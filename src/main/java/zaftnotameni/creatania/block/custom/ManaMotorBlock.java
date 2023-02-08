@@ -1,91 +1,83 @@
 package zaftnotameni.creatania.block.custom;
 
+import com.simibubi.create.content.contraptions.base.DirectionalKineticBlock;
+import com.simibubi.create.foundation.block.ITE;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.*;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.VoxelShape;
-import org.jetbrains.annotations.Nullable;
 import zaftnotameni.creatania.block.entity.ModBlockEntities;
 import zaftnotameni.creatania.block.entity.custom.ManaMotorBlockEntity;
 
+import java.util.Random;
 
-public class ManaMotorBlock extends BaseEntityBlock {
-  public static final DirectionProperty FACING = BlockStateProperties.FACING;
+public class ManaMotorBlock extends DirectionalKineticBlock implements ITE<ManaMotorBlockEntity> {
 
-  public ManaMotorBlock(BlockBehaviour.Properties properties) {
+  public ManaMotorBlock(Properties properties) {
     super(properties);
-  }
-
-  private static final VoxelShape SHAPE =  Block.box(0, 0, 0, 16, 8, 16);
-
-  @Override
-  public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) { return SHAPE; }
-
-  /* FACING */
-  @Override
-  public BlockState getStateForPlacement(BlockPlaceContext pContext) { return this.defaultBlockState().setValue(FACING, pContext.getHorizontalDirection().getOpposite()); }
-  @Override
-  public BlockState rotate(BlockState pState, Rotation pRotation) { return pState.setValue(FACING, pRotation.rotate(pState.getValue(FACING))); }
-  @Override
-  public BlockState mirror(BlockState pState, Mirror pMirror) { return pState.rotate(pMirror.getRotation(pState.getValue(FACING))); }
-  @Override
-  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) { pBuilder.add(FACING); }
-
-  /* BLOCK ENTITY */
-  @Override
-  public RenderShape getRenderShape(BlockState pState) {
-    return RenderShape.MODEL;
+    registerDefaultState(defaultBlockState());
   }
 
   @Override
-  public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-    if (pState.getBlock() != pNewState.getBlock()) {
-      BlockEntity blockEntity = pLevel.getBlockEntity(pPos);
-      if (blockEntity instanceof ManaMotorBlockEntity) {
-        ((ManaMotorBlockEntity) blockEntity).drops();
-      }
+  public BlockState getStateForPlacement(BlockPlaceContext context) {
+    Direction preferred = getPreferredFacing(context);
+    if ((context.getPlayer() != null && context.getPlayer().isShiftKeyDown()) || preferred == null)
+      return super.getStateForPlacement(context);
+    return defaultBlockState().setValue(FACING, preferred);
+  }
+
+  @Override
+  public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+    return new ManaMotorBlockEntity(pos, state);
+  }
+
+  @Override
+  public Class<ManaMotorBlockEntity> getTileEntityClass() {
+    return ManaMotorBlockEntity.class;
+  }
+
+  @Override
+  public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
+    return face == state.getValue(FACING);
+  }
+
+  @Override
+  public Direction.Axis getRotationAxis(BlockState state) {
+    return state.getValue(FACING).getAxis();
+  }
+
+  @Override
+  public boolean hideStressImpact() {
+    return false;
+  }
+
+  @Override
+  public boolean canConnectRedstone(BlockState state, BlockGetter world, BlockPos pos, Direction side) {
+    return false;
+  }
+
+  @Override
+  public BlockEntityType<? extends ManaMotorBlockEntity> getTileEntityType() {
+    return ModBlockEntities.MANA_MOTOR_BLOCK_ENTITY.get();
+  }
+
+  @Override
+  public void neighborChanged(BlockState state, Level world, BlockPos pos, Block block, BlockPos from, boolean b) {
+    super.neighborChanged(state, world, pos, block, from, b);
+    if (!world.isClientSide) {
+      world.scheduleTick(pos, this, 4);
     }
-    super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
   }
 
   @Override
-  public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos,
-                               Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
-    if (!pLevel.isClientSide()) {
-      BlockEntity entity = pLevel.getBlockEntity(pPos);
-      if (entity instanceof ManaMotorBlockEntity) {
-        // do something
-      }
-    }
-
-    return InteractionResult.sidedSuccess(pLevel.isClientSide());
-  }
-
-  @Nullable
-  @Override
-  public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-    return new ManaMotorBlockEntity(pPos, pState);
-  }
-
-  @Nullable
-  @Override
-  public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level pLevel, BlockState pState, BlockEntityType<T> pBlockEntityType) {
-    return createTickerHelper(pBlockEntityType, ModBlockEntities.MANA_MOTOR_BLOCK_ENTITY.get(),
-      ManaMotorBlockEntity::tick);
+  public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
+    super.tick(state, world, pos, random);
   }
 }
