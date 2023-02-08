@@ -15,6 +15,7 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import zaftnotameni.creatania.block.ModBlocks;
+import zaftnotameni.creatania.block.entity.ModBlockEntities;
 import zaftnotameni.creatania.item.ModItems;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -30,6 +31,7 @@ public class CreataniaMain
 
         ModItems.register(bus);
         ModBlocks.register(bus);
+        ModBlockEntities.register(bus);
 
         // Register the setup method for modloading
         bus.addListener(this::setup);
