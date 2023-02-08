@@ -43,6 +43,10 @@ public class ManaMotorBlock extends DirectionalKineticBlock implements ITE<ManaM
   public Class<ManaMotorBlockEntity> getTileEntityClass() {
     return ManaMotorBlockEntity.class;
   }
+  @Override
+  public BlockEntityType<? extends ManaMotorBlockEntity> getTileEntityType() {
+    return ModBlockEntities.MANA_MOTOR_BLOCK_ENTITY.get();
+  }
 
   @Override
   public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
@@ -64,10 +68,6 @@ public class ManaMotorBlock extends DirectionalKineticBlock implements ITE<ManaM
     return false;
   }
 
-  @Override
-  public BlockEntityType<? extends ManaMotorBlockEntity> getTileEntityType() {
-    return ModBlockEntities.MANA_MOTOR_BLOCK_ENTITY.get();
-  }
 
   @Override
   public void neighborChanged(BlockState state, Level world, BlockPos pos, Block block, BlockPos from, boolean b) {
@@ -75,11 +75,6 @@ public class ManaMotorBlock extends DirectionalKineticBlock implements ITE<ManaM
     if (!world.isClientSide) {
       world.scheduleTick(pos, this, 4);
     }
-  }
-
-  @Override
-  public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
-    super.tick(state, world, pos, random);
   }
 
   public static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> pServerType, BlockEntityType<E> pClientType, BlockEntityTicker<? super E> pTicker) {

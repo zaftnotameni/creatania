@@ -7,13 +7,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 import zaftnotameni.creatania.Constants;
+import zaftnotameni.creatania.block.custom.ManaGeneratorBlock;
 import zaftnotameni.creatania.block.custom.ManaMotorBlock;
 import zaftnotameni.creatania.item.ModItems;
 import zaftnotameni.creatania.util.Log;
@@ -26,6 +26,10 @@ public class ModBlocks {
 
   public static final RegistryObject<Block> MANA_MOTOR = registerBlock(Constants.MANA_MOTOR,
     () -> new ManaMotorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()),
+    CreativeModeTab.TAB_MISC);
+
+  public static final RegistryObject<Block> MANA_GENERATOR = registerBlock(Constants.MANA_GENERATOR,
+    () -> new ManaGeneratorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()),
     CreativeModeTab.TAB_MISC);
 
   public static void register(IEventBus bus) {
@@ -65,6 +69,5 @@ public class ModBlocks {
     return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(),
       new Item.Properties().tab(tab)));
   }
-
 
 }

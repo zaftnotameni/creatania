@@ -7,6 +7,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.block.ModBlocks;
+import zaftnotameni.creatania.block.entity.custom.ManaGeneratorBlockEntity;
 import zaftnotameni.creatania.block.entity.custom.ManaMotorBlockEntity;
 import zaftnotameni.creatania.util.Log;
 
@@ -18,8 +19,11 @@ public class ModBlockEntities {
       BLOCK_ENTITIES.register(Constants.MANA_MOTOR_BLOCK_ENTITY, () ->
         BlockEntityType.Builder.of(ManaMotorBlockEntity::new, ModBlocks.MANA_MOTOR.get()).build(null));
 
+  public static final RegistryObject<BlockEntityType<ManaGeneratorBlockEntity>> MANA_GENERATOR_BLOCK_ENTITY =
+    BLOCK_ENTITIES.register(Constants.MANA_GENERATOR_BLOCK_ENTITY, () ->
+      BlockEntityType.Builder.of(ManaGeneratorBlockEntity::new, ModBlocks.MANA_GENERATOR.get()).build(null));
 
-    public static void register(IEventBus eventBus) {
+  public static void register(IEventBus eventBus) {
       Log.LOGGER.debug("register block entities");
       BLOCK_ENTITIES.register(eventBus);
     }
