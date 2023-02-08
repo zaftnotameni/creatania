@@ -11,6 +11,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import zaftnotameni.creatania.block.entity.ModBlockEntities;
@@ -79,5 +80,13 @@ public class ManaMotorBlock extends DirectionalKineticBlock implements ITE<ManaM
   @Override
   public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
     super.tick(state, world, pos, random);
+  }
+
+  public static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> pServerType, BlockEntityType<E> pClientType, BlockEntityTicker<? super E> pTicker) {
+    return pClientType == pServerType ? (BlockEntityTicker<A>)pTicker : null;
+  }
+  @Override
+  public <S extends BlockEntity> BlockEntityTicker<S> getTicker(Level level, BlockState blockState, BlockEntityType<S> blockEntityType) {
+    return createTickerHelper(blockEntityType, ModBlockEntities.MANA_MOTOR_BLOCK_ENTITY.get(), ManaMotorBlockEntity::tick);
   }
 }

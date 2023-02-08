@@ -17,76 +17,64 @@ import org.slf4j.Logger;
 import zaftnotameni.creatania.block.ModBlocks;
 import zaftnotameni.creatania.block.entity.ModBlockEntities;
 import zaftnotameni.creatania.item.ModItems;
+import zaftnotameni.creatania.util.Log;
 
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod(Constants.MODID)
-public class CreataniaMain
-{
-    // Directly reference a slf4j logger
-    private static final Logger LOGGER = LogUtils.getLogger();
+public class CreataniaMain {
+  // Directly reference a slf4j logger
 
-    public CreataniaMain()
-    {
-        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+  public CreataniaMain() {
+    IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        ModItems.register(bus);
-        ModBlocks.register(bus);
-        ModBlockEntities.register(bus);
+    ModItems.register(bus);
+    ModBlocks.register(bus);
+    ModBlockEntities.register(bus);
 
-        // Register the setup method for modloading
-        bus.addListener(this::setup);
-        // Register the enqueueIMC method for modloading
-        bus.addListener(this::enqueueIMC);
-        // Register the processIMC method for modloading
-        bus.addListener(this::processIMC);
+    // Register the setup method for modloading
+    bus.addListener(this::setup);
+    // Register the enqueueIMC method for modloading
+    bus.addListener(this::enqueueIMC);
+    // Register the processIMC method for modloading
+    bus.addListener(this::processIMC);
 
-        // Register ourselves for server and other game events we are interested in
-        MinecraftForge.EVENT_BUS.register(this);
-    }
+    // Register ourselves for server and other game events we are interested in
+    MinecraftForge.EVENT_BUS.register(this);
+  }
 
-    private void setup(final FMLCommonSetupEvent event)
-    {
-        // some preinit code
-        LOGGER.info("HELLO FROM PREINIT");
-        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
-    }
+  private void setup(final FMLCommonSetupEvent event) {
+    Log.LOGGER.debug("pre init");
+  }
 
-    private void enqueueIMC(final InterModEnqueueEvent event)
-    {
-        // Some example code to dispatch IMC to another mod
-        // InterModComms.sendTo("examplemod", "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
-    }
+  private void enqueueIMC(final InterModEnqueueEvent event) {
+    // Some example code to dispatch IMC to another mod
+    // InterModComms.sendTo("examplemod", "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
+    Log.LOGGER.debug("enqueue IMC");
 
-    private void processIMC(final InterModProcessEvent event)
-    {
-        // Some example code to receive and process InterModComms from other mods
-        // LOGGER.info("Got IMC {}", event.getIMCStream().
-        //        map(m->m.messageSupplier().get()).
-        //        collect(Collectors.toList()));
-    }
+  }
 
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
+  private void processIMC(final InterModProcessEvent event) {
+    // Some example code to receive and process InterModComms from other mods
+    // LOGGER.info("Got IMC {}", event.getIMCStream().
+    //        map(m->m.messageSupplier().get()).
+    //        collect(Collectors.toList()));
+    Log.LOGGER.debug("process IMC");
+  }
+
+  // You can use SubscribeEvent and let the Event Bus discover methods to call
+  @SubscribeEvent
+  public void onServerStarting(ServerStartingEvent event) {
+    // Do something when the server starts
+    // LOGGER.info("HELLO from server starting");
+    Log.LOGGER.debug("server starting");
+  }
+
+  // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
+  // Event bus for receiving Registry Events)
+  @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+  public static class RegistryEvents {
     @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event)
-    {
-        // Do something when the server starts
-        // LOGGER.info("HELLO from server starting");
+    public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
+      Log.LOGGER.debug("block registry");
     }
-
-    // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
-    // Event bus for receiving Registry Events)
-    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents
-    {
-        @SubscribeEvent
-        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent)
-        {
-            // Register a new block here
-            // LOGGER.info("HELLO from Register Block");
-        }
-    }
+  }
 }
-
-// no texture in world: block states json is wrong
-// no texture in inventory: item json is wrong
-// neither: model json is wrong or everything is wrong

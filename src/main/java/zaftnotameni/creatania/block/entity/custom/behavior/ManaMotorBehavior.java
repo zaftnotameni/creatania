@@ -10,13 +10,11 @@ import zaftnotameni.creatania.block.entity.custom.ManaMotorBlockEntity;
 
 public class ManaMotorBehavior extends TileEntityBehaviour {
   public static final BehaviourType<TileEntityBehaviour> TYPE = new BehaviourType<>();
-  public CenteredSideValueBoxTransform slot;
   public ManaMotorBlockEntity motor;
 
-  public ManaMotorBehavior(ManaMotorBlockEntity pMotor, CenteredSideValueBoxTransform pSlot) {
+  public ManaMotorBehavior(ManaMotorBlockEntity pMotor) {
     super(pMotor);
     this.motor = pMotor;
-    this.slot = pSlot;
   }
 
   @Override
@@ -24,6 +22,8 @@ public class ManaMotorBehavior extends TileEntityBehaviour {
     super.read(nbt, clientPacket);
     this.motor.mana = nbt.getInt("mana");
     this.motor.manaCap = nbt.getInt("mana_cap");
+    this.motor.manaPerRPM = nbt.getInt("mana_per_rpm");
+    this.motor.manaPerTick = nbt.getInt("mana_per_tick");
     this.motor.active = nbt.getBoolean("active");
   }
 
@@ -31,6 +31,8 @@ public class ManaMotorBehavior extends TileEntityBehaviour {
   public void write(CompoundTag nbt, boolean clientPacket) {
     nbt.putInt("mana", this.motor.mana);
     nbt.putInt("mana_cap", this.motor.manaCap);
+    nbt.putInt("mana_per_rpm", this.motor.manaPerRPM);
+    nbt.putInt("mana_per_tick", this.motor.manaPerTick);
     nbt.putBoolean("active", this.motor.active);
     super.write(nbt, clientPacket);
   }
