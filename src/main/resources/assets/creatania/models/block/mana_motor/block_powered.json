@@ -1,0 +1,8 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "create:block/clutch/block",
+	"textures": {
+		"0": "creatania:block/clutch_on",
+		"particle": "creatania:block/clutch_on"
+	}
+}

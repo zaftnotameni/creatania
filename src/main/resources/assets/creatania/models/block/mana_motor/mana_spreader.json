@@ -1,0 +1,10 @@
+{
+	"credit": "Made with Blockbench",
+	"parent": "botania:block/shapes/spreader",
+	"textures": {
+		"side": "creatania:block/mana_spreader_side",
+		"back": "creatania:block/mana_spreader_back",
+		"inside": "creatania:block/stripped_livingwood_log",
+		"outside": "creatania:block/livingwood_log"
+	}
+}
