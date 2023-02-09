@@ -7,15 +7,16 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.Nullable;
 import zaftnotameni.creatania.Constants;
+import zaftnotameni.creatania.block.custom.ManaGeneratorBlock;
 import zaftnotameni.creatania.block.custom.ManaMotorBlock;
 import zaftnotameni.creatania.item.ModItems;
+import zaftnotameni.creatania.util.Log;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -27,7 +28,14 @@ public class ModBlocks {
     () -> new ManaMotorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()),
     CreativeModeTab.TAB_MISC);
 
-  public static void register(IEventBus bus) { BLOCKS.register(bus); }
+  public static final RegistryObject<Block> MANA_GENERATOR = registerBlock(Constants.MANA_GENERATOR,
+    () -> new ManaGeneratorBlock(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()),
+    CreativeModeTab.TAB_MISC);
+
+  public static void register(IEventBus bus) {
+    Log.LOGGER.debug("register blocks");
+    BLOCKS.register(bus);
+  }
 
   private static <T extends Block> RegistryObject<T> registerBlockWithoutBlockItem(String name, Supplier<T> block) {
     return BLOCKS.register(name, block);
@@ -42,8 +50,7 @@ public class ModBlocks {
 
   private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block,
                                                                           CreativeModeTab tab, String tooltipKey) {
-    return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(),
-      new Item.Properties().tab(tab)) {
+    return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(),  new Item.Properties().tab(tab)) {
       @Override
       public void appendHoverText(ItemStack pStack, @Nullable Level pLevel, List<Component> pTooltip, TooltipFlag pFlag) {
         pTooltip.add(new TextComponent(tooltipKey));
@@ -62,6 +69,5 @@ public class ModBlocks {
     return ModItems.ITEMS.register(name, () -> new BlockItem(block.get(),
       new Item.Properties().tab(tab)));
   }
-
 
 }

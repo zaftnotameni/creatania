@@ -4,19 +4,15 @@ import com.simibubi.create.content.contraptions.base.DirectionalKineticBlock;
 import com.simibubi.create.foundation.block.ITE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import zaftnotameni.creatania.block.entity.ModBlockEntities;
 import zaftnotameni.creatania.block.entity.custom.ManaMotorBlockEntity;
-
-import java.util.Random;
 
 public class ManaMotorBlock extends DirectionalKineticBlock implements ITE<ManaMotorBlockEntity> {
 
@@ -42,6 +38,10 @@ public class ManaMotorBlock extends DirectionalKineticBlock implements ITE<ManaM
   public Class<ManaMotorBlockEntity> getTileEntityClass() {
     return ManaMotorBlockEntity.class;
   }
+  @Override
+  public BlockEntityType<? extends ManaMotorBlockEntity> getTileEntityType() {
+    return ModBlockEntities.MANA_MOTOR_BLOCK_ENTITY.get();
+  }
 
   @Override
   public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {
@@ -58,26 +58,11 @@ public class ManaMotorBlock extends DirectionalKineticBlock implements ITE<ManaM
     return false;
   }
 
-  @Override
-  public boolean canConnectRedstone(BlockState state, BlockGetter world, BlockPos pos, Direction side) {
-    return false;
+  public static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> pServerType, BlockEntityType<E> pClientType, BlockEntityTicker<? super E> pTicker) {
+    return pClientType == pServerType ? (BlockEntityTicker<A>)pTicker : null;
   }
-
   @Override
-  public BlockEntityType<? extends ManaMotorBlockEntity> getTileEntityType() {
-    return ModBlockEntities.MANA_MOTOR_BLOCK_ENTITY.get();
-  }
-
-  @Override
-  public void neighborChanged(BlockState state, Level world, BlockPos pos, Block block, BlockPos from, boolean b) {
-    super.neighborChanged(state, world, pos, block, from, b);
-    if (!world.isClientSide) {
-      world.scheduleTick(pos, this, 4);
-    }
-  }
-
-  @Override
-  public void tick(BlockState state, ServerLevel world, BlockPos pos, Random random) {
-    super.tick(state, world, pos, random);
+  public <S extends BlockEntity> BlockEntityTicker<S> getTicker(Level level, BlockState blockState, BlockEntityType<S> blockEntityType) {
+    return createTickerHelper(blockEntityType, ModBlockEntities.MANA_MOTOR_BLOCK_ENTITY.get(), ManaMotorBlockEntity::tick);
   }
 }
