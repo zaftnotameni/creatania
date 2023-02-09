@@ -4,20 +4,15 @@ import com.simibubi.create.content.contraptions.base.DirectionalKineticBlock;
 import com.simibubi.create.foundation.block.ITE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import zaftnotameni.creatania.block.entity.ModBlockEntities;
 import zaftnotameni.creatania.block.entity.custom.ManaMotorBlockEntity;
-
-import java.util.Random;
 
 public class ManaMotorBlock extends DirectionalKineticBlock implements ITE<ManaMotorBlockEntity> {
 
@@ -61,20 +56,6 @@ public class ManaMotorBlock extends DirectionalKineticBlock implements ITE<ManaM
   @Override
   public boolean hideStressImpact() {
     return false;
-  }
-
-  @Override
-  public boolean canConnectRedstone(BlockState state, BlockGetter world, BlockPos pos, Direction side) {
-    return false;
-  }
-
-
-  @Override
-  public void neighborChanged(BlockState state, Level world, BlockPos pos, Block block, BlockPos from, boolean b) {
-    super.neighborChanged(state, world, pos, block, from, b);
-    if (!world.isClientSide) {
-      world.scheduleTick(pos, this, 4);
-    }
   }
 
   public static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> pServerType, BlockEntityType<E> pClientType, BlockEntityTicker<? super E> pTicker) {

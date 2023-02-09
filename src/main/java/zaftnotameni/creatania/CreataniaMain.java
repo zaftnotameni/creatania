@@ -7,7 +7,9 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
@@ -16,6 +18,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 import zaftnotameni.creatania.block.ModBlocks;
 import zaftnotameni.creatania.block.entity.ModBlockEntities;
+import zaftnotameni.creatania.config.ModClientConfigs;
+import zaftnotameni.creatania.config.ModCommonConfigs;
 import zaftnotameni.creatania.item.ModItems;
 import zaftnotameni.creatania.util.Log;
 
@@ -36,6 +40,9 @@ public class CreataniaMain {
     bus.addListener(this::enqueueIMC);
     // Register the processIMC method for modloading
     bus.addListener(this::processIMC);
+
+    ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ModClientConfigs.SPEC, "creatania-client.toml");
+    ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ModCommonConfigs.SPEC, "creatania-common.toml");
 
     // Register ourselves for server and other game events we are interested in
     MinecraftForge.EVENT_BUS.register(this);
