@@ -5,12 +5,21 @@ import com.simibubi.create.foundation.block.ITE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import zaftnotameni.creatania.block.ModBlocks;
 import zaftnotameni.creatania.block.entity.ModBlockEntities;
 import zaftnotameni.creatania.block.entity.custom.ManaMotorBlockEntity;
 
@@ -64,5 +73,31 @@ public class ManaMotorBlock extends DirectionalKineticBlock implements ITE<ManaM
   @Override
   public <S extends BlockEntity> BlockEntityTicker<S> getTicker(Level level, BlockState blockState, BlockEntityType<S> blockEntityType) {
     return createTickerHelper(blockEntityType, ModBlockEntities.MANA_MOTOR_BLOCK_ENTITY.get(), ManaMotorBlockEntity::tick);
+  }
+
+  private static final VoxelShape SHAPE =  Block.box(0, 0, 0, 16, 8, 16);
+  @Override
+  public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+    return SHAPE;
+  }
+
+  @Override
+  public BlockState rotate(BlockState pState, Rotation pRotation) {
+    return pState.setValue(FACING, pRotation.rotate(pState.getValue(FACING)));
+  }
+
+  @Override
+  public BlockState mirror(BlockState pState, Mirror pMirror) {
+    return pState.rotate(pMirror.getRotation(pState.getValue(FACING)));
+  }
+
+  @Override
+  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) {
+    pBuilder.add(FACING);
+  }
+
+  @Override
+  public RenderShape getRenderShape(BlockState pState) {
+    return RenderShape.MODEL;
   }
 }
