@@ -30,12 +30,9 @@ import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
 import zaftnotameni.creatania.network.EnergyNetworkPacket;
 import zaftnotameni.creatania.network.ObservePacket;
-import zaftnotameni.creatania.registry.Blocks;
-import zaftnotameni.creatania.registry.BlockEntities;
+import zaftnotameni.creatania.registry.*;
 import zaftnotameni.creatania.config.ClientConfig;
 import zaftnotameni.creatania.config.CommonConfig;
-import zaftnotameni.creatania.registry.Index;
-import zaftnotameni.creatania.registry.Items;
 import zaftnotameni.creatania.util.Log;
 
 import static zaftnotameni.creatania.Constants.MODID;
@@ -54,6 +51,7 @@ public class CreataniaMain {
 
     Items.register(bus);
     Blocks.register(bus);
+    Fluids.register(bus);
     BlockEntities.register(bus);
     Index.CREATE_REGISTRATE.registerEventListeners(bus);
 
