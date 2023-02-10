@@ -1,6 +1,8 @@
 package zaftnotameni.creatania;
 
 import com.mojang.logging.LogUtils;
+import com.simibubi.create.foundation.data.CreateRegistrate;
+import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
@@ -25,7 +27,9 @@ import zaftnotameni.creatania.util.Log;
 
 @Mod(Constants.MODID)
 public class CreataniaMain {
-  // Directly reference a slf4j logger
+  public static final NonNullSupplier<CreateRegistrate> registrate = CreateRegistrate.lazy(Constants.MODID);
+
+  public static CreateRegistrate getRegistrate() { return registrate.get(); }
 
   public CreataniaMain() {
     IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();

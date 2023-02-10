@@ -40,7 +40,7 @@ public class ManaMotorBlock extends DirectionalKineticBlock implements ITE<ManaM
 
   @Override
   public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-    return new ManaMotorBlockEntity(pos, state);
+    return ModBlockEntities.MANA_MOTOR_BLOCK_ENTITY.create(pos, state);
   }
 
   @Override

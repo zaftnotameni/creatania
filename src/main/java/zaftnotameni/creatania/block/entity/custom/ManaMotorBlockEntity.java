@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
@@ -44,9 +45,8 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
   public boolean isAboveThreshold = false;
   public int isBelowThresholdCount = 0;
 
-
-  public ManaMotorBlockEntity(BlockPos pPos, BlockState pBlockState) {
-    super(ModBlockEntities.MANA_MOTOR_BLOCK_ENTITY.get(), pPos, pBlockState);
+  public ManaMotorBlockEntity(BlockEntityType<? extends ManaMotorBlockEntity> type, BlockPos pos, BlockState state) {
+    super(type, pos, state);
     this.stressUnitsPerRPM = ModCommonConfigs.MANA_MOTOR_SU_PER_RPM.get();
     this.manaPerTickPerRPM = ModCommonConfigs.MANA_MOTOR_MANA_PER_TICK_PER_RPM.get();
     this.minimumSafeThreshold = ModCommonConfigs.MANA_MOTOR_MIN_MANA_RESERVE_FACTOR.get();
