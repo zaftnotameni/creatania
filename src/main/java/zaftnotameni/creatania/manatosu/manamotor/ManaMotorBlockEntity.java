@@ -1,7 +1,9 @@
 package zaftnotameni.creatania.manatosu.manamotor;
 
 import com.simibubi.create.content.contraptions.base.GeneratingKineticTileEntity;
+import com.simibubi.create.content.contraptions.components.motor.CreativeMotorBlock;
 import com.simibubi.create.content.contraptions.components.motor.CreativeMotorTileEntity;
+import com.simibubi.create.foundation.block.BlockStressValues;
 import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
 import com.simibubi.create.foundation.tileEntity.behaviour.CenteredSideValueBoxTransform;
 import com.simibubi.create.foundation.tileEntity.behaviour.scrollvalue.ScrollValueBehaviour;
@@ -22,6 +24,84 @@ import zaftnotameni.creatania.util.Log;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+
+
+import java.util.List;
+
+import com.simibubi.create.AllBlocks;
+import com.simibubi.create.content.contraptions.base.GeneratingKineticTileEntity;
+import com.simibubi.create.foundation.config.AllConfigs;
+import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
+import com.simibubi.create.foundation.tileEntity.behaviour.CenteredSideValueBoxTransform;
+import com.simibubi.create.foundation.tileEntity.behaviour.scrollvalue.ScrollValueBehaviour;
+import com.simibubi.create.foundation.tileEntity.behaviour.scrollvalue.ScrollValueBehaviour.StepContext;
+import com.simibubi.create.foundation.utility.Lang;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+
+//public class ManaMotorBlockEntity extends GeneratingKineticTileEntity {
+//
+//  public static final int DEFAULT_SPEED = 16;
+//  protected ScrollValueBehaviour generatedSpeed;
+//
+//  public ManaMotorBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+//    super(type, pos, state);
+//  }
+//
+//  @Override
+//  public void addBehaviours(List<TileEntityBehaviour> behaviours) {
+//    super.addBehaviours(behaviours);
+//    Integer max = AllConfigs.SERVER.kinetics.maxMotorSpeed.get();
+//
+//    CenteredSideValueBoxTransform slot = new CenteredSideValueBoxTransform(
+//      (motor, side) -> motor.getValue(CreativeMotorBlock.FACING) == side.getOpposite());
+//
+//    generatedSpeed = new ScrollValueBehaviour(Lang.translateDirect("generic.speed"), this, slot);
+//    generatedSpeed.between(-max, max);
+//    generatedSpeed.value = DEFAULT_SPEED;
+//    generatedSpeed.scrollableValue = DEFAULT_SPEED;
+//    generatedSpeed.withUnit(i -> Lang.translateDirect("generic.unit.rpm"));
+//    generatedSpeed.withCallback(i -> this.updateGeneratedRotation());
+//    generatedSpeed.withStepFunction(com.simibubi.create.content.contraptions.components.motor.CreativeMotorTileEntity::step);
+//    behaviours.add(generatedSpeed);
+//  }
+//
+//  @Override
+//  public void initialize() {
+//    super.initialize();
+//    if (!hasSource() || getGeneratedSpeed() > getTheoreticalSpeed())
+//      updateGeneratedRotation();
+//  }
+//
+//  @Override
+//  public float getGeneratedSpeed() {
+//    if (!AllBlocks.CREATIVE_MOTOR.has(getBlockState()))
+//      return 0;
+//    return convertToDirection(generatedSpeed.getValue(), getBlockState().getValue(CreativeMotorBlock.FACING));
+//  }
+//
+//  public static int step(StepContext context) {
+//    int current = context.currentValue;
+//    int step = 1;
+//
+//    if (!context.shift) {
+//      int magnitude = Math.abs(current) - (context.forward == current > 0 ? 0 : 1);
+//
+//      if (magnitude >= 4)
+//        step *= 4;
+//      if (magnitude >= 32)
+//        step *= 4;
+//      if (magnitude >= 128)
+//        step *= 4;
+//    }
+//
+//    return (int) (current + (context.forward ? step : -step) == 0 ? step + 1 : step);
+//  }
+//
+//}
+
 
 public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements IManaReceiver {
   public static final boolean UPDATE_MANA_ON_EVERY_TICK = true;
@@ -133,8 +213,8 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
     super.addBehaviours(behaviours);
     this.shaftSlot = this.createShaftSlot();
     this.scrollValueBehaviour = this.createScrollBehavior();
-    // this.manaMotorBehavior = new ManaMotorBehavior(this);
-    // behaviours.add(manaMotorBehavior);
+    this.manaMotorBehavior = new ManaMotorBehavior(this);
+    behaviours.add(manaMotorBehavior);
     behaviours.add(scrollValueBehaviour);
   }
 
@@ -162,27 +242,7 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
   }
   @Override
   public void updateGeneratedRotation() { super.updateGeneratedRotation(); }
-  public static void tick(Level level, BlockPos blockPos, BlockState blockState, ManaMotorBlockEntity self) {
-    if (self.firstTick) {
-      self.updateGeneratedRotation();
-      self.firstTick = false;
-    }
-    if (level.isClientSide()) {
-      tickClient(level, blockPos, blockState, self);
-    } else {
-      tickServer(level, blockPos, blockState, self);
-    }
-  }
 
-  public static void tickClient(Level level, BlockPos blockPos, BlockState blockState, ManaMotorBlockEntity self) {
-
-  }
-
-  public static void tickServer(Level level, BlockPos blockPos, BlockState blockState, ManaMotorBlockEntity self) {
-    if (UPDATE_MANA_ON_EVERY_TICK) {
-      if (self.active) self.updateMana(Math.max(0, self.mana - self.manaPerTick));
-    }
-  }
 
   @Override
   public void invalidateCaps() {
@@ -205,5 +265,12 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
   @Override
   public float calculateStressApplied() {
     return 0f;
+  }
+
+  @Override
+  public float calculateAddedStressCapacity() {
+    float capacity = (float) ManaMotorConfig.getStressUnitsPerRPM();
+    this.lastCapacityProvided = capacity;
+    return capacity;
   }
 }

@@ -68,10 +68,6 @@ public class ManaMotorBlock extends DirectionalKineticBlock implements ITE<ManaM
   public static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> pServerType, BlockEntityType<E> pClientType, BlockEntityTicker<? super E> pTicker) {
     return pClientType == pServerType ? (BlockEntityTicker<A>)pTicker : null;
   }
-  @Override
-  public <S extends BlockEntity> BlockEntityTicker<S> getTicker(Level level, BlockState blockState, BlockEntityType<S> blockEntityType) {
-    return createTickerHelper(blockEntityType, BlockEntities.MANA_MOTOR_BLOCK_ENTITY.get(), ManaMotorBlockEntity::tick);
-  }
 
   private static final VoxelShape SHAPE =  Block.box(0, 0, 0, 16, 8, 16);
   @Override
