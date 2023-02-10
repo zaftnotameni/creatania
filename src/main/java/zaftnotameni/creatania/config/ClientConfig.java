@@ -1,6 +1,6 @@
 package zaftnotameni.creatania.config;
 import net.minecraftforge.common.ForgeConfigSpec;
-public class ModClientConfigs {
+public class ClientConfig {
   public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
   public static final ForgeConfigSpec SPEC;
 
