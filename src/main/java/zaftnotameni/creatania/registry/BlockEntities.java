@@ -10,6 +10,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import zaftnotameni.creatania.Constants;
+import zaftnotameni.creatania.manatoitem.manacondenser.ManaCondenserBlockEntity;
+import zaftnotameni.creatania.manatoitem.manacondenser.ManaCondenserRenderer;
 import zaftnotameni.creatania.sutomana.managenerator.ManaGeneratorBlockEntity;
 import zaftnotameni.creatania.manatosu.manamotor.ManaMotorBlockEntity;
 import zaftnotameni.creatania.manatosu.manamotor.ManaMotorRenderer;
@@ -18,7 +20,7 @@ import zaftnotameni.creatania.util.Log;
 
 public class BlockEntities {
   public static final CreateRegistrate CREATE_REGISTRATE = Index.getCreateRegistrate()
-    .creativeModeTab(() -> CreativeModeTab.TAB_MISC);
+    .creativeModeTab(() -> CreativeModeTabs.CREATANIA_ITEMS);
 
   public static final BlockEntityEntry<ManaMotorBlockEntity> MANA_MOTOR_BLOCK_ENTITY = CREATE_REGISTRATE
     .tileEntity(Constants.MANA_MOTOR_BLOCK_ENTITY, ManaMotorBlockEntity::new)
@@ -32,6 +34,13 @@ public class BlockEntities {
     .instance(() -> HalfShaftInstance::new)
     .validBlocks(Blocks.MANA_GENERATOR)
     .renderer(() -> ManaGeneratorRenderer::new)
+    .register();
+
+  public static final BlockEntityEntry<ManaCondenserBlockEntity> MANA_CONDENSER_BLOCK_ENTITY = CREATE_REGISTRATE
+    .tileEntity(Constants.MANA_CONDENSER_BLOCK_ENTITY, ManaCondenserBlockEntity::new)
+    .instance(() -> HalfShaftInstance::new)
+    .validBlocks(Blocks.MANA_CONDENSER)
+    .renderer(() -> ManaCondenserRenderer::new)
     .register();
 
 

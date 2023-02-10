@@ -2,7 +2,6 @@ package zaftnotameni.creatania.registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -47,7 +46,7 @@ public class Fluids {
       .bucket(() -> Fluids.MANA_FLUID_BUCKET.get());
 
   public static BucketItem createManaFluidBucket() {
-    return new BucketItem(Fluids.MANA_FLUID, new Item.Properties().tab(CreativeModeTab.TAB_MISC).stacksTo(1));
+    return new BucketItem(Fluids.MANA_FLUID, new Item.Properties().tab(CreativeModeTabs.CREATANIA_ITEMS).stacksTo(1));
   }
   public static final RegistryObject<Item> MANA_FLUID_BUCKET = Items.INDEX.register(
     Constants.MANA_FLUID_BUCKET_NAME, () -> createManaFluidBucket());

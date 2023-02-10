@@ -13,6 +13,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.config.CommonConfig;
+import zaftnotameni.creatania.manatoitem.manacondenser.ManaCondenserBlock;
 import zaftnotameni.creatania.manatosu.manamotor.ManaMotorBlock;
 import zaftnotameni.creatania.sutomana.managenerator.ManaGeneratorBlock;
 import zaftnotameni.creatania.util.Log;
@@ -23,7 +24,7 @@ public class Blocks {
   public static final DeferredRegister<Block> INDEX = DeferredRegister.create(ForgeRegistries.BLOCKS, Constants.MODID);
 
   public static final CreateRegistrate CREATE_REGISTRATE = Index.getCreateRegistrate()
-    .creativeModeTab(() -> CreativeModeTab.TAB_MISC);
+    .creativeModeTab(() -> CreativeModeTabs.CREATANIA_ITEMS);
 
   public static final BlockEntry<ManaMotorBlock> MANA_MOTOR = CREATE_REGISTRATE
     .block(Constants.MANA_MOTOR, ManaMotorBlock::new)
@@ -39,6 +40,15 @@ public class Blocks {
     .initialProperties(SharedProperties::softMetal)
     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
     .transform(BlockStressDefaults.setImpact(CommonConfig.MANA_GENERATOR_SU_PER_RPM.get()))
+    .item()
+    .transform(customItemModel())
+    .register();
+
+  public static final BlockEntry<ManaCondenserBlock> MANA_CONDENSER = CREATE_REGISTRATE
+    .block(Constants.MANA_CONDENSER, ManaCondenserBlock::new)
+    .initialProperties(SharedProperties::softMetal)
+    .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+    .transform(BlockStressDefaults.setImpact(CommonConfig.MANA_CONDENSER_SU_PER_RPM.get()))
     .item()
     .transform(customItemModel())
     .register();
