@@ -22,12 +22,14 @@ public class ManaMotorBehavior extends TileEntityBehaviour {
   public void read(CompoundTag nbt, boolean clientPacket) {
     super.read(nbt, clientPacket);
     this.motor.mana = nbt.getInt("mana");
+    this.motor.manaPerTick = nbt.getInt("manaPerTick");
     this.motor.active = nbt.getBoolean("active");
   }
 
   @Override
   public void write(CompoundTag nbt, boolean clientPacket) {
     nbt.putInt("mana", this.motor.mana);
+    nbt.putInt("manaPerTick", this.motor.manaPerTick);
     nbt.putBoolean("active", this.motor.active);
     super.write(nbt, clientPacket);
   }
