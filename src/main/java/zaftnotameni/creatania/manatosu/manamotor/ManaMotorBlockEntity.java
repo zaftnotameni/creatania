@@ -1,15 +1,14 @@
 package zaftnotameni.creatania.manatosu.manamotor;
 
 import com.simibubi.create.content.contraptions.base.GeneratingKineticTileEntity;
-import com.simibubi.create.content.contraptions.components.motor.CreativeMotorBlock;
 import com.simibubi.create.content.contraptions.components.motor.CreativeMotorTileEntity;
-import com.simibubi.create.foundation.block.BlockStressValues;
+import com.simibubi.create.foundation.config.AllConfigs;
 import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
 import com.simibubi.create.foundation.tileEntity.behaviour.CenteredSideValueBoxTransform;
 import com.simibubi.create.foundation.tileEntity.behaviour.scrollvalue.ScrollValueBehaviour;
+import com.simibubi.create.foundation.utility.Lang;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -28,6 +27,8 @@ import java.util.List;
 /**
  * Generates SU (from Create) when provided Mana (from Botania).
  * Mana per Tick and SU are proportional to RPM.
+ *
+ * If there is not enough mana, it still rotates but produces 0 SU.
  */
 public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements IManaReceiver {
   public static final boolean UPDATE_MANA_ON_EVERY_TICK = true;
@@ -40,55 +41,32 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
   public int manaPerTick = 0;
   public boolean active = false;
   public boolean firstTick = true;
-  public boolean isAboveThreshold = false;
-  public int isBelowThresholdCount = 0;
 
   public ManaMotorBlockEntity(BlockEntityType<? extends ManaMotorBlockEntity> type, BlockPos pos, BlockState state) {
     super(type, pos, state);
-    this.isAboveThreshold = false;
     this.setLazyTickRate(CommonConfig.MANA_MOTOR_LAZY_TICK_RATE.get());
   }
 
   @Nonnull
   @Override
   public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-    if (cap == BotaniaForgeCapabilities.MANA_RECEIVER) {
-      return lazyManaReceiver.cast();
-    }
+    if (cap == BotaniaForgeCapabilities.MANA_RECEIVER) return lazyManaReceiver.cast();
     return super.getCapability(cap, side);
   }
   @Override
-  public Level getManaReceiverLevel() {
-    return this.getLevel();
-  }
+  public Level getManaReceiverLevel() { return this.getLevel(); }
   @Override
-  public BlockPos getManaReceiverPos() {
-    return this.getBlockPos();
-  }
+  public BlockPos getManaReceiverPos() { return this.getBlockPos(); }
   @Override
   public int getCurrentMana() { return this.mana; }
   @Override
-  public boolean isFull() {
-    return this.mana > ManaMotorConfig.getManaCap();
-  }
+  public boolean isFull() {return this.mana > ManaMotorConfig.getManaCap(); }
   @Override
   public void receiveMana(int pMana) { this.updateMana(this.mana + pMana); }
 
-  public int getMinimumSafeThresholdForMana() {
-    return Math.max(ManaMotorConfig.getMinimumSafeThreshold() * this.getMinimumManaPerTick(), ManaMotorConfig.getMinimumSafeThresholdPool());
-  }
   public void updateMana(int newManaValue) {
     Log.LOGGER.trace("Mana changed from {} to {}", this.mana, newManaValue);
     this.mana = newManaValue;
-    if (this.mana > this.getMinimumSafeThresholdForMana()) {
-      if (!this.isAboveThreshold) Log.LOGGER.debug("Mana is above threshold for the first time {}", this.mana);
-      this.isAboveThreshold = true;
-      this.isBelowThresholdCount = 0;
-    } else {
-      this.isAboveThreshold = false;
-      this.isBelowThresholdCount += 1;
-      if (this.isBelowThresholdCount < (ManaMotorConfig.getMinimumSafeThreshold() / 4f)) Log.LOGGER.debug("Mana is below threshold for {} ticks {}", this.isBelowThresholdCount, this.mana);
-    }
     this.setChanged();
     this.reconsiderIfHasEnoughManaToProduceSU();
   }
@@ -107,7 +85,7 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
   }
   public void reconsiderIfHasEnoughManaToProduceSU() {
     var previousActiveState = this.active;
-    var newActiveState = this.isBelowThresholdCount < (CommonConfig.MANA_MOTOR_MIN_MANA_RESERVE_FACTOR.get() / 2);
+    var newActiveState = this.mana > this.manaPerTick;
     this.active = newActiveState;
     if (previousActiveState != newActiveState) {
       Log.LOGGER.debug("Active state changed from {} to {}", previousActiveState, newActiveState);
@@ -120,18 +98,16 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
   @NotNull
   @Override
   public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap) { return super.getCapability(cap); }
-  public CenteredSideValueBoxTransform createShaftSlot() {
-    var slot = new CenteredSideValueBoxTransform((motor, side) -> motor.getValue(ManaMotorBlock.FACING) == side.getOpposite());
-    return slot;
-  }
+  public CenteredSideValueBoxTransform createShaftSlot() { return new CenteredSideValueBoxTransform((motor, side) -> motor.getValue(ManaMotorBlock.FACING) == side.getOpposite()); }
   public ScrollValueBehaviour createScrollBehavior() {
-    var behavior = new ScrollValueBehaviour(new TextComponent("speed"), this, this.shaftSlot)
-      .between(-256, 256)
-      .withUnit(i -> new TextComponent("RPM"))
+    var maxRPM = AllConfigs.SERVER.kinetics.maxMotorSpeed.get();
+    var behavior = new ScrollValueBehaviour(Lang.translateDirect("generic.speed"), this, this.shaftSlot)
+      .between(-maxRPM, maxRPM)
+      .withUnit(i -> Lang.translateDirect("generic.unit.rpm"))
       .withCallback(this::updateGeneratedRotation)
-      .withClientCallback((i) -> Log.LOGGER.info("clientCallback"))
       .withStepFunction(CreativeMotorTileEntity::step);
-    behavior.setValue(CommonConfig.MANA_MOTOR_BASE_RPM.get());
+    behavior.value = CommonConfig.MANA_MOTOR_BASE_RPM.get();
+    behavior.scrollableValue = behavior.value;
     return behavior;
   }
   @Override
@@ -149,10 +125,9 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
     super.initialize();
     if (!hasSource() || getGeneratedSpeed() > getTheoreticalSpeed()) updateGeneratedRotation();
   }
+  public int getSpeedSafe() { return (this.scrollValueBehaviour != null) ? this.scrollValueBehaviour.getValue() : 0; }
   @Override
-  public float getGeneratedSpeed() {
-    return convertToDirection((this.scrollValueBehaviour != null && this.active) ? this.scrollValueBehaviour.getValue() : 0, getBlockState().getValue(ManaMotorBlock.FACING));
-  }
+  public float getGeneratedSpeed() { return convertToDirection(this.getSpeedSafe(), getBlockState().getValue(ManaMotorBlock.FACING)); }
   @Override
   public void lazyTick() {
     super.lazyTick();
@@ -163,9 +138,7 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
       this.updateMana(newMana);
     }
   }
-  public void updateGeneratedRotation(int i) {
-    if (this.level != null) this.updateGeneratedRotation();
-  }
+  public void updateGeneratedRotation(int i) { if (this.level != null) this.updateGeneratedRotation(); }
 
   @Override
   public void invalidateCaps() {
@@ -186,13 +159,11 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
     Log.LOGGER.debug("Speed changed from {} to {}", previousSpeed, this.scrollValueBehaviour.getValue());
   }
   @Override
-  public float calculateStressApplied() {
-    return 0f;
-  }
+  public float calculateStressApplied() { return 0f; }
 
   @Override
   public float calculateAddedStressCapacity() {
-    float capacity = (float) ManaMotorConfig.getStressUnitsPerRPM();
+    float capacity = this.active ? ((float) ManaMotorConfig.getStressUnitsPerRPM()) : 0f;
     this.lastCapacityProvided = capacity;
     return capacity;
   }

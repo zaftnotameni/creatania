@@ -19,7 +19,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
 
-version = '0.0.1-1.18.2'
+version = '1.18.2-0.0.1-alpha'
 group = 'zaftnotameni.creatania' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'creatania'
 

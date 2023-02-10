@@ -59,8 +59,7 @@ public class ManaMotorBehavior extends TileEntityBehaviour {
   }
 
   public static void tickServer(Level level, BlockPos blockPos, BlockState blockState, ManaMotorBlockEntity self) {
-    if (UPDATE_MANA_ON_EVERY_TICK) {
-      if (self.active) self.updateMana(Math.max(0, self.mana - self.manaPerTick));
-    }
+    var shouldConsumeMana = UPDATE_MANA_ON_EVERY_TICK && (self.active || ManaMotorConfig.getShouldConsumeManaIfNotActive());
+    if (shouldConsumeMana) { self.updateMana(Math.max(0, self.mana - self.manaPerTick));  }
   }
 }
