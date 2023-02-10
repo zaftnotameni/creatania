@@ -13,7 +13,7 @@
 	},
 	"elements": [
 		{
-			"name": "shaft",
+			"name": "Axis",
 			"from": [6, 6, 8],
 			"to": [10, 10, 16],
 			"faces": {
@@ -343,9 +343,10 @@
 			}
 		}
 	],
+	"display": {},
 	"groups": [
 		{
-			"name": "shaft",
+			"name": "Axis",
 			"origin": [8, 8, 8],
 			"color": 0,
 			"children": [0]
