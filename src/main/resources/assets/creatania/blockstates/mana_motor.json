@@ -2,25 +2,27 @@
   "variants": {
     "facing=down": {
       "model": "creatania:block/mana_motor/mana_motor",
-      "x": 180
+      "x": 270, "y": 0, "z": 0
     },
     "facing=up": {
-      "model": "creatania:block/mana_motor/mana_motor"
+      "model": "creatania:block/mana_motor/mana_motor",
+      "x": 90, "y": 0, "z": 0
     },
     "facing=north": {
       "model": "creatania:block/mana_motor/mana_motor",
-      "y": 180
+      "x": 0, "y": 180, "z": 0
     },
     "facing=south": {
-      "model": "creatania:block/mana_motor/mana_motor"
+      "model": "creatania:block/mana_motor/mana_motor",
+      "x": 0, "y": 0, "z": 0
     },
     "facing=west": {
       "model": "creatania:block/mana_motor/mana_motor",
-      "y": 90
+      "x": 0, "y": 90, "z": 0
     },
     "facing=east": {
       "model": "creatania:block/mana_motor/mana_motor",
-      "y": 270
+      "x": 0, "y": 270, "z": 0
     }
   }
 }
