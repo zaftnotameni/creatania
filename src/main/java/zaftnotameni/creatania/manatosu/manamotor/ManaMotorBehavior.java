@@ -1,12 +1,8 @@
-package zaftnotameni.creatania.block.entity.custom.behavior;
+package zaftnotameni.creatania.manatosu.manamotor;
 
 import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
 import com.simibubi.create.foundation.tileEntity.behaviour.BehaviourType;
-import com.simibubi.create.foundation.tileEntity.behaviour.CenteredSideValueBoxTransform;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.Vec3;
-import zaftnotameni.creatania.block.entity.custom.ManaMotorBlockEntity;
 
 public class ManaMotorBehavior extends TileEntityBehaviour {
   public static final BehaviourType<TileEntityBehaviour> TYPE = new BehaviourType<>();

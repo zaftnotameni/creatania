@@ -1,28 +1,24 @@
-package zaftnotameni.creatania.block.entity.custom;
+package zaftnotameni.creatania.sutomana.managenerator;
 
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.contraptions.base.KineticTileEntity;
-import com.simibubi.create.foundation.block.BlockStressValues;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import vazkii.botania.api.mana.IManaPool;
-import zaftnotameni.creatania.block.entity.ModBlockEntities;
-import zaftnotameni.creatania.config.ModCommonConfigs;
+import zaftnotameni.creatania.config.CommonConfig;
 
 public class ManaGeneratorBlockEntity extends KineticTileEntity {
   public boolean isFirstTick = true;
-
-  public ManaGeneratorBlockEntity(BlockPos pPos, BlockState pBlockState) {
-    super(ModBlockEntities.MANA_GENERATOR_BLOCK_ENTITY.get(), pPos, pBlockState);
-    this.setLazyTickRate(ModCommonConfigs.MANA_GENERATOR_LAZY_TICK_RATE.get());
+  public ManaGeneratorBlockEntity(BlockEntityType<? extends ManaGeneratorBlockEntity> type, BlockPos pos, BlockState state) {
+    super(type, pos, state);
+    this.setLazyTickRate(CommonConfig.MANA_GENERATOR_LAZY_TICK_RATE.get());
   }
 
   public int getNormalizedRPM() {
-    var min = ModCommonConfigs.MANA_GENERATOR_MINIMUM_RPM.get();
+    var min = CommonConfig.MANA_GENERATOR_MINIMUM_RPM.get();
     if (this.getSpeed() < min) return 0;
-    return Math.max(ModCommonConfigs.MANA_GENERATOR_MINIMUM_RPM.get(),
-      Math.min(ModCommonConfigs.MANA_GENERATOR_MAXIMUM_RPM.get(), (int) Math.abs(this.getSpeed())));
+    return Math.max(CommonConfig.MANA_GENERATOR_MINIMUM_RPM.get(),
+      Math.min(CommonConfig.MANA_GENERATOR_MAXIMUM_RPM.get(), (int) Math.abs(this.getSpeed())));
   }
   public void serverTick() {
     if (this.isOverStressed() || this.getNormalizedRPM() == 0 || this.worldPosition == null) return;
@@ -43,12 +39,12 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity {
   }
 
   public int getManaProductionRate() {
-    return getNormalizedRPM() * ModCommonConfigs.MANA_GENERATOR_MANA_PER_RPM_PER_TICK.get();
+    return getNormalizedRPM() * CommonConfig.MANA_GENERATOR_MANA_PER_RPM_PER_TICK.get();
   }
 
   @Override
   public float calculateStressApplied() {
-    float impact = ModCommonConfigs.MANA_GENERATOR_SU_PER_RPM.get() * Math.abs(this.getSpeed());
+    float impact = CommonConfig.MANA_GENERATOR_SU_PER_RPM.get() * Math.abs(this.getSpeed());
     this.lastStressApplied = impact;
     return impact;
   }

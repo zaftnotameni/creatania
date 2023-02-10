@@ -1,4 +1,4 @@
-package zaftnotameni.creatania.block.entity.custom;
+package zaftnotameni.creatania.sutomana.managenerator;
 import com.simibubi.create.AllBlockPartials;
 import com.simibubi.create.content.contraptions.base.KineticTileEntity;
 import com.simibubi.create.content.contraptions.base.KineticTileEntityRenderer;
@@ -6,8 +6,8 @@ import com.simibubi.create.foundation.render.CachedBufferer;
 import com.simibubi.create.foundation.render.SuperByteBuffer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.level.block.state.BlockState;
-public class ManaMotorRenderer extends KineticTileEntityRenderer {
-  public ManaMotorRenderer(BlockEntityRendererProvider.Context context) {
+public class ManaGeneratorRenderer extends KineticTileEntityRenderer {
+  public ManaGeneratorRenderer(BlockEntityRendererProvider.Context context) {
     super(context);
   }
   @Override

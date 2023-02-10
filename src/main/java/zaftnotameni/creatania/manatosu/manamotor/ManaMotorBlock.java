@@ -1,4 +1,4 @@
-package zaftnotameni.creatania.block.custom;
+package zaftnotameni.creatania.manatosu.manamotor;
 
 import com.simibubi.create.content.contraptions.base.DirectionalKineticBlock;
 import com.simibubi.create.foundation.block.ITE;
@@ -19,9 +19,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import zaftnotameni.creatania.block.ModBlocks;
-import zaftnotameni.creatania.block.entity.ModBlockEntities;
-import zaftnotameni.creatania.block.entity.custom.ManaMotorBlockEntity;
+import zaftnotameni.creatania.registry.BlockEntities;
 
 public class ManaMotorBlock extends DirectionalKineticBlock implements ITE<ManaMotorBlockEntity> {
 
@@ -40,7 +38,7 @@ public class ManaMotorBlock extends DirectionalKineticBlock implements ITE<ManaM
 
   @Override
   public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-    return ModBlockEntities.MANA_MOTOR_BLOCK_ENTITY.create(pos, state);
+    return BlockEntities.MANA_MOTOR_BLOCK_ENTITY.create(pos, state);
   }
 
   @Override
@@ -49,7 +47,7 @@ public class ManaMotorBlock extends DirectionalKineticBlock implements ITE<ManaM
   }
   @Override
   public BlockEntityType<? extends ManaMotorBlockEntity> getTileEntityType() {
-    return ModBlockEntities.MANA_MOTOR_BLOCK_ENTITY.get();
+    return BlockEntities.MANA_MOTOR_BLOCK_ENTITY.get();
   }
 
   @Override
@@ -72,7 +70,7 @@ public class ManaMotorBlock extends DirectionalKineticBlock implements ITE<ManaM
   }
   @Override
   public <S extends BlockEntity> BlockEntityTicker<S> getTicker(Level level, BlockState blockState, BlockEntityType<S> blockEntityType) {
-    return createTickerHelper(blockEntityType, ModBlockEntities.MANA_MOTOR_BLOCK_ENTITY.get(), ManaMotorBlockEntity::tick);
+    return createTickerHelper(blockEntityType, BlockEntities.MANA_MOTOR_BLOCK_ENTITY.get(), ManaMotorBlockEntity::tick);
   }
 
   private static final VoxelShape SHAPE =  Block.box(0, 0, 0, 16, 8, 16);

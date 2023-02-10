@@ -1,4 +1,4 @@
-package zaftnotameni.creatania.block.custom;
+package zaftnotameni.creatania.sutomana.managenerator;
 
 import com.simibubi.create.content.contraptions.base.DirectionalKineticBlock;
 import com.simibubi.create.foundation.block.ITE;
@@ -10,8 +10,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import zaftnotameni.creatania.block.entity.ModBlockEntities;
-import zaftnotameni.creatania.block.entity.custom.ManaGeneratorBlockEntity;
+import zaftnotameni.creatania.registry.BlockEntities;
 
 public class ManaGeneratorBlock extends DirectionalKineticBlock implements ITE<ManaGeneratorBlockEntity> {
   @Override
@@ -39,7 +38,7 @@ public class ManaGeneratorBlock extends DirectionalKineticBlock implements ITE<M
 
   @Override
   public BlockEntityType<? extends ManaGeneratorBlockEntity> getTileEntityType() {
-    return ModBlockEntities.MANA_GENERATOR_BLOCK_ENTITY.get();
+    return BlockEntities.MANA_GENERATOR_BLOCK_ENTITY.get();
   }
 
   @Override
@@ -49,7 +48,7 @@ public class ManaGeneratorBlock extends DirectionalKineticBlock implements ITE<M
 
   @Override
   public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-    return new ManaGeneratorBlockEntity(pos, state);
+    return new ManaGeneratorBlockEntity(getTileEntityType(), pos, state);
   }
 
   @Override
