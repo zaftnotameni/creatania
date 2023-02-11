@@ -22,12 +22,13 @@ public class ManaMotorRenderer extends KineticTileEntityRenderer {
   @Override
   protected void renderSafe(KineticTileEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
     super.renderSafe(te, partialTicks, ms, buffer, light, overlay);
-
     renderFluids(te, partialTicks, ms, buffer, light, overlay);
   }
   private void renderFluids(KineticTileEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
     var renderedFluid = new FluidStack(Fluids.MANA_FLUID.get(), 1000);
-    FluidRenderer.renderFluidBox(renderedFluid, 0.1f, 0.5f, 0.1f, 0.9f, 1f, 0.9f, buffer, ms, light,
+    var motor = (ManaMotorBlockEntity) te;
+    float ymax = 0.5f + (float) motor.mana / (float) motor.manaMachine.manaCap;
+    FluidRenderer.renderFluidBox(renderedFluid, 0.1f, 0.5f, 0.1f, 0.9f, ymax, 0.9f, buffer, ms, light,
       true);
   }
 }

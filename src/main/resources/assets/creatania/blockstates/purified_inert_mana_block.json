@@ -1,5 +1,5 @@
 {
   "variants": {
-    "": "minecraft:block/emerald_block"
+    "": { "model": "creatania:block/purified_inert_mana_block" }
   }
 }

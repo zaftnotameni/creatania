@@ -27,6 +27,8 @@ import zaftnotameni.creatania.manatosu.manamotor.ManaMotorBlock;
 import zaftnotameni.creatania.sutomana.managenerator.ManaGeneratorBlock;
 import zaftnotameni.creatania.util.Log;
 
+import java.util.function.Supplier;
+
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 
@@ -65,13 +67,24 @@ public class Blocks {
     .transform(customItemModel())
     .register();
 
-  public static final RegistryObject<CorruptedManaBlock> CORRUPTED_INERT_MANA_BLOCK = INDEX.register(
+  public static final RegistryObject<CorruptedManaBlock> CORRUPTED_INERT_MANA_BLOCK = registerBlockWithItem(
     Constants.CORRUPTED_INERT_MANA_BLOCK,
     () -> new CorruptedManaBlock(BlockBehaviour.Properties.of(Material.STONE)));
 
-  public static final RegistryObject<CorruptedManaBlock> PURIFIED_INERT_MANA_BLOCK = INDEX.register(
+  public static final RegistryObject<CorruptedManaBlock> PURIFIED_INERT_MANA_BLOCK = registerBlockWithItem(
     Constants.PURIFIED_INERT_MANA_BLOCK,
     () -> new CorruptedManaBlock(BlockBehaviour.Properties.of(Material.STONE)));
+
+  public static <T extends Block> RegistryObject<T> registerBlockWithItem(String name, Supplier<T> createBlock) {
+    RegistryObject<T> block = INDEX.register(name, createBlock);
+    registerBlockItem(name, block, CreativeModeTabs.CREATANIA_ITEMS);
+    return block;
+  }
+  private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block, CreativeModeTab tab) {
+    return Items.INDEX.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(tab)));
+  }
+
+
 
   public static void register(IEventBus bus) {
     Log.LOGGER.debug("register blocks");

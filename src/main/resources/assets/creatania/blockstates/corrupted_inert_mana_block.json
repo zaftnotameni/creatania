@@ -1,5 +1,5 @@
 {
   "variants": {
-    "": "minecraft:block/diamond_block"
+    "": { "model": "creatania:block/corrupted_inert_mana_block" }
   }
 }

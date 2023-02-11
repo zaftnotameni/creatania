@@ -6,6 +6,5 @@
   },
   "output": {
     "name": "creatania:purified_inert_mana_block"
-  },
-  "success_function": "botania:ender_air_release"
+  }
 }
