@@ -1,5 +1,6 @@
 package zaftnotameni.creatania.manatosu.manamotor;
 
+import com.google.common.base.Predicates;
 import com.simibubi.create.content.contraptions.base.GeneratingKineticTileEntity;
 import com.simibubi.create.content.contraptions.components.motor.CreativeMotorTileEntity;
 import com.simibubi.create.foundation.config.AllConfigs;
@@ -9,14 +10,21 @@ import com.simibubi.create.foundation.tileEntity.behaviour.scrollvalue.ScrollVal
 import com.simibubi.create.foundation.utility.Lang;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import vazkii.botania.api.BotaniaForgeCapabilities;
 import vazkii.botania.api.mana.IManaReceiver;
+import vazkii.botania.api.mana.spark.IManaSpark;
+import vazkii.botania.api.mana.spark.ISparkAttachable;
+import vazkii.botania.api.mana.spark.SparkHelper;
+import vazkii.botania.api.mana.spark.SparkUpgradeType;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.util.Log;
 
@@ -30,13 +38,14 @@ import java.util.List;
  *
  * If there is not enough mana, it still rotates but produces 0 SU.
  */
-public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements IManaReceiver {
+public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements IManaReceiver, ISparkAttachable {
   public static final boolean UPDATE_MANA_ON_EVERY_TICK = true;
   public static final boolean UPDATE_MANA_ON_LAZY_TICK = !UPDATE_MANA_ON_EVERY_TICK;
   public ManaMotorBehavior manaMotorBehavior;
   public CenteredSideValueBoxTransform shaftSlot;
   public ScrollValueBehaviour scrollValueBehaviour;
   public LazyOptional<IManaReceiver> lazyManaReceiver = LazyOptional.empty();
+  public LazyOptional<ISparkAttachable> lazySparkAttachable = LazyOptional.empty();
   public int mana = 0;
   public int manaPerTick = 0;
   public boolean active = false;
@@ -51,6 +60,7 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
   @Override
   public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
     if (cap == BotaniaForgeCapabilities.MANA_RECEIVER) return lazyManaReceiver.cast();
+    if (cap == BotaniaForgeCapabilities.SPARK_ATTACHABLE) return lazySparkAttachable.cast();
     return super.getCapability(cap, side);
   }
   @Override
@@ -144,12 +154,14 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
   public void invalidateCaps() {
     super.invalidateCaps();
     this.lazyManaReceiver.invalidate();
+    this.lazySparkAttachable.invalidate();
   }
 
   @Override
   public void onLoad() {
     super.onLoad();
     lazyManaReceiver = LazyOptional.of(() -> this);
+    lazySparkAttachable = LazyOptional.of(() -> this);
   }
 
   @Override
@@ -167,4 +179,18 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
     this.lastCapacityProvided = capacity;
     return capacity;
   }
+  @Override
+  public boolean canAttachSpark(ItemStack stack) { return true; }
+  @Override
+  public int getAvailableSpaceForMana() { return ManaMotorConfig.getManaCap() - this.mana; }
+  @Override
+  public IManaSpark getAttachedSpark() {
+    var sparks = level.getEntitiesOfClass(Entity.class,
+      new AABB(worldPosition.above(), worldPosition.above().offset(1, 1, 1)), Predicates.instanceOf(IManaSpark.class));
+
+    if (sparks.isEmpty()) return null;
+    return (IManaSpark) sparks.get(0);
+  }
+  @Override
+  public boolean areIncomingTranfersDone() { return this.isFull(); }
 }
