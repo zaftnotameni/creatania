@@ -2,9 +2,11 @@ package zaftnotameni.creatania.registry;
 
 import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.block.BlockStressDefaults;
+import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
@@ -19,6 +21,7 @@ import zaftnotameni.creatania.sutomana.managenerator.ManaGeneratorBlock;
 import zaftnotameni.creatania.util.Log;
 
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
+import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 
 public class Blocks {
   public static final DeferredRegister<Block> INDEX = DeferredRegister.create(ForgeRegistries.BLOCKS, Constants.MODID);
@@ -28,8 +31,10 @@ public class Blocks {
 
   public static final BlockEntry<ManaMotorBlock> MANA_MOTOR = CREATE_REGISTRATE
     .block(Constants.MANA_MOTOR, ManaMotorBlock::new)
-    .initialProperties(SharedProperties::softMetal)
-    .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+    .initialProperties(SharedProperties::stone)
+    .blockstate(BlockStateGen.directionalBlockProvider(true))
+    .addLayer(() -> RenderType::cutoutMipped)
+    .transform(axeOrPickaxe())
     .transform(BlockStressDefaults.setCapacity(CommonConfig.MANA_MOTOR_SU_PER_RPM.get()))
     .item()
     .transform(customItemModel())

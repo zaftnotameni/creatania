@@ -19,7 +19,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import zaftnotameni.creatania.registry.BlockEntities;
 
-import static zaftnotameni.creatania.util.Voxel.FULL_BLOCK_VOXEL;
+import static zaftnotameni.creatania.util.Voxel.*;
 
 public class ManaMotorBlock extends DirectionalKineticBlock implements ITE<ManaMotorBlockEntity> {
   public ManaMotorBlock(Properties properties) {
@@ -52,7 +52,9 @@ public class ManaMotorBlock extends DirectionalKineticBlock implements ITE<ManaM
     return false;
   }
   @Override
-  public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) { return FULL_BLOCK_VOXEL; }
+  public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) { return ALMOST_FULL_BLOCK_VOXEL; }
+  @Override
+  public VoxelShape getCollisionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) { return FULL_BLOCK_VOXEL; }
   @Override
   public BlockState rotate(BlockState pState, Rotation pRotation) { return pState.setValue(FACING, pRotation.rotate(pState.getValue(FACING))); }
   @Override
