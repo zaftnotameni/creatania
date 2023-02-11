@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
@@ -54,6 +55,7 @@ public class Fluids {
   public static LiquidBlock createManaFluidBlock() {
     return new LiquidBlock(() -> MANA_FLUID.get(), BlockBehaviour.Properties
       .of(Material.WATER)
+      .color(MaterialColor.COLOR_CYAN)
       .noCollission()
       .strength(100f));
   }

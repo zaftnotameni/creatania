@@ -8,7 +8,6 @@
 		"9": "creatania:block/livingrock",
 		"10": "creatania:block/mana_motor_core",
 		"11": "creatania:block/mana_motor_face",
-		"12": "creatania:block/mana_water",
 		"particle": "creatania:block/livingrock"
 	},
 	"elements": [
@@ -341,14 +340,6 @@
 				"east": {"uv": [0, 0, 12, 4], "texture": "#9"},
 				"south": {"uv": [0, 0, 0, 4], "texture": "#9"}
 			}
-		},
-		{
-			"name": "mana_water",
-			"from": [2, 14, 2],
-			"to": [14, 14.001, 14],
-			"faces": {
-				"up": {"uv": [2, 2, 14, 14], "texture": "#12", "cullface": "down"}
-			}
 		}
 	],
 	"gui_light": "front",
@@ -390,7 +381,7 @@
 			"name": "mana_pool",
 			"origin": [8, 8, 8],
 			"color": 0,
-			"children": [21, 22, 23, 24, 25, 26]
+			"children": [21, 22, 23, 24, 25]
 		}
 	]
 }
