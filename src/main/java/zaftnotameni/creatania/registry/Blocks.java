@@ -1,5 +1,6 @@
 package zaftnotameni.creatania.registry;
 
+import com.mojang.datafixers.kinds.Const;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.block.BlockStressDefaults;
 import com.simibubi.create.foundation.data.BlockStateGen;
@@ -7,14 +8,20 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.config.CommonConfig;
+import zaftnotameni.creatania.manatoitem.CorruptedManaBlock;
 import zaftnotameni.creatania.manatoitem.manacondenser.ManaCondenserBlock;
 import zaftnotameni.creatania.manatosu.manamotor.ManaMotorBlock;
 import zaftnotameni.creatania.sutomana.managenerator.ManaGeneratorBlock;
@@ -57,6 +64,14 @@ public class Blocks {
     .item()
     .transform(customItemModel())
     .register();
+
+  public static final RegistryObject<CorruptedManaBlock> CORRUPTED_INERT_MANA_BLOCK = INDEX.register(
+    Constants.CORRUPTED_INERT_MANA_BLOCK,
+    () -> new CorruptedManaBlock(BlockBehaviour.Properties.of(Material.STONE)));
+
+  public static final RegistryObject<CorruptedManaBlock> PURIFIED_INERT_MANA_BLOCK = INDEX.register(
+    Constants.PURIFIED_INERT_MANA_BLOCK,
+    () -> new CorruptedManaBlock(BlockBehaviour.Properties.of(Material.STONE)));
 
   public static void register(IEventBus bus) {
     Log.LOGGER.debug("register blocks");

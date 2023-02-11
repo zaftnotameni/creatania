@@ -15,4 +15,6 @@ public class Constants {
   public static final String MANA_FLUID_BUCKET_NAME = "mana_fluid_bucket";
   public static final String MANA_PARTICLES_NAME = "mana_particles";
   public static final String MANA_GEL_ITEM_NAME = "mana_gel";
+  public static final String CORRUPTED_INERT_MANA_BLOCK = "corrupted_inert_mana_block";
+  public static final String PURIFIED_INERT_MANA_BLOCK = "purified_inert__mana_block";
 }

@@ -1,0 +1,11 @@
+{
+  "type": "botania:pure_daisy",
+  "input": {
+    "type": "block",
+    "block": "creatania:purified_inert_mana_block"
+  },
+  "output": {
+    "name": "creatania:corrupted_inert_mana_block"
+  },
+  "success_function": "botania:ender_air_release"
+}

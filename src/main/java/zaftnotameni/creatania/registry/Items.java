@@ -12,7 +12,7 @@ import zaftnotameni.creatania.util.Log;
 public class Items {
   public static final DeferredRegister<Item> INDEX = DeferredRegister.create(ForgeRegistries.ITEMS, Constants.MODID);
 
-  public static final RegistryObject<Item> MANA_GEL = INDEX.register(Constants.MANA_GEL_ITEM_NAME, () -> new ManaGelItem());
+  public static final RegistryObject<ManaGelItem> MANA_GEL = INDEX.register(Constants.MANA_GEL_ITEM_NAME, () -> new ManaGelItem());
 
   public static void register(IEventBus bus) {
     Log.LOGGER.debug("register items");

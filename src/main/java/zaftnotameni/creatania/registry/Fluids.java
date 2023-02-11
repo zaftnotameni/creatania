@@ -40,7 +40,7 @@ public class Fluids {
       .viscosity(5)
       .sound(SoundEvents.HONEY_DRINK)
       .overlay(WATER_OVERLAY_RL)
-      .color(0x3333aaff))
+      .color(0xaa33aaff))
       .slopeFindDistance(2)
       .levelDecreasePerBlock(2)
       .block(() -> Fluids.MANA_FLUID_BLOCK.get())
