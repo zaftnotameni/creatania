@@ -25,6 +25,7 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
   public LazyOptional<IManaReceiver> lazyManaReceiver = LazyOptional.empty();
   public boolean isFirstTick = true;
   public int mana = 0;
+  public boolean firstTick = true;
   public ManaCondenserBlockEntity(BlockEntityType<? extends ManaCondenserBlockEntity> type, BlockPos pos, BlockState state) {
     super(type, pos, state);
     this.setLazyTickRate(CommonConfig.MANA_GENERATOR_LAZY_TICK_RATE.get());
@@ -42,13 +43,13 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
   }
   public void serverTick() {
     var rpm = this.getNormalizedRPM();
-    var requiredMana = CommonConfig.MANA_CONDENSER_MANA_PER_TICK_PER_RPM.get() * rpm;
+    var requiredMana = getManaConsumptionRate();
     if (this.doesNotMeetRequirementsToCondenseMana(rpm, requiredMana)) return;
     this.receiveMana(-requiredMana);
     this.insertManaGelBelow();
   }
   public boolean doesNotMeetRequirementsToCondenseMana(int rpm, int requiredMana) {
-    return this.isOverStressed() || (rpm <= 0) || (this.worldPosition == null) || !this.isSpeedRequirementFulfilled() || (this.mana < requiredMana);
+    return this.isOverStressed() || (rpm <= 0) || (this.getBlockPos() == null) || !this.isSpeedRequirementFulfilled() || (this.mana < requiredMana);
   }
   public void insertManaGelBelow() {
     BlockEntity entityBelow = this.level.getBlockEntity(this.worldPosition.below());
