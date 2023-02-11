@@ -7,14 +7,9 @@ import com.simibubi.create.foundation.tileEntity.behaviour.CenteredSideValueBoxT
 import com.simibubi.create.foundation.tileEntity.behaviour.scrollvalue.ScrollValueBehaviour;
 import com.simibubi.create.foundation.utility.Lang;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.AABB;
 import vazkii.botania.api.mana.spark.IManaSpark;
-import zaftnotameni.creatania.config.CommonConfig;
-import zaftnotameni.creatania.manatosu.manamotor.ManaMotorBlock;
-import zaftnotameni.creatania.manatosu.manamotor.ManaMotorConfig;
-import zaftnotameni.creatania.util.Log;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
@@ -39,7 +34,8 @@ public class KineticManaMachine<T extends SmartTileEntity & IAmManaMachine> {
     cons.accept(value);
     return value;
   }
-  public float calculateStressActiveOnly() { return calculateStress(te::isManaMachineActive, te::setManaMachineLastStressImpact); }
+  public float calculateStressRegardless() { return calculateStress(() -> true, te::setManaMachineLastStressImpact); }
+  public float calculateStressActiveOnly() { return calculateStress(te::isManaMachineActive, te::setManaMachineLastCapacityProvided); }
   public IManaSpark getAttachedSpark() {
     var level = te.getLevel();
     if (level == null) return null;

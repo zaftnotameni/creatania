@@ -1,4 +1,4 @@
-package zaftnotameni.creatania.tangiblemana;
+package zaftnotameni.creatania.manatoitem;
 import net.minecraft.world.item.Item;
 import zaftnotameni.creatania.registry.CreativeModeTabs;
 public class ManaGelItem extends Item  {

@@ -22,6 +22,7 @@ import net.minecraftforge.registries.RegistryObject;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.manatoitem.CorruptedManaBlock;
+import zaftnotameni.creatania.manatoitem.PurifiedManaBlock;
 import zaftnotameni.creatania.manatoitem.manacondenser.ManaCondenserBlock;
 import zaftnotameni.creatania.manatosu.manamotor.ManaMotorBlock;
 import zaftnotameni.creatania.sutomana.managenerator.ManaGeneratorBlock;
@@ -71,9 +72,9 @@ public class Blocks {
     Constants.CORRUPTED_INERT_MANA_BLOCK,
     () -> new CorruptedManaBlock(BlockBehaviour.Properties.of(Material.STONE)));
 
-  public static final RegistryObject<CorruptedManaBlock> PURIFIED_INERT_MANA_BLOCK = registerBlockWithItem(
+  public static final RegistryObject<PurifiedManaBlock> PURIFIED_INERT_MANA_BLOCK = registerBlockWithItem(
     Constants.PURIFIED_INERT_MANA_BLOCK,
-    () -> new CorruptedManaBlock(BlockBehaviour.Properties.of(Material.STONE)));
+    () -> new PurifiedManaBlock(BlockBehaviour.Properties.of(Material.STONE)));
 
   public static <T extends Block> RegistryObject<T> registerBlockWithItem(String name, Supplier<T> createBlock) {
     RegistryObject<T> block = INDEX.register(name, createBlock);
@@ -83,8 +84,6 @@ public class Blocks {
   private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block, CreativeModeTab tab) {
     return Items.INDEX.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(tab)));
   }
-
-
 
   public static void register(IEventBus bus) {
     Log.LOGGER.debug("register blocks");

@@ -27,7 +27,7 @@ public class ManaMotorRenderer extends KineticTileEntityRenderer {
   private void renderFluids(KineticTileEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
     var renderedFluid = new FluidStack(Fluids.MANA_FLUID.get(), 1000);
     var motor = (ManaMotorBlockEntity) te;
-    float ymax = 0.5f + (float) motor.mana / (float) motor.manaMachine.manaCap;
+    float ymax = (motor.mana == 0) ? 0.55f : (0.8f + (0.19f * motor.mana / (float) motor.manaMachine.manaCap));
     FluidRenderer.renderFluidBox(renderedFluid, 0.1f, 0.5f, 0.1f, 0.9f, ymax, 0.9f, buffer, ms, light,
       true);
   }
