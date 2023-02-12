@@ -4,6 +4,46 @@ Creatania
 
 Connecting Create and Botania.
 
+### Design
+
+Tenants:
+
+- Connect Create and Botania, leveraging mechanics from both mods.
+- Avoid breaking balance in both Botania and Create, this is not a mod about having overpowered items/machines.
+
+### Machines
+
+- Mana Motor (botania mana -> SU, requires mana)
+- Mana Condenser (SU -> corrupted inert mana blocks, requires SU)
+- Mana Generator (purified inert mana fluid -> botania mana, requires SU)
+
+### Fluids
+
+- Inert mana fluid: a fluid version of mana, can be used for transportation in pipes/trains but must go through another machine to become botania mana.
+
+### Blocks
+
+- Purified Inert Mana block: can be melted to inert mana fluid using a superheated mixer.
+- Corrupted Inert Mana block: can be purified via pure daisy to become a purified inert mana block
+
+### Mechanics
+
+#### Mana Generation
+
+SU can be used to generate mana through an 4-step process.
+
+1. SU is used in a mana condenser to generate corrupted mana blocks
+2. corrupted mana blocks are used with a pure daisy to make inert mana blocks
+3. Inert mana blocks can be superheated into Inert mana fluid
+4. Inert mana fluid can be converted to mana using a mana generator
+
+#### SU Generation
+
+Mana can be converted directly to SU via a Mana Motor.
+
+
+### Development
+
 Setup Process:
 ==============================
 
