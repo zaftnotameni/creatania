@@ -9,7 +9,9 @@ Connecting Create and Botania.
 Tenants:
 
 - Connect Create and Botania, leveraging mechanics from both mods.
+- Strongly favor sided blocks.
 - Avoid breaking balance in both Botania and Create, this is not a mod about having overpowered items/machines.
+- Highly configurable: every production rate, exchange rate, SU/mana requirements can be tuned via config. 
 
 ### Machines
 
@@ -41,8 +43,31 @@ SU can be used to generate mana through an 4-step process.
 
 Mana can be converted directly to SU via a Mana Motor.
 
-
 ### Development
+
+#### TO-DO List
+
+- [ ] Loot Tables for all blocks
+- [ ] Lock to horizontal
+  - [ ] Mana Motor
+  - [ ] Mana Generator
+  - [ ] Mana Condenser
+- [ ] Recipes
+  - [ ] Mana Machine (intermediate block)
+  - [ ] Mana Motor
+  - [ ] Mana Generator
+  - [ ] Mana Condenser
+  - [ ] Mana Gel
+- [ ] Functionality
+  - [ ] Mana Condenser generates 
+- [ ] Mining level tags for all blocks
+- [ ] Art
+  - [ ] pipe connection for mana generator
+  - [ ] mana gel
+  - [ ] corrupted mana block
+  - [ ] purified mana block
+  - [ ] purified mana machine
+  - [ ] mana fluid + bucket
 
 Setup Process:
 ==============================

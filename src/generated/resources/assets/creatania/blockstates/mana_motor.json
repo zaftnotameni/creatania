@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "creatania:block/mana_motor/block",
+      "x": 180
+    },
+    "facing=up": {
+      "model": "creatania:block/mana_motor/block"
+    },
+    "facing=north": {
+      "model": "creatania:block/mana_motor/block",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "creatania:block/mana_motor/block",
+      "x": 90,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "creatania:block/mana_motor/block",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east": {
+      "model": "creatania:block/mana_motor/block",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

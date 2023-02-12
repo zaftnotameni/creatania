@@ -53,6 +53,7 @@ public class Blocks {
   public static final BlockEntry<ManaGeneratorBlock> MANA_GENERATOR = CREATE_REGISTRATE
     .block(Constants.MANA_GENERATOR, ManaGeneratorBlock::new)
     .initialProperties(SharedProperties::softMetal)
+    .blockstate(BlockStateGen.directionalBlockProvider(true))
     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
     .transform(BlockStressDefaults.setImpact(CommonConfig.MANA_GENERATOR_SU_PER_RPM.get()))
     .item()
@@ -62,6 +63,7 @@ public class Blocks {
   public static final BlockEntry<ManaCondenserBlock> MANA_CONDENSER = CREATE_REGISTRATE
     .block(Constants.MANA_CONDENSER, ManaCondenserBlock::new)
     .initialProperties(SharedProperties::softMetal)
+    .blockstate(BlockStateGen.directionalBlockProvider(true))
     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
     .transform(BlockStressDefaults.setImpact(CommonConfig.MANA_CONDENSER_SU_PER_RPM.get()))
     .item()

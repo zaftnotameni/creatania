@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "creatania:block/mana_condenser/block",
+      "x": 180
+    },
+    "facing=up": {
+      "model": "creatania:block/mana_condenser/block"
+    },
+    "facing=north": {
+      "model": "creatania:block/mana_condenser/block",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "creatania:block/mana_condenser/block",
+      "x": 90,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "creatania:block/mana_condenser/block",
+      "x": 90,
+      "y": 270
+    },
+    "facing=east": {
+      "model": "creatania:block/mana_condenser/block",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

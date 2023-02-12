@@ -1,0 +1,11 @@
+{
+  "type": "create:mixing",
+  "ingredients": [{
+    "tag": "creatania:purified_inert_mana_block"
+  }],
+  "results": [{
+    "fluid": "creatania:mana",
+    "amount": 125
+  }],
+  "heatRequirement": "superheated"
+}

@@ -1,26 +1,41 @@
 package zaftnotameni.creatania.sutomana.managenerator;
 
 import com.simibubi.create.content.contraptions.base.KineticTileEntity;
+import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
 import vazkii.botania.api.mana.IManaPool;
 import zaftnotameni.creatania.config.CommonConfig;
-import zaftnotameni.creatania.manatosu.manamotor.ManaMotorBlockEntity;
-import zaftnotameni.creatania.manatosu.manamotor.ManaMotorConfig;
+import zaftnotameni.creatania.util.Log;
 import zaftnotameni.sharedbehaviors.IAmManaMachine;
 import zaftnotameni.sharedbehaviors.KineticManaMachine;
 
-public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmManaMachine {
+import javax.annotation.Nonnull;
+import java.util.List;
+
+public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmManaMachine, Log.IHasTickLogger {
   public boolean isFirstTick = true;
   public boolean active;
   public int mana;
   public KineticManaMachine manaMachine;
+
+  public ManaGeneratorFluidHandler manaGeneratorFluidHandler;
+
+
   public ManaGeneratorBlockEntity(BlockEntityType<? extends ManaGeneratorBlockEntity> type, BlockPos pos, BlockState state) {
     super(type, pos, state);
     this.setLazyTickRate(CommonConfig.MANA_GENERATOR_LAZY_TICK_RATE.get());
   }
-  private KineticManaMachine<ManaGeneratorBlockEntity> getManaMachine() {
+  public ManaGeneratorFluidHandler getManaGeneratorFluidHandler() {
+    if (this.manaGeneratorFluidHandler == null) this.manaGeneratorFluidHandler = new ManaGeneratorFluidHandler(this);
+    return this.manaGeneratorFluidHandler;
+  }
+  public KineticManaMachine<ManaGeneratorBlockEntity> getManaMachine() {
     if (this.manaMachine == null) this.manaMachine = new KineticManaMachine<>(this)
       .withManaCap(1000)
       .withManaPerRpmPerTick(CommonConfig.MANA_GENERATOR_MANA_PER_RPM_PER_TICK.get())
@@ -29,28 +44,90 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
     return this.manaMachine;
   }
 
+  @Override
+  protected void read(CompoundTag compound, boolean clientPacket) {
+    super.read(compound, clientPacket);
+    this.manaGeneratorFluidHandler.read(compound, clientPacket);
+  }
+  @Override
+  protected void write(CompoundTag compound, boolean clientPacket) {
+    this.manaGeneratorFluidHandler.write(compound, clientPacket);
+    super.write(compound, clientPacket);
+  }
+  @Override
+  public void invalidate() {
+    super.invalidate();
+    this.getManaGeneratorFluidHandler().invalidate();
+  }
+  @Override
+  public void addBehaviours(List<TileEntityBehaviour> behaviours) {
+    this.getManaGeneratorFluidHandler().addBehaviours(behaviours);
+  }
+  @Nonnull
+  @Override
+  public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
+    var foundCapability = this.getManaGeneratorFluidHandler().getCapability(cap, side);
+    if (foundCapability != null) { return foundCapability; }
+    return super.getCapability(cap, side);
+  }
   public int getNormalizedRPM() {
     var min = CommonConfig.MANA_GENERATOR_MINIMUM_RPM.get();
     if (this.getSpeed() < min) return 0;
     return Math.max(CommonConfig.MANA_GENERATOR_MINIMUM_RPM.get(),
       Math.min(CommonConfig.MANA_GENERATOR_MAXIMUM_RPM.get(), (int) Math.abs(this.getSpeed())));
   }
+  public IManaPool getManaPoolAbove() {
+    if (this.level == null || this.worldPosition == null) return null;
+    var blockAbove = level.getBlockEntity(this.worldPosition.above());
+    if (blockAbove != null && blockAbove instanceof IManaPool) { return (IManaPool)  blockAbove; }
+    return null;
+  }
+
+  public int addManaToPool(int manaAmount) {
+    var pool = this.getManaPoolAbove();
+    if (pool == null || pool.isFull()) return 0;
+    pool.receiveMana(manaAmount);
+    return manaAmount;
+  }
+
+  public boolean shouldAbortServerTick() {
+    var isInInvalidState = this.isOverStressed() || this.getNormalizedRPM() == 0 || this.worldPosition == null || this.level == null;
+    if (isInInvalidState) return true;
+    var notEnoughSpeed = Math.abs(this.getSpeed()) <= 0 || !this.isSpeedRequirementFulfilled();
+    if (notEnoughSpeed) return true;
+    return false;
+  }
+
+  public int getManaConversionRate() { return Math.max(Math.abs(CommonConfig.MANA_GENERATOR_MANA_CONVERSION_RATE.get()), 1);  }
+
+  public Log.RateLimited logger;
+  public Log.RateLimited getLogger() { return logger; }
+  public void setLogger(Log.RateLimited pLogger) { logger = pLogger; }
   public void serverTick() {
-    if (this.isOverStressed() || this.getNormalizedRPM() == 0 || this.worldPosition == null) return;
-    if (Math.abs(getSpeed()) > 0 && isSpeedRequirementFulfilled()) {
-      var blockAbove = level.getBlockEntity(this.worldPosition.above());
-      if (blockAbove != null && blockAbove instanceof IManaPool) {
-        var pool = (IManaPool) blockAbove;
-        if (!pool.isFull()) pool.receiveMana(this.getManaProductionRate());
-      }
+    this.getManaGeneratorFluidHandler().serverTick();
+    if (this.shouldAbortServerTick()) return;
+
+    var conversionRate = this.getManaConversionRate();
+    var manaToBeGenerated = this.getManaProductionRate();
+    var manaFluidRequired = manaToBeGenerated * conversionRate;
+    var manaFluidAvailable = this.getManaGeneratorFluidHandler().getManaFluidAvailable();
+    var hasEnoughManaFluidToProduceMana = manaFluidRequired <= manaFluidAvailable;
+    if (hasEnoughManaFluidToProduceMana) {
+      var manaFluidConsumed = this.getManaGeneratorFluidHandler().drainManaFluidFromTank(manaFluidRequired);
+      var realManaToBeGenerated = manaFluidConsumed / conversionRate;
+      Log.RateLimited.of(this, 20).log((logger) -> logger.debug("consumed {} mana fluid to generate {} mana", manaFluidConsumed, realManaToBeGenerated));
+      addManaToPool(realManaToBeGenerated);
     }
   }
+  public void clientTick() {}
+
   @Override
   public void tick() {
     super.tick();
     isFirstTick = false;
-    if (this.level == null || this.level.isClientSide()) return;
-    serverTick();
+    if (this.level == null || this.worldPosition == null) return;
+    if (level.isClientSide()) this.clientTick();
+    if (!level.isClientSide()) this.serverTick();
   }
   public int getManaProductionRate() {
     return getNormalizedRPM() * CommonConfig.MANA_GENERATOR_MANA_PER_RPM_PER_TICK.get();
