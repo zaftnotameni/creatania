@@ -19,5 +19,6 @@ public class ForgeDatagenInitializer {
     generator.addProvider(new ForgeBlockLootProvider(generator));
     generator.addProvider(new ForgeFluidTagProvider(generator, helper));
     generator.addProvider(new ForgeBlockstatesProvider(generator, helper));
+    generator.addProvider(new ForgeSequencedAssemblyRecipeProvider(generator));
   }
 }

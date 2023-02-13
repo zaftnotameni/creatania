@@ -15,6 +15,10 @@
 - Mana Condenser shaft now renders correctly
 - Mana Machines are now locked to horizontal orientation
 
+#### Internals
+
+- Create sequence assembly recipes are generated instead of relying on horrible json files
+
 ### 1.18.2-0.0.8-alpha
 
 #### Fixes

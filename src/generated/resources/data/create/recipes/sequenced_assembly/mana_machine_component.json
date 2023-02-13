@@ -1,0 +1,75 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "botania:livingwood"
+  },
+  "transitionalItem": {
+    "item": "creatania:incomplete_mana_machine_component"
+  },
+  "sequence": [
+    {
+      "type": "create:cutting",
+      "ingredients": [
+        {
+          "item": "creatania:incomplete_mana_machine_component"
+        }
+      ],
+      "results": [
+        {
+          "item": "creatania:incomplete_mana_machine_component"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "creatania:incomplete_mana_machine_component"
+        },
+        {
+          "item": "botania:livingrock"
+        }
+      ],
+      "results": [
+        {
+          "item": "creatania:incomplete_mana_machine_component"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "creatania:incomplete_mana_machine_component"
+        }
+      ],
+      "results": [
+        {
+          "item": "creatania:incomplete_mana_machine_component"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "creatania:incomplete_mana_machine_component"
+        },
+        {
+          "item": "create:andesite_casing"
+        }
+      ],
+      "results": [
+        {
+          "item": "creatania:incomplete_mana_machine_component"
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "item": "creatania:mana_machine_component"
+    }
+  ],
+  "loops": 1
+}

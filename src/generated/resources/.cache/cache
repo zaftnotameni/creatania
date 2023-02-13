@@ -24,6 +24,7 @@ f335e0a277544d827be80e50216ffa84aae43eb8 data/creatania/loot_tables/blocks/mana_
 07a590466baac48bb1b2ecd950bba09d72d2d9e3 data/creatania/tags/blocks/mana_machine.json
 04d6c2590a43007db989e26493e9e91e23503629 data/creatania/tags/blocks/pure_inert_mana.json
 6f10cf7446b0d8ec134eacbc53c8001922b270d6 data/creatania/tags/fluids/pure_inert_mana.json
+49386668b55031db9b554b53ad0fac2c336edbbb data/create/recipes/sequenced_assembly/mana_machine_component.json
 fa05f6aacd61db527071d071c3dec380bab89e34 data/create/tags/blocks/safe_nbt.json
 8dcd21603f1873ba26065606a4b91364458f1e35 data/minecraft/tags/blocks/mineable/axe.json
 8dcd21603f1873ba26065606a4b91364458f1e35 data/minecraft/tags/blocks/mineable/pickaxe.json
