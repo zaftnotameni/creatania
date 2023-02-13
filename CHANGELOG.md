@@ -2,6 +2,18 @@
 
 ## changelog
 
+### 1.18.2-0.0.9-alpha
+
+#### New
+
+- Mana Generator spawns particles outwards
+- Mana Condenser spawns particles inwards
+
+#### Fixes
+
+- Mana Generator shaft now renders correctly
+- Mana Condenser shaft now renders correctly
+
 ### 1.18.2-0.0.8-alpha
 
 #### Fixes

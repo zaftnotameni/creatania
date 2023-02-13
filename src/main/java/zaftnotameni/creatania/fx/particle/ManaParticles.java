@@ -13,10 +13,9 @@ public class ManaParticles extends TextureSheetParticle {
     this.xd = xd;
     this.yd = yd;
     this.zd = zd;
-    this.quadSize *= 0.85F;
+    this.quadSize *= 0.5F;
     this.lifetime = 20;
     this.setSpriteFromAge(spriteSet);
-
     this.rCol = 1f;
     this.gCol = 1f;
     this.bCol = 1f;

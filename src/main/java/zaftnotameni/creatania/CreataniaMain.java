@@ -49,6 +49,7 @@ public class CreataniaMain {
   public CreataniaMain() {
     IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
+    Particles.register(bus);
     Items.register(bus);
     Blocks.register(bus);
     Fluids.register(bus);
