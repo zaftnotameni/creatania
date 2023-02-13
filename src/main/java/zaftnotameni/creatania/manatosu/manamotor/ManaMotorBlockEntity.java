@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
@@ -64,7 +65,7 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
   public int getCurrentMana() { return this.mana; }
   @Override
   public boolean isFull() { return this.getManaMachine().isFull(); }
-  private KineticManaMachine<ManaMotorBlockEntity> getManaMachine() {
+  public KineticManaMachine<ManaMotorBlockEntity> getManaMachine() {
      if (this.manaMachine == null) this.manaMachine = new KineticManaMachine<>(this)
       .withManaCap(ManaMotorConfig.getManaCap())
       .withManaPerRpmPerTick(ManaMotorConfig.getManaPerTickPerRPM())
@@ -110,7 +111,7 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
   @Override
   public void addBehaviours(List<TileEntityBehaviour> behaviours) {
     super.addBehaviours(behaviours);
-    this.scrollValueBehaviour = this.getManaMachine().createScrollBehavior(ManaMotorBlock.FACING);
+    this.scrollValueBehaviour = this.getManaMachine().createScrollBehavior(BlockStateProperties.FACING);
     this.manaMotorBehavior = new ManaMotorBehavior(this);
     behaviours.add(manaMotorBehavior);
     behaviours.add(scrollValueBehaviour);
@@ -122,7 +123,7 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
     if (!hasSource() || getGeneratedSpeed() > getTheoreticalSpeed()) updateGeneratedRotation();
   }
   @Override
-  public float getGeneratedSpeed() { return this.getManaMachine().getGeneratedSpeed(ManaMotorBlock.FACING); }
+  public float getGeneratedSpeed() { return this.getManaMachine().getGeneratedSpeed(BlockStateProperties.FACING); }
   @Override
   public void lazyTick() {
     super.lazyTick();

@@ -17,4 +17,6 @@ public class Constants {
   public static final String MANA_GEL_ITEM_NAME = "mana_gel";
   public static final String CORRUPTED_INERT_MANA_BLOCK = "corrupted_inert_mana_block";
   public static final String PURIFIED_INERT_MANA_BLOCK = "purified_inert_mana_block";
+  public static final String MANA_MACHINE_COMPONENT = "mana_machine_component";
+  public static final String INCOMPLETE_MANA_MACHINE_COMPONENT = "incomplete_mana_machine_component";
 }

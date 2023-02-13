@@ -2,6 +2,29 @@
 
 ## changelog
 
+### 1.18.2-0.0.8-alpha
+
+#### Fixes
+
+- Correct intermediate item in the mana machine component assembly
+- Added missing Mana Condenser recipe
+- Removed Duplicated recipe for Mana Generator
+
+#### dev environment
+
+- JEI added to mods.toml so recipes show correctly in the dev instance
+
+### 1.18.2-0.0.7-alpha
+
+#### New
+
+- Mana Machine Component, created via assembly line, used to craft mana machines 
+- Recipes for Mana Motor/Generator/Condenser using the botania runic altar
+
+#### Fixes
+
+- Mana Machines models showing the incorrect orientation.
+
 ### 1.18.2-0.0.6-alpha
 
 - Mana generator requires **fluid inert mana** to operate as well as SU

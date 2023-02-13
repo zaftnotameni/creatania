@@ -1,4 +1,5 @@
 package zaftnotameni.sharedbehaviors;
+import net.minecraft.world.level.block.state.BlockState;
 public interface IAmManaMachine {
   public boolean isManaMachineActive();
   public int getManaMachineMana();
@@ -7,5 +8,7 @@ public interface IAmManaMachine {
   public void updateMana(int value);
   public void setManaMachineMana(int value);
   public int getManaMachineGeneratedSpeed();
+  public KineticManaMachine getManaMachine();
   public void updateGeneratedRotation(int i);
+  public BlockState getBlockState();
 }

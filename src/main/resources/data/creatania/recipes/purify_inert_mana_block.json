@@ -1,5 +1,6 @@
 {
   "type": "botania:pure_daisy",
+  "time": 10,
   "input": {
     "type": "block",
     "block": "creatania:corrupted_inert_mana_block"

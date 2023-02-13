@@ -15,12 +15,18 @@ import vazkii.botania.api.BotaniaForgeCapabilities;
 import vazkii.botania.api.mana.IManaPool;
 import vazkii.botania.api.mana.IManaReceiver;
 import zaftnotameni.creatania.config.CommonConfig;
+import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Items;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.math.MathContext;
 
+/**
+ * Consumes SU and adds Corrupted Inert Mana blocks in the inventory below
+ *
+ * Can be configured to also require mana, but requires none by default
+ */
 public class ManaCondenserBlockEntity extends KineticTileEntity implements IManaReceiver {
   public LazyOptional<IManaReceiver> lazyManaReceiver = LazyOptional.empty();
   public boolean isFirstTick = true;
@@ -55,7 +61,7 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
     BlockEntity entityBelow = this.level.getBlockEntity(this.worldPosition.below());
     if (entityBelow == null) return;
     entityBelow.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP).ifPresent((inventoryBelow) -> {
-      ItemStack stack = new ItemStack(Items.MANA_GEL.get().asItem());
+      ItemStack stack = new ItemStack(Blocks.CORRUPTED_INERT_MANA_BLOCK.get().asItem());
       for (int i = 0; i < inventoryBelow.getSlots(); i++) {
         if (!inventoryBelow.isItemValid(i, stack)) continue;
         if (!inventoryBelow.insertItem(i, stack, true).isEmpty()) continue;

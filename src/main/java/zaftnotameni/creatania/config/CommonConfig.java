@@ -46,7 +46,7 @@ public class CommonConfig {
     BUILDER.push("mana_condenser");
     MANA_CONDENSER_SU_PER_RPM = BUILDER.define("su_per_rpm", 1);
     MANA_CONDENSER_MANA_PER_ITEM = BUILDER.define("mana_per_item", 100);
-    MANA_CONDENSER_MANA_PER_TICK_PER_RPM = BUILDER.define("mana_per_tick_per_rpm", 1);
+    MANA_CONDENSER_MANA_PER_TICK_PER_RPM = BUILDER.define("mana_per_tick_per_rpm", 0);
     MANA_CONDENSER_MAX_MANA_STORAGE = BUILDER.define("max_mana_storage", 1000);
     BUILDER.pop();
 

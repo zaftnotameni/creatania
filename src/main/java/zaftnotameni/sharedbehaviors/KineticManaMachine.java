@@ -1,12 +1,18 @@
 package zaftnotameni.sharedbehaviors;
 import com.google.common.base.Predicates;
+import com.simibubi.create.content.contraptions.base.DirectionalKineticBlock;
 import com.simibubi.create.content.contraptions.components.motor.CreativeMotorTileEntity;
 import com.simibubi.create.foundation.config.AllConfigs;
 import com.simibubi.create.foundation.tileEntity.SmartTileEntity;
 import com.simibubi.create.foundation.tileEntity.behaviour.CenteredSideValueBoxTransform;
 import com.simibubi.create.foundation.tileEntity.behaviour.scrollvalue.ScrollValueBehaviour;
 import com.simibubi.create.foundation.utility.Lang;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.AABB;
 import vazkii.botania.api.mana.spark.IManaSpark;
@@ -69,4 +75,13 @@ public class KineticManaMachine<T extends SmartTileEntity & IAmManaMachine> {
   }
   public int getSpeedSafe() { return (this.scrollValueBehaviour != null) ? this.scrollValueBehaviour.getValue() : 0; }
   public float getGeneratedSpeed(DirectionProperty dir) { return convertToDirection(this.getSpeedSafe(), te.getBlockState().getValue(dir)); }
+
+  public static Direction getFacingForPlacement(BlockPlaceContext context) {
+    Direction facing = context.getHorizontalDirection();
+    if (context.getPlayer() != null && context.getPlayer().isShiftKeyDown()) return facing;
+    return facing.getOpposite();
+  }
+  public static boolean hasShaftTowards(BlockState state, Direction face) {
+    return face == state.getValue(DirectionalKineticBlock.FACING);
+  }
 }

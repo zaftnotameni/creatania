@@ -1,11 +1,8 @@
 package zaftnotameni.creatania.registry.datagen;
-import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import zaftnotameni.creatania.Constants;
-
-import java.util.Collections;
 
 @Mod.EventBusSubscriber(modid = Constants.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ForgeDatagenInitializer {
@@ -21,6 +18,6 @@ public class ForgeDatagenInitializer {
     generator.addProvider(new ForgeRecipeProvider(generator));
     generator.addProvider(new ForgeBlockLootProvider(generator));
     generator.addProvider(new ForgeFluidTagProvider(generator, helper));
-
+    generator.addProvider(new ForgeBlockstatesProvider(generator, helper));
   }
 }

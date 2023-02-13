@@ -8,13 +8,18 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.Direction;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Material;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -28,6 +33,7 @@ import zaftnotameni.creatania.manatosu.manamotor.ManaMotorBlock;
 import zaftnotameni.creatania.sutomana.managenerator.ManaGeneratorBlock;
 import zaftnotameni.creatania.util.Log;
 
+import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
@@ -42,7 +48,7 @@ public class Blocks {
   public static final BlockEntry<ManaMotorBlock> MANA_MOTOR = CREATE_REGISTRATE
     .block(Constants.MANA_MOTOR, ManaMotorBlock::new)
     .initialProperties(SharedProperties::stone)
-    .blockstate(BlockStateGen.directionalBlockProvider(true))
+    .blockstate(BlockStateGen.directionalAxisBlockProvider())
     .addLayer(() -> RenderType::cutoutMipped)
     .transform(axeOrPickaxe())
     .transform(BlockStressDefaults.setCapacity(CommonConfig.MANA_MOTOR_SU_PER_RPM.get()))
@@ -53,7 +59,9 @@ public class Blocks {
   public static final BlockEntry<ManaGeneratorBlock> MANA_GENERATOR = CREATE_REGISTRATE
     .block(Constants.MANA_GENERATOR, ManaGeneratorBlock::new)
     .initialProperties(SharedProperties::softMetal)
-    .blockstate(BlockStateGen.directionalBlockProvider(true))
+    .blockstate(BlockStateGen.directionalAxisBlockProvider())
+    .addLayer(() -> RenderType::cutoutMipped)
+    .transform(axeOrPickaxe())
     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
     .transform(BlockStressDefaults.setImpact(CommonConfig.MANA_GENERATOR_SU_PER_RPM.get()))
     .item()
@@ -63,7 +71,9 @@ public class Blocks {
   public static final BlockEntry<ManaCondenserBlock> MANA_CONDENSER = CREATE_REGISTRATE
     .block(Constants.MANA_CONDENSER, ManaCondenserBlock::new)
     .initialProperties(SharedProperties::softMetal)
-    .blockstate(BlockStateGen.directionalBlockProvider(true))
+    .blockstate(BlockStateGen.directionalAxisBlockProvider())
+    .addLayer(() -> RenderType::cutoutMipped)
+    .transform(axeOrPickaxe())
     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
     .transform(BlockStressDefaults.setImpact(CommonConfig.MANA_CONDENSER_SU_PER_RPM.get()))
     .item()
@@ -72,11 +82,15 @@ public class Blocks {
 
   public static final RegistryObject<CorruptedManaBlock> CORRUPTED_INERT_MANA_BLOCK = registerBlockWithItem(
     Constants.CORRUPTED_INERT_MANA_BLOCK,
-    () -> new CorruptedManaBlock(BlockBehaviour.Properties.of(Material.STONE)));
+    () -> new CorruptedManaBlock(BlockBehaviour.Properties.of(Material.STONE).destroyTime(5f)));
 
   public static final RegistryObject<PurifiedManaBlock> PURIFIED_INERT_MANA_BLOCK = registerBlockWithItem(
     Constants.PURIFIED_INERT_MANA_BLOCK,
-    () -> new PurifiedManaBlock(BlockBehaviour.Properties.of(Material.STONE)));
+    () -> new PurifiedManaBlock(BlockBehaviour.Properties.of(Material.STONE).destroyTime(1f)));
+
+  public static final RegistryObject<PurifiedManaBlock> MANA_MACHINE_COMPONENT = registerBlockWithItem(
+    Constants.MANA_MACHINE_COMPONENT,
+    () -> new PurifiedManaBlock(BlockBehaviour.Properties.of(Material.STONE).destroyTime(1f)));
 
   public static <T extends Block> RegistryObject<T> registerBlockWithItem(String name, Supplier<T> createBlock) {
     RegistryObject<T> block = INDEX.register(name, createBlock);
