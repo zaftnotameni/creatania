@@ -24,11 +24,13 @@ public class ManaCondenserBehavior extends TileEntityBehaviour {
   public void read(CompoundTag nbt, boolean clientPacket) {
     super.read(nbt, clientPacket);
     this.condenser.mana = nbt.getInt("mana");
+    this.condenser.active = nbt.getBoolean("active");
   }
 
   @Override
   public void write(CompoundTag nbt, boolean clientPacket) {
     nbt.putInt("mana", this.condenser.mana);
+    nbt.putBoolean("active", this.condenser.active);
     super.write(nbt, clientPacket);
   }
 

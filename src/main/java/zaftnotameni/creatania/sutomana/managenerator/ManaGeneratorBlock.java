@@ -10,6 +10,7 @@ import net.minecraft.core.Direction.Axis;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -38,6 +39,10 @@ public class ManaGeneratorBlock extends DirectionalAxisKineticBlock implements I
   public Axis getRotationAxis(BlockState state) {
     return state.getValue(FACING).getAxis();
   }
+  @Override
+  public BlockState getRotatedBlockState(BlockState originalState, Direction targetedFace) { return KineticManaMachine.rotate(originalState, targetedFace); }
+  @Override
+  public BlockState rotate(BlockState pState, Rotation pRotation) { return KineticManaMachine.rotate(pState, pRotation); }
   @Override
   public BlockEntityType<? extends ManaGeneratorBlockEntity> getTileEntityType() { return BlockEntities.MANA_GENERATOR_BLOCK_ENTITY.get(); }
   @Override

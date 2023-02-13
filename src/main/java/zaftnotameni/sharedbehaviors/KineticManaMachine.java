@@ -12,6 +12,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.AABB;
@@ -83,5 +84,12 @@ public class KineticManaMachine<T extends SmartTileEntity & IAmManaMachine> {
   }
   public static boolean hasShaftTowards(BlockState state, Direction face) {
     return face == state.getValue(DirectionalKineticBlock.FACING);
+  }
+
+  public static BlockState rotate(BlockState state, Rotation rotation) {
+    return state.setValue(DirectionalKineticBlock.FACING, state.getValue(DirectionalKineticBlock.FACING).getClockWise(Direction.Axis.Y));
+  }
+  public static BlockState rotate(BlockState state, Direction direction) {
+    return state.setValue(DirectionalKineticBlock.FACING, state.getValue(DirectionalKineticBlock.FACING).getClockWise(Direction.Axis.Y));
   }
 }

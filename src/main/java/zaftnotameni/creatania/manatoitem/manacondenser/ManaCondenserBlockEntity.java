@@ -17,6 +17,7 @@ import vazkii.botania.api.mana.IManaReceiver;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Items;
+import zaftnotameni.sharedbehaviors.IAmParticleEmittingMachine;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -27,7 +28,7 @@ import java.math.MathContext;
  *
  * Can be configured to also require mana, but requires none by default
  */
-public class ManaCondenserBlockEntity extends KineticTileEntity implements IManaReceiver {
+public class ManaCondenserBlockEntity extends KineticTileEntity implements IManaReceiver, IAmParticleEmittingMachine {
   public LazyOptional<IManaReceiver> lazyManaReceiver = LazyOptional.empty();
   public boolean isFirstTick = true;
   public int mana = 0;
@@ -48,11 +49,16 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
     return Math.max(0, (int) Math.abs(this.getSpeed()));
   }
   public void serverTick() {
+    var wasActive = this.active;
+    this.active = false;
     var rpm = this.getNormalizedRPM();
     var requiredMana = getManaConsumptionRate();
-    if (this.doesNotMeetRequirementsToCondenseMana(rpm, requiredMana)) return;
+    if (this.doesNotMeetRequirementsToCondenseMana(rpm, requiredMana)) {
+      return;
+    }
     this.receiveMana(-requiredMana);
     this.insertManaGelBelow();
+    this.active = true;
   }
   public boolean doesNotMeetRequirementsToCondenseMana(int rpm, int requiredMana) {
     return this.isOverStressed() || (rpm <= 0) || (this.getBlockPos() == null) || !this.isSpeedRequirementFulfilled() || (this.mana < requiredMana);
@@ -109,6 +115,9 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
     super.onLoad();
     lazyManaReceiver = LazyOptional.of(() -> this);
   }
+  public boolean active;
+  @Override
+  public boolean shouldEmitParticles() { return true; }
 }
 
 

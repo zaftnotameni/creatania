@@ -9,7 +9,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.level.block.state.BlockState;
+import zaftnotameni.creatania.config.ClientConfig;
 import zaftnotameni.creatania.registry.Particles;
+import zaftnotameni.sharedbehaviors.IAmParticleEmittingMachine;
 public class ManaCondenserRenderer extends KineticTileEntityRenderer {
   public ManaCondenserRenderer(BlockEntityRendererProvider.Context context) {
     super(context);
@@ -26,13 +28,16 @@ public class ManaCondenserRenderer extends KineticTileEntityRenderer {
 
   public float tickCounter = 0f;
   public float signal = 1f;
-  public float particlesEveryFTicks = 2.1f;
   public float speedModifier = 1.25f;
-  public boolean enableManaParticles = true;
+  public float particlesEveryFTicks = ClientConfig.TICKS_PER_PARTICLE.get();
+  public boolean enableManaParticles = ClientConfig.ENABLE_MANA_PARTICLES.get();
 
   public void spawnManaParticles(KineticTileEntity te, float partialTicks) {
     if (!this.enableManaParticles) return;
     if (Minecraft.getInstance().isPaused()) return;
+    if (!(te instanceof IAmParticleEmittingMachine)) return;
+    var particleEmittingMachine = (IAmParticleEmittingMachine) te;
+    if (!particleEmittingMachine.shouldEmitParticles()) return;
     var level = te.getLevel();
     if (level == null) return;
     this.tickCounter += partialTicks;

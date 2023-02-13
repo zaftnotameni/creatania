@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.RenderShape;
@@ -26,6 +27,7 @@ public class ManaMotorBlock extends DirectionalAxisKineticBlock implements ITE<M
     super(properties);
     registerDefaultState(defaultBlockState());
   }
+
   @Override
   protected Direction getFacingForPlacement(BlockPlaceContext context) { return KineticManaMachine.getFacingForPlacement(context); }
   @Override
@@ -51,11 +53,11 @@ public class ManaMotorBlock extends DirectionalAxisKineticBlock implements ITE<M
   @Override
   public VoxelShape getCollisionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) { return FULL_BLOCK_VOXEL; }
   @Override
-  public BlockState rotate(BlockState pState, Rotation pRotation) { return pState.setValue(FACING, pRotation.rotate(pState.getValue(FACING))); }
+  public BlockState rotate(BlockState pState, Rotation pRotation) { return KineticManaMachine.rotate(pState, pRotation); }
   @Override
   public BlockState mirror(BlockState pState, Mirror pMirror) { return pState.rotate(pMirror.getRotation(pState.getValue(FACING))); }
   @Override
-  public RenderShape getRenderShape(BlockState pState) {
-    return RenderShape.MODEL;
-  }
+  public BlockState getRotatedBlockState(BlockState originalState, Direction targetedFace) { return KineticManaMachine.rotate(originalState, targetedFace); }
+  @Override
+  public RenderShape getRenderShape(BlockState pState) { return RenderShape.MODEL; }
 }

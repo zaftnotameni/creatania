@@ -13,12 +13,13 @@ import vazkii.botania.api.mana.IManaPool;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.util.Log;
 import zaftnotameni.sharedbehaviors.IAmManaMachine;
+import zaftnotameni.sharedbehaviors.IAmParticleEmittingMachine;
 import zaftnotameni.sharedbehaviors.KineticManaMachine;
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
-public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmManaMachine, Log.IHasTickLogger {
+public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmManaMachine, Log.IHasTickLogger, IAmParticleEmittingMachine {
   public boolean isFirstTick = true;
   public boolean active;
   public int mana;
@@ -47,11 +48,15 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   @Override
   protected void read(CompoundTag compound, boolean clientPacket) {
     super.read(compound, clientPacket);
+    this.active = compound.getBoolean("active");
+    this.mana = compound.getInt("mana");
     this.manaGeneratorFluidHandler.read(compound, clientPacket);
   }
   @Override
   protected void write(CompoundTag compound, boolean clientPacket) {
     this.manaGeneratorFluidHandler.write(compound, clientPacket);
+    compound.putBoolean("active", this.active);
+    compound.putInt("mana", this.mana);
     super.write(compound, clientPacket);
   }
   @Override
@@ -104,6 +109,8 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   public Log.RateLimited getLogger() { return logger; }
   public void setLogger(Log.RateLimited pLogger) { logger = pLogger; }
   public void serverTick() {
+    var wasActive = this.active;
+    this.active = false;
     this.getManaGeneratorFluidHandler().serverTick();
     if (this.shouldAbortServerTick()) return;
 
@@ -117,6 +124,8 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
       var realManaToBeGenerated = manaFluidConsumed / conversionRate;
       Log.RateLimited.of(this, 20).log((logger) -> logger.debug("consumed {} mana fluid to generate {} mana", manaFluidConsumed, realManaToBeGenerated));
       addManaToPool(realManaToBeGenerated);
+      this.active = true;
+      return;
     }
   }
   public void clientTick() {}
@@ -154,5 +163,7 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   public int getManaMachineGeneratedSpeed() { return 0; }
   @Override
   public void updateGeneratedRotation(int i) { }
+  @Override
+  public boolean shouldEmitParticles() { return true; }
 }
 

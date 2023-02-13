@@ -13,6 +13,7 @@
 
 - Mana Generator shaft now renders correctly
 - Mana Condenser shaft now renders correctly
+- Mana Machines are now locked to horizontal orientation
 
 ### 1.18.2-0.0.8-alpha
 
