@@ -8,6 +8,14 @@
 
 - Mana Generator spawns particles outwards
 - Mana Condenser spawns particles inwards
+- Corrupted mana fluid
+- Pure Daisy inert mana conversion also works for fluid versions
+
+#### Changes
+
+- Mana Machine Component looks more like a manasteel casing now
+- Mana Motor shows fans spinning inside
+- Uses vanilla spark particles for mana condenser/generator
 
 #### Fixes
 

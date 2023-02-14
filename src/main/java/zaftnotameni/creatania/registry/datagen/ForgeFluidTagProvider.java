@@ -15,6 +15,7 @@ public class ForgeFluidTagProvider extends FluidTagsProvider {
   @Override
   protected void addTags() {
     tag(Tags.Fluids.PURE_INERT_MANA).add(Fluids.MANA_FLUID.get());
+    tag(Tags.Fluids.CORRUPT_INERT_MANA).add(Fluids.CORRUPT_MANA_FLUID.get());
   }
 }
 

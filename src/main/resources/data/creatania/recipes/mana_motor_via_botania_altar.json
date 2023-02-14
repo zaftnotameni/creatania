@@ -1,8 +1,6 @@
 {
   "type": "botania:runic_altar",
   "ingredients": [
-    { "tag": "botania:mana_dusts" },
-    { "tag": "botania:manasteel_ingots" },
     { "item": "create:cogwheel" },
     { "item": "creatania:mana_machine_component" }
   ],

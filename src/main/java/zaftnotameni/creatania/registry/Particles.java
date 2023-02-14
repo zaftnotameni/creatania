@@ -12,7 +12,7 @@ public class Particles {
     DeferredRegister.create(ForgeRegistries.PARTICLE_TYPES, Constants.MODID);
 
   public static final RegistryObject<SimpleParticleType> MANA_PARTICLES =
-    PARTICLE_TYPES.register(Constants.MANA_PARTICLES_NAME, () -> new SimpleParticleType(true));
+    PARTICLE_TYPES.register(Constants.MANA_PARTICLES_NAME, () -> new SimpleParticleType(false));
 
   public static void register(IEventBus eventBus) {
     PARTICLE_TYPES.register(eventBus);

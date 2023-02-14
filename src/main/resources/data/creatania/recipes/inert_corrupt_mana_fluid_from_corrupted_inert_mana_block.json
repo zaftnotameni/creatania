@@ -1,0 +1,11 @@
+{
+  "type": "create:mixing",
+  "ingredients": [{
+    "item": "creatania:corrupted_inert_mana_block"
+  }],
+  "results": [{
+    "fluid": "creatania:corrupt_mana_fluid",
+    "amount": 125
+  }],
+  "heatRequirement": "superheated"
+}

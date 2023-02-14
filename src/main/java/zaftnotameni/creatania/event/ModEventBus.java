@@ -1,6 +1,7 @@
 package zaftnotameni.creatania.event;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.GlowParticle;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -13,6 +14,6 @@ public class ModEventBus {
 
   @SubscribeEvent
   public static void registerParticleFactories(final ParticleFactoryRegisterEvent evt) {
-    Minecraft.getInstance().particleEngine.register(Particles.MANA_PARTICLES.get(), ManaParticles.Provider::new);
+    Minecraft.getInstance().particleEngine.register(Particles.MANA_PARTICLES.get(), GlowParticle.ElectricSparkProvider::new);
   }
 }
