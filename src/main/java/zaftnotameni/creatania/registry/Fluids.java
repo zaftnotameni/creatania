@@ -16,6 +16,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import zaftnotameni.creatania.Constants;
+import zaftnotameni.creatania.event.ModEventBus;
 import zaftnotameni.creatania.util.Log;
 
 public class Fluids {
@@ -46,7 +47,7 @@ public class Fluids {
       .viscosity(5)
       .sound(SoundEvents.HONEY_DRINK)
       .overlay(WATER_OVERLAY_RL)
-      .color(0xdd11aaff))
+      .color(0xff11aaff))
       .slopeFindDistance(2)
       .levelDecreasePerBlock(2)
       .block(() -> Fluids.MANA_FLUID_BLOCK.get())
@@ -61,7 +62,7 @@ public class Fluids {
       .viscosity(5)
       .sound(SoundEvents.HONEY_DRINK)
       .overlay(WATER_OVERLAY_RL)
-      .color(0xaa440044))
+      .color(0xff440044))
     .slopeFindDistance(2)
     .levelDecreasePerBlock(2)
     .block(() -> Fluids.CORRUPT_MANA_FLUID_BLOCK.get())

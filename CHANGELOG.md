@@ -2,6 +2,16 @@
 
 ## changelog
 
+### 1.18.2-0.0.10-alpha
+
+#### New
+
+- Mana Motor now renders a fan inside representing a "mana wheel" as it generates SU
+
+#### Fixes
+
+- Mana Motor recipe in the botania rune altar was creating a mana generator instead
+
 ### 1.18.2-0.0.9-alpha
 
 #### New

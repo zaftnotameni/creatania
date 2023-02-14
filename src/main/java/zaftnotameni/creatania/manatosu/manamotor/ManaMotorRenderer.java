@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
+import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Fluids;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
@@ -38,14 +39,12 @@ public class ManaMotorRenderer extends KineticTileEntityRenderer {
 
     int lightInFront = LevelRenderer.getLightColor(te.getLevel(), te.getBlockPos().relative(direction));
 
-    SuperByteBuffer fanInner1 = CachedBufferer.partialFacing(AllBlockPartials.ENCASED_FAN_INNER, te.getBlockState(), direction.getOpposite());
-    SuperByteBuffer fanInner2 = CachedBufferer.partialFacing(AllBlockPartials.ENCASED_FAN_INNER, te.getBlockState(), direction);
+    SuperByteBuffer fanInner1 = CachedBufferer.partialFacing(Blocks.Partials.MANA_MOTOR_FAN, te.getBlockState(), direction.getOpposite());
 
     Direction.Axis axis = ((IRotate) te.getBlockState().getBlock()).getRotationAxis(te.getBlockState());
     var angle = getAngleForTe(te, te.getBlockPos(), axis);
 
     kineticRotationTransform(fanInner1, te, direction.getAxis(), angle, lightInFront).renderInto(ms, vb);
-    kineticRotationTransform(fanInner2, te, direction.getAxis(), angle, lightInFront).renderInto(ms, vb);
   }
   public static void renderFluids(KineticTileEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
     var renderedFluid = new FluidStack(Fluids.MANA_FLUID.get(), 1000);
