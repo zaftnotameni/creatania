@@ -47,20 +47,20 @@ Mana can be converted directly to SU via a Mana Motor.
 
 #### TO-DO List
 
-- [ ] Loot Tables for all blocks
-- [ ] Lock to horizontal
-  - [ ] Mana Motor
-  - [ ] Mana Generator
-  - [ ] Mana Condenser
+- [x] Loot Tables for all blocks
+- [x] Lock to horizontal
+  - [x] Mana Motor
+  - [x] Mana Generator
+  - [x] Mana Condenser
 - [ ] Recipes
-  - [ ] Mana Machine (intermediate block)
-  - [ ] Mana Motor
-  - [ ] Mana Generator
-  - [ ] Mana Condenser
+  - [x] Mana Machine (intermediate block)
+  - [x] Mana Motor
+  - [x] Mana Generator
+  - [x] Mana Condenser
   - [ ] Mana Gel
 - [ ] Functionality
-  - [ ] Mana Condenser generates 
-- [ ] Mining level tags for all blocks
+  - [x] Mana Condenser generates 
+- [x] Mining level tags for all blocks
 - [ ] Art
   - [ ] pipe connection for mana generator
   - [ ] mana gel

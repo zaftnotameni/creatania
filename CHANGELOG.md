@@ -8,9 +8,20 @@
 
 - Mana Motor now renders a fan inside representing a "mana wheel" as it generates SU
 
+#### Removed
+
+- Mana Generator/Condenser/Motor dev recipes with only sticks
+
+#### Changes
+
+- Mana Generator is now sided, only accepts fluid from the side opposite to the shaft
+- Mana Motor is now sided, only accepts mana from the bottom or the sides orthogonal to the shaft
+
 #### Fixes
 
 - Mana Motor recipe in the botania rune altar was creating a mana generator instead
+- ? Mana Generator generates mana on a mana pool above
+- ? Mana Condenser generates mana on an inventory below
 
 ### 1.18.2-0.0.9-alpha
 

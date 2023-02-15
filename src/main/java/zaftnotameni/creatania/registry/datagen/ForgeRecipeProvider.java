@@ -4,9 +4,14 @@ import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.SpecialRecipeBuilder;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraftforge.fluids.FluidStack;
+import zaftnotameni.creatania.recipes.Inputs;
+import zaftnotameni.creatania.recipes.ManaGeneratorRecipeBuilder;
+import zaftnotameni.creatania.recipes.Outputs;
 import zaftnotameni.creatania.registry.Blocks;
+import zaftnotameni.creatania.registry.Fluids;
 
 import java.util.function.Consumer;
 
@@ -18,24 +23,14 @@ public class ForgeRecipeProvider extends RecipeProvider {
   @Override
   protected void buildCraftingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
     InventoryChangeTrigger.TriggerInstance x = inventoryTrigger(
-      ItemPredicate.Builder.item().of(Items.STICK).build()
+      ItemPredicate.Builder.item().of(Blocks.MANA_MACHINE_COMPONENT.get().asItem()).build()
     );
 
-    shapeless(Blocks.MANA_CONDENSER.get())
-      .requires(Items.STICK)
-      .unlockedBy("has_stick", x)
-      .save(pFinishedRecipeConsumer);
-
-    shaped(Blocks.MANA_MOTOR.get())
-      .define('S', Items.STICK)
-      .pattern("SS")
-      .unlockedBy("has_stick", x)
-      .save(pFinishedRecipeConsumer);
-
-    shaped(Blocks.MANA_GENERATOR.get())
-      .define('S', Items.STICK)
-      .pattern("SSS")
-      .unlockedBy("has_stick", x)
+    new ManaGeneratorRecipeBuilder(
+      Inputs.fromIngredient(Ingredient.of(Blocks.PURIFIED_INERT_MANA_BLOCK.get())),
+      Outputs.fromFluidStack(new FluidStack(Fluids.BOTANIA_MANA_FLUID.get(), 1000)),
+      "botania_mana")
+      .unlockedBy("has_mana_machine_component", x)
       .save(pFinishedRecipeConsumer);
   }
 }

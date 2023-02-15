@@ -71,6 +71,10 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   @Nonnull
   @Override
   public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
+    if (side == null) return super.getCapability(cap, side);
+    var block = this.getBlockState().getBlock();
+    if (!(block instanceof  ManaGeneratorBlock)) return super.getCapability(cap, side);
+    if (!((ManaGeneratorBlock) block).hasShaftTowards(this.level, this.worldPosition, this.getBlockState(), side.getOpposite())) return super.getCapability(cap, side);
     var foundCapability = this.getManaGeneratorFluidHandler().getCapability(cap, side);
     if (foundCapability != null) { return foundCapability; }
     return super.getCapability(cap, side);

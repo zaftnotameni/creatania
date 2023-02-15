@@ -19,6 +19,7 @@ import vazkii.botania.api.mana.IManaReceiver;
 import vazkii.botania.api.mana.spark.IManaSpark;
 import vazkii.botania.api.mana.spark.ISparkAttachable;
 import zaftnotameni.creatania.config.CommonConfig;
+import zaftnotameni.creatania.sutomana.managenerator.ManaGeneratorBlock;
 import zaftnotameni.creatania.util.Log;
 import zaftnotameni.sharedbehaviors.IAmManaMachine;
 import zaftnotameni.sharedbehaviors.KineticManaMachine;
@@ -53,8 +54,18 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
   @Nonnull
   @Override
   public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-    if (cap == BotaniaForgeCapabilities.MANA_RECEIVER) return lazyManaReceiver.cast();
+    var block = this.getBlockState().getBlock();
+    if (!(block instanceof ManaMotorBlock)) return super.getCapability(cap, side);
+
+    var motorBlock = (ManaMotorBlock) block;
+
     if (cap == BotaniaForgeCapabilities.SPARK_ATTACHABLE) return lazySparkAttachable.cast();
+    if (side == null) return super.getCapability(cap, side);
+    var sameAxisAsShaft =
+      motorBlock.hasShaftTowards(this.level, this.worldPosition, this.getBlockState(), side.getOpposite()) ||
+      motorBlock.hasShaftTowards(this.level, this.worldPosition, this.getBlockState(), side);
+
+    if (cap == BotaniaForgeCapabilities.MANA_RECEIVER && !sameAxisAsShaft) return lazyManaReceiver.cast();
     return super.getCapability(cap, side);
   }
   @Override

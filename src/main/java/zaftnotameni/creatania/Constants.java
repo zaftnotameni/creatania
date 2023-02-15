@@ -23,4 +23,8 @@ public class Constants {
   public static final String MANA_MACHINE_COMPONENT = "mana_machine_component";
   public static final String INCOMPLETE_MANA_MACHINE_COMPONENT = "incomplete_mana_machine_component";
   public static final String CORRUPT_MANA_FLUID_BUCKET_NAME = "corrupt_mana_fluid_bucket";
+  public static final String BOTANIA_MANA_FLUID_BLOCK_NAME = "botania_mana";
+  public static final String BOTANIA_MANA_FLUID_BUCKET_NAME = "botania_mana_fluid_bucket";
+  public static final String BOTANIA_MANA_FLUID = "botania_mana_fluid";
+  public static final String BOTANIA_MANA_FLOWING = "botania_mana_flowing";
 }

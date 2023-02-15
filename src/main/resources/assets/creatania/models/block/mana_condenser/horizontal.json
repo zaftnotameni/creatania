@@ -243,10 +243,15 @@
 		},
 		{
 			"name": "mana_water",
-			"from": [2, 16, 2],
-			"to": [14, 16.001, 14],
+			"from": [2, 12, 2],
+			"to": [14, 16, 14],
 			"faces": {
-				"up": {"uv": [2, 2, 14, 14], "texture": "#12", "cullface": "down"}
+				"north": {"uv": [2, 2, 14, 14], "texture": "#12", "cullface": "down"},
+				"east": {"uv": [2, 2, 14, 14], "texture": "#12", "cullface": "down"},
+				"south": {"uv": [2, 2, 14, 14], "texture": "#12", "cullface": "down"},
+				"west": {"uv": [2, 2, 14, 14], "texture": "#12", "cullface": "down"},
+				"up": {"uv": [2, 2, 14, 14], "texture": "#12", "cullface": "down"},
+				"down": {"uv": [2, 2, 14, 14], "texture": "#12", "cullface": "down"}
 			}
 		}
 	],

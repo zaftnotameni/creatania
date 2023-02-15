@@ -55,6 +55,7 @@ public class CreataniaMain {
     Fluids.register(bus);
     BlockEntities.register(bus);
     Index.CREATE_REGISTRATE.registerEventListeners(bus);
+    Recipes.register(bus);
 
     bus.addListener(this::setup);
     bus.addListener(this::enqueueIMC);
