@@ -1,0 +1,43 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"texture_size": [64, 64],
+	"textures": {
+		"0": "creatania:block/mana_motor_fan",
+		"particle": "creatania:block/mana_motor_fan"
+	},
+	"elements": [
+		{
+			"from": [3, 7, 3],
+			"to": [13, 9, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [2.5, 2.5, 5, 3], "texture": "#0"},
+				"east": {"uv": [0, 2.5, 2.5, 3], "texture": "#0"},
+				"south": {"uv": [7.5, 2.5, 10, 3], "texture": "#0"},
+				"west": {"uv": [5, 2.5, 7.5, 3], "texture": "#0"},
+				"up": {"uv": [5, 2.5, 2.5, 0], "texture": "#0"},
+				"down": {"uv": [7.5, 0, 5, 2.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [7, 3, 3],
+			"to": [9, 13, 13],
+			"rotation": {"angle": 0, "axis": "z", "origin": [8, 8, 8]},
+			"faces": {
+				"north": {"uv": [2.5, 5.75, 3, 8.25], "texture": "#0"},
+				"east": {"uv": [0, 5.75, 2.5, 8.25], "texture": "#0"},
+				"south": {"uv": [5.5, 5.75, 6, 8.25], "texture": "#0"},
+				"west": {"uv": [3, 5.75, 5.5, 8.25], "texture": "#0"},
+				"up": {"uv": [3, 5.75, 2.5, 3.25], "texture": "#0"},
+				"down": {"uv": [3.5, 3.25, 3, 5.75], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"gui": {
+			"rotation": [30, 225, 0],
+			"scale": [0.625, 0.625, 0.625]
+		}
+	}
+}

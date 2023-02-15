@@ -1,0 +1,63 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "botania:livingwood"
+  },
+  "transitionalItem": {
+    "item": "creatania:incomplete_mana_machine_component"
+  },
+  "sequence": [
+    {
+      "type": "create:cutting",
+      "ingredients": [
+        {
+          "item": "creatania:incomplete_mana_machine_component"
+        }
+      ],
+      "results": [
+        {
+          "item": "creatania:incomplete_mana_machine_component"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "creatania:incomplete_mana_machine_component"
+        },
+        {
+          "item": "botania:manasteel_ingot"
+        }
+      ],
+      "results": [
+        {
+          "item": "creatania:incomplete_mana_machine_component"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "creatania:incomplete_mana_machine_component"
+        },
+        {
+          "item": "create:shaft"
+        }
+      ],
+      "results": [
+        {
+          "item": "creatania:incomplete_mana_machine_component"
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "item": "creatania:mana_machine_component",
+      "count": 2
+    }
+  ],
+  "loops": 1
+}

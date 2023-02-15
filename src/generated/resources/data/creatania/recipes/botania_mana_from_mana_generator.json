@@ -1,0 +1,15 @@
+{
+  "type": "creatania:mana_generator",
+  "itemIngredients": [
+    {
+      "item": "creatania:purified_inert_mana_block"
+    }
+  ],
+  "fluidIngredients": [],
+  "itemResults": [],
+  "fluidResults": [
+    {
+      "fluid": "creatania:botania_mana_fluid"
+    }
+  ]
+}
