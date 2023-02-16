@@ -8,7 +8,7 @@ public class ClientConfig {
 
   static {
     BUILDER.push("rendering");
-    TICKS_PER_PARTICLE = BUILDER.define("ticks_per_particle", 6.9f);
+    TICKS_PER_PARTICLE = BUILDER.define("ticks_per_particle", 2.1f);
     ENABLE_MANA_PARTICLES = BUILDER.define("enable_mana_particles", true);
     BUILDER.pop();
     SPEC = BUILDER.build();

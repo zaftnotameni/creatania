@@ -29,7 +29,7 @@ public class ManaGeneratorRenderer extends KineticTileEntityRenderer {
 
   public float tickCounter = 0f;
   public float signal = 1f;
-  public float speedModifier = 0.9f;
+  public float speedModifier = 1.1f;
   public float particlesEveryFTicks = ClientConfig.TICKS_PER_PARTICLE.get();
   public boolean enableManaParticles = ClientConfig.ENABLE_MANA_PARTICLES.get();
   public void spawnManaParticles(KineticTileEntity te, float partialTicks) {
