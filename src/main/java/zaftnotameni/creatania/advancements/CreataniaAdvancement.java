@@ -155,15 +155,13 @@ public class CreataniaAdvancement {
       return this;
     }
 
-    public String title;
     public Builder title(String title) {
-      this.title = title;
+      CreataniaAdvancement.this.title = title;
       return this;
     }
 
-    public String description;
     public Builder description(String description) {
-      this.description = description;
+      CreataniaAdvancement.this.description = description;
       return this;
     }
 

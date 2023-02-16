@@ -1,0 +1,38 @@
+{
+  "parent": "creatania:mana_machine_component",
+  "display": {
+    "icon": {
+      "item": "creatania:mana_generator"
+    },
+    "title": {
+      "translate": "advancement.creatania.mana_generator"
+    },
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.creatania.mana_generator.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "creatania:mana_generator"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ]
+}

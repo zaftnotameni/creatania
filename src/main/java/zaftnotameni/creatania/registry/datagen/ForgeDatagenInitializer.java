@@ -1,4 +1,6 @@
 package zaftnotameni.creatania.registry.datagen;
+import com.simibubi.create.foundation.data.AllLangPartials;
+import com.simibubi.create.foundation.data.LangMerger;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
@@ -11,6 +13,10 @@ public class ForgeDatagenInitializer {
     var generator = evt.getGenerator();
     var helper = evt.getExistingFileHelper();
     // var helper = new ExistingFileHelper(Collections.emptyList(), Collections.emptySet(), false, null, null);
+
+
+    generator.addProvider(new LangMerger(generator, Constants.MODID, "Creatania", LangPartials.values()));
+
     var blockTagProvider = new ForgeBlockTagProvider(generator, helper);
 
     generator.addProvider(blockTagProvider);
