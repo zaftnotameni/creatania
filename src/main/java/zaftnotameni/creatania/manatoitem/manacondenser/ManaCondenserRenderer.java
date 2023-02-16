@@ -2,7 +2,6 @@ package zaftnotameni.creatania.manatoitem.manacondenser;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.simibubi.create.AllBlockPartials;
-import com.simibubi.create.content.contraptions.base.IRotate;
 import com.simibubi.create.content.contraptions.base.KineticTileEntity;
 import com.simibubi.create.content.contraptions.base.KineticTileEntityRenderer;
 import com.simibubi.create.foundation.render.CachedBufferer;
@@ -15,11 +14,8 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 import zaftnotameni.creatania.config.ClientConfig;
-import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Particles;
 import zaftnotameni.sharedbehaviors.IAmParticleEmittingMachine;
-
-import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
 public class ManaCondenserRenderer extends KineticTileEntityRenderer {
   public ManaCondenserRenderer(BlockEntityRendererProvider.Context context) {
     super(context);
@@ -57,8 +53,7 @@ public class ManaCondenserRenderer extends KineticTileEntityRenderer {
   public void spawnManaParticles(KineticTileEntity te, float partialTicks) {
     if (!this.enableManaParticles) return;
     if (Minecraft.getInstance().isPaused()) return;
-    if (!(te instanceof IAmParticleEmittingMachine)) return;
-    var particleEmittingMachine = (IAmParticleEmittingMachine) te;
+    if (!(te instanceof IAmParticleEmittingMachine particleEmittingMachine)) return;
     if (!particleEmittingMachine.shouldEmitParticles()) return;
     var level = te.getLevel();
     if (level == null) return;
@@ -67,7 +62,7 @@ public class ManaCondenserRenderer extends KineticTileEntityRenderer {
     this.tickCounter = 0f;
     this.signal *= -1f;
     var cx = te.getBlockPos().getX() + .5f;
-    var cy = te.getBlockPos().above(3).getY();
+    var cy = te.getBlockPos().above(2).getY();
     var cz = te.getBlockPos().getZ() + .5f;
     var xs = 0.1f - (Math.random() * 0.2f);
     var ys = Math.random() * this.speedModifier;

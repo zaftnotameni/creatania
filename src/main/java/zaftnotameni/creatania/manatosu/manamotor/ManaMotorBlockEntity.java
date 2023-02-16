@@ -1,7 +1,6 @@
 package zaftnotameni.creatania.manatosu.manamotor;
 
 import com.simibubi.create.content.contraptions.base.GeneratingKineticTileEntity;
-import com.simibubi.create.foundation.tileEntity.SmartTileEntity;
 import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
 import com.simibubi.create.foundation.tileEntity.behaviour.scrollvalue.ScrollValueBehaviour;
 import net.minecraft.core.BlockPos;
@@ -19,7 +18,6 @@ import vazkii.botania.api.mana.IManaReceiver;
 import vazkii.botania.api.mana.spark.IManaSpark;
 import vazkii.botania.api.mana.spark.ISparkAttachable;
 import zaftnotameni.creatania.config.CommonConfig;
-import zaftnotameni.creatania.sutomana.managenerator.ManaGeneratorBlock;
 import zaftnotameni.creatania.util.Log;
 import zaftnotameni.sharedbehaviors.IAmManaMachine;
 import zaftnotameni.sharedbehaviors.KineticManaMachine;
@@ -55,9 +53,7 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
   @Override
   public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
     var block = this.getBlockState().getBlock();
-    if (!(block instanceof ManaMotorBlock)) return super.getCapability(cap, side);
-
-    var motorBlock = (ManaMotorBlock) block;
+    if (!(block instanceof ManaMotorBlock motorBlock)) return super.getCapability(cap, side);
 
     if (cap == BotaniaForgeCapabilities.SPARK_ATTACHABLE) return lazySparkAttachable.cast();
     if (side == null) return super.getCapability(cap, side);

@@ -35,8 +35,7 @@ public class ManaGeneratorRenderer extends KineticTileEntityRenderer {
   public void spawnManaParticles(KineticTileEntity te, float partialTicks) {
     if (!this.enableManaParticles) return;
     if (Minecraft.getInstance().isPaused()) return;
-    if (!(te instanceof IAmParticleEmittingMachine)) return;
-    var particleEmittingMachine = (IAmParticleEmittingMachine) te;
+    if (!(te instanceof IAmParticleEmittingMachine particleEmittingMachine)) return;
     if (!particleEmittingMachine.shouldEmitParticles()) return;
     var level = te.getLevel();
     if (level == null) return;

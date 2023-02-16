@@ -4,7 +4,9 @@
 
 ### 1.18.2-0.0.12-alpha
 
+#### Fixes
 
+- Mana Condenser inner faces are no longer culled
 
 ### 1.18.2-0.0.11-alpha
 

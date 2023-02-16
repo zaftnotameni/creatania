@@ -145,7 +145,6 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
       Log.RateLimited.of(this, 20).log((logger) -> logger.debug("consumed {} mana fluid to generate {} mana", manaFluidConsumed, realManaToBeGenerated));
       addManaToPool(realManaToBeGenerated);
       this.active = true;
-      return;
     }
     Log.RateLimited.of(this, 20).log((logger) -> logger.debug("not enough mana fluid to produce mana, required {}, available {}", manaFluidRequired, manaFluidAvailable));
   }
