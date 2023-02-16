@@ -1,15 +1,23 @@
 package zaftnotameni.creatania.registry.datagen;
 import com.google.common.base.Supplier;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.simibubi.create.foundation.data.LangPartial;
 import com.simibubi.create.foundation.utility.Lang;
 import zaftnotameni.creatania.Constants;
+import zaftnotameni.creatania.util.Log;
+
+import java.util.logging.Logger;
 public enum LangPartials implements LangPartial {
 
-  ADVANCEMENTS("Advancements", ForgeAdvancementsProvider::provideLangEntries)
+  ADVANCEMENTS("Advancements", ForgeAdvancementsProvider::provideLangEntries),
+  INTERFACE("UI & Messages"),
+  SUBTITLES("Subtitles"),
+  TOOLTIPS("Item Descriptions"),
+  PONDER("Ponder Content"),
   ;
-  private final String displayName;
-  private final Supplier<JsonElement> provider;
+  public final String displayName;
+  public Supplier<JsonElement> provider;
 
   private LangPartials(String displayName) {
     this.displayName = displayName;
@@ -29,7 +37,14 @@ public enum LangPartials implements LangPartial {
 
   @Override
   public JsonElement provide() {
-    return provider.get();
+    Log.LOGGER.info("provider running for {}", this.displayName);
+    try {
+      return provider.get();
+    } catch (RuntimeException e) {
+      return new JsonObject();
+    } catch (Exception e) {
+      return new JsonObject();
+    }
   }
 
 }
