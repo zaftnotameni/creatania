@@ -12,7 +12,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.client.event.ColorHandlerEvent;
@@ -25,6 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.fx.particle.ManaParticles;
 import zaftnotameni.creatania.recipes.ManaGeneratorRecipe;
+import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Fluids;
 import zaftnotameni.creatania.registry.Particles;
 
@@ -110,6 +110,7 @@ public class ModEventBus {
     registerBlockColors(purple, () -> Fluids.CORRUPT_MANA_FLUID_BLOCK.get());
     registerBlockColors(cyan, () -> Fluids.MANA_FLUID_BLOCK.get());
     registerBlockColors(cyan, () -> Fluids.BOTANIA_MANA_FLUID_BLOCK.get());
+    registerBlockColors(cyan, () -> Blocks.BOTANIA_MANA_BLOCK.get());
   }
   public static void initItemColors() {
     if (!ITEM_COLORS.isEmpty()) return;

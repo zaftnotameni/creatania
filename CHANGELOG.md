@@ -2,9 +2,22 @@
 
 ## changelog
 
+### 1.18.2-0.0.14-alpha
+
+
+
 ### 1.18.2-0.0.13-alpha
 
-### 1.18.2-0.0.12-alpha
+#### Fixes
+
+- Mana Generator works with negative rotation speeds now
+- No longer crashes due to bad initialization order for flight effect
+
+### 1.18.2-0.0.12-alpha (bad version)
+
+#### Warning! This version has a game breaking bug
+
+- Crash on startup due to bad initialization of the flight effect
 
 #### Fixes
 

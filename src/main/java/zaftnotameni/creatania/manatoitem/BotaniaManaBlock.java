@@ -11,22 +11,27 @@ import zaftnotameni.creatania.network.Networking;
 import zaftnotameni.creatania.network.PacketUpdateFlight;
 import zaftnotameni.creatania.registry.Potions;
 public class BotaniaManaBlock extends Block {
-  public static final VanillaEffectConfiguration flightEffect = new VanillaEffectConfiguration(
-    Potions.FLIGHT_EFFECT.get(),
-    CommonConfig.BOTANIA_MANA_BLOCK_BUFF_FLIGHT_DURATION.get(),
-    CommonConfig.BOTANIA_MANA_BLOCK_BUFF_FLIGHT.get()
-  );
+  public static VanillaEffectConfiguration flightEffect;
+
+  public static VanillaEffectConfiguration getFlightEffect() {
+    if (flightEffect !=null) return flightEffect;
+    flightEffect = new VanillaEffectConfiguration(
+      Potions.FLIGHT_EFFECT.get(),
+      CommonConfig.BOTANIA_MANA_BLOCK_BUFF_FLIGHT_DURATION.get(),
+      CommonConfig.BOTANIA_MANA_BLOCK_BUFF_FLIGHT.get());
+    return flightEffect;
+  }
   public BotaniaManaBlock(Properties pProperties) {
     super(pProperties);
   }
   @Override
   public void stepOn(Level pLevel, BlockPos pPos, BlockState pState, Entity pEntity) {
-    if (pLevel == null || pLevel.isClientSide || !(pEntity instanceof ServerPlayer player) || !flightEffect.canApplyTo(pLevel, pEntity)) {
+    if (pLevel == null || pLevel.isClientSide || !(pEntity instanceof ServerPlayer player) || !getFlightEffect().canApplyTo(pLevel, pEntity)) {
       super.stepOn(pLevel, pPos, pState, pEntity);
       return;
     }
     var wasFlying = player.getAbilities().flying;
-    player.addEffect(flightEffect.createInstance());
+    player.addEffect(getFlightEffect().createInstance());
     player.getAbilities().mayfly = true;
     player.getAbilities().flying = wasFlying;
     Networking.sendToPlayer(new PacketUpdateFlight(true, wasFlying), player);

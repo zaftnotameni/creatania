@@ -91,7 +91,7 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   }
   public int getNormalizedRPM() {
     var min = CommonConfig.MANA_GENERATOR_MINIMUM_RPM.get();
-    if (this.getSpeed() < min) return 0;
+    if (Math.abs(this.getSpeed()) < min) return 0;
     return Math.max(CommonConfig.MANA_GENERATOR_MINIMUM_RPM.get(),
       Math.min(CommonConfig.MANA_GENERATOR_MAXIMUM_RPM.get(), (int) Math.abs(this.getSpeed())));
   }
