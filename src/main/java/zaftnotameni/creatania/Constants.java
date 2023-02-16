@@ -27,4 +27,5 @@ public class Constants {
   public static final String BOTANIA_MANA_FLUID_BUCKET_NAME = "botania_mana_fluid_bucket";
   public static final String BOTANIA_MANA_FLUID = "botania_mana_fluid";
   public static final String BOTANIA_MANA_FLOWING = "botania_mana_flowing";
+  public static final String BOTANIA_MANA_BLOCK = "botania_mana_block";
 }

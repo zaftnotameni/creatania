@@ -17,6 +17,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
@@ -28,8 +29,7 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
-import zaftnotameni.creatania.network.EnergyNetworkPacket;
-import zaftnotameni.creatania.network.ObservePacket;
+import zaftnotameni.creatania.network.*;
 import zaftnotameni.creatania.registry.*;
 import zaftnotameni.creatania.config.ClientConfig;
 import zaftnotameni.creatania.config.CommonConfig;
@@ -46,6 +46,8 @@ public class CreataniaMain {
     .networkProtocolVersion(() -> PROTOCOL)
     .simpleChannel();
 
+  public static IAmProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> ServerProxy::new);
+
   public CreataniaMain() {
     IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -54,6 +56,7 @@ public class CreataniaMain {
     Blocks.register(bus);
     Fluids.register(bus);
     BlockEntities.register(bus);
+    Potions.register(bus);
     Index.CREATE_REGISTRATE.registerEventListeners(bus);
     Recipes.register(bus);
 
@@ -74,6 +77,7 @@ public class CreataniaMain {
   private void setup(final FMLCommonSetupEvent event) {
     Log.LOGGER.debug("pre init");
     BlockStressValues.registerProvider(MODID, AllConfigs.SERVER.kinetics.stressValues);
+    Networking.registerMessages();
   }
 
   private void enqueueIMC(final InterModEnqueueEvent event) {

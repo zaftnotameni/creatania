@@ -8,6 +8,17 @@
 
 - Mana Condenser inner faces are no longer culled
 
+#### Changes
+
+- Improved Mana Generator model by ClaudiusMinimus
+
+#### New
+
+- Balancing/Config that allows a single unit of mana to generate multiple RPM in a mana motor
+- Stepping on a Purified Inert Mana Block will give any entity absorption, heal, and saturation buffs for 30s (configurable)
+- Stepping on a Corrupted Inert Mana Block will give any entity poison, wither, hunger, and harm effects for 30s (configurable)
+- Stepping on a Botania Mana Block will give any entity creative flight for 60s (configurable)
+
 ### 1.18.2-0.0.11-alpha
 
 #### Changes

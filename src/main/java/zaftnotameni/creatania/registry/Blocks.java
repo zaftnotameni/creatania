@@ -1,43 +1,35 @@
 package zaftnotameni.creatania.registry;
 
 import com.jozufozu.flywheel.core.PartialModel;
-import com.mojang.datafixers.kinds.Const;
-import com.simibubi.create.AllBlockPartials;
 import com.simibubi.create.AllTags;
-import com.simibubi.create.Create;
 import com.simibubi.create.foundation.block.BlockStressDefaults;
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Material;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.config.CommonConfig;
+import zaftnotameni.creatania.manatoitem.BotaniaManaBlock;
 import zaftnotameni.creatania.manatoitem.CorruptedManaBlock;
 import zaftnotameni.creatania.manatoitem.PurifiedManaBlock;
 import zaftnotameni.creatania.manatoitem.manacondenser.ManaCondenserBlock;
 import zaftnotameni.creatania.manatosu.manamotor.ManaMotorBlock;
 import zaftnotameni.creatania.sutomana.managenerator.ManaGeneratorBlock;
 import zaftnotameni.creatania.util.Log;
+import zaftnotameni.sharedbehaviors.ManaMachineComponentBlock;
 
-import java.util.function.Function;
 import java.util.function.Supplier;
 
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
@@ -86,15 +78,19 @@ public class Blocks {
 
   public static final RegistryObject<CorruptedManaBlock> CORRUPTED_INERT_MANA_BLOCK = registerBlockWithItem(
     Constants.CORRUPTED_INERT_MANA_BLOCK,
-    () -> new CorruptedManaBlock(BlockBehaviour.Properties.of(Material.STONE).destroyTime(5f)));
+    () -> new CorruptedManaBlock(BlockBehaviour.Properties.of(Material.STONE).destroyTime(10f)));
 
   public static final RegistryObject<PurifiedManaBlock> PURIFIED_INERT_MANA_BLOCK = registerBlockWithItem(
     Constants.PURIFIED_INERT_MANA_BLOCK,
     () -> new PurifiedManaBlock(BlockBehaviour.Properties.of(Material.STONE).destroyTime(1f)));
 
-  public static final RegistryObject<PurifiedManaBlock> MANA_MACHINE_COMPONENT = registerBlockWithItem(
+  public static final RegistryObject<BotaniaManaBlock> BOTANIA_MANA_BLOCK = registerBlockWithItem(
+    Constants.BOTANIA_MANA_BLOCK,
+    () -> new BotaniaManaBlock(BlockBehaviour.Properties.of(Material.GLASS).destroyTime(1f)));
+
+  public static final RegistryObject<ManaMachineComponentBlock> MANA_MACHINE_COMPONENT = registerBlockWithItem(
     Constants.MANA_MACHINE_COMPONENT,
-    () -> new PurifiedManaBlock(BlockBehaviour.Properties.of(Material.STONE).destroyTime(1f)));
+    () -> new ManaMachineComponentBlock(BlockBehaviour.Properties.of(Material.STONE).destroyTime(1f)));
 
   public static <T extends Block> RegistryObject<T> registerBlockWithItem(String name, Supplier<T> createBlock) {
     RegistryObject<T> block = INDEX.register(name, createBlock);
@@ -110,7 +106,7 @@ public class Blocks {
     INDEX.register(bus);
   }
 
-  public class Partials {
+  public static class Partials {
     public static final PartialModel MANA_MOTOR_FAN = block("mana_motor/mana_motor_fan");
     private static PartialModel block(String path) {
       return new PartialModel(new ResourceLocation(Constants.MODID + ":block/" + path));

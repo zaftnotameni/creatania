@@ -76,6 +76,7 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
      if (this.manaMachine == null) this.manaMachine = new KineticManaMachine<>(this)
       .withManaCap(ManaMotorConfig.getManaCap())
       .withManaPerRpmPerTick(ManaMotorConfig.getManaPerTickPerRPM())
+      .withRpmPerManaPerTick(ManaMotorConfig.getRPMPerManaPerTick())
       .withStressUnitsPerRpm(ManaMotorConfig.getStressUnitsPerRPM())
       .withBaseRpm(CommonConfig.MANA_MOTOR_BASE_RPM.get());
      return this.manaMachine;

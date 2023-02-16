@@ -24,6 +24,7 @@ import java.util.function.Supplier;
 import static com.simibubi.create.content.contraptions.base.KineticTileEntity.convertToDirection;
 public class KineticManaMachine<T extends SmartTileEntity & IAmManaMachine> {
   public int manaPerRpmPerTick = 1;
+  public int rpmPerManaPerTick = 1;
   public int stressUnitsPerRpm = 1;
   public int manaCap = 1;
   public int baseRpm = 1;
@@ -31,6 +32,7 @@ public class KineticManaMachine<T extends SmartTileEntity & IAmManaMachine> {
   public T te;
   public KineticManaMachine(T pte) { te = pte; }
   public KineticManaMachine withManaPerRpmPerTick(int i) { this.manaPerRpmPerTick = i; return this; }
+  public KineticManaMachine withRpmPerManaPerTick(int i) { this.rpmPerManaPerTick = i; return this; }
   public KineticManaMachine withStressUnitsPerRpm(int i) { this.stressUnitsPerRpm = i; return this; }
   public KineticManaMachine withManaCap(int i) { this.manaCap = i; return this; }
   public KineticManaMachine withBaseRpm(int i) { this.baseRpm = i; return this; }
@@ -58,7 +60,13 @@ public class KineticManaMachine<T extends SmartTileEntity & IAmManaMachine> {
     te.setChanged();
   }
   public boolean isFull() { return te.getManaMachineMana() > this.manaCap; }
-  public int getMinimumManaPerTick() { return this.manaPerRpmPerTick * Math.abs(te.getManaMachineGeneratedSpeed()); }
+  public int getMinimumManaPerTick() {
+    if (this.manaPerRpmPerTick > 1) { return Math.max(1, this.manaPerRpmPerTick * Math.abs(te.getManaMachineGeneratedSpeed())); }
+    if (this.rpmPerManaPerTick > 1) { return (int) Math.max(1, Math.abs(te.getManaMachineGeneratedSpeed()) / (float) this.rpmPerManaPerTick); }
+    var manaPerRpm = Math.max(1, this.manaPerRpmPerTick);
+    var rpmPerMana = Math.max(1, this.rpmPerManaPerTick);
+    return (int) Math.max(1, ((float) manaPerRpm/(float) rpmPerMana) * Math.abs(te.getManaMachineGeneratedSpeed()));
+  }
 
   public CenteredSideValueBoxTransform createShaftSlot(DirectionProperty dir) { return new CenteredSideValueBoxTransform((motor, side) -> motor.getValue(dir) == side.getOpposite()); }
   public ScrollValueBehaviour createScrollBehavior(DirectionProperty dir) {
