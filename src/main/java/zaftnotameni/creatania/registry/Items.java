@@ -1,5 +1,7 @@
 package zaftnotameni.creatania.registry;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.simibubi.create.content.contraptions.itemAssembly.SequencedAssemblyItem;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.ItemEntry;
@@ -10,6 +12,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.manatoitem.ManaGelItem;
+import zaftnotameni.creatania.util.Humanity;
 import zaftnotameni.creatania.util.Log;
 
 public class Items {
@@ -26,5 +29,10 @@ public class Items {
   }
   private static ItemEntry<SequencedAssemblyItem> sequencedIngredient(String name) {
     return CREATE_REGISTRATE.item(name, SequencedAssemblyItem::new).register();
+  }
+  public static JsonElement provideLangEntries() {
+    var json = new JsonObject();
+    INDEX.getEntries().forEach(entry -> json.addProperty(Humanity.keyItem(entry), Humanity.digestItem(entry)));
+    return json;
   }
 }

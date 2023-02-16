@@ -7,7 +7,7 @@
 #### New
 
 - Advancements, including some hidden easter eggs
-
+- Recipe for true mana block using the agglomeration plate
 
 ### 1.18.2-0.0.13-alpha
 

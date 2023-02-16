@@ -1,5 +1,7 @@
 package zaftnotameni.creatania.registry;
 
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.jozufozu.flywheel.core.PartialModel;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.block.BlockStressDefaults;
@@ -19,6 +21,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.apache.commons.lang3.StringUtils;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.manatoitem.BotaniaManaBlock;
@@ -27,6 +30,7 @@ import zaftnotameni.creatania.manatoitem.PurifiedManaBlock;
 import zaftnotameni.creatania.manatoitem.manacondenser.ManaCondenserBlock;
 import zaftnotameni.creatania.manatosu.manamotor.ManaMotorBlock;
 import zaftnotameni.creatania.sutomana.managenerator.ManaGeneratorBlock;
+import zaftnotameni.creatania.util.Humanity;
 import zaftnotameni.creatania.util.Log;
 import zaftnotameni.sharedbehaviors.ManaMachineComponentBlock;
 
@@ -104,6 +108,12 @@ public class Blocks {
   public static void register(IEventBus bus) {
     Log.LOGGER.debug("register blocks");
     INDEX.register(bus);
+  }
+
+  public static JsonElement provideLangEntries() {
+    var json = new JsonObject();
+    INDEX.getEntries().forEach(entry -> json.addProperty(Humanity.keyBlock(entry), Humanity.digestBlock(entry)));
+    return json;
   }
 
   public static class Partials {

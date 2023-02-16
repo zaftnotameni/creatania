@@ -1,0 +1,10 @@
+{
+  "type": "botania:terra_plate",
+  "ingredients": [{
+    "item": "creatania:purified_inert_mana_block"
+  }],
+  "mana": 500000,
+  "result": {
+    "item": "creatania:botania_mana_block"
+  }
+}
