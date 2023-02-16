@@ -2,7 +2,13 @@
 
 ## changelog
 
+### 1.18.2-0.0.11-alpha
+
 ### 1.18.2-0.0.10-alpha
+
+#### Fixes
+ 
+- Mana Generator fluid connection in the model matches the actual functionality
 
 #### New
 

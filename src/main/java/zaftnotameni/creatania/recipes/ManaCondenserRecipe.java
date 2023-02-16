@@ -1,27 +1,20 @@
 package zaftnotameni.creatania.recipes;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
 import zaftnotameni.creatania.registry.Index;
 
-public class ManaGeneratorRecipe extends CreataniaRecipe {
-  public ManaGeneratorRecipe(ResourceLocation id, Inputs in, Outputs out) {
+public class ManaCondenserRecipe extends CreataniaRecipe {
+  public ManaCondenserRecipe(ResourceLocation id, Inputs in, Outputs out) {
     super(id, in, out);
   }
 
@@ -70,29 +63,29 @@ public class ManaGeneratorRecipe extends CreataniaRecipe {
     return Type.INSTANCE;
   }
 
-  public static class Type implements RecipeType<ManaGeneratorRecipe> {
+  public static class Type implements RecipeType<ManaCondenserRecipe> {
     private Type() { }
     public static final Type INSTANCE = new Type();
-    public static final String ID = "mana_generator";
+    public static final String ID = "mana_condenser";
   }
 
-  public static class Serializer implements RecipeSerializer<ManaGeneratorRecipe> {
+  public static class Serializer implements RecipeSerializer<ManaCondenserRecipe> {
     public static final Serializer INSTANCE = new Serializer();
-    public static final ResourceLocation ID = Index.resource(Type.ID);
-    public static ResourceLocation name = Index.resource(Type.ID);
+    public static final ResourceLocation ID = Index.resource(ManaCondenserRecipe.Type.ID);
+    public static ResourceLocation name = Index.resource(ManaCondenserRecipe.Type.ID);
 
     @Override
-    public ManaGeneratorRecipe fromJson(ResourceLocation id, JsonObject json) {
-      return ItemFluidRecipeSerializer.fromJson(id, json, ManaGeneratorRecipe::new);
+    public ManaCondenserRecipe fromJson(ResourceLocation id, JsonObject json) {
+      return ItemFluidRecipeSerializer.fromJson(id, json, ManaCondenserRecipe::new);
     }
 
     @Override
-    public ManaGeneratorRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
-      return ItemFluidRecipeSerializer.fromNetwork(id, buf, ManaGeneratorRecipe::new);
+    public ManaCondenserRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
+      return ItemFluidRecipeSerializer.fromNetwork(id, buf, ManaCondenserRecipe::new);
     }
 
     @Override
-    public void toNetwork(FriendlyByteBuf buf, ManaGeneratorRecipe recipe) {
+    public void toNetwork(FriendlyByteBuf buf, ManaCondenserRecipe recipe) {
       ItemFluidRecipeSerializer.toNetwork(buf, recipe);
     }
 

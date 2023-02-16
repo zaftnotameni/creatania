@@ -1,5 +1,4 @@
 package zaftnotameni.creatania.recipes;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
@@ -11,22 +10,19 @@ import net.minecraft.data.recipes.RecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import zaftnotameni.creatania.registry.Index;
 
 import java.util.function.Consumer;
-public class ManaGeneratorRecipeBuilder implements RecipeBuilder {
+public class ManaCondenserRecipeBuilder implements RecipeBuilder {
   public final Inputs inputs;
   public final Outputs outputs;
   public final Advancement.Builder advancement = Advancement.Builder.advancement();
   public final String recipeIdPrefix;
 
-  public ManaGeneratorRecipeBuilder(Inputs inputs, Outputs outputs, String pRecipeIdPrefix) {
+  public ManaCondenserRecipeBuilder(Inputs inputs, Outputs outputs, String pRecipeIdPrefix) {
     this.inputs = inputs;
     this.outputs = outputs;
     this.recipeIdPrefix = pRecipeIdPrefix;
@@ -51,7 +47,7 @@ public class ManaGeneratorRecipeBuilder implements RecipeBuilder {
       .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(pRecipeId))
       .rewards(AdvancementRewards.Builder.recipe(pRecipeId)).requirements(RequirementsStrategy.OR);
 
-    pFinishedRecipeConsumer.accept(new ManaGeneratorRecipeBuilder.Result(pRecipeId, this.inputs, this.outputs,
+    pFinishedRecipeConsumer.accept(new ManaCondenserRecipeBuilder.Result(pRecipeId, this.inputs, this.outputs,
       this.advancement, createAdvancementId(pRecipeId), this.recipeIdPrefix));
   }
   @NotNull
@@ -84,7 +80,7 @@ public class ManaGeneratorRecipeBuilder implements RecipeBuilder {
 
     @Override
     public ResourceLocation getId() {
-      return Index.resource(this.getRecipeIdPrefix() + "_from_mana_generator");
+      return Index.resource(this.getRecipeIdPrefix() + "_from_mana_condenser");
     }
 
     public String getRecipeIdPrefix() {
@@ -94,7 +90,7 @@ public class ManaGeneratorRecipeBuilder implements RecipeBuilder {
 
     @Override
     public RecipeSerializer<?> getType() {
-      return ManaGeneratorRecipe.Serializer.INSTANCE;
+      return ManaCondenserRecipe.Serializer.INSTANCE;
     }
 
     @javax.annotation.Nullable
