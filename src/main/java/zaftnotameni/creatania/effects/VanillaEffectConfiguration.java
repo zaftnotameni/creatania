@@ -13,6 +13,7 @@ public class VanillaEffectConfiguration {
     this.duration = duration;
     this.modifier = modifier;
   }
+
   public boolean applyTo(Level level, Entity entity) {
     var applicable = this.canApplyTo(level, entity);
     if (!applicable) return false;

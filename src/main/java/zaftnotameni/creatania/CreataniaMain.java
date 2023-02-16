@@ -33,6 +33,7 @@ import zaftnotameni.creatania.network.*;
 import zaftnotameni.creatania.registry.*;
 import zaftnotameni.creatania.config.ClientConfig;
 import zaftnotameni.creatania.config.CommonConfig;
+import zaftnotameni.creatania.registry.datagen.ForgeAdvancementsProvider;
 import zaftnotameni.creatania.util.Log;
 
 import static zaftnotameni.creatania.Constants.MODID;
@@ -78,6 +79,10 @@ public class CreataniaMain {
     Log.LOGGER.debug("pre init");
     BlockStressValues.registerProvider(MODID, AllConfigs.SERVER.kinetics.stressValues);
     Networking.registerMessages();
+    event.enqueueWork(() -> {
+      Advancements.register();
+      Triggers.register();
+    });
   }
 
   private void enqueueIMC(final InterModEnqueueEvent event) {

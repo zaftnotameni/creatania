@@ -4,6 +4,9 @@
 
 ### 1.18.2-0.0.14-alpha
 
+#### New
+
+- Advancements, including some hidden easter eggs
 
 
 ### 1.18.2-0.0.13-alpha
