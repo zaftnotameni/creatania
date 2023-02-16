@@ -240,19 +240,6 @@
 				"up": {"uv": [1, 1, 2, 2], "rotation": 90, "texture": "#13"},
 				"down": {"uv": [2, 2, 14, 14], "rotation": 90, "texture": "#13"}
 			}
-		},
-		{
-			"name": "mana_water",
-			"from": [2, 12, 2],
-			"to": [14, 16, 14],
-			"faces": {
-				"north": {"uv": [2, 2, 14, 14], "texture": "#12", "cullface": "down"},
-				"east": {"uv": [2, 2, 14, 14], "texture": "#12", "cullface": "down"},
-				"south": {"uv": [2, 2, 14, 14], "texture": "#12", "cullface": "down"},
-				"west": {"uv": [2, 2, 14, 14], "texture": "#12", "cullface": "down"},
-				"up": {"uv": [2, 2, 14, 14], "texture": "#12", "cullface": "down"},
-				"down": {"uv": [2, 2, 14, 14], "texture": "#12", "cullface": "down"}
-			}
 		}
 	],
 	"gui_light": "front",

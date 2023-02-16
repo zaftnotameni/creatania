@@ -1,17 +1,25 @@
 package zaftnotameni.creatania.manatoitem.manacondenser;
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.simibubi.create.AllBlockPartials;
+import com.simibubi.create.content.contraptions.base.IRotate;
 import com.simibubi.create.content.contraptions.base.KineticTileEntity;
 import com.simibubi.create.content.contraptions.base.KineticTileEntityRenderer;
 import com.simibubi.create.foundation.render.CachedBufferer;
 import com.simibubi.create.foundation.render.SuperByteBuffer;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 import zaftnotameni.creatania.config.ClientConfig;
+import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Particles;
 import zaftnotameni.sharedbehaviors.IAmParticleEmittingMachine;
+
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
 public class ManaCondenserRenderer extends KineticTileEntityRenderer {
   public ManaCondenserRenderer(BlockEntityRendererProvider.Context context) {
     super(context);
@@ -23,8 +31,22 @@ public class ManaCondenserRenderer extends KineticTileEntityRenderer {
   @Override
   protected void renderSafe(KineticTileEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
     super.renderSafe(te, partialTicks, ms, buffer, light, overlay);
-    this.spawnManaParticles(te, partialTicks);
+    renderFans(te, ms, buffer);
+    spawnManaParticles(te, partialTicks);
   }
+  public void renderFans(KineticTileEntity te, PoseStack ms, MultiBufferSource buffer) {
+    Direction direction = Direction.UP;
+    Direction.Axis axis = Direction.Axis.Y;
+
+    VertexConsumer vb = buffer.getBuffer(RenderType.cutoutMipped());
+
+    int lightInFront = LevelRenderer.getLightColor(te.getLevel(), te.getBlockPos().relative(direction));
+    var angle = getAngleForTe(te, te.getBlockPos(), axis);
+
+    SuperByteBuffer fanInner1 = CachedBufferer.partialFacing(AllBlockPartials.ENCASED_FAN_INNER, te.getBlockState(), Direction.DOWN);
+    kineticRotationTransform(fanInner1, te, axis, angle, lightInFront).renderInto(ms, vb);
+  }
+
 
   public float tickCounter = 0f;
   public float signal = 1f;
