@@ -2,6 +2,7 @@ package zaftnotameni.creatania.manatoitem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -9,6 +10,7 @@ import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.effects.VanillaEffectConfiguration;
 import zaftnotameni.creatania.network.Networking;
 import zaftnotameni.creatania.network.PacketUpdateFlight;
+import zaftnotameni.creatania.registry.Advancements;
 import zaftnotameni.creatania.registry.Potions;
 public class BotaniaManaBlock extends Block {
   public static VanillaEffectConfiguration flightEffect;
@@ -30,11 +32,16 @@ public class BotaniaManaBlock extends Block {
       super.stepOn(pLevel, pPos, pState, pEntity);
       return;
     }
+    unlockAchievementBuffingPlayer(pLevel, player);
     var wasFlying = player.getAbilities().flying;
     player.addEffect(getFlightEffect().createInstance());
     player.getAbilities().mayfly = true;
     player.getAbilities().flying = wasFlying;
     Networking.sendToPlayer(new PacketUpdateFlight(true, wasFlying), player);
     super.stepOn(pLevel, pPos, pState, pEntity);
+  }
+  public void unlockAchievementBuffingPlayer(Level pLevel, LivingEntity livingEntity) {
+    if (!(livingEntity instanceof ServerPlayer player)) return;
+    Advancements.BUFF_FROM_REAL_MANA_BLOCKS.awardTo(player);
   }
 }

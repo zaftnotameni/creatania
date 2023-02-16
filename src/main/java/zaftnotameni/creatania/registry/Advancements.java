@@ -42,6 +42,21 @@ public class Advancements {
       .description("The llama guy got what he deserves, thanks for your service")
       .after(ROOT)
       .special(SECRET)),
+    BUFF_FROM_INERT_MANA_BLOCKS = create("buff_from_purified_blocks", b -> b.icon(Blocks.PURIFIED_INERT_MANA_BLOCK.get())
+      .title("Power Overwhelming!")
+      .description("Purified mana might be inert, but still contains a lot of power within")
+      .after(ROOT)
+      .special(SECRET)),
+    BUFF_FROM_REAL_MANA_BLOCKS = create("buff_from_real_mana_blocks", b -> b.icon(Blocks.BOTANIA_MANA_BLOCK.get())
+      .title("Flying High")
+      .description("Botania mana blocks are the real deal, pure condensed magical power")
+      .after(ROOT)
+      .special(SECRET)),
+    DEBUFF_FROM_INERT_MANA_BLOCKS = create("debuff_from_corrupt_blocks", b -> b.icon(Blocks.CORRUPTED_INERT_MANA_BLOCK.get())
+      .title("Watch your step!")
+      .description("Corrupt mana might be inert, but still extremely dangerous")
+      .after(ROOT)
+      .special(SECRET)),
     END = null;
 
   public static CreataniaAdvancement create(String id, UnaryOperator<CreataniaAdvancement.Builder> b) {

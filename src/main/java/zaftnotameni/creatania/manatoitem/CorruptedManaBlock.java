@@ -1,5 +1,6 @@
 package zaftnotameni.creatania.manatoitem;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -62,5 +63,7 @@ public class CorruptedManaBlock extends Block {
     super.stepOn(pLevel, pPos, pState, pEntity);
   }
   public void unlockAchievementCorruptionOfPlayer(Level pLevel, LivingEntity livingEntity) {
+    if (!(livingEntity instanceof ServerPlayer player)) return;
+    Advancements.DEBUFF_FROM_INERT_MANA_BLOCKS.awardTo(player);
   }
 }
