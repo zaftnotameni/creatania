@@ -21,7 +21,8 @@ public class CommonConfig {
 
   public static final ForgeConfigSpec.ConfigValue<Integer> MANA_CONDENSER_SU_PER_RPM;
   public static final ForgeConfigSpec.ConfigValue<Integer> MANA_CONDENSER_MANA_PER_ITEM;
-  public static final ForgeConfigSpec.ConfigValue<Integer> MANA_CONDENSER_MANA_PER_TICK_PER_RPM ;
+  public static final ForgeConfigSpec.ConfigValue<Integer> MANA_CONDENSER_MANA_PER_TICK_PER_RPM;
+  public static final ForgeConfigSpec.ConfigValue<Integer> MANA_CONDENSER_THROTTLE_PER_RPM_BELOW_MAX;
   public static final ForgeConfigSpec.ConfigValue<Integer> MANA_CONDENSER_MAX_MANA_STORAGE;
   static {
     BUILDER.push("mana_generator");
@@ -48,6 +49,7 @@ public class CommonConfig {
     MANA_CONDENSER_MANA_PER_ITEM = BUILDER.define("mana_per_item", 100);
     MANA_CONDENSER_MANA_PER_TICK_PER_RPM = BUILDER.define("mana_per_tick_per_rpm", 0);
     MANA_CONDENSER_MAX_MANA_STORAGE = BUILDER.define("max_mana_storage", 1000);
+    MANA_CONDENSER_THROTTLE_PER_RPM_BELOW_MAX = BUILDER.define("mana_condenser_throttle_per_rpm_below_max", 1);
     BUILDER.pop();
 
     SPEC = BUILDER.build();

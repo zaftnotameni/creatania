@@ -26,8 +26,6 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   public KineticManaMachine manaMachine;
 
   public ManaGeneratorFluidHandler manaGeneratorFluidHandler;
-
-
   public ManaGeneratorBlockEntity(BlockEntityType<? extends ManaGeneratorBlockEntity> type, BlockPos pos, BlockState state) {
     super(type, pos, state);
     this.setLazyTickRate(CommonConfig.MANA_GENERATOR_LAZY_TICK_RATE.get());
@@ -71,12 +69,24 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   @Nonnull
   @Override
   public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
-    if (side == null) return super.getCapability(cap, side);
+    if (side == null) {
+      Log.LOGGER.info("no side provided when checking for capability {}", cap.getName());
+      return super.getCapability(cap, side);
+    }
     var block = this.getBlockState().getBlock();
-    if (!(block instanceof  ManaGeneratorBlock)) return super.getCapability(cap, side);
-    if (!((ManaGeneratorBlock) block).hasShaftTowards(this.level, this.worldPosition, this.getBlockState(), side.getOpposite())) return super.getCapability(cap, side);
+    if (!(block instanceof  ManaGeneratorBlock)){
+      Log.LOGGER.info("block is not a mana generator block when checking for capability {}", cap.getName());
+      return super.getCapability(cap, side);
+    }
+    if (!((ManaGeneratorBlock) block).hasShaftTowards(this.level, this.worldPosition, this.getBlockState(), side.getOpposite())) {
+      Log.LOGGER.info("side is not opposite to the shaft when checking for capability {}", cap.getName());
+      return super.getCapability(cap, side);
+    }
     var foundCapability = this.getManaGeneratorFluidHandler().getCapability(cap, side);
-    if (foundCapability != null) { return foundCapability; }
+    if (foundCapability != null) {
+      Log.RateLimited.of(this, 20).log((logger) -> logger.debug("connection could be established when checking for capability {}", cap.getName()));
+      return foundCapability;
+    }
     return super.getCapability(cap, side);
   }
   public int getNormalizedRPM() {
@@ -101,9 +111,15 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
 
   public boolean shouldAbortServerTick() {
     var isInInvalidState = this.isOverStressed() || this.getNormalizedRPM() == 0 || this.worldPosition == null || this.level == null;
-    if (isInInvalidState) return true;
+    if (isInInvalidState) {
+      Log.RateLimited.of(this, 20).log((logger) -> logger.debug("server tick aborted because RPM is 0 or is overstressed"));
+      return true;
+    }
     var notEnoughSpeed = Math.abs(this.getSpeed()) <= 0 || !this.isSpeedRequirementFulfilled();
-    if (notEnoughSpeed) return true;
+    if (notEnoughSpeed) {
+      Log.RateLimited.of(this, 20).log((logger) -> logger.debug("server tick aborted because RPM {} does not satisfy minimum requirement", this.getSpeed()));
+      return true;
+    }
     return false;
   }
 
@@ -131,6 +147,7 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
       this.active = true;
       return;
     }
+    Log.RateLimited.of(this, 20).log((logger) -> logger.debug("not enough mana fluid to produce mana, required {}, available {}", manaFluidRequired, manaFluidAvailable));
   }
   public void clientTick() {}
 

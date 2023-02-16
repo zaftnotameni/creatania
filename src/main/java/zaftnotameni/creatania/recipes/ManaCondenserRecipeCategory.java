@@ -43,7 +43,7 @@ public class ManaCondenserRecipeCategory extends CreataniaRecipeCategory<ManaCon
   @Override
   public void setRecipe(IRecipeLayoutBuilder builder, ManaCondenserRecipe recipe, IFocusGroup focuses) {
     builder.addSlot(RecipeIngredientRole.OUTPUT, 30, 50).addIngredients(Ingredient.of(ForgeRegistries.ITEMS.getValue(new ResourceLocation("minecraft:chest")).asItem()))
-      .addTooltipCallback((recipeSlotView, tooltip) -> tooltip.add(new TextComponent("Any Inventory will serve as output")));
+      .addTooltipCallback((recipeSlotView, tooltip) -> tooltip.add(new TextComponent("Any Inventory placed below the machine will serve as output")));
     builder.addSlot(RecipeIngredientRole.OUTPUT, 30, 30).addIngredients(Ingredient.of(recipe.outputs.items.get(0).getItem()))
       .addTooltipCallback((recipeSlotView, tooltip) -> tooltip.add(new TextComponent("Corrupt mana is condensed in block form, it will need to be purified as part of a separate process")));
     builder.addSlot(RecipeIngredientRole.CATALYST, 30, 10).addIngredients(Ingredient.of(Blocks.MANA_CONDENSER.get()))

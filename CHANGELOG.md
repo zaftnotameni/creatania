@@ -4,6 +4,24 @@
 
 ### 1.18.2-0.0.11-alpha
 
+#### Changes
+
+- Mana Condenser throttles the rate of corrupt mana generated based on RPM (1 per tick at max RPM)
+- Increase default amount of particles in Mana Condenser/Generator (ticks per particle still configurable and client config)
+
+#### New
+
+- JEI category with brief explanation for the process of mana generation
+- JEI category with brief explanation for the process of mana condensing
+
+#### Fixes
+
+- ? Mana Generator should populate the mana pool above it properly
+
+#### Internals
+
+- Extra logs around Mana Generator since we had some problems with it
+
 ### 1.18.2-0.0.10-alpha
 
 #### Fixes

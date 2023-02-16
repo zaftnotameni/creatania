@@ -1,6 +1,7 @@
 package zaftnotameni.creatania.manatoitem.manacondenser;
 
 import com.simibubi.create.content.contraptions.base.KineticTileEntity;
+import com.simibubi.create.foundation.config.AllConfigs;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
@@ -12,16 +13,13 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.items.CapabilityItemHandler;
 import vazkii.botania.api.BotaniaForgeCapabilities;
-import vazkii.botania.api.mana.IManaPool;
 import vazkii.botania.api.mana.IManaReceiver;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.registry.Blocks;
-import zaftnotameni.creatania.registry.Items;
 import zaftnotameni.sharedbehaviors.IAmParticleEmittingMachine;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.math.MathContext;
 
 /**
  * Consumes SU and adds Corrupted Inert Mana blocks in the inventory below
@@ -48,22 +46,33 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
     if (Math.abs(this.getSpeed()) < min) return 0;
     return Math.max(0, (int) Math.abs(this.getSpeed()));
   }
+
+
+  public float tickCounter = 0f;
   public void serverTick() {
     var wasActive = this.active;
     this.active = false;
     var rpm = this.getNormalizedRPM();
+    var maxPossibleRpm = AllConfigs.SERVER.kinetics.maxMotorSpeed.get();
+    var percentageOfMaxRpm = Math.max(0.01f, rpm / (float) maxPossibleRpm);
+
     var requiredMana = getManaConsumptionRate();
     if (this.doesNotMeetRequirementsToCondenseMana(rpm, requiredMana)) {
       return;
     }
     this.receiveMana(-requiredMana);
-    this.insertManaGelBelow();
+
+    tickCounter += percentageOfMaxRpm / (Math.max(1, CommonConfig.MANA_CONDENSER_THROTTLE_PER_RPM_BELOW_MAX.get()));
+    if (tickCounter > 1f) {
+      this.insertCorruptedManaBlockBelow();
+      tickCounter = 0;
+    }
     this.active = true;
   }
   public boolean doesNotMeetRequirementsToCondenseMana(int rpm, int requiredMana) {
     return this.isOverStressed() || (rpm <= 0) || (this.getBlockPos() == null) || !this.isSpeedRequirementFulfilled() || (this.mana < requiredMana);
   }
-  public void insertManaGelBelow() {
+  public void insertCorruptedManaBlockBelow() {
     BlockEntity entityBelow = this.level.getBlockEntity(this.worldPosition.below());
     if (entityBelow == null) return;
     entityBelow.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP).ifPresent((inventoryBelow) -> {

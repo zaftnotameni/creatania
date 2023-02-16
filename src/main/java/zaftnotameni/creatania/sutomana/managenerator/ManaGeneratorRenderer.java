@@ -29,7 +29,7 @@ public class ManaGeneratorRenderer extends KineticTileEntityRenderer {
 
   public float tickCounter = 0f;
   public float signal = 1f;
-  public float speedModifier = 1.25f;
+  public float speedModifier = 0.9f;
   public float particlesEveryFTicks = ClientConfig.TICKS_PER_PARTICLE.get();
   public boolean enableManaParticles = ClientConfig.ENABLE_MANA_PARTICLES.get();
   public void spawnManaParticles(KineticTileEntity te, float partialTicks) {
@@ -47,9 +47,9 @@ public class ManaGeneratorRenderer extends KineticTileEntityRenderer {
     var cx = te.getBlockPos().getX() + .5f;
     var cy = te.getBlockPos().above().getY();
     var cz = te.getBlockPos().getZ() + .5f;
-    var xs = this.signal * Math.random() * this.speedModifier;
+    var xs = 0.1f - (Math.random() * 0.2f);
     var ys = Math.random() * this.speedModifier;
-    var zs = this.signal * Math.random() * this.speedModifier;
+    var zs = 0.1f - (Math.random() * 0.2f);
     var px = cx;
     var py = cy;
     var pz = cz;
