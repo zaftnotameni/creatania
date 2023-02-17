@@ -3,8 +3,7 @@
 	"parent": "minecraft:block/block",
 	"textures": {
 		"11": "creatania:block/manasteel_block",
-		"14": "creatania:block/stripped_livingwood_log",
-		"particle": "creatania:block/livingrock"
+		"14": "creatania:block/stripped_livingwood_log"
 	},
 	"elements": [
 		{
