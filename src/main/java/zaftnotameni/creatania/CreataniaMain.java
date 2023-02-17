@@ -11,6 +11,8 @@ import com.simibubi.create.foundation.worldgen.AllFeatures;
 import com.simibubi.create.foundation.worldgen.AllOreFeatureConfigEntries;
 import com.simibubi.create.foundation.worldgen.AllPlacementModifiers;
 import com.simibubi.create.foundation.worldgen.BuiltinRegistration;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.MinecraftForge;
@@ -21,10 +23,7 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLLoadCompleteEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
+import net.minecraftforge.fml.event.lifecycle.*;
 import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkRegistry;
@@ -63,6 +62,7 @@ public class CreataniaMain {
     Recipes.register(bus);
 
     bus.addListener(this::setup);
+    bus.addListener(this::client);
     bus.addListener(this::enqueueIMC);
     bus.addListener(this::processIMC);
     bus.addListener(this::postInit);
@@ -77,14 +77,22 @@ public class CreataniaMain {
     MinecraftForge.EVENT_BUS.register(ForgeEventBus.class);
   }
 
+
+  private void client(final FMLClientSetupEvent event) {
+    Log.LOGGER.info("creatania client setup started");
+    ItemBlockRenderTypes.setRenderLayer(Blocks.TERRASTEEL_MANADUCT_BLOCK.get(), RenderType.cutoutMipped());
+    Log.LOGGER.info("creatania client setup finished");
+  }
+
   private void setup(final FMLCommonSetupEvent event) {
-    Log.LOGGER.debug("pre init");
+    Log.LOGGER.info("creatania setup started");
     BlockStressValues.registerProvider(MODID, AllConfigs.SERVER.kinetics.stressValues);
     Networking.registerMessages();
     event.enqueueWork(() -> {
       Advancements.register();
       Triggers.register();
     });
+    Log.LOGGER.info("creatania setup finished");
   }
 
   private void enqueueIMC(final InterModEnqueueEvent event) {

@@ -31,4 +31,5 @@ public class Constants {
   public static final String BOTANIA_MANA_BLOCK = "botania_mana_block";
   public static final String OMNIBOX_BLOCK_ENTITY = "omnibox_block_entity";
   public static final String OMNIBOX = "omnibox";
+  public static final String TERRASTEEL_MANA_DUCT_BLOCK = "terrasteel_manaduct_block";
 }
