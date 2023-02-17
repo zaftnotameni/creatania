@@ -3,12 +3,8 @@ package zaftnotameni.creatania.registry;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.jozufozu.flywheel.core.PartialModel;
-import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.AllTags;
-import com.simibubi.create.content.contraptions.relays.encased.EncasedCTBehaviour;
-import com.simibubi.create.content.contraptions.relays.gearbox.GearboxBlock;
 import com.simibubi.create.foundation.block.BlockStressDefaults;
-import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.SharedProperties;
@@ -26,7 +22,6 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
-import org.apache.commons.lang3.StringUtils;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.manaiaccreate.omnibox.OmniboxBlock;
@@ -45,8 +40,6 @@ import zaftnotameni.sharedbehaviors.ManaMachineComponentBlock;
 
 import java.util.function.Supplier;
 
-import static com.simibubi.create.Create.REGISTRATE;
-import static com.simibubi.create.foundation.data.BlockStateGen.axisBlock;
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 
@@ -94,7 +87,8 @@ public class Blocks {
   public static final BlockEntry<OmniboxBlock> OMNIBOX = CREATE_REGISTRATE
     .block(Constants.OMNIBOX, OmniboxBlock::new)
     .initialProperties(SharedProperties::stone)
-    // .blockstate(BlockStateGen.simpleCubeAll(Constants.OMNIBOX))
+    .blockstate(BlockStateGen.directionalBlockProvider(false))
+    .addLayer(() -> RenderType::cutoutMipped)
     .properties(BlockBehaviour.Properties::noOcclusion)
     .properties(p -> p.color(MaterialColor.PODZOL))
     .transform(BlockStressDefaults.setNoImpact())

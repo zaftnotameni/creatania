@@ -4,6 +4,11 @@
 
 ### 1.18.2-0.0.18-alpha
 
+#### Changes
+
+- Omnibox, a gearbox that propagates rotational force in every direction now has the correct model and behavior
+
+
 ### 1.18.2-0.0.17-alpha
 
 #### New
