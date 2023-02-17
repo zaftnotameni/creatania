@@ -1,5 +1,6 @@
 package zaftnotameni.creatania;
 
+import net.minecraft.world.level.material.Material;
 import net.minecraftforge.eventbus.api.IEventBus;
 public class Constants {
   public static final String MODID = "creatania";
@@ -28,4 +29,6 @@ public class Constants {
   public static final String BOTANIA_MANA_FLUID = "botania_mana_fluid";
   public static final String BOTANIA_MANA_FLOWING = "botania_mana_flowing";
   public static final String BOTANIA_MANA_BLOCK = "botania_mana_block";
+  public static final String OMNIBOX_BLOCK_ENTITY = "omnibox_block_entity";
+  public static final String OMNIBOX = "omnibox";
 }
