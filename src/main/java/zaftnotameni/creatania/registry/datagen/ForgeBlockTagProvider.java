@@ -12,6 +12,9 @@ public class ForgeBlockTagProvider extends BlockTagsProvider {
 
   @Override
   protected void addTags() {
+    tag(Tags.Blocks.PREVENTS_ENDER_TELEPORTATION).add(
+      Blocks.CORRUPTED_INERT_MANA_BLOCK.get());
+
     tag(Tags.Blocks.MANA_MACHINE).add(
       Blocks.MANA_CONDENSER.get(),
       Blocks.MANA_GENERATOR.get(),

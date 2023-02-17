@@ -4,6 +4,15 @@
 
 ### 1.18.2-0.0.16-alpha
 
+#### Changes
+
+- Mana Motor mana rendering has a smaller bounding box, all paddings are now configurable in client configs
+
+#### New
+
+- Secret feature 1 + hidden advancement for it (botania/create related)
+- Secret feature 2 + hidden advancement for it (mana blocks related)
+
 ### 1.18.2-0.0.15-alpha
 
 #### Changes

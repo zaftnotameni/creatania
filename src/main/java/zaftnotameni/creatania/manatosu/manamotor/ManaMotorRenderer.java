@@ -15,6 +15,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
+import zaftnotameni.creatania.config.ClientConfig;
 import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Fluids;
 
@@ -46,11 +47,37 @@ public class ManaMotorRenderer extends KineticTileEntityRenderer {
 
     kineticRotationTransform(fanInner1, te, direction.getAxis(), angle, lightInFront).renderInto(ms, vb);
   }
+  public static float getYMaxForFluidLevel(ManaMotorBlockEntity motor){
+    var topPadding = ClientConfig.MANA_MOTOR_MANA_FILL_TOP_PADDING.get();
+    var bottomPadding = ClientConfig.MANA_MOTOR_MANA_FILL_BOTTOM_PADDING.get();
+    var topWithPadding = 1.0f - topPadding;
+    var percentageFull = (float) motor.mana / (float) motor.manaMachine.manaCap;
+    var toFill = 1.0f - bottomPadding;
+    return Math.min(topWithPadding, bottomPadding + (toFill * percentageFull));
+
+  }
+  public static float getYMinForFluidLevel() {
+    var bottomPadding = ClientConfig.MANA_MOTOR_MANA_FILL_BOTTOM_PADDING.get();
+    return 0.0f + bottomPadding;
+  }
+  public static float getHorizontalMinForFluidLevel() {
+    var horizontalPadding = ClientConfig.MANA_MOTOR_MANA_FILL_HORIZONTAL_PADDING.get();
+    return 0.0f + horizontalPadding;
+  }
+  public static float getHorizontalMaxForFluidLevel() {
+    var horizontalPadding = ClientConfig.MANA_MOTOR_MANA_FILL_HORIZONTAL_PADDING.get();
+    return 1.0f - horizontalPadding;
+  }
   public static void renderFluids(KineticTileEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
+    if (!(te instanceof ManaMotorBlockEntity motor)) return;
+    if (motor.mana < 1) return;
     var renderedFluid = new FluidStack(Fluids.MANA_FLUID.get(), 1000);
-    var motor = (ManaMotorBlockEntity) te;
-    float ymax = Math.min(1f, (motor.mana == 0) ? 0.0f : (0.01f + (0.99f * motor.mana / (float) motor.manaMachine.manaCap)));
-    FluidRenderer.renderFluidBox(renderedFluid, 0.1f, 0.5f, 0.1f, 0.9f, ymax, 0.9f, buffer, ms, light,
-      true);
+    float ymin = getYMinForFluidLevel();
+    float ymax = getYMaxForFluidLevel(motor);
+    float xmin = getHorizontalMinForFluidLevel();
+    float xmax = getHorizontalMaxForFluidLevel();
+    float zmin = getHorizontalMinForFluidLevel();
+    float zmax = getHorizontalMaxForFluidLevel();
+    FluidRenderer.renderFluidBox(renderedFluid, xmin, ymin, zmin, xmax, ymax, zmax, buffer, ms, light, true);
   }
 }

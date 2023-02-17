@@ -59,8 +59,18 @@ public class Advancements {
       .after(ROOT)
       .special(SECRET)),
     PICK_A_BOTANIA_BLOCK_WITH_CREATE_WRENCH = create("botania_block_with_create_wrench", b -> b.icon(AllItems.WRENCH.get())
-      .title("Mana Wrenching")
-      .description("Pick up blocks from botania using the create wrench")
+      .title("Joyful Mana Gut Wrenching")
+      .description("Pick up blocks from botania using the create wrench. Be very careful with it")
+      .after(ROOT)
+      .special(SECRET)),
+    PREVENT_ENDER_ENTITY_FROM_TELEPORTING = create("prevent_ender_entity_from_teleporting", b -> b.icon(net.minecraft.world.item.Items.ENDER_PEARL)
+      .title("Denied!")
+      .description("Corrupt mana blocks, among its many properties, can prevent ender entities from teleporting")
+      .after(ROOT)
+      .special(SECRET)),
+    PRODUCE_MANA_GEL_FROM_SLIME = create("produce_mana_gel_from_slime", b -> b.icon(Items.MANA_GEL.get())
+      .title("YUMMY!")
+      .description("Produce mana gel by having a slime touch purified inert mana fluid")
       .after(ROOT)
       .special(SECRET)),
     END = null;

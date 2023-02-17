@@ -38,6 +38,7 @@ public class CommonConfig {
   public static final ForgeConfigSpec.ConfigValue<Integer> CORRUPTED_MANA_BLOCK_BUFF_HUNGER_DURATION;
   public static final ForgeConfigSpec.ConfigValue<Integer> BOTANIA_MANA_BLOCK_BUFF_FLIGHT;
   public static final ForgeConfigSpec.ConfigValue<Integer> BOTANIA_MANA_BLOCK_BUFF_FLIGHT_DURATION;
+  public static final ForgeConfigSpec.ConfigValue<String> BLACKLISTED_WRENCH_BLOCKS;
 
   static {
     BUILDER.push("mana_generator");
@@ -91,6 +92,10 @@ public class CommonConfig {
     BUILDER.push("botania_mana_block");
     BOTANIA_MANA_BLOCK_BUFF_FLIGHT = BUILDER.define("buff_flight", 1);
     BOTANIA_MANA_BLOCK_BUFF_FLIGHT_DURATION = BUILDER.define("buff_flight_duration", 60 * 20);
+    BUILDER.pop();
+
+    BUILDER.push("misc");
+    BLACKLISTED_WRENCH_BLOCKS = BUILDER.define("blacklisted_wrench_blocks", "");
     BUILDER.pop();
 
     SPEC = BUILDER.build();

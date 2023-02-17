@@ -29,8 +29,10 @@
 	"advancement.creatania.buff_from_real_mana_blocks.desc": "Botania mana blocks are the real deal, pure condensed magical power§7\n(Hidden Advancement)",
 	"advancement.creatania.debuff_from_corrupt_blocks": "Watch your step!",
 	"advancement.creatania.debuff_from_corrupt_blocks.desc": "Corrupt mana might be inert, but still extremely dangerous§7\n(Hidden Advancement)",
-	"advancement.creatania.botania_block_with_create_wrench": "Mana Wrenching",
-	"advancement.creatania.botania_block_with_create_wrench.desc": "Pick up blocks from botania using the create wrench§7\n(Hidden Advancement)",
+	"advancement.creatania.botania_block_with_create_wrench": "Joyful Mana Gut Wrenching",
+	"advancement.creatania.botania_block_with_create_wrench.desc": "Pick up blocks from botania using the create wrench. Be very careful with it§7\n(Hidden Advancement)",
+	"advancement.creatania.prevent_ender_entity_from_teleporting": "Denied!",
+	"advancement.creatania.prevent_ender_entity_from_teleporting.desc": "Corrupt mana blocks, among its many properties, can prevent ender entities from teleporting§7\n(Hidden Advancement)",
 
 
 	"_": "->------------------------]  UI & Messages  [------------------------<-",
