@@ -22,6 +22,7 @@
   - no longer requires mana pearl
   - now requires mana powder
   - now requires a shaft
+  - now requires iron bars
   - now requires a propeller
 - Mana Motor altar recipe:
   - now requires mana powder
