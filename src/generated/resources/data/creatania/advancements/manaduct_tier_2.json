@@ -1,0 +1,38 @@
+{
+  "parent": "creatania:mana_generator",
+  "display": {
+    "icon": {
+      "item": "creatania:terrasteel_manaduct_block"
+    },
+    "title": {
+      "translate": "advancement.creatania.manaduct_tier_2"
+    },
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.creatania.manaduct_tier_2.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "creatania:terrasteel_manaduct_block"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ]
+}
