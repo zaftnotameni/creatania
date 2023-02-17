@@ -1,25 +1,14 @@
 package zaftnotameni.creatania.event;
 
 import com.simibubi.create.AllItems;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.monster.Slime;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.storage.loot.LootContext;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
-import net.minecraftforge.event.entity.living.LivingEvent;
-import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -28,45 +17,46 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.StringUtils;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.config.CommonConfig;
-import zaftnotameni.creatania.registry.*;
+import zaftnotameni.creatania.registry.Advancements;
+import zaftnotameni.creatania.registry.Tags;
 import zaftnotameni.creatania.util.ScanArea;
 
 import java.util.Collection;
 
 @Mod.EventBusSubscriber(modid = Constants.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeEventBus {
-  public static void slimy(Level level, LivingEntity entity) {
-    if (level.isClientSide()) return;
-    entity.is(EntityType.SLIME.create(level));
-    var pos = entity.getOnPos();
-    var posAbove = entity.getOnPos().above();
-    var blockState = level.getBlockState(pos);
-    var blockStateAbove = level.getBlockState(posAbove);
-    var fluidState = level.getFluidState(pos);
-    var fluidStateAbove = level.getFluidState(posAbove);
-    if (!fluidState.is(Fluids.MANA_FLUID.get())
-      && !fluidStateAbove.is(Fluids.MANA_FLUID.get())
-      && !blockState.is(Fluids.MANA_FLUID_BLOCK.get())
-      && !blockStateAbove.is(Fluids.MANA_FLUID_BLOCK.get())) return;
-    ScanArea.forEachPlayerInTheArea(level, pos, 128, p -> true, Advancements.PRODUCE_MANA_GEL_FROM_SLIME::awardTo);
-    var stack = new ItemStack(Items.MANA_GEL.get(),1);
-    entity.kill();
-    var itemEntity = new ItemEntity(level, posAbove.getX(), posAbove.getY(), posAbove.getZ(), stack);
-    itemEntity.setDeltaMovement(0f, 1f, 0f);
-    level.addFreshEntity(itemEntity);
-  }
-  @SubscribeEvent
-  public static void onLivingFallEvent(LivingFallEvent evt) {
-    var entity = evt.getEntityLiving();
-    var level = entity.getLevel();
-    slimy(level, entity);
-  }
-  @SubscribeEvent
-  public static void onLivingJumpEvent(LivingEvent.LivingJumpEvent evt) {
-    var entity = evt.getEntityLiving();
-    var level = entity.getLevel();
-    slimy(level, entity);
-  }
+//  public static void slimy(Level level, LivingEntity entity) {
+//    if (level.isClientSide()) return;
+//    entity.is(EntityType.SLIME.create(level));
+//    var pos = entity.getOnPos();
+//    var posAbove = entity.getOnPos().above();
+//    var blockState = level.getBlockState(pos);
+//    var blockStateAbove = level.getBlockState(posAbove);
+//    var fluidState = level.getFluidState(pos);
+//    var fluidStateAbove = level.getFluidState(posAbove);
+//    if (!fluidState.is(Fluids.MANA_FLUID.get())
+//      && !fluidStateAbove.is(Fluids.MANA_FLUID.get())
+//      && !blockState.is(Fluids.MANA_FLUID_BLOCK.get())
+//      && !blockStateAbove.is(Fluids.MANA_FLUID_BLOCK.get())) return;
+//    ScanArea.forEachPlayerInTheArea(level, pos, 128, p -> true, Advancements.PRODUCE_MANA_GEL_FROM_SLIME::awardTo);
+//    var stack = new ItemStack(Items.MANA_GEL.get(),1);
+//    entity.kill();
+//    var itemEntity = new ItemEntity(level, posAbove.getX(), posAbove.getY(), posAbove.getZ(), stack);
+//    itemEntity.setDeltaMovement(0f, 1f, 0f);
+//    level.addFreshEntity(itemEntity);
+//  }
+//  @SubscribeEvent
+//  public static void onLivingFallEvent(LivingFallEvent evt) {
+//    var entity = evt.getEntityLiving();
+//    var level = entity.getLevel();
+//    slimy(level, entity);
+//  }
+//  @SubscribeEvent
+//  public static void onLivingJumpEvent(LivingEvent.LivingJumpEvent evt) {
+//    var entity = evt.getEntityLiving();
+//    var level = entity.getLevel();
+//    slimy(level, entity);
+//  }
   @SubscribeEvent
   public static void onEnderEntityTeleportAttempt(EntityTeleportEvent.EnderEntity evt) {
     try {

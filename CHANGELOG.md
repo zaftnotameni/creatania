@@ -12,6 +12,7 @@
 
 - Secret feature 1 + hidden advancement for it (botania/create related)
 - Secret feature 2 + hidden advancement for it (mana blocks related)
+- (not ready) First pass for a way of obtaining managel
 
 ### 1.18.2-0.0.15-alpha
 
