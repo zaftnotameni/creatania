@@ -32,10 +32,25 @@ public class ForgeBlockTagProvider extends BlockTagsProvider {
       Blocks.GAIA_MANADUCT_BLOCK.get());
 
     tag(Tags.Blocks.BOTANIA_TERRA_PLATE_BASE).add(
+      AllBlocks.ANDESITE_CASING.get(),
+      AllBlocks.COPPER_CASING.get(),
+      AllBlocks.BRASS_CASING.get(),
+      AllBlocks.RAILWAY_CASING.get(),
+      AllBlocks.FLUID_TANK.get(),
+      AllBlocks.ENCASED_FLUID_PIPE.get(),
       Blocks.MANA_GENERATOR.get(),
+      Blocks.OMNIBOX.get(),
       AllBlocks.FLUID_PIPE.get());
 
     tag(Tags.Blocks.FORGE_LAPIS).add(
+      AllBlocks.ANDESITE_CASING.get(),
+      AllBlocks.COPPER_CASING.get(),
+      AllBlocks.BRASS_CASING.get(),
+      AllBlocks.RAILWAY_CASING.get(),
+      AllBlocks.FLUID_TANK.get(),
+      AllBlocks.ENCASED_FLUID_PIPE.get(),
+      AllBlocks.FLUID_PIPE.get(),
+      Blocks.OMNIBOX.get(),
       Blocks.MANA_GENERATOR.get());
 
     tag(Tags.Blocks.PREVENTS_ENDER_TELEPORTATION).add(

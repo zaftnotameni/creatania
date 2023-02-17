@@ -1,0 +1,14 @@
+{
+  "type": "botania:terra_plate",
+  "ingredients": [{
+    "item": "create:smart_fluid_pipe"
+  }, {
+    "item": "botania:terrasteel_ingot"
+  }, {
+    "item": "botania:livingrock"
+  }],
+  "mana": 10000,
+  "result": {
+    "item": "creatania:terrasteel_manaduct_block"
+  }
+}

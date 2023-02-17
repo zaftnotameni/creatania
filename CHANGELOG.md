@@ -2,12 +2,26 @@
 
 ## changelog
 
+### 1.18.2-0.0.19-alpha
+
+#### New
+
+- New blocks that can be used as a part of the multiblock terra agglomeration structure
+  - Pipe and Encased Pipe (create)
+  - Fluid Tank (create)
+  - Omnibox (creatania)
+- Recipes Added:
+  - Manasteel manaduct
+  - Terrasteel manaduct
+  - Gaia manaduct
+  - Omnibox
+
 ### 1.18.2-0.0.18-alpha
 
 #### Changes
 
 - Omnibox, a gearbox that propagates rotational force in every direction now has the correct model and behavior
-
+- Improved terrasteel mana duct model
 
 ### 1.18.2-0.0.17-alpha
 

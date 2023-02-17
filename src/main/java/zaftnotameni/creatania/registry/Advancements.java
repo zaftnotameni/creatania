@@ -27,6 +27,12 @@ public class Advancements {
       .after(MANA_MACHINE_COMPONENT)
       .special(NOISY)
       .whenIconCollected()),
+    OMNI_GEARBOX = create("omni_gearbox", b -> b.icon(Blocks.OMNIBOX.get())
+      .title("Ominously Omnidirectional")
+      .description("Gearboxes are too limited, enters the omnibox!")
+      .after(MANA_MACHINE_COMPONENT)
+      .special(NOISY)
+      .whenIconCollected()),
     MANADUCT_TIER_1 = create("manaduct_tier_1", b -> b.icon(Blocks.MANASTEEL_MANADUCT_BLOCK.get())
       .title("Pipe Dream")
       .description("Ducts transfer mana without the massive efficiency loss of transmitting it through air")
