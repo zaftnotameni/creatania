@@ -57,6 +57,9 @@
 	"_": "->------------------------]  Items  [------------------------<-",
 
 	"item.creatania.mana_gel": "Mana gel",
+	"item.creatania.manasteel_manaduct_block": "Manasteel manaduct block",
+	"item.creatania.terrasteel_manaduct_block": "Terrasteel manaduct block",
+	"item.creatania.gaia_manaduct_block": "Gaia manaduct block",
 	"item.creatania.corrupted_inert_mana_block": "Corrupted inert mana block",
 	"item.creatania.purified_inert_mana_block": "Purified inert mana block",
 	"item.creatania.botania_mana_block": "Botania mana block",
@@ -68,6 +71,9 @@
 
 	"_": "->------------------------]  Blocks  [------------------------<-",
 
+	"block.creatania.manasteel_manaduct_block": "Manasteel manaduct block",
+	"block.creatania.terrasteel_manaduct_block": "Terrasteel manaduct block",
+	"block.creatania.gaia_manaduct_block": "Gaia manaduct block",
 	"block.creatania.corrupted_inert_mana_block": "Corrupted inert mana block",
 	"block.creatania.purified_inert_mana_block": "Purified inert mana block",
 	"block.creatania.botania_mana_block": "Botania mana block",

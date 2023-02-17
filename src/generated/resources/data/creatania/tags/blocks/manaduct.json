@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "creatania:manasteel_manaduct_block",
+    "creatania:terrasteel_manaduct_block",
+    "creatania:gaia_manaduct_block"
+  ]
+}

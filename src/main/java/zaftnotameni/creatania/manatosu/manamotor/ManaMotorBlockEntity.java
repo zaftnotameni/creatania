@@ -182,6 +182,8 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
   @Override
   public boolean isManaMachineActive() { return this.active; }
   @Override
+  public boolean isManaMachineDuct() { return false; }
+  @Override
   public int getManaMachineMana() { return this.mana; }
   @Override
   public void setManaMachineLastCapacityProvided(float value) { this.lastCapacityProvided = value; }

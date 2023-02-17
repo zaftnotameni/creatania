@@ -27,6 +27,24 @@ public class Advancements {
       .after(MANA_MACHINE_COMPONENT)
       .special(NOISY)
       .whenIconCollected()),
+    MANADUCT_TIER_1 = create("manaduct_tier_1", b -> b.icon(Blocks.MANASTEEL_MANADUCT_BLOCK.get())
+      .title("Pipe Dream")
+      .description("Ducts transfer mana without the massive efficiency loss of transmitting it through air")
+      .after(MANA_GENERATOR)
+      .special(NOISY)
+      .whenIconCollected()),
+    MANADUCT_TIER_2 = create("manaduct_tier_2", b -> b.icon(Blocks.TERRASTEEL_MANADUCT_BLOCK.get())
+      .title("Duct Tales")
+      .description("A more refined duct, will increase your mana gains even more")
+      .after(MANA_GENERATOR)
+      .special(NOISY)
+      .whenIconCollected()),
+    MANADUCT_TIER_3 = create("manaduct_tier_3", b -> b.icon(Blocks.GAIA_MANADUCT_BLOCK.get())
+      .title("Duct taping mana")
+      .description("An even larger pipe")
+      .after(MANA_GENERATOR)
+      .special(NOISY)
+      .whenIconCollected()),
     MANA_CONDENSER = create("mana_condenser", b -> b.icon(zaftnotameni.creatania.registry.Blocks.MANA_CONDENSER.get())
       .title("Mana ex nihilo")
       .description("You're now ready to extract mana out of thin air, though it might be corrupted in the process")

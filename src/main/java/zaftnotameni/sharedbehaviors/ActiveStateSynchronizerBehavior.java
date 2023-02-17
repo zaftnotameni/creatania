@@ -7,9 +7,11 @@ public class ActiveStateSynchronizerBehavior<X extends SmartTileEntity & IAmMana
   public static final BehaviourType<TileEntityBehaviour> TYPE = new BehaviourType<>();
   public final X x;
   public boolean active;
-  public boolean wasActive;
+  public boolean duct;
   public boolean wasActive1;
   public boolean wasActive2;
+  public boolean wasDuct1;
+  public boolean wasDuct2;
   public ActiveStateSynchronizerBehavior(X te) {
     super(te);
     this.x = te;
@@ -20,18 +22,23 @@ public class ActiveStateSynchronizerBehavior<X extends SmartTileEntity & IAmMana
   public void read(CompoundTag nbt, boolean clientPacket) {
     super.read(nbt, clientPacket);
     this.active = nbt.getBoolean("active");
+    this.duct = nbt.getBoolean("duct");
   }
   @Override
   public void write(CompoundTag nbt, boolean clientPacket) {
     nbt.putBoolean("active", this.active);
+    nbt.putBoolean("duct", this.duct);
     super.write(nbt, clientPacket);
   }
   @Override
   public void tick() {
     this.wasActive1 = this.wasActive2;
     this.wasActive2 = this.active;
+    this.wasDuct1 = this.wasDuct2;
+    this.wasDuct2 = this.duct;
     this.active = x.isManaMachineActive();
-    if (this.wasActive2 != this.active) {
+    this.duct = x.isManaMachineDuct();
+    if (this.wasActive2 != this.active || this.wasDuct2 != this.duct) {
       this.tileEntity.setChanged();
       this.tileEntity.sendData();
     }

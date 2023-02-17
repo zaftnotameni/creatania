@@ -25,7 +25,7 @@ public class ManaGeneratorRenderer extends KineticTileEntityRenderer {
   protected void renderSafe(KineticTileEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
     super.renderSafe(te, partialTicks, ms, buffer, light, overlay);
     if (!(te instanceof ManaGeneratorBlockEntity generator)) return;
-    if (generator.activeStateSynchronizerBehavior.active) this.spawnManaParticles(te, partialTicks);
+    if (generator.activeStateSynchronizerBehavior.active && !generator.activeStateSynchronizerBehavior.duct) this.spawnManaParticles(te, partialTicks);
   }
 
   public float tickCounter = 0f;

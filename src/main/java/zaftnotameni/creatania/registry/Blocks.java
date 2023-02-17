@@ -35,6 +35,8 @@ import zaftnotameni.creatania.manatoitem.CorruptedManaBlock;
 import zaftnotameni.creatania.manatoitem.PurifiedManaBlock;
 import zaftnotameni.creatania.manatoitem.manacondenser.ManaCondenserBlock;
 import zaftnotameni.creatania.manatosu.manamotor.ManaMotorBlock;
+import zaftnotameni.creatania.sutomana.manaduct.GaiaManaductBlock;
+import zaftnotameni.creatania.sutomana.manaduct.ManasteelManaductBlock;
 import zaftnotameni.creatania.sutomana.manaduct.TerrasteelManaductBlock;
 import zaftnotameni.creatania.sutomana.managenerator.ManaGeneratorBlock;
 import zaftnotameni.creatania.util.Humanity;
@@ -102,9 +104,17 @@ public class Blocks {
     .transform(customItemModel())
     .register();
 
+  public static final RegistryObject<ManasteelManaductBlock> MANASTEEL_MANADUCT_BLOCK = registerBlockWithItem(
+    Constants.MANASTEEL_MANA_DUCT_BLOCK,
+    () -> new ManasteelManaductBlock(BlockBehaviour.Properties.of(Material.STONE).destroyTime(1f)));
+
   public static final RegistryObject<TerrasteelManaductBlock> TERRASTEEL_MANADUCT_BLOCK = registerBlockWithItem(
     Constants.TERRASTEEL_MANA_DUCT_BLOCK,
     () -> new TerrasteelManaductBlock(BlockBehaviour.Properties.of(Material.STONE).destroyTime(1f)));
+
+  public static final RegistryObject<GaiaManaductBlock> GAIA_MANADUCT_BLOCK = registerBlockWithItem(
+    Constants.GAIA_MANA_DUCT_BLOCK,
+    () -> new GaiaManaductBlock(BlockBehaviour.Properties.of(Material.STONE).destroyTime(1f)));
 
   public static final RegistryObject<CorruptedManaBlock> CORRUPTED_INERT_MANA_BLOCK = registerBlockWithItem(
     Constants.CORRUPTED_INERT_MANA_BLOCK,

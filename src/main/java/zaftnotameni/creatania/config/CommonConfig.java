@@ -39,6 +39,10 @@ public class CommonConfig {
   public static final ForgeConfigSpec.ConfigValue<Integer> BOTANIA_MANA_BLOCK_BUFF_FLIGHT;
   public static final ForgeConfigSpec.ConfigValue<Integer> BOTANIA_MANA_BLOCK_BUFF_FLIGHT_DURATION;
   public static final ForgeConfigSpec.ConfigValue<String> BLACKLISTED_WRENCH_BLOCKS;
+  public static final ForgeConfigSpec.ConfigValue<Integer> MANA_DUCT_TIER_1_MULTIPLIER;
+  public static final ForgeConfigSpec.ConfigValue<Integer> MANA_DUCT_TIER_2_MULTIPLIER;
+  public static final ForgeConfigSpec.ConfigValue<Integer> MANA_DUCT_TIER_3_MULTIPLIER;
+  public static final ForgeConfigSpec.ConfigValue<Integer> MANA_DUCT_TIER_4_MULTIPLIER;
 
   static {
     BUILDER.push("mana_generator");
@@ -67,6 +71,13 @@ public class CommonConfig {
     MANA_CONDENSER_MANA_PER_TICK_PER_RPM = BUILDER.define("mana_per_tick_per_rpm", 0);
     MANA_CONDENSER_MAX_MANA_STORAGE = BUILDER.define("max_mana_storage", 1000);
     MANA_CONDENSER_THROTTLE_PER_RPM_BELOW_MAX = BUILDER.define("mana_condenser_throttle_per_rpm_below_max", 1);
+    BUILDER.pop();
+
+    BUILDER.push("mana_duct");
+    MANA_DUCT_TIER_1_MULTIPLIER = BUILDER.define("tier_1_multiplier", 4);
+    MANA_DUCT_TIER_2_MULTIPLIER = BUILDER.define("tier_2_multiplier", 8);
+    MANA_DUCT_TIER_3_MULTIPLIER = BUILDER.define("tier_3_multiplier", 16);
+    MANA_DUCT_TIER_4_MULTIPLIER = BUILDER.define("tier_4_multiplier", 32);
     BUILDER.pop();
 
     BUILDER.push("purified_inert_mana_block");

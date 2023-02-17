@@ -15,6 +15,7 @@ import vazkii.botania.api.block.IWandable;
 import vazkii.botania.api.mana.IManaPool;
 import vazkii.botania.api.mana.IManaReceiver;
 import zaftnotameni.creatania.config.CommonConfig;
+import zaftnotameni.creatania.sutomana.manaduct.BaseManaductBlock;
 import zaftnotameni.creatania.util.Log;
 import zaftnotameni.sharedbehaviors.ActiveStateSynchronizerBehavior;
 import zaftnotameni.sharedbehaviors.IAmManaMachine;
@@ -29,6 +30,7 @@ import java.util.List;
 public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmManaMachine, Log.IHasTickLogger, IAmParticleEmittingMachine {
   public boolean isFirstTick = true;
   public boolean active;
+  public boolean duct;
   public int mana;
   public ActiveStateSynchronizerBehavior activeStateSynchronizerBehavior;
   public KineticManaMachine manaMachine;
@@ -54,6 +56,7 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   protected void read(CompoundTag compound, boolean clientPacket) {
     super.read(compound, clientPacket);
     this.active = compound.getBoolean("active");
+    this.duct = compound.getBoolean("duct");
     this.mana = compound.getInt("mana");
     this.manaGeneratorFluidHandler.read(compound, clientPacket);
   }
@@ -61,6 +64,7 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   protected void write(CompoundTag compound, boolean clientPacket) {
     this.manaGeneratorFluidHandler.write(compound, clientPacket);
     compound.putBoolean("active", this.active);
+    compound.putBoolean("duct", this.duct);
     compound.putInt("mana", this.mana);
     super.write(compound, clientPacket);
   }
@@ -144,12 +148,37 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
     }
     return null;
   }
-  public int addManaToPool(int manaAmount) {
-    var pool = this.getManaPoolAbove();
+
+  public BlockState getManaductBlockAbove() {
+    var state = this.level.getBlockState(this.worldPosition.above());
+    if (state != null && state.getBlock() instanceof BaseManaductBlock manaDuct) return state;
+    return null;
+  }
+  public int specialHandlingViaManaduct(int manaAmount, BlockState manaDuctBlockState) {
+    if (!(manaDuctBlockState.getBlock() instanceof BaseManaductBlock manaDuctBlock)) return 0;
+    var maybeAggloPlateBlockState = BaseManaductBlock.getMouthPointedAtBlockState(this.level, manaDuctBlockState, this.worldPosition.above());
+    if (maybeAggloPlateBlockState == null || !maybeAggloPlateBlockState.hasBlockEntity()) return 0;
+    var maybeAggloPlateBlockEntity = BaseManaductBlock.getMouthPointedAtBlockEntity(this.level, manaDuctBlockState, this.worldPosition.above());
+    if (!(maybeAggloPlateBlockEntity instanceof IManaReceiver receiver) || receiver.isFull()) return 0;
+    receiver.receiveMana(manaAmount * manaDuctBlock.manaMultiplier);
+    Log.RateLimited.of(this, 20).log(logger -> logger.info("handled {} mana via manaduct with multiplier {}", manaAmount, manaDuctBlock.manaMultiplier));
+    this.duct = true;
+    return manaAmount;
+  }
+  public int addManaToTargetPool(int manaAmount, IManaReceiver pool) {
     if (pool == null || pool.isFull()) return 0;
     pool.receiveMana(manaAmount);
     if (pool instanceof IWandable wandable) wandable.onUsedByWand(null, ItemStack.EMPTY, Direction.UP);
+    Log.RateLimited.of(this, 20).log(logger -> logger.info("handled {} mana via direct transfer with mana", manaAmount));
+    this.duct = false;
     return manaAmount;
+  }
+  public int addManaToPool(int manaAmount) {
+    var manaDuctBlockState = this.getManaductBlockAbove();
+    if (manaDuctBlockState != null) {
+      return specialHandlingViaManaduct(manaAmount, manaDuctBlockState);
+    }
+    return addManaToTargetPool(manaAmount, this.getManaPoolAbove());
   }
   public boolean shouldAbortServerTick() {
     var isInInvalidState = this.isOverStressed() || this.getNormalizedRPM() == 0 || this.worldPosition == null || this.level == null;
@@ -170,8 +199,14 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   public Log.RateLimited logger;
   public Log.RateLimited getLogger() { return logger; }
   public void setLogger(Log.RateLimited pLogger) { logger = pLogger; }
+
+  public int ductCheckTickCount = 0;
   public void serverTick() {
     this.active = false;
+    if (this.ductCheckTickCount++ > CommonConfig.MANA_GENERATOR_LAZY_TICK_RATE.get()) {
+      this.ductCheckTickCount = 0;
+      this.duct = getManaductBlockAbove() != null;
+    }
     this.getManaGeneratorFluidHandler().serverTick();
     if (this.shouldAbortServerTick()) return;
 
@@ -210,6 +245,8 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   }
   @Override
   public boolean isManaMachineActive() { return this.active; }
+  @Override
+  public boolean isManaMachineDuct() { return this.duct; }
   @Override
   public int getManaMachineMana() { return this.mana; }
   @Override

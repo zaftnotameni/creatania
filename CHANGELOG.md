@@ -2,12 +2,19 @@
 
 ## changelog
 
+### 1.18.2-0.0.18-alpha
+
 ### 1.18.2-0.0.17-alpha
 
 #### New
 
+- Manaduct block used to connect Mana Generator with agglomeration plate
+- Omnibox, a gearbox that propagates rotational force in every direction (draft state, no functionality)
 - Mana Generator can now also inject mana into agglomeration plates
 - Mana Generator can now also inject mana into runic altars
+- Mana Generator can transfer mana via a manaduct, model by ClaudiusMinimums
+- Mana Generator can replace lapis blocks as part of the agglomeration plate multiblock structure
+- Pipes (from create) can replace livingrock blocks as part of the agglomeration plate multiblock structure
 
 ### 1.18.2-0.0.16-alpha
 

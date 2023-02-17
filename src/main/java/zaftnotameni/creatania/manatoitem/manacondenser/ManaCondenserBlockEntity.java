@@ -140,6 +140,8 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
   @Override
   public boolean isManaMachineActive() { return this.active; }
   @Override
+  public boolean isManaMachineDuct() { return false; }
+  @Override
   public int getManaMachineMana() { return this.mana; }
   @Override
   public void setManaMachineLastCapacityProvided(float value) { this.lastCapacityProvided = value; }
