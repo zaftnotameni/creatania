@@ -35,22 +35,6 @@
           "item": "creatania:incomplete_mana_machine_component"
         }
       ]
-    },
-    {
-      "type": "create:deploying",
-      "ingredients": [
-        {
-          "item": "creatania:incomplete_mana_machine_component"
-        },
-        {
-          "item": "create:shaft"
-        }
-      ],
-      "results": [
-        {
-          "item": "creatania:incomplete_mana_machine_component"
-        }
-      ]
     }
   ],
   "results": [

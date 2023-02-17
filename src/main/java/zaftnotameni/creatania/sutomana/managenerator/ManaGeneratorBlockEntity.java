@@ -12,6 +12,7 @@ import net.minecraftforge.common.util.LazyOptional;
 import vazkii.botania.api.mana.IManaPool;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.util.Log;
+import zaftnotameni.sharedbehaviors.ActiveStateSynchronizerBehavior;
 import zaftnotameni.sharedbehaviors.IAmManaMachine;
 import zaftnotameni.sharedbehaviors.IAmParticleEmittingMachine;
 import zaftnotameni.sharedbehaviors.KineticManaMachine;
@@ -23,8 +24,8 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   public boolean isFirstTick = true;
   public boolean active;
   public int mana;
+  public ActiveStateSynchronizerBehavior activeStateSynchronizerBehavior;
   public KineticManaMachine manaMachine;
-
   public ManaGeneratorFluidHandler manaGeneratorFluidHandler;
   public ManaGeneratorBlockEntity(BlockEntityType<? extends ManaGeneratorBlockEntity> type, BlockPos pos, BlockState state) {
     super(type, pos, state);
@@ -64,7 +65,10 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   }
   @Override
   public void addBehaviours(List<TileEntityBehaviour> behaviours) {
+    super.addBehaviours(behaviours);
     this.getManaGeneratorFluidHandler().addBehaviours(behaviours);
+    this.activeStateSynchronizerBehavior = new ActiveStateSynchronizerBehavior(this);
+    behaviours.add(this.activeStateSynchronizerBehavior);
   }
   @Nonnull
   @Override
@@ -129,7 +133,6 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   public Log.RateLimited getLogger() { return logger; }
   public void setLogger(Log.RateLimited pLogger) { logger = pLogger; }
   public void serverTick() {
-    var wasActive = this.active;
     this.active = false;
     this.getManaGeneratorFluidHandler().serverTick();
     if (this.shouldAbortServerTick()) return;

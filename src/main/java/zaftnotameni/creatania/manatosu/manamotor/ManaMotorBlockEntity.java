@@ -19,6 +19,7 @@ import vazkii.botania.api.mana.spark.IManaSpark;
 import vazkii.botania.api.mana.spark.ISparkAttachable;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.util.Log;
+import zaftnotameni.sharedbehaviors.ActiveStateSynchronizerBehavior;
 import zaftnotameni.sharedbehaviors.IAmManaMachine;
 import zaftnotameni.sharedbehaviors.KineticManaMachine;
 
@@ -37,6 +38,7 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
   public static final boolean UPDATE_MANA_ON_LAZY_TICK = !UPDATE_MANA_ON_EVERY_TICK;
   public ManaMotorBehavior manaMotorBehavior;
   public ScrollValueBehaviour scrollValueBehaviour;
+  public ActiveStateSynchronizerBehavior activeStateSynchronizerBehavior;
   public LazyOptional<IManaReceiver> lazyManaReceiver = LazyOptional.empty();
   public LazyOptional<ISparkAttachable> lazySparkAttachable = LazyOptional.empty();
   public int mana = 0;
@@ -121,8 +123,10 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
     super.addBehaviours(behaviours);
     this.scrollValueBehaviour = this.getManaMachine().createScrollBehavior(BlockStateProperties.FACING);
     this.manaMotorBehavior = new ManaMotorBehavior(this);
+    this.activeStateSynchronizerBehavior = new ActiveStateSynchronizerBehavior(this);
     behaviours.add(manaMotorBehavior);
     behaviours.add(scrollValueBehaviour);
+    behaviours.add(activeStateSynchronizerBehavior);
   }
 
   @Override

@@ -1,7 +1,10 @@
 {
   "type": "botania:runic_altar",
   "ingredients": [
-    { "item": "botania:mana_diamond" },
+    { "item": "botania:mana_powder" },
+    { "item": "create:shaft" },
+    { "item": "botania:livingrock" },
+    { "item": "create:fluid_pipe" },
     { "item": "creatania:mana_machine_component" }
   ],
   "mana": 2000,

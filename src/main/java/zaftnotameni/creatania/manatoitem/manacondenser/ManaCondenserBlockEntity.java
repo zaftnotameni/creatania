@@ -2,8 +2,10 @@ package zaftnotameni.creatania.manatoitem.manacondenser;
 
 import com.simibubi.create.content.contraptions.base.KineticTileEntity;
 import com.simibubi.create.foundation.config.AllConfigs;
+import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -16,18 +18,23 @@ import vazkii.botania.api.BotaniaForgeCapabilities;
 import vazkii.botania.api.mana.IManaReceiver;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.registry.Blocks;
+import zaftnotameni.sharedbehaviors.ActiveStateSynchronizerBehavior;
+import zaftnotameni.sharedbehaviors.IAmManaMachine;
 import zaftnotameni.sharedbehaviors.IAmParticleEmittingMachine;
+import zaftnotameni.sharedbehaviors.KineticManaMachine;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * Consumes SU and adds Corrupted Inert Mana blocks in the inventory below
  *
  * Can be configured to also require mana, but requires none by default
  */
-public class ManaCondenserBlockEntity extends KineticTileEntity implements IManaReceiver, IAmParticleEmittingMachine {
+public class ManaCondenserBlockEntity extends KineticTileEntity implements IManaReceiver, IAmManaMachine, IAmParticleEmittingMachine {
   public LazyOptional<IManaReceiver> lazyManaReceiver = LazyOptional.empty();
+  public ActiveStateSynchronizerBehavior activeStateSynchronizerBehavior;
   public boolean isFirstTick = true;
   public int mana = 0;
   public boolean firstTick = true;
@@ -44,13 +51,16 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
   public int getNormalizedRPM() {
     var min = CommonConfig.MANA_CONDENSER_SU_PER_RPM.get();
     if (Math.abs(this.getSpeed()) < min) return 0;
-    return Math.max(0, (int) Math.abs(this.getSpeed()));
+    return Math.max(1, (int) Math.abs(this.getSpeed()));
   }
-
-
+  @Override
+  public void addBehaviours(List<TileEntityBehaviour> behaviours) {
+    this.activeStateSynchronizerBehavior = new ActiveStateSynchronizerBehavior(this);
+    behaviours.add(this.activeStateSynchronizerBehavior);
+    super.addBehaviours(behaviours);
+  }
   public float tickCounter = 0f;
   public void serverTick() {
-    var wasActive = this.active;
     this.active = false;
     var rpm = this.getNormalizedRPM();
     var maxPossibleRpm = AllConfigs.SERVER.kinetics.maxMotorSpeed.get();
@@ -60,7 +70,7 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
     if (this.doesNotMeetRequirementsToCondenseMana(rpm, requiredMana)) {
       return;
     }
-    this.receiveMana(-requiredMana);
+    if (requiredMana > 0) this.receiveMana(-requiredMana);
 
     tickCounter += percentageOfMaxRpm / (Math.max(1, CommonConfig.MANA_CONDENSER_THROTTLE_PER_RPM_BELOW_MAX.get()));
     if (tickCounter > 1f) {
@@ -127,6 +137,36 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
   public boolean active;
   @Override
   public boolean shouldEmitParticles() { return true; }
+  @Override
+  public boolean isManaMachineActive() { return this.active; }
+  @Override
+  public int getManaMachineMana() { return this.mana; }
+  @Override
+  public void setManaMachineLastCapacityProvided(float value) { this.lastCapacityProvided = value; }
+  @Override
+  public void setManaMachineLastStressImpact(float value) { this.lastStressApplied = value; }
+  @Override
+  public void updateMana(int value) { this.mana = value; }
+  @Override
+  public void setManaMachineMana(int value) { this.updateMana(value); }
+  @Override
+  public int getManaMachineGeneratedSpeed() { return 0; }
+  @Override
+  public KineticManaMachine getManaMachine() { return null; }
+  @Override
+  public void updateGeneratedRotation(int i) {}
+  @Override
+  protected void read(CompoundTag compound, boolean clientPacket) {
+    super.read(compound, clientPacket);
+    this.active = compound.getBoolean("active");
+    this.mana = compound.getInt("mana");
+  }
+  @Override
+  protected void write(CompoundTag compound, boolean clientPacket) {
+    compound.putBoolean("active", this.active);
+    compound.putInt("mana", this.mana);
+    super.write(compound, clientPacket);
+  }
 }
 
 

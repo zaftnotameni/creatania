@@ -15,6 +15,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 import zaftnotameni.creatania.config.ClientConfig;
 import zaftnotameni.creatania.registry.Particles;
+import zaftnotameni.creatania.sutomana.managenerator.ManaGeneratorBlockEntity;
 import zaftnotameni.sharedbehaviors.IAmParticleEmittingMachine;
 public class ManaCondenserRenderer extends KineticTileEntityRenderer {
   public ManaCondenserRenderer(BlockEntityRendererProvider.Context context) {
@@ -27,10 +28,11 @@ public class ManaCondenserRenderer extends KineticTileEntityRenderer {
   @Override
   protected void renderSafe(KineticTileEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
     super.renderSafe(te, partialTicks, ms, buffer, light, overlay);
-    renderFans(te, ms, buffer);
-    spawnManaParticles(te, partialTicks);
+    var active = (te instanceof ManaCondenserBlockEntity generator) && generator.activeStateSynchronizerBehavior.active;
+    renderFans(te, ms, buffer, active);
+    if (active) this.spawnManaParticles(te, partialTicks);
   }
-  public void renderFans(KineticTileEntity te, PoseStack ms, MultiBufferSource buffer) {
+  public void renderFans(KineticTileEntity te, PoseStack ms, MultiBufferSource buffer, boolean active) {
     Direction direction = Direction.UP;
     Direction.Axis axis = Direction.Axis.Y;
 
@@ -40,7 +42,8 @@ public class ManaCondenserRenderer extends KineticTileEntityRenderer {
     var angle = getAngleForTe(te, te.getBlockPos(), axis);
 
     SuperByteBuffer fanInner1 = CachedBufferer.partialFacing(AllBlockPartials.ENCASED_FAN_INNER, te.getBlockState(), Direction.DOWN);
-    kineticRotationTransform(fanInner1, te, axis, angle, lightInFront).renderInto(ms, vb);
+    if (active) kineticRotationTransform(fanInner1, te, axis, angle, lightInFront).renderInto(ms, vb);
+    else fanInner1.renderInto(ms, vb);
   }
 
 

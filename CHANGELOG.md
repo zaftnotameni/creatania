@@ -4,6 +4,30 @@
 
 ### 1.18.2-0.0.15-alpha
 
+#### Changes
+
+- Mana Generator only shows particles when actively producing mana
+- Mana Condenser only shows particles when actively producing mana
+- Improved Mana Generator model by ClaudiusMinimus
+- Improved Mana Motor model by ClaudiusMinimus
+- Improved Mana Machine Component model by ClaudiusMinimus
+- Mana Machine Component assembly recipe:
+  - no longer requires a shaft
+- Mana Generator altar recipe now requires a shaft
+  - no longer requires mana diamond
+  - now requires mana powder
+  - now requires a pipe
+  - now requires living rock
+- Mana Condenser altar recipe:
+  - no longer requires mana pearl
+  - now requires mana powder
+  - now requires a shaft
+  - now requires a propeller
+- Mana Motor altar recipe:
+  - now requires mana powder
+  - now requires a shaft
+  - now requires iron bars
+  - now requires 4 iron sheets
 
 
 ### 1.18.2-0.0.14-alpha

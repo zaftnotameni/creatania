@@ -24,8 +24,7 @@ public class ForgeSequencedAssemblyRecipeProvider extends SequencedAssemblyRecip
     .addOutput(new ItemStack(Blocks.MANA_MACHINE_COMPONENT.get().asItem(), 2), 1f)
     .loops(1)
     .addStep(CuttingRecipe::new, rr -> rr)
-    .addStep(DeployerApplicationRecipe::new, rr -> rr.require(manasteel()))
-    .addStep(DeployerApplicationRecipe::new, rr -> rr.require(shaft())));
+    .addStep(DeployerApplicationRecipe::new, rr -> rr.require(manasteel())));
   public Item andesitecasing() {
     return AllBlocks.ANDESITE_CASING.get().asItem();
   }
