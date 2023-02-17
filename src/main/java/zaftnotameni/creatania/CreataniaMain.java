@@ -29,6 +29,7 @@ import net.minecraftforge.event.server.ServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
+import zaftnotameni.creatania.event.ForgeEventBus;
 import zaftnotameni.creatania.network.*;
 import zaftnotameni.creatania.registry.*;
 import zaftnotameni.creatania.config.ClientConfig;
@@ -73,6 +74,7 @@ public class CreataniaMain {
 
     // Register ourselves for server and other game events we are interested in
     MinecraftForge.EVENT_BUS.register(this);
+    MinecraftForge.EVENT_BUS.register(ForgeEventBus.class);
   }
 
   private void setup(final FMLCommonSetupEvent event) {

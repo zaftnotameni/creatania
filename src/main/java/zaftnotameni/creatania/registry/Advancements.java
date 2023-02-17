@@ -1,4 +1,5 @@
 package zaftnotameni.creatania.registry;
+import com.simibubi.create.AllItems;
 import zaftnotameni.creatania.advancements.CreataniaAdvancement;
 
 import java.util.ArrayList;
@@ -55,6 +56,11 @@ public class Advancements {
     DEBUFF_FROM_INERT_MANA_BLOCKS = create("debuff_from_corrupt_blocks", b -> b.icon(Blocks.CORRUPTED_INERT_MANA_BLOCK.get())
       .title("Watch your step!")
       .description("Corrupt mana might be inert, but still extremely dangerous")
+      .after(ROOT)
+      .special(SECRET)),
+    PICK_A_BOTANIA_BLOCK_WITH_CREATE_WRENCH = create("botania_block_with_create_wrench", b -> b.icon(AllItems.WRENCH.get())
+      .title("Mana Wrenching")
+      .description("Pick up blocks from botania using the create wrench")
       .after(ROOT)
       .special(SECRET)),
     END = null;
