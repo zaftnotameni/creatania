@@ -2,6 +2,13 @@
 
 ## changelog
 
+### 1.18.2-0.0.17-alpha
+
+#### New
+
+- Mana Generator can now also inject mana into agglomeration plates
+- Mana Generator can now also inject mana into runic altars
+
 ### 1.18.2-0.0.16-alpha
 
 #### Changes

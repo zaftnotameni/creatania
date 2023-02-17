@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "creatania:mana_generator",
+    "create:fluid_pipe"
+  ]
+}

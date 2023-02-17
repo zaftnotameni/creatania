@@ -68,7 +68,6 @@ public class ForgeEventBus {
       if (!preventsTeleportation) return;
       var previous = evt.getPrev();
       evt.setCanceled(true);
-      evt.setResult(Event.Result.DENY);
       evt.setTargetX(previous.x);
       evt.setTargetY(previous.y);
       evt.setTargetZ(previous.z);

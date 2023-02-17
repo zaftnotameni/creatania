@@ -33,6 +33,8 @@
 	"advancement.creatania.botania_block_with_create_wrench.desc": "Pick up blocks from botania using the create wrench. Be very careful with it§7\n(Hidden Advancement)",
 	"advancement.creatania.prevent_ender_entity_from_teleporting": "Denied!",
 	"advancement.creatania.prevent_ender_entity_from_teleporting.desc": "Corrupt mana blocks, among its many properties, can prevent ender entities from teleporting§7\n(Hidden Advancement)",
+	"advancement.creatania.produce_mana_gel_from_slime": "YUMMY!",
+	"advancement.creatania.produce_mana_gel_from_slime.desc": "Produce mana gel by having a slime touch purified inert mana fluid§7\n(Hidden Advancement)",
 
 
 	"_": "->------------------------]  UI & Messages  [------------------------<-",

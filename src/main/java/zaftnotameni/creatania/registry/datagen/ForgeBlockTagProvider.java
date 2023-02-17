@@ -1,7 +1,9 @@
 package zaftnotameni.creatania.registry.datagen;
+import com.simibubi.create.AllBlocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.registries.ForgeRegistries;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Tags;
@@ -12,6 +14,13 @@ public class ForgeBlockTagProvider extends BlockTagsProvider {
 
   @Override
   protected void addTags() {
+    tag(Tags.Blocks.BOTANIA_TERRA_PLATE_BASE).add(
+      Blocks.MANA_GENERATOR.get(),
+      AllBlocks.FLUID_PIPE.get());
+
+    tag(Tags.Blocks.FORGE_LAPIS).add(
+      Blocks.MANA_GENERATOR.get());
+
     tag(Tags.Blocks.PREVENTS_ENDER_TELEPORTATION).add(
       Blocks.CORRUPTED_INERT_MANA_BLOCK.get());
 

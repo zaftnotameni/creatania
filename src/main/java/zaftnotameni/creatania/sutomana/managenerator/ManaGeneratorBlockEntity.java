@@ -5,11 +5,15 @@ import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.LazyOptional;
+import vazkii.botania.api.block.IWandable;
 import vazkii.botania.api.mana.IManaPool;
+import vazkii.botania.api.mana.IManaReceiver;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.util.Log;
 import zaftnotameni.sharedbehaviors.ActiveStateSynchronizerBehavior;
@@ -18,6 +22,8 @@ import zaftnotameni.sharedbehaviors.IAmParticleEmittingMachine;
 import zaftnotameni.sharedbehaviors.KineticManaMachine;
 
 import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmManaMachine, Log.IHasTickLogger, IAmParticleEmittingMachine {
@@ -99,20 +105,52 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
     return Math.max(CommonConfig.MANA_GENERATOR_MINIMUM_RPM.get(),
       Math.min(CommonConfig.MANA_GENERATOR_MAXIMUM_RPM.get(), (int) Math.abs(this.getSpeed())));
   }
-  public IManaPool getManaPoolAbove() {
-    if (this.level == null || this.worldPosition == null) return null;
-    var blockAbove = level.getBlockEntity(this.worldPosition.above());
-    if (blockAbove != null && blockAbove instanceof IManaPool) { return (IManaPool)  blockAbove; }
+
+  public IManaReceiver manaReceiverAt(BlockPos pos) {
+    var blockEntity = this.level.getBlockEntity(pos);
+    if (blockEntity != null && blockEntity instanceof IManaReceiver receiver) { return receiver; }
     return null;
   }
 
+  public Collection<BlockPos> blocksToCheckForManaReceivers() {
+    var positions = new ArrayList<BlockPos>(18);
+    var above1 = this.worldPosition.above();
+    var above2 = this.worldPosition.above().above();
+    positions.add(above1);
+    positions.add(above2);
+    positions.add(above1.north());
+    positions.add(above1.north().east());
+    positions.add(above1.north().west());
+    positions.add(above1.south());
+    positions.add(above1.south().east());
+    positions.add(above1.south().west());
+    positions.add(above1.east());
+    positions.add(above1.west());
+    positions.add(above2.north());
+    positions.add(above2.north().east());
+    positions.add(above2.north().west());
+    positions.add(above2.south());
+    positions.add(above2.south().east());
+    positions.add(above2.south().west());
+    positions.add(above2.east());
+    positions.add(above2.west());
+    return positions;
+  }
+  public IManaReceiver getManaPoolAbove() {
+    if (this.level == null || this.worldPosition == null) return null;
+    for (var pos : blocksToCheckForManaReceivers()) {
+      var blockEntity = this.level.getBlockEntity(pos);
+      if (blockEntity instanceof IManaReceiver receiver) return receiver;
+    }
+    return null;
+  }
   public int addManaToPool(int manaAmount) {
     var pool = this.getManaPoolAbove();
     if (pool == null || pool.isFull()) return 0;
     pool.receiveMana(manaAmount);
+    if (pool instanceof IWandable wandable) wandable.onUsedByWand(null, ItemStack.EMPTY, Direction.UP);
     return manaAmount;
   }
-
   public boolean shouldAbortServerTick() {
     var isInInvalidState = this.isOverStressed() || this.getNormalizedRPM() == 0 || this.worldPosition == null || this.level == null;
     if (isInInvalidState) {

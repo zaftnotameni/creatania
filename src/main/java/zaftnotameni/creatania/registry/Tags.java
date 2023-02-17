@@ -15,8 +15,12 @@ public class Tags {
     public static final TagKey<Block> PREVENTS_ENDER_TELEPORTATION = tag("prevents_ender_teleportation");
     public static final TagKey<Block> BLACKLISTED_FOR_WRENCH_PICKUP = tag("blacklisted_for_wrench_pickup");
     public static final TagKey<Block> MANA_MACHINE = tag("mana_machine");
+    public static final TagKey<Block> FORGE_LAPIS = forgeTag("storage_blocks/lapis");
+    public static final TagKey<Block> BOTANIA_TERRA_PLATE_BASE = botaniaTag("terra_plate_base");
+
     public static TagKey<Block> tag(String name) { return BlockTags.create(new ResourceLocation(Constants.MODID, name));  }
     public static TagKey<Block> forgeTag(String name) { return BlockTags.create(new ResourceLocation("forge", name)); }
+    public static TagKey<Block> botaniaTag(String name) { return BlockTags.create(new ResourceLocation("botania", name)); }
   }
   public static class Fluids {
     public static final TagKey<Fluid> PURE_INERT_MANA = tag("pure_inert_mana");
