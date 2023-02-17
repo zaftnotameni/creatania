@@ -23,6 +23,12 @@
 	"advancement.creatania.mana_motor.desc": "You're now ready to generate rotation force with mana",
 	"advancement.creatania.lords_work": "More like wandering TRAITOR...",
 	"advancement.creatania.lords_work.desc": "The llama guy got what he deserves, thanks for your service§7\n(Hidden Advancement)",
+	"advancement.creatania.buff_from_purified_blocks": "Power Overwhelming!",
+	"advancement.creatania.buff_from_purified_blocks.desc": "Purified mana might be inert, but still contains a lot of power within§7\n(Hidden Advancement)",
+	"advancement.creatania.buff_from_real_mana_blocks": "Flying High",
+	"advancement.creatania.buff_from_real_mana_blocks.desc": "Botania mana blocks are the real deal, pure condensed magical power§7\n(Hidden Advancement)",
+	"advancement.creatania.debuff_from_corrupt_blocks": "Watch your step!",
+	"advancement.creatania.debuff_from_corrupt_blocks.desc": "Corrupt mana might be inert, but still extremely dangerous§7\n(Hidden Advancement)",
 
 
 	"_": "->------------------------]  UI & Messages  [------------------------<-",
