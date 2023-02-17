@@ -2,6 +2,8 @@
 
 ## changelog
 
+### 1.18.2-0.0.16-alpha
+
 ### 1.18.2-0.0.15-alpha
 
 #### Changes
@@ -9,6 +11,7 @@
 - Mana Generator only shows particles when actively producing mana
 - Mana Condenser only shows particles when actively producing mana
 - Improved Mana Generator model by ClaudiusMinimus
+- Improved Mana Condenser model by ClaudiusMinimus
 - Improved Mana Motor model by ClaudiusMinimus
 - Improved Mana Machine Component model by ClaudiusMinimus
 - Mana Machine Component assembly recipe:
