@@ -27,3 +27,5 @@ forge*changelog.txt
 # VSCode workspace
 creatania.code-workspace
 src/main/resources/assets/botania
+src/main/resources/assets/create
+src/main/resources/assets/minecraft
