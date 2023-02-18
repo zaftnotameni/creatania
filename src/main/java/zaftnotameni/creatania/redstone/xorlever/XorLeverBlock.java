@@ -58,25 +58,7 @@ public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implem
 
   public static final int SIGNAL_STRENGTH = CommonConfig.XOR_LEVER_SIGNAL_STRENGTH.get();
   public Function<XorLeverBlockEntity, Integer> computeStateSignal(BlockState bs, Direction side) {
-    return (te) -> {
-      var teIsOn = te.state > 0;
-      var facing = bs.getValue(FACING);
-      var face = bs.getValue(FACE);
-      var sideAxis = side.getAxis();
-      if (face == AttachFace.CEILING) facing = facing.getOpposite();
-      var faceAxis = facing.getAxis();
-      if (face == AttachFace.WALL) {
-        faceAxis = Direction.Axis.Y;
-        facing = facing == Direction.NORTH ? Direction.UP : Direction.DOWN;
-        facing = facing == Direction.SOUTH ? Direction.UP : Direction.DOWN;
-        facing = facing == Direction.EAST ? Direction.UP : Direction.DOWN;
-        facing = facing == Direction.WEST ? Direction.UP : Direction.DOWN;
-      }
-      if (faceAxis != sideAxis) return 0;
-      if (side == facing) return teIsOn ? 0 : SIGNAL_STRENGTH;
-      if (side != facing) return teIsOn ? SIGNAL_STRENGTH : 0;
-      return 0;
-    };
+    return te -> (side == this.getSignalDirection(te, bs)) ? SIGNAL_STRENGTH : 0;
   }
 
   @Override
@@ -88,8 +70,8 @@ public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implem
   @OnlyIn(Dist.CLIENT)
   public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
     withTileEntityDo(worldIn, pos, te -> {
-      if (te.state != 0 && rand.nextFloat() < 0.25F)
-        addParticles(stateIn, worldIn, pos, 0.5F);
+      if (rand.nextFloat() < 0.5F)
+        addParticles(stateIn, worldIn, pos.relative(this.getSignalDirection(te, stateIn), 1), 0.5F, -0.5F);
     });
   }
 
@@ -103,16 +85,19 @@ public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implem
     });
   }
 
-  private static void addParticles(BlockState state, LevelAccessor worldIn, BlockPos pos, float alpha) {
+  private static void addParticles(BlockState state, LevelAccessor worldIn, BlockPos pos, float alpha, float delta) {
     Direction direction = state.getValue(FACING).getOpposite();
     Direction direction1 = getConnectedDirection(state).getOpposite();
-    double d0 = (double) pos.getX() + 0.5D + 0.1D * (double) direction.getStepX() + 0.2D * (double) direction1.getStepX();
-    double d1 = (double) pos.getY() + 0.5D + 0.1D * (double) direction.getStepY() + 0.2D * (double) direction1.getStepY();
-    double d2 = (double) pos.getZ() + 0.5D + 0.1D * (double) direction.getStepZ() + 0.2D * (double) direction1.getStepZ();
+    double d0 = (double) pos.getX() + 0.5D + 0.1D * (double) direction.getStepX() + 0.2D * (double) direction1.getStepX() + delta;
+    double d1 = (double) pos.getY() + 0.5D + 0.1D * (double) direction.getStepY() + 0.2D * (double) direction1.getStepY() + delta;
+    double d2 = (double) pos.getZ() + 0.5D + 0.1D * (double) direction.getStepZ() + 0.2D * (double) direction1.getStepZ() + delta;
     double xspeed = 0d;
     double yspeed = 0d;
     double zspeed = 0d;
     worldIn.addParticle(new DustParticleOptions(new Vector3f(1.0F, 0.0F, 0.0F), alpha), d0, d1, d2, xspeed, yspeed, zspeed);
+  }
+  private static void addParticles(BlockState state, LevelAccessor worldIn, BlockPos pos, float alpha) {
+    addParticles(state, worldIn, pos, alpha, 0f);
   }
 
   static void updateNeighbors(BlockState state, Level world, BlockPos pos) {
@@ -144,5 +129,29 @@ public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implem
   @Override
   public boolean isPathfindable(BlockState state, BlockGetter reader, BlockPos pos, PathComputationType type) {
     return false;
+  }
+  public Direction.Axis getTrueFaceAxis(BlockState bs) {
+    var face = bs.getValue(FACE);
+    var faceAxis = this.getTrueFacing(bs).getAxis();
+    if (face == AttachFace.WALL) faceAxis = Direction.Axis.Y;
+    return faceAxis;
+  }
+  public Direction getSignalDirection(XorLeverBlockEntity te, BlockState bs) {
+    var teIsOn = te.state > 0;
+    var facing = this.getTrueFacing(bs);
+    if (teIsOn) return facing.getOpposite();
+    return facing;
+  }
+  public Direction getTrueFacing(BlockState bs) {
+    var facing = bs.getValue(FACING);
+    var face = bs.getValue(FACE);
+    if (face == AttachFace.CEILING) facing = facing.getOpposite();
+    if (face == AttachFace.WALL) {
+      facing = facing == Direction.NORTH ? Direction.UP : Direction.DOWN;
+      facing = facing == Direction.SOUTH ? Direction.UP : Direction.DOWN;
+      facing = facing == Direction.EAST ? Direction.UP : Direction.DOWN;
+      facing = facing == Direction.WEST ? Direction.UP : Direction.DOWN;
+    }
+    return facing;
   }
 }

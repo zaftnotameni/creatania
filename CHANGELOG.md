@@ -4,7 +4,9 @@
 
 ### 1.18.2-0.0.22-alpha
 
+#### changes
 
+- Mana Blocks are now emissive
 
 ### 1.18.2-0.0.21-alpha
 
