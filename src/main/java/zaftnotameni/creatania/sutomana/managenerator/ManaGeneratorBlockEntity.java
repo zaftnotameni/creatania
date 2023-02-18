@@ -9,10 +9,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.common.util.LazyOptional;
 import vazkii.botania.api.block.IWandable;
-import vazkii.botania.api.mana.IManaPool;
 import vazkii.botania.api.mana.IManaReceiver;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.sutomana.manaduct.BaseManaductBlock;
@@ -98,7 +96,7 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
     }
     var foundCapability = this.getManaGeneratorFluidHandler().getCapability(cap, side);
     if (foundCapability != null) {
-      Log.RateLimited.of(this, 20).log((logger) -> logger.debug("connection could be established when checking for capability {}", cap.getName()));
+      Log.RateLimited.of(this, 20 * 30).log((logger) -> logger.debug("connection could be established when checking for capability {}", cap.getName()));
       return foundCapability;
     }
     return super.getCapability(cap, side);
@@ -161,7 +159,7 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
     var maybeAggloPlateBlockEntity = BaseManaductBlock.getMouthPointedAtBlockEntity(this.level, manaDuctBlockState, this.worldPosition.above());
     if (!(maybeAggloPlateBlockEntity instanceof IManaReceiver receiver) || receiver.isFull()) return 0;
     receiver.receiveMana(manaAmount * manaDuctBlock.manaMultiplier);
-    Log.RateLimited.of(this, 20).log(logger -> logger.info("handled {} mana via manaduct with multiplier {}", manaAmount, manaDuctBlock.manaMultiplier));
+    Log.RateLimited.of(this, 20 * 30).log(logger -> logger.info("handled {} mana via manaduct with multiplier {}", manaAmount, manaDuctBlock.manaMultiplier));
     this.duct = true;
     return manaAmount;
   }
@@ -169,7 +167,7 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
     if (pool == null || pool.isFull()) return 0;
     pool.receiveMana(manaAmount);
     if (pool instanceof IWandable wandable) wandable.onUsedByWand(null, ItemStack.EMPTY, Direction.UP);
-    Log.RateLimited.of(this, 20).log(logger -> logger.info("handled {} mana via direct transfer with mana", manaAmount));
+    Log.RateLimited.of(this, 20 * 30).log(logger -> logger.info("handled {} mana via direct transfer with mana", manaAmount));
     this.duct = false;
     return manaAmount;
   }
@@ -183,12 +181,12 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   public boolean shouldAbortServerTick() {
     var isInInvalidState = this.isOverStressed() || this.getNormalizedRPM() == 0 || this.worldPosition == null || this.level == null;
     if (isInInvalidState) {
-      Log.RateLimited.of(this, 20).log((logger) -> logger.debug("server tick aborted because RPM is 0 or is overstressed"));
+      Log.RateLimited.of(this, 20 * 30).log((logger) -> logger.debug("server tick aborted because RPM is 0 or is overstressed"));
       return true;
     }
     var notEnoughSpeed = Math.abs(this.getSpeed()) <= 0 || !this.isSpeedRequirementFulfilled();
     if (notEnoughSpeed) {
-      Log.RateLimited.of(this, 20).log((logger) -> logger.debug("server tick aborted because RPM {} does not satisfy minimum requirement", this.getSpeed()));
+      Log.RateLimited.of(this, 20 * 30).log((logger) -> logger.debug("server tick aborted because RPM {} does not satisfy minimum requirement", this.getSpeed()));
       return true;
     }
     return false;
@@ -218,11 +216,11 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
     if (hasEnoughManaFluidToProduceMana) {
       var manaFluidConsumed = this.getManaGeneratorFluidHandler().drainManaFluidFromTank(manaFluidRequired);
       var realManaToBeGenerated = manaFluidConsumed / conversionRate;
-      Log.RateLimited.of(this, 20).log((logger) -> logger.debug("consumed {} mana fluid to generate {} mana", manaFluidConsumed, realManaToBeGenerated));
+      Log.RateLimited.of(this, 20 * 30).log((logger) -> logger.debug("consumed {} mana fluid to generate {} mana", manaFluidConsumed, realManaToBeGenerated));
       addManaToPool(realManaToBeGenerated);
       this.active = true;
     }
-    Log.RateLimited.of(this, 20).log((logger) -> logger.debug("not enough mana fluid to produce mana, required {}, available {}", manaFluidRequired, manaFluidAvailable));
+    Log.RateLimited.of(this, 20 * 30).log((logger) -> logger.debug("not enough mana fluid to produce mana, required {}, available {}", manaFluidRequired, manaFluidAvailable));
   }
   public void clientTick() {}
 

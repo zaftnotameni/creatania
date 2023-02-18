@@ -62,6 +62,7 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
   public float tickCounter = 0f;
   public void serverTick() {
     this.active = false;
+    this.firstTick = false;
     var rpm = this.getNormalizedRPM();
     var maxPossibleRpm = AllConfigs.SERVER.kinetics.maxMotorSpeed.get();
     var percentageOfMaxRpm = Math.max(0.01f, rpm / (float) maxPossibleRpm);
