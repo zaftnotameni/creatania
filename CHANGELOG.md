@@ -6,6 +6,7 @@
 
 #### New
 
+- XOR Lever
 - Alternative Omnibox recipe in the runic altar
 - Manaduct progression tiers: manasteel -> terrasteel -> elementium -> gaia
 - Manaduct upgrade recipes

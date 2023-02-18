@@ -3,7 +3,6 @@ import com.simibubi.create.AllBlocks;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Tags;
@@ -17,6 +16,7 @@ public class ForgeBlockTagProvider extends BlockTagsProvider {
     tag(Tags.Blocks.MANADUCT).add(
       Blocks.MANASTEEL_MANADUCT_BLOCK.get(),
       Blocks.TERRASTEEL_MANADUCT_BLOCK.get(),
+      Blocks.ELEMENTIUM_MANADUCT_BLOCK.get(),
       Blocks.GAIA_MANADUCT_BLOCK.get());
 
     tag(Tags.Blocks.TIER_1).add(
@@ -29,6 +29,9 @@ public class ForgeBlockTagProvider extends BlockTagsProvider {
       Blocks.TERRASTEEL_MANADUCT_BLOCK.get());
 
     tag(Tags.Blocks.TIER_3).add(
+      Blocks.ELEMENTIUM_MANADUCT_BLOCK.get());
+
+    tag(Tags.Blocks.TIER_4).add(
       Blocks.GAIA_MANADUCT_BLOCK.get());
 
     tag(Tags.Blocks.BOTANIA_TERRA_PLATE_BASE).add(

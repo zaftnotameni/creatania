@@ -1,5 +1,4 @@
 package zaftnotameni.creatania.config;
-import com.google.common.reflect.Reflection;
 import net.minecraftforge.common.ForgeConfigSpec;
 public class CommonConfig {
   public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
@@ -55,6 +54,7 @@ public class CommonConfig {
   public static final ForgeConfigSpec.ConfigValue<Integer> MANAGEL_STACKS_TO;
   public static final ForgeConfigSpec.ConfigValue<Integer> MANAGEL_FLIGHT_DURATION;
   public static final ForgeConfigSpec.ConfigValue<Integer> MANAGEL_FLIGHT_MODIFIER;
+  public static final ForgeConfigSpec.ConfigValue<Integer> XOR_LEVER_SIGNAL_STRENGTH;
 
   static {
     BUILDER.push("mana_generator");
@@ -133,6 +133,7 @@ public class CommonConfig {
 
     BUILDER.push("misc");
     BLACKLISTED_WRENCH_BLOCKS = BUILDER.define("blacklisted_wrench_blocks", "");
+    XOR_LEVER_SIGNAL_STRENGTH = BUILDER.define("xor_lever_signal_strength", 2);
     BUILDER.pop();
 
     SPEC = BUILDER.build();

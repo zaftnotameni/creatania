@@ -1,19 +1,19 @@
 {
   "variants": {
     "facing=north": {
-      "model": "creatania:block/terrasteel_mana_duct",
+      "model": "creatania:block/gaia_mana_duct",
       "y": 0
     },
     "facing=south": {
-      "model": "creatania:block/terrasteel_mana_duct",
+      "model": "creatania:block/gaia_mana_duct",
       "y": 180
     },
     "facing=east": {
-      "model": "creatania:block/terrasteel_mana_duct",
+      "model": "creatania:block/gaia_mana_duct",
       "y": 90
     },
     "facing=west": {
-      "model": "creatania:block/terrasteel_mana_duct",
+      "model": "creatania:block/gaia_mana_duct",
       "y": 270
     }
   }

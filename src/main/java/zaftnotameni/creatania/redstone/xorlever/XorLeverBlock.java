@@ -18,12 +18,14 @@ import net.minecraft.world.level.block.FaceAttachedHorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.AttachFace;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.registry.BlockEntities;
 
 import java.util.Random;
@@ -54,25 +56,33 @@ public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implem
     return getTileEntityOptional(blockAccess, pos).map(computeStateSignal(blockState, side)).orElse(0);
   }
 
+  public static final int SIGNAL_STRENGTH = CommonConfig.XOR_LEVER_SIGNAL_STRENGTH.get();
   public Function<XorLeverBlockEntity, Integer> computeStateSignal(BlockState bs, Direction side) {
     return (te) -> {
       var teIsOn = te.state > 0;
       var facing = bs.getValue(FACING);
-      if (side == facing) return teIsOn ? 0 : 2;
-      if (side != facing) return teIsOn ? 2 : 0;
+      var face = bs.getValue(FACE);
+      var sideAxis = side.getAxis();
+      if (face == AttachFace.CEILING) facing = facing.getOpposite();
+      var faceAxis = facing.getAxis();
+      if (face == AttachFace.WALL) {
+        faceAxis = Direction.Axis.Y;
+        facing = facing == Direction.NORTH ? Direction.UP : Direction.DOWN;
+        facing = facing == Direction.SOUTH ? Direction.UP : Direction.DOWN;
+        facing = facing == Direction.EAST ? Direction.UP : Direction.DOWN;
+        facing = facing == Direction.WEST ? Direction.UP : Direction.DOWN;
+      }
+      if (faceAxis != sideAxis) return 0;
+      if (side == facing) return teIsOn ? 0 : SIGNAL_STRENGTH;
+      if (side != facing) return teIsOn ? SIGNAL_STRENGTH : 0;
       return 0;
     };
   }
 
   @Override
-  public boolean isSignalSource(BlockState state) {
-    return true;
-  }
-
+  public boolean isSignalSource(BlockState state) { return true; }
   @Override
-  public int getDirectSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side) {
-    return getConnectedDirection(blockState) == side ? getSignal(blockState, blockAccess, pos, side) : 0;
-  }
+  public int getDirectSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side) { return getConnectedDirection(blockState) == side ? getSignal(blockState, blockAccess, pos, side) : 0; }
 
   @Override
   @OnlyIn(Dist.CLIENT)

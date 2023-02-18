@@ -33,6 +33,7 @@ import zaftnotameni.creatania.manatoitem.PurifiedManaBlock;
 import zaftnotameni.creatania.manatoitem.manacondenser.ManaCondenserBlock;
 import zaftnotameni.creatania.manatosu.manamotor.ManaMotorBlock;
 import zaftnotameni.creatania.redstone.xorlever.XorLeverBlock;
+import zaftnotameni.creatania.sutomana.manaduct.ElementiumManaductBlock;
 import zaftnotameni.creatania.sutomana.manaduct.GaiaManaductBlock;
 import zaftnotameni.creatania.sutomana.manaduct.ManasteelManaductBlock;
 import zaftnotameni.creatania.sutomana.manaduct.TerrasteelManaductBlock;
@@ -119,6 +120,10 @@ public class Blocks {
   public static final RegistryObject<TerrasteelManaductBlock> TERRASTEEL_MANADUCT_BLOCK = registerBlockWithItem(
     Constants.TERRASTEEL_MANA_DUCT_BLOCK,
     () -> new TerrasteelManaductBlock(BlockBehaviour.Properties.of(Material.STONE).destroyTime(1f)));
+
+  public static final RegistryObject<ElementiumManaductBlock> ELEMENTIUM_MANADUCT_BLOCK = registerBlockWithItem(
+    Constants.ELEMENTIUML_MANA_DUCT_BLOCK,
+    () -> new ElementiumManaductBlock(BlockBehaviour.Properties.of(Material.STONE).destroyTime(1f)));
 
   public static final RegistryObject<GaiaManaductBlock> GAIA_MANADUCT_BLOCK = registerBlockWithItem(
     Constants.GAIA_MANA_DUCT_BLOCK,
