@@ -1,0 +1,19 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "botania:lime_mystical_flower"
+    }
+  ],
+  "results": [
+    {
+      "item": "botania:lime_petal",
+      "count": 2
+    },
+    {
+      "item": "botania:lime_petal",
+      "chance": 0.1
+    }
+  ],
+  "processingTime": 150
+}

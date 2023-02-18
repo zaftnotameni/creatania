@@ -7,7 +7,7 @@ import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.network.NetworkEvent;
-import zaftnotameni.creatania.CreataniaMain;
+import zaftnotameni.creatania.setup.StaticInit;
 
 import java.util.function.Supplier;
 
@@ -71,7 +71,7 @@ public class ObservePacket {
 		if(cooldown > 0)
 			return false;
 		cooldown = 10;
-		CreataniaMain.Network.sendToServer(new ObservePacket(pos, node));
+		StaticInit.Network.sendToServer(new ObservePacket(pos, node));
 		return true;
 	}
 	

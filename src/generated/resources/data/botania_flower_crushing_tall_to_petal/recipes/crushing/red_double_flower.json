@@ -1,0 +1,20 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "botania:red_double_flower"
+    }
+  ],
+  "results": [
+    {
+      "item": "botania:red_petal",
+      "count": 4
+    },
+    {
+      "item": "botania:red_petal",
+      "count": 2,
+      "chance": 0.1
+    }
+  ],
+  "processingTime": 150
+}

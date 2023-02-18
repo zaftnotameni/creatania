@@ -1,0 +1,19 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "botania:magenta_mystical_flower"
+    }
+  ],
+  "results": [
+    {
+      "item": "botania:magenta_petal",
+      "count": 2
+    },
+    {
+      "item": "botania:magenta_petal",
+      "chance": 0.1
+    }
+  ],
+  "processingTime": 150
+}
