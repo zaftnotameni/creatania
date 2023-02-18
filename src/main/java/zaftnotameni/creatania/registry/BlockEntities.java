@@ -5,17 +5,17 @@ import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
 import net.minecraftforge.eventbus.api.IEventBus;
 import zaftnotameni.creatania.Constants;
-import zaftnotameni.creatania.manaiaccreate.omnibox.OmniboxBlockEntity;
-import zaftnotameni.creatania.manaiaccreate.omnibox.OmniboxRenderer;
-import zaftnotameni.creatania.manatoitem.manacondenser.ManaCondenserBlockEntity;
-import zaftnotameni.creatania.manatoitem.manacondenser.ManaCondenserRenderer;
-import zaftnotameni.creatania.manatosu.manamotor.ManaMotorBlockEntity;
-import zaftnotameni.creatania.manatosu.manamotor.ManaMotorRenderer;
-import zaftnotameni.creatania.redstone.xorlever.XorLeverBlockEntity;
-import zaftnotameni.creatania.redstone.xorlever.XorLeverInstance;
-import zaftnotameni.creatania.redstone.xorlever.XorLeverRenderer;
-import zaftnotameni.creatania.sutomana.managenerator.ManaGeneratorBlockEntity;
-import zaftnotameni.creatania.sutomana.managenerator.ManaGeneratorRenderer;
+import zaftnotameni.creatania.machines.manacondenser.ManaCondenserBlockEntity;
+import zaftnotameni.creatania.machines.manacondenser.ManaCondenserRenderer;
+import zaftnotameni.creatania.machines.managenerator.ManaGeneratorBlockEntity;
+import zaftnotameni.creatania.machines.managenerator.ManaGeneratorRenderer;
+import zaftnotameni.creatania.machines.manamotor.ManaMotorBlockEntity;
+import zaftnotameni.creatania.machines.manamotor.ManaMotorRenderer;
+import zaftnotameni.creatania.stress.omnibox.OmniboxBlockEntity;
+import zaftnotameni.creatania.stress.omnibox.OmniboxRenderer;
+import zaftnotameni.creatania.stress.xorlever.XorLeverBlockEntity;
+import zaftnotameni.creatania.stress.xorlever.XorLeverInstance;
+import zaftnotameni.creatania.stress.xorlever.XorLeverRenderer;
 import zaftnotameni.creatania.util.Log;
 
 public class BlockEntities {

@@ -11,7 +11,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import zaftnotameni.creatania.Constants;
-import zaftnotameni.creatania.manatoitem.ManaGelItem;
+import zaftnotameni.creatania.food.ManaGelItem;
 import zaftnotameni.creatania.util.Humanity;
 import zaftnotameni.creatania.util.Log;
 
