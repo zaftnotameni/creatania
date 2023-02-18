@@ -3,17 +3,14 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.effects.VanillaEffectConfiguration;
 import zaftnotameni.creatania.registry.Advancements;
-import zaftnotameni.creatania.registry.Items;
-import zaftnotameni.creatania.util.ScanArea;
+
+import static zaftnotameni.creatania.util.Actions.killSlimeProduceManagelGrantAchievement;
 public class PurifiedManaBlock extends BaseManaBlock {
   public static final VanillaEffectConfiguration absorptionEffect = new VanillaEffectConfiguration(
     MobEffects.ABSORPTION,
@@ -36,15 +33,7 @@ public class PurifiedManaBlock extends BaseManaBlock {
   }
 
   public void slimeConversion(Level level, LivingEntity entity) {
-    if (level.isClientSide()) return;
-    entity.is(EntityType.SLIME.create(level));
-    var posAbove = entity.getOnPos().above();
-    ScanArea.forEachPlayerInTheArea(level, entity.getOnPos(), 128, p -> true, Advancements.PRODUCE_MANA_GEL_FROM_SLIME::awardTo);
-    var stack = new ItemStack(Items.MANA_GEL.get(),1);
-    entity.kill();
-    var itemEntity = new ItemEntity(level, posAbove.getX(), posAbove.getY(), posAbove.getZ(), stack);
-    itemEntity.setDeltaMovement(0f, 1f, 0f);
-    level.addFreshEntity(itemEntity);
+    killSlimeProduceManagelGrantAchievement(level, entity, entity.getOnPos());
   }
 
   @Override

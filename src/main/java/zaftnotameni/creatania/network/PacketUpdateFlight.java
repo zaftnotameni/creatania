@@ -1,7 +1,7 @@
 package zaftnotameni.creatania.network;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
-import zaftnotameni.creatania.CreataniaMain;
+import zaftnotameni.creatania.setup.StaticInit;
 
 import java.util.function.Supplier;
 
@@ -25,8 +25,8 @@ public class PacketUpdateFlight {
   }
   public void handle(Supplier<NetworkEvent.Context> ctx) {
     ctx.get().enqueueWork(() -> {
-      CreataniaMain.proxy.getPlayer().getAbilities().mayfly = canFly;
-      CreataniaMain.proxy.getPlayer().getAbilities().flying = wasFlying;
+      StaticInit.proxy.getPlayer().getAbilities().mayfly = canFly;
+      StaticInit.proxy.getPlayer().getAbilities().flying = wasFlying;
     });
     ctx.get().setPacketHandled(true);
   }

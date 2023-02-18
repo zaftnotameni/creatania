@@ -1,10 +1,10 @@
 package zaftnotameni.creatania.registry.datagen;
-import com.simibubi.create.foundation.data.AllLangPartials;
 import com.simibubi.create.foundation.data.LangMerger;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import zaftnotameni.creatania.Constants;
+import zaftnotameni.creatania.registry.datagen.processing.ForgeCreateProcessingRecipeProvider;
 
 @Mod.EventBusSubscriber(modid = Constants.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ForgeDatagenInitializer {
@@ -27,6 +27,10 @@ public class ForgeDatagenInitializer {
     generator.addProvider(new ForgeBlockstatesProvider(generator, helper));
     generator.addProvider(new ForgeSequencedAssemblyRecipeProvider(generator));
     generator.addProvider(new ForgeAdvancementsProvider(generator));
+
+    if (evt.includeServer()) {
+      ForgeCreateProcessingRecipeProvider.registerAll(generator);
+    }
 
   }
 }

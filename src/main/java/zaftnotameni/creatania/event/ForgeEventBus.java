@@ -4,9 +4,7 @@ import com.simibubi.create.AllItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -27,11 +25,12 @@ import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.registry.Advancements;
 import zaftnotameni.creatania.registry.Fluids;
-import zaftnotameni.creatania.registry.Items;
 import zaftnotameni.creatania.registry.Tags;
 import zaftnotameni.creatania.util.ScanArea;
 
 import java.util.Collection;
+
+import static zaftnotameni.creatania.util.Actions.killSlimeProduceManagelGrantAchievement;
 
 @Mod.EventBusSubscriber(modid = Constants.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeEventBus {
@@ -62,12 +61,7 @@ public class ForgeEventBus {
     if (!isSlimeEntity(level, entity)) return;
     var pos = entity.getOnPos();
     if (!isOnTopOrInsideManaFluid(level, entity, pos)) return;
-    ScanArea.forEachPlayerInTheArea(level, pos, 128, p -> true, Advancements.PRODUCE_MANA_GEL_FROM_SLIME::awardTo);
-    var stack = new ItemStack(Items.MANA_GEL.get(),1);
-    entity.kill();
-    var itemEntity = new ItemEntity(level, pos.getX(), pos.getY(), pos.getZ(), stack);
-    itemEntity.setDeltaMovement(0f, 0.5f, 0f);
-    level.addFreshEntity(itemEntity);
+    killSlimeProduceManagelGrantAchievement(level, entity, pos);
   }
   @SubscribeEvent
   public static void onLivingHurtEvent(LivingHurtEvent evt) {

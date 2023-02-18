@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "creatania:manasteel_manaduct_block",
-    "creatania:mana_generator",
-    "creatania:mana_motor",
-    "creatania:mana_condenser"
-  ]
-}

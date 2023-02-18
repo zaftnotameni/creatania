@@ -23,6 +23,8 @@ public class Tags {
     public static final TagKey<Block> MANA_MACHINE = tag("mana_machine");
     public static final TagKey<Block> FORGE_LAPIS = forgeTag("storage_blocks/lapis");
     public static final TagKey<Block> BOTANIA_TERRA_PLATE_BASE = botaniaTag("terra_plate_base");
+    public static final TagKey<Block> BOTANIA_DOUBLE_MYSTICAL_FLOWERS = botaniaTag("double_mystical_flowers");
+    public static final TagKey<Block> BOTANIA_MYSTICAL_FLOWERS = botaniaTag("mystical_flowers");
 
     public static TagKey<Block> tag(String name) { return BlockTags.create(new ResourceLocation(Constants.MODID, name));  }
     public static TagKey<Block> forgeTag(String name) { return BlockTags.create(new ResourceLocation("forge", name)); }
@@ -35,7 +37,10 @@ public class Tags {
     public static TagKey<Fluid> forgeTag(String name) { return FluidTags.create(new ResourceLocation("forge", name)); }
   }
   public static class Items {
+    public static final TagKey<Item> BOTANIA_DOUBLE_MYSTICAL_FLOWERS = botaniaTag("double_mystical_flowers");
+    public static final TagKey<Item> BOTANIA_MYSTICAL_FLOWERS = botaniaTag("mystical_flowers");
     public static TagKey<Item> tag(String name) { return ItemTags.create(new ResourceLocation(Constants.MODID, name)); }
     public static TagKey<Item> forgeTag(String name) { return ItemTags.create(new ResourceLocation("forge", name)); }
+    public static TagKey<Item> botaniaTag(String name) { return ItemTags.create(new ResourceLocation("botania", name)); }
   }
 }

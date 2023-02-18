@@ -2,11 +2,27 @@
 
 ## changelog
 
+### 1.18.2-0.0.23-alpha
+
+
 ### 1.18.2-0.0.22-alpha
 
-#### changes
+#### New
+
+- Tall Mystical Flower to Mystical Flower crushing recipe
+- Mystical Flower to Flower Petal crushing recipe
+- Mystical Mystical Flower to Tall Flower filling recipe
+- Flower Petal to Mystical Flower filling recipe
+
+#### Fixes
+
+- Stepping on purified mana blocks no longer kills the player
+
+#### Changes
 
 - Mana Blocks are now emissive
+- Mana Blocks have new models
+- Mana Gel has new model
 
 ### 1.18.2-0.0.21-alpha
 

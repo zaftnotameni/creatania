@@ -1,13 +1,13 @@
 package zaftnotameni.creatania.network;
 
-import java.util.function.Supplier;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.PacketDistributor;
-import zaftnotameni.creatania.CreataniaMain;
+import zaftnotameni.creatania.setup.StaticInit;
+
+import java.util.function.Supplier;
 
 public class ConsProdSyncPacket {
 	private BlockPos pos;
@@ -52,6 +52,6 @@ public class ConsProdSyncPacket {
     }
 	
 	public static void send(BlockPos pos, int consumption, int production, ServerPlayer player) {
-		CreataniaMain.Network.send(PacketDistributor.PLAYER.with(() -> player), new ConsProdSyncPacket(pos, consumption, production));
+		StaticInit.Network.send(PacketDistributor.PLAYER.with(() -> player), new ConsProdSyncPacket(pos, consumption, production));
 	}
 }

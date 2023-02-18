@@ -1,13 +1,13 @@
 package zaftnotameni.creatania.network;
 
-import java.util.function.Supplier;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
 import net.minecraftforge.network.PacketDistributor;
-import zaftnotameni.creatania.CreataniaMain;
+import zaftnotameni.creatania.setup.StaticInit;
+
+import java.util.function.Supplier;
 
 public class EnergyNetworkPacket {
 	private BlockPos pos;
@@ -54,6 +54,6 @@ public class EnergyNetworkPacket {
     }
 	
 	public static void send(BlockPos pos, int demand, int buff, ServerPlayer player) {
-		CreataniaMain.Network.send(PacketDistributor.PLAYER.with(() -> player), new EnergyNetworkPacket(pos, demand, buff));
+		StaticInit.Network.send(PacketDistributor.PLAYER.with(() -> player), new EnergyNetworkPacket(pos, demand, buff));
 	}
 }
