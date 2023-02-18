@@ -71,7 +71,7 @@ public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implem
   public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
     withTileEntityDo(worldIn, pos, te -> {
       if (rand.nextFloat() < 0.5F) {
-        var delta = (getSignalDirection(te, stateIn) == getTrueFacing(stateIn)) ? 0.5f : -0.5f;
+        var delta = (getSignalDirection(te, stateIn) == getTrueFacing(stateIn)) ? -0.5f : 0.5f;
         addParticles(stateIn, worldIn, pos, 0.5F, delta);
       }
     });
