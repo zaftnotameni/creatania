@@ -1,4 +1,5 @@
 package zaftnotameni.creatania.config;
+import com.google.common.reflect.Reflection;
 import net.minecraftforge.common.ForgeConfigSpec;
 public class CommonConfig {
   public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
@@ -125,8 +126,8 @@ public class CommonConfig {
     MANAGEL_FLIGHT_PROBABILITY = BUILDER.define("chance_of_providing_flight", 1f);
     MANAGEL_SATURATION_MODIFIER = BUILDER.define("saturation_modifier", 0.1f);
     MANAGEL_NUTRITION = BUILDER.define("nutrition_value", 1);
-    MANAGEL_FLIGHT_DURATION = BUILDER.define("nutrition_value", 15 * 20);
-    MANAGEL_FLIGHT_MODIFIER = BUILDER.define("nutrition_value", 1);
+    MANAGEL_FLIGHT_DURATION = BUILDER.define("flight_duration", 15 * 20);
+    MANAGEL_FLIGHT_MODIFIER = BUILDER.define("flight_modifier", 1);
     MANAGEL_STACKS_TO = BUILDER.define("stacks_to", 32);
     BUILDER.pop();
 

@@ -2,6 +2,8 @@
 
 ## changelog
 
+### 1.18.2-0.0.21-alpha
+
 ### 1.18.2-0.0.20-alpha
 
 #### New
@@ -10,6 +12,10 @@
 - Managel is now a food source (saturation, nutrition, fast eat, always eat configurable)
 - Eating managel now provides 30s of flight (configurable)
 - Buffs/Debuffs on mana blocks are disabled while sneaking (configurable)
+
+#### Changes
+
+- Manaduct inventory view is now 3d-ish
 
 ### 1.18.2-0.0.19-alpha
 
