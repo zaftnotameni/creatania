@@ -7,7 +7,7 @@
   }, {
     "item": "botania:livingrock"
   }],
-  "mana": 100000,
+  "mana": 99999,
   "result": {
     "item": "creatania:gaia_manaduct_block"
   }

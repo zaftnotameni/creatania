@@ -1,0 +1,12 @@
+{
+  "type": "botania:runic_altar",
+  "ingredients": [
+    { "item": "creatania:manasteel_manaduct_block" },
+    { "item": "botania:terrasteel_ingot" }
+  ],
+  "mana": 44444,
+  "output": {
+    "count": 1,
+    "item": "creatania:terrasteel_manaduct_block"
+  }
+}

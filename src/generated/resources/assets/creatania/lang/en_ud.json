@@ -4,5 +4,6 @@
   "block.creatania.mana_motor": "\u0279o\u0287oW \u0250u\u0250W",
   "block.creatania.omnibox": "xoq\u0131u\u026FO",
   "block.creatania.xor_lever": "\u0279\u01DD\u028C\u01DD\uA780 \u0279oX",
-  "item.creatania.incomplete_mana_machine_component": "\u0287u\u01DDuod\u026Fo\u0186 \u01DDu\u0131\u0265\u0254\u0250W \u0250u\u0250W \u01DD\u0287\u01DD\u05DFd\u026Fo\u0254uI"
+  "item.creatania.incomplete_mana_machine_component": "\u0287u\u01DDuod\u026Fo\u0186 \u01DDu\u0131\u0265\u0254\u0250W \u0250u\u0250W \u01DD\u0287\u01DD\u05DFd\u026Fo\u0254uI",
+  "item.creatania.incomplete_xor_lever": "\u0279\u01DD\u028C\u01DD\uA780 \u0279oX \u01DD\u0287\u01DD\u05DFd\u026Fo\u0254uI"
 }

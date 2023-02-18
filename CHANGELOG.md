@@ -2,6 +2,10 @@
 
 ## changelog
 
+### 1.18.2-0.0.22-alpha
+
+
+
 ### 1.18.2-0.0.21-alpha
 
 #### New
@@ -10,10 +14,12 @@
 - Alternative Omnibox recipe in the runic altar
 - Manaduct progression tiers: manasteel -> terrasteel -> elementium -> gaia
 - Manaduct upgrade recipes
+- Elementium Manaduct (tier 3)
 
 #### Changes
 
 - Ominibox recipe in agglo plate now requires 3 shafts and 3 cogs instead of 6 shafts
+- Gaia Manaduct is now tier 4 (from tier 3)
 
 ### 1.18.2-0.0.20-alpha
 
