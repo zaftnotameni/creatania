@@ -4,7 +4,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.effects.VanillaEffectConfiguration;
@@ -12,7 +11,7 @@ import zaftnotameni.creatania.network.Networking;
 import zaftnotameni.creatania.network.PacketUpdateFlight;
 import zaftnotameni.creatania.registry.Advancements;
 import zaftnotameni.creatania.registry.Potions;
-public class BotaniaManaBlock extends Block {
+public class BotaniaManaBlock extends BaseManaBlock {
   public static VanillaEffectConfiguration flightEffect;
 
   public static VanillaEffectConfiguration getFlightEffect() {

@@ -7,10 +7,12 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
@@ -66,5 +68,13 @@ public class BaseManaductBlock extends Block {
   @Override
   protected ImmutableMap<BlockState, VoxelShape> getShapeForEachState(Function<BlockState, VoxelShape> shapeFactory) {
     return super.getShapeForEachState(x -> Voxel.TINY_BLOCK_VOXEL);
+  }
+
+  public static BlockBehaviour.Properties makeManaductProperties() {
+    return BlockBehaviour.Properties.of(Material.STONE)
+      .destroyTime(1f)
+      .lightLevel(x -> 15)
+      .hasPostProcess((x, y, z) -> true)
+      .emissiveRendering((x, y, z) -> true);
   }
 }

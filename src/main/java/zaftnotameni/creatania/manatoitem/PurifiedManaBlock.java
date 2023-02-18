@@ -8,14 +8,13 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.effects.VanillaEffectConfiguration;
 import zaftnotameni.creatania.registry.Advancements;
 import zaftnotameni.creatania.registry.Items;
 import zaftnotameni.creatania.util.ScanArea;
-public class PurifiedManaBlock extends Block {
+public class PurifiedManaBlock extends BaseManaBlock {
   public static final VanillaEffectConfiguration absorptionEffect = new VanillaEffectConfiguration(
     MobEffects.ABSORPTION,
     CommonConfig.PURIFIED_MANA_BLOCK_BUFF_ABSORPTION_DURATION.get(),

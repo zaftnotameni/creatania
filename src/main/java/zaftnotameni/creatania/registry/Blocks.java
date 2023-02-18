@@ -27,16 +27,14 @@ import net.minecraftforge.registries.RegistryObject;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.manaiaccreate.omnibox.OmniboxBlock;
+import zaftnotameni.creatania.manatoitem.BaseManaBlock;
 import zaftnotameni.creatania.manatoitem.BotaniaManaBlock;
 import zaftnotameni.creatania.manatoitem.CorruptedManaBlock;
 import zaftnotameni.creatania.manatoitem.PurifiedManaBlock;
 import zaftnotameni.creatania.manatoitem.manacondenser.ManaCondenserBlock;
 import zaftnotameni.creatania.manatosu.manamotor.ManaMotorBlock;
 import zaftnotameni.creatania.redstone.xorlever.XorLeverBlock;
-import zaftnotameni.creatania.sutomana.manaduct.ElementiumManaductBlock;
-import zaftnotameni.creatania.sutomana.manaduct.GaiaManaductBlock;
-import zaftnotameni.creatania.sutomana.manaduct.ManasteelManaductBlock;
-import zaftnotameni.creatania.sutomana.manaduct.TerrasteelManaductBlock;
+import zaftnotameni.creatania.sutomana.manaduct.*;
 import zaftnotameni.creatania.sutomana.managenerator.ManaGeneratorBlock;
 import zaftnotameni.creatania.util.Humanity;
 import zaftnotameni.creatania.util.Log;
@@ -115,31 +113,31 @@ public class Blocks {
 
   public static final RegistryObject<ManasteelManaductBlock> MANASTEEL_MANADUCT_BLOCK = registerBlockWithItem(
     Constants.MANASTEEL_MANA_DUCT_BLOCK,
-    () -> new ManasteelManaductBlock(BlockBehaviour.Properties.of(Material.STONE).destroyTime(1f)));
+    () -> new ManasteelManaductBlock(BaseManaductBlock.makeManaductProperties()));
 
   public static final RegistryObject<TerrasteelManaductBlock> TERRASTEEL_MANADUCT_BLOCK = registerBlockWithItem(
     Constants.TERRASTEEL_MANA_DUCT_BLOCK,
-    () -> new TerrasteelManaductBlock(BlockBehaviour.Properties.of(Material.STONE).destroyTime(1f)));
+    () -> new TerrasteelManaductBlock(BaseManaductBlock.makeManaductProperties()));
 
   public static final RegistryObject<ElementiumManaductBlock> ELEMENTIUM_MANADUCT_BLOCK = registerBlockWithItem(
     Constants.ELEMENTIUML_MANA_DUCT_BLOCK,
-    () -> new ElementiumManaductBlock(BlockBehaviour.Properties.of(Material.STONE).destroyTime(1f)));
+    () -> new ElementiumManaductBlock(BaseManaductBlock.makeManaductProperties()));
 
   public static final RegistryObject<GaiaManaductBlock> GAIA_MANADUCT_BLOCK = registerBlockWithItem(
     Constants.GAIA_MANA_DUCT_BLOCK,
-    () -> new GaiaManaductBlock(BlockBehaviour.Properties.of(Material.STONE).destroyTime(1f)));
+    () -> new GaiaManaductBlock(BaseManaductBlock.makeManaductProperties()));
 
   public static final RegistryObject<CorruptedManaBlock> CORRUPTED_INERT_MANA_BLOCK = registerBlockWithItem(
     Constants.CORRUPTED_INERT_MANA_BLOCK,
-    () -> new CorruptedManaBlock(BlockBehaviour.Properties.of(Material.STONE).destroyTime(10f)));
+    () -> new CorruptedManaBlock(BaseManaBlock.makeManablockProperties().destroyTime(10f)));
 
   public static final RegistryObject<PurifiedManaBlock> PURIFIED_INERT_MANA_BLOCK = registerBlockWithItem(
     Constants.PURIFIED_INERT_MANA_BLOCK,
-    () -> new PurifiedManaBlock(BlockBehaviour.Properties.of(Material.STONE).destroyTime(1f)));
+    () -> new PurifiedManaBlock(BaseManaBlock.makeManablockProperties()));
 
   public static final RegistryObject<BotaniaManaBlock> BOTANIA_MANA_BLOCK = registerBlockWithItem(
     Constants.BOTANIA_MANA_BLOCK,
-    () -> new BotaniaManaBlock(BlockBehaviour.Properties.of(Material.GLASS).destroyTime(1f)));
+    () -> new BotaniaManaBlock(BaseManaBlock.makeManablockProperties()));
 
   public static final RegistryObject<ManaMachineComponentBlock> MANA_MACHINE_COMPONENT = registerBlockWithItem(
     Constants.MANA_MACHINE_COMPONENT,
