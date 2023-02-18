@@ -19,7 +19,7 @@ public class ManaGelItem extends Item  {
     var f = new FoodProperties.Builder();
     if (CommonConfig.MANAGEL_CAN_ALWAYS_EAT.get()) f.alwaysEat();
     if (CommonConfig.MANAGEL_FAST_EATING.get()) f.fast();
-    if (CommonConfig.MANAGEL_FLIGHT_PROBABILITY.get() > 0) f.effect(flightEffect(), CommonConfig.MANAGEL_FLIGHT_PROBABILITY.get());
+    if (CommonConfig.MANAGEL_FLIGHT_PROBABILITY.get() > 0) f.effect(ManaGelItem::flightEffect, CommonConfig.MANAGEL_FLIGHT_PROBABILITY.get());
     f.saturationMod(CommonConfig.MANAGEL_SATURATION_MODIFIER.get());
     f.nutrition(CommonConfig.MANAGEL_NUTRITION.get());
     return f.build();

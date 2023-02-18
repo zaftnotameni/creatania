@@ -52,12 +52,12 @@ public class CreataniaMain {
   public CreataniaMain() {
     IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
+    Potions.register(bus);
     Particles.register(bus);
     Items.register(bus);
     Blocks.register(bus);
     Fluids.register(bus);
     BlockEntities.register(bus);
-    Potions.register(bus);
     Index.CREATE_REGISTRATE.registerEventListeners(bus);
     Recipes.register(bus);
 

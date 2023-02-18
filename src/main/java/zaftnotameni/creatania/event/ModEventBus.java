@@ -107,10 +107,18 @@ public class ModEventBus {
         return MaterialColor.COLOR_CYAN.calculateRGBColor(MaterialColor.Brightness.HIGH);
       }
     };
+    var wart = new BlockColor() {
+      @Override
+      public int getColor(BlockState pState, @Nullable BlockAndTintGetter pLevel, @Nullable BlockPos pPos, int pTintIndex) {
+        return MaterialColor.WARPED_WART_BLOCK.calculateRGBColor(MaterialColor.Brightness.HIGH);
+      }
+    };
+    registerBlockColors(purple, () -> Blocks.CORRUPTED_INERT_MANA_BLOCK.get());
     registerBlockColors(purple, () -> Fluids.CORRUPT_MANA_FLUID_BLOCK.get());
+    registerBlockColors(cyan, () -> Blocks.PURIFIED_INERT_MANA_BLOCK.get());
     registerBlockColors(cyan, () -> Fluids.MANA_FLUID_BLOCK.get());
-    registerBlockColors(cyan, () -> Fluids.BOTANIA_MANA_FLUID_BLOCK.get());
-    registerBlockColors(cyan, () -> Blocks.BOTANIA_MANA_BLOCK.get());
+    registerBlockColors(wart, () -> Fluids.BOTANIA_MANA_FLUID_BLOCK.get());
+    registerBlockColors(wart, () -> Blocks.BOTANIA_MANA_BLOCK.get());
   }
   public static void initItemColors() {
     if (!ITEM_COLORS.isEmpty()) return;
@@ -126,8 +134,14 @@ public class ModEventBus {
         return MaterialColor.COLOR_CYAN.calculateRGBColor(MaterialColor.Brightness.HIGH);
       }
     };
+    var wart = new ItemColor() {
+      @Override
+      public int getColor(ItemStack pStack, int pTintIndex) {
+        return MaterialColor.WARPED_WART_BLOCK.calculateRGBColor(MaterialColor.Brightness.HIGH);
+      }
+    };
     registerItemColors(purple, () -> Fluids.CORRUPT_MANA_FLUID_BUCKET.get().asItem());
     registerItemColors(cyan, () -> Fluids.MANA_FLUID_BUCKET.get().asItem());
-    registerItemColors(cyan, () -> Fluids.BOTANIA_MANA_FLUID_BUCKET.get().asItem());
+    registerItemColors(wart, () -> Fluids.BOTANIA_MANA_FLUID_BUCKET.get().asItem());
   }
 }
