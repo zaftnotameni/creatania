@@ -57,8 +57,8 @@ public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implem
   }
 
   public static final int SIGNAL_STRENGTH = CommonConfig.XOR_LEVER_SIGNAL_STRENGTH.get();
-  public Function<XorLeverBlockEntity, Integer> computeStateSignal(BlockState bs, Direction side) {
-    return te -> (side == this.getSignalDirection(te, bs)) ? SIGNAL_STRENGTH : 0;
+  public static Function<XorLeverBlockEntity, Integer> computeStateSignal(BlockState bs, Direction side) {
+    return te -> (side == getSignalDirection(te, bs)) ? SIGNAL_STRENGTH : 0;
   }
 
   @Override
@@ -70,8 +70,10 @@ public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implem
   @OnlyIn(Dist.CLIENT)
   public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
     withTileEntityDo(worldIn, pos, te -> {
-      if (rand.nextFloat() < 0.5F)
-        addParticles(stateIn, worldIn, pos.relative(this.getSignalDirection(te, stateIn), 1), 0.5F, -0.5F);
+      if (rand.nextFloat() < 0.5F) {
+        var delta = (getSignalDirection(te, stateIn) == getTrueFacing(stateIn)) ? 0.5f : -0.5f;
+        addParticles(stateIn, worldIn, pos, 0.5F, delta);
+      }
     });
   }
 
@@ -88,9 +90,10 @@ public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implem
   private static void addParticles(BlockState state, LevelAccessor worldIn, BlockPos pos, float alpha, float delta) {
     Direction direction = state.getValue(FACING).getOpposite();
     Direction direction1 = getConnectedDirection(state).getOpposite();
-    double d0 = (double) pos.getX() + 0.5D + 0.1D * (double) direction.getStepX() + 0.2D * (double) direction1.getStepX() + delta;
-    double d1 = (double) pos.getY() + 0.5D + 0.1D * (double) direction.getStepY() + 0.2D * (double) direction1.getStepY() + delta;
-    double d2 = (double) pos.getZ() + 0.5D + 0.1D * (double) direction.getStepZ() + 0.2D * (double) direction1.getStepZ() + delta;
+    Direction trueDirection = getTrueFacing(state);
+    double d0 = (double) pos.getX() + 0.5D + 0.1D * (double) direction.getStepX() + 0.2D * (double) direction1.getStepX() + (delta * trueDirection.getStepX());
+    double d1 = (double) pos.getY() + 0.5D + 0.1D * (double) direction.getStepY() + 0.2D * (double) direction1.getStepY() + (delta * trueDirection.getStepY());
+    double d2 = (double) pos.getZ() + 0.5D + 0.1D * (double) direction.getStepZ() + 0.2D * (double) direction1.getStepZ() + (delta * trueDirection.getStepZ());
     double xspeed = 0d;
     double yspeed = 0d;
     double zspeed = 0d;
@@ -130,19 +133,19 @@ public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implem
   public boolean isPathfindable(BlockState state, BlockGetter reader, BlockPos pos, PathComputationType type) {
     return false;
   }
-  public Direction.Axis getTrueFaceAxis(BlockState bs) {
+  public static Direction.Axis getTrueFaceAxis(BlockState bs) {
     var face = bs.getValue(FACE);
-    var faceAxis = this.getTrueFacing(bs).getAxis();
+    var faceAxis = getTrueFacing(bs).getAxis();
     if (face == AttachFace.WALL) faceAxis = Direction.Axis.Y;
     return faceAxis;
   }
-  public Direction getSignalDirection(XorLeverBlockEntity te, BlockState bs) {
+  public static Direction getSignalDirection(XorLeverBlockEntity te, BlockState bs) {
     var teIsOn = te.state > 0;
-    var facing = this.getTrueFacing(bs);
+    var facing = getTrueFacing(bs);
     if (teIsOn) return facing.getOpposite();
     return facing;
   }
-  public Direction getTrueFacing(BlockState bs) {
+  public static Direction getTrueFacing(BlockState bs) {
     var facing = bs.getValue(FACING);
     var face = bs.getValue(FACE);
     if (face == AttachFace.CEILING) facing = facing.getOpposite();
