@@ -1,0 +1,99 @@
+{
+
+	"_": "->------------------------]  Game Elements  [------------------------<-",
+
+	"block.creatania.mana_condenser": "Mana Condenser",
+	"block.creatania.mana_generator": "Mana Generator",
+	"block.creatania.mana_motor": "Mana Motor",
+	"block.creatania.omnibox": "Omnibox",
+	"block.creatania.xor_lever": "Xor Lever",
+
+	"item.creatania.incomplete_mana_machine_component": "Incomplete Mana Machine Component",
+	"item.creatania.incomplete_xor_lever": "Incomplete Xor Lever",
+
+
+	"_": "->------------------------]  Advancements  [------------------------<-",
+
+	"advancement.creatania.root": "Welcome to Creatania",
+	"advancement.creatania.root.desc": "Creatania is a Contraption Magical Tech Mod",
+	"advancement.creatania.mana_machine_component": "Magical... Stress",
+	"advancement.creatania.mana_machine_component.desc": "Obtain a mana machine component, the core of all mana machines",
+	"advancement.creatania.mana_generator": "Poolished Mechanics",
+	"advancement.creatania.mana_generator.desc": "Create your first Mana Generator, now you can convert inert mana fluid to real mana",
+	"advancement.creatania.omni_gearbox": "Ominously Omnidirectional",
+	"advancement.creatania.omni_gearbox.desc": "Gearboxes are too limited, enters the omnibox!",
+	"advancement.creatania.manaduct_tier_1": "Pipe Dream",
+	"advancement.creatania.manaduct_tier_1.desc": "Ducts transfer mana without the massive efficiency loss of transmitting it through air",
+	"advancement.creatania.manaduct_tier_2": "Duct Tales",
+	"advancement.creatania.manaduct_tier_2.desc": "A more refined duct, will increase your mana gains even more",
+	"advancement.creatania.manaduct_tier_3": "Duct taping mana",
+	"advancement.creatania.manaduct_tier_3.desc": "An even larger pipe",
+	"advancement.creatania.mana_condenser": "Mana ex nihilo",
+	"advancement.creatania.mana_condenser.desc": "You're now ready to extract mana out of thin air, though it might be corrupted in the process",
+	"advancement.creatania.mana_motor": "Don't Stress over it... you'll MANAge just fine",
+	"advancement.creatania.mana_motor.desc": "You're now ready to generate rotation force with mana",
+	"advancement.creatania.lords_work": "More like wandering TRAITOR...",
+	"advancement.creatania.lords_work.desc": "The llama guy got what he deserves, thanks for your service§7\n(Hidden Advancement)",
+	"advancement.creatania.buff_from_purified_blocks": "Power Overwhelming!",
+	"advancement.creatania.buff_from_purified_blocks.desc": "Purified mana might be inert, but still contains a lot of power within§7\n(Hidden Advancement)",
+	"advancement.creatania.buff_from_real_mana_blocks": "Flying High",
+	"advancement.creatania.buff_from_real_mana_blocks.desc": "Botania mana blocks are the real deal, pure condensed magical power§7\n(Hidden Advancement)",
+	"advancement.creatania.debuff_from_corrupt_blocks": "Watch your step!",
+	"advancement.creatania.debuff_from_corrupt_blocks.desc": "Corrupt mana might be inert, but still extremely dangerous§7\n(Hidden Advancement)",
+	"advancement.creatania.botania_block_with_create_wrench": "Joyful Mana Gut Wrenching",
+	"advancement.creatania.botania_block_with_create_wrench.desc": "Pick up blocks from botania using the create wrench. Be very careful with it§7\n(Hidden Advancement)",
+	"advancement.creatania.prevent_ender_entity_from_teleporting": "Denied!",
+	"advancement.creatania.prevent_ender_entity_from_teleporting.desc": "Corrupt mana blocks, among its many properties, can prevent ender entities from teleporting§7\n(Hidden Advancement)",
+	"advancement.creatania.produce_mana_gel_from_slime": "YUMMY!",
+	"advancement.creatania.produce_mana_gel_from_slime.desc": "Produce mana gel by having a slime touch purified inert mana fluid§7\n(Hidden Advancement)",
+
+
+	"_": "->------------------------]  UI & Messages  [------------------------<-",
+
+
+
+	"_": "->------------------------]  Subtitles  [------------------------<-",
+
+
+
+	"_": "->------------------------]  Item Descriptions  [------------------------<-",
+
+
+
+	"_": "->------------------------]  Ponder Content  [------------------------<-",
+
+
+
+	"_": "->------------------------]  Items  [------------------------<-",
+
+	"item.creatania.mana_gel": "Mana gel",
+	"item.creatania.manasteel_manaduct_block": "Manasteel manaduct block",
+	"item.creatania.terrasteel_manaduct_block": "Terrasteel manaduct block",
+	"item.creatania.elementium_manaduct_block": "Elementium manaduct block",
+	"item.creatania.gaia_manaduct_block": "Gaia manaduct block",
+	"item.creatania.corrupted_inert_mana_block": "Corrupted inert mana block",
+	"item.creatania.purified_inert_mana_block": "Purified inert mana block",
+	"item.creatania.botania_mana_block": "Botania mana block",
+	"item.creatania.mana_machine_component": "Mana machine component",
+	"item.creatania.mana_fluid_bucket": "Mana fluid bucket",
+	"item.creatania.corrupt_mana_fluid_bucket": "Corrupt mana fluid bucket",
+	"item.creatania.botania_mana_fluid_bucket": "Botania mana fluid bucket",
+
+
+	"_": "->------------------------]  Blocks  [------------------------<-",
+
+	"block.creatania.manasteel_manaduct_block": "Manasteel manaduct block",
+	"block.creatania.terrasteel_manaduct_block": "Terrasteel manaduct block",
+	"block.creatania.elementium_manaduct_block": "Elementium manaduct block",
+	"block.creatania.gaia_manaduct_block": "Gaia manaduct block",
+	"block.creatania.corrupted_inert_mana_block": "Corrupted inert mana block",
+	"block.creatania.purified_inert_mana_block": "Purified inert mana block",
+	"block.creatania.botania_mana_block": "Botania mana block",
+	"block.creatania.mana_machine_component": "Mana machine component",
+	"block.creatania.mana": "Mana",
+	"block.creatania.corrupt_mana": "Corrupt mana",
+	"block.creatania.botania_mana": "Botania mana",
+
+	"_": "Thank you for translating Creatania!"
+
+}

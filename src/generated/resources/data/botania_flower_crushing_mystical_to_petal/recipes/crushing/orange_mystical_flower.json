@@ -1,0 +1,19 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "botania:orange_mystical_flower"
+    }
+  ],
+  "results": [
+    {
+      "item": "botania:orange_petal",
+      "count": 2
+    },
+    {
+      "item": "botania:orange_petal",
+      "chance": 0.1
+    }
+  ],
+  "processingTime": 150
+}

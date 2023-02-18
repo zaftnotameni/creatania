@@ -1,0 +1,19 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "botania:cyan_mystical_flower"
+    }
+  ],
+  "results": [
+    {
+      "item": "botania:cyan_petal",
+      "count": 2
+    },
+    {
+      "item": "botania:cyan_petal",
+      "chance": 0.1
+    }
+  ],
+  "processingTime": 150
+}
