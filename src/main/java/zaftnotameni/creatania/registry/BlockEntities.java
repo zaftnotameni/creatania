@@ -1,30 +1,22 @@
 package zaftnotameni.creatania.registry;
 
-import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.contraptions.base.HalfShaftInstance;
-import com.simibubi.create.content.contraptions.relays.gearbox.GearboxInstance;
-import com.simibubi.create.content.contraptions.relays.gearbox.GearboxRenderer;
-import com.simibubi.create.content.contraptions.relays.gearbox.GearboxTileEntity;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.BlockEntityEntry;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.manaiaccreate.omnibox.OmniboxBlockEntity;
 import zaftnotameni.creatania.manaiaccreate.omnibox.OmniboxRenderer;
 import zaftnotameni.creatania.manatoitem.manacondenser.ManaCondenserBlockEntity;
 import zaftnotameni.creatania.manatoitem.manacondenser.ManaCondenserRenderer;
-import zaftnotameni.creatania.sutomana.managenerator.ManaGeneratorBlockEntity;
 import zaftnotameni.creatania.manatosu.manamotor.ManaMotorBlockEntity;
 import zaftnotameni.creatania.manatosu.manamotor.ManaMotorRenderer;
+import zaftnotameni.creatania.redstone.xorlever.XorLeverBlockEntity;
+import zaftnotameni.creatania.redstone.xorlever.XorLeverInstance;
+import zaftnotameni.creatania.redstone.xorlever.XorLeverRenderer;
+import zaftnotameni.creatania.sutomana.managenerator.ManaGeneratorBlockEntity;
 import zaftnotameni.creatania.sutomana.managenerator.ManaGeneratorRenderer;
 import zaftnotameni.creatania.util.Log;
-
-import static com.simibubi.create.Create.REGISTRATE;
 
 public class BlockEntities {
   public static final CreateRegistrate CREATE_REGISTRATE = Index.getCreateRegistrate()
@@ -56,6 +48,13 @@ public class BlockEntities {
     .instance(() -> HalfShaftInstance::new)
     .validBlocks(Blocks.OMNIBOX)
     .renderer(() -> OmniboxRenderer::new)
+    .register();
+
+  public static final BlockEntityEntry<XorLeverBlockEntity> XOR_LEVER_BLOCK_ENTITY = CREATE_REGISTRATE
+    .tileEntity(Constants.XOR_LEVER_BLOCK_ENTITY, XorLeverBlockEntity::new)
+    .instance(() -> XorLeverInstance::new, false)
+    .validBlocks(Blocks.XOR_LEVER)
+    .renderer(() -> XorLeverRenderer::new)
     .register();
 
   public static void register(IEventBus eventBus) {

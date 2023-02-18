@@ -1,7 +1,5 @@
 package zaftnotameni.creatania;
 
-import net.minecraft.world.level.material.Material;
-import net.minecraftforge.eventbus.api.IEventBus;
 public class Constants {
   public static final String MODID = "creatania";
   public static final String MANA_MOTOR = "mana_motor";
@@ -34,4 +32,6 @@ public class Constants {
   public static final String TERRASTEEL_MANA_DUCT_BLOCK = "terrasteel_manaduct_block";
   public static final String MANASTEEL_MANA_DUCT_BLOCK = "manasteel_manaduct_block";
   public static final String GAIA_MANA_DUCT_BLOCK = "gaia_manaduct_block";
+  public static final String XOR_LEVER = "xor_lever";
+  public static final String XOR_LEVER_BLOCK_ENTITY = "xor_lever_block_entity";
 }

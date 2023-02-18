@@ -1,0 +1,13 @@
+{
+  "type": "botania:runic_altar",
+  "ingredients": [
+    { "item": "creatania:mana_machine_component" },
+    { "item": "create:gearbox" },
+    { "item": "create:vertical_gearbox" }
+  ],
+  "mana": 1000,
+  "output": {
+    "count": 1,
+    "item": "creatania:omnibox"
+  }
+}

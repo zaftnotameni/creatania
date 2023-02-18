@@ -3,6 +3,7 @@
   "values": [
     "creatania:mana_generator",
     "creatania:mana_condenser",
-    "creatania:omnibox"
+    "creatania:omnibox",
+    "creatania:xor_lever"
   ]
 }

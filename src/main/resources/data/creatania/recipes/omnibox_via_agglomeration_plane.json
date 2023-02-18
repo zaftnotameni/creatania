@@ -1,22 +1,14 @@
 {
   "type": "botania:terra_plate",
-  "ingredients": [{
-    "item": "creatania:mana_machine_component"
-  }, {
-    "item": "create:shaft"
-  }, {
-    "item": "create:shaft"
-  }, {
-    "item": "create:shaft"
-  }, {
-    "item": "create:shaft"
-  }, {
-    "item": "create:shaft"
-  }, {
-    "item": "create:shaft"
-  }],
+  "ingredients": [
+    { "item": "creatania:mana_machine_component" },
+    { "item": "create:cogwheel" },
+    { "item": "create:shaft" },
+    { "item": "create:cogwheel" },
+    { "item": "create:shaft" },
+    { "item": "create:cogwheel" },
+    { "item": "create:shaft" }
+  ],
   "mana": 1000,
-  "result": {
-    "item": "creatania:omnibox"
-  }
+  "result": { "item": "creatania:omnibox" }
 }

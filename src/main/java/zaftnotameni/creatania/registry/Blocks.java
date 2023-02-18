@@ -5,6 +5,8 @@ import com.google.gson.JsonObject;
 import com.jozufozu.flywheel.core.PartialModel;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.block.BlockStressDefaults;
+import com.simibubi.create.foundation.block.ItemUseOverrides;
+import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.SharedProperties;
@@ -30,6 +32,7 @@ import zaftnotameni.creatania.manatoitem.CorruptedManaBlock;
 import zaftnotameni.creatania.manatoitem.PurifiedManaBlock;
 import zaftnotameni.creatania.manatoitem.manacondenser.ManaCondenserBlock;
 import zaftnotameni.creatania.manatosu.manamotor.ManaMotorBlock;
+import zaftnotameni.creatania.redstone.xorlever.XorLeverBlock;
 import zaftnotameni.creatania.sutomana.manaduct.GaiaManaductBlock;
 import zaftnotameni.creatania.sutomana.manaduct.ManasteelManaductBlock;
 import zaftnotameni.creatania.sutomana.manaduct.TerrasteelManaductBlock;
@@ -94,6 +97,17 @@ public class Blocks {
     .transform(BlockStressDefaults.setNoImpact())
     .transform(axeOrPickaxe())
     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+    .item()
+    .transform(customItemModel())
+    .register();
+
+  public static final BlockEntry<XorLeverBlock> XOR_LEVER = CREATE_REGISTRATE
+    .block(Constants.XOR_LEVER, XorLeverBlock::new)
+    .initialProperties(() -> net.minecraft.world.level.block.Blocks.LEVER)
+    .transform(axeOrPickaxe())
+    .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
+    .blockstate((c, p) -> p.horizontalFaceBlock(c.get(), AssetLookup.partialBaseModel(c, p)))
+    .onRegister(ItemUseOverrides::addBlock)
     .item()
     .transform(customItemModel())
     .register();
