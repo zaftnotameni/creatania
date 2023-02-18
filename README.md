@@ -6,12 +6,16 @@ Connecting Create and Botania.
 
 ### Design
 
-Tenants:
+##### Tenants:
 
 - Connect Create and Botania, leveraging mechanics from both mods.
 - Strongly favor sided blocks.
-- Avoid breaking balance in both Botania and Create, this is not a mod about having overpowered items/machines.
-- Highly configurable: every production rate, exchange rate, SU/mana requirements can be tuned via config. 
+- Don't break balance in both Botania and Create, no overpowered items/machines.
+- Highly configurable: every production rate, exchange rate, SU/mana requirements can be tuned via config.
+- Respect Botania and Create mod philosophies the best we can:
+  - Never ever show numeric values for mana.
+  - Mana generation requires some interaction with botania.
+  - Avoid GUIs as much as possible.
 
 ### Machines
 

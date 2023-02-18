@@ -21,19 +21,23 @@ public class CorruptedManaBlock extends Block {
   public static final VanillaEffectConfiguration witherEffect = new VanillaEffectConfiguration(
     MobEffects.WITHER,
     CommonConfig.CORRUPTED_MANA_BLOCK_BUFF_WITHER_DURATION.get(),
-    CommonConfig.CORRUPTED_MANA_BLOCK_BUFF_WITHER.get());
+    CommonConfig.CORRUPTED_MANA_BLOCK_BUFF_WITHER.get(),
+    CommonConfig.CORRUPTED_MANA_BLOCK_BUFF_DISABLE_WHEN_SNEAKING.get());
   public static final VanillaEffectConfiguration harmEffect = new VanillaEffectConfiguration(
     MobEffects.HARM,
     CommonConfig.CORRUPTED_MANA_BLOCK_BUFF_HARM_DURATION.get(),
-    CommonConfig.CORRUPTED_MANA_BLOCK_BUFF_HARM.get());
+    CommonConfig.CORRUPTED_MANA_BLOCK_BUFF_HARM.get(),
+    CommonConfig.CORRUPTED_MANA_BLOCK_BUFF_DISABLE_WHEN_SNEAKING.get());
   public static final VanillaEffectConfiguration poisonEffect = new VanillaEffectConfiguration(
     MobEffects.POISON,
     CommonConfig.CORRUPTED_MANA_BLOCK_BUFF_POISON_DURATION.get(),
-    CommonConfig.CORRUPTED_MANA_BLOCK_BUFF_POISON.get());
+    CommonConfig.CORRUPTED_MANA_BLOCK_BUFF_POISON.get(),
+    CommonConfig.CORRUPTED_MANA_BLOCK_BUFF_DISABLE_WHEN_SNEAKING.get());
   public static final VanillaEffectConfiguration hungerEffect = new VanillaEffectConfiguration(
     MobEffects.HUNGER,
     CommonConfig.CORRUPTED_MANA_BLOCK_BUFF_HUNGER_DURATION.get(),
-    CommonConfig.CORRUPTED_MANA_BLOCK_BUFF_HUNGER.get());
+    CommonConfig.CORRUPTED_MANA_BLOCK_BUFF_HUNGER.get(),
+    CommonConfig.CORRUPTED_MANA_BLOCK_BUFF_DISABLE_WHEN_SNEAKING.get());
   public CorruptedManaBlock(Properties pProperties) {
     super(pProperties);
   }

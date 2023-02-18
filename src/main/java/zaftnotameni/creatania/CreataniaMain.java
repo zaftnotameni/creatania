@@ -52,12 +52,12 @@ public class CreataniaMain {
   public CreataniaMain() {
     IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
 
+    Potions.register(bus);
     Particles.register(bus);
     Items.register(bus);
     Blocks.register(bus);
     Fluids.register(bus);
     BlockEntities.register(bus);
-    Potions.register(bus);
     Index.CREATE_REGISTRATE.registerEventListeners(bus);
     Recipes.register(bus);
 
@@ -80,7 +80,12 @@ public class CreataniaMain {
 
   private void client(final FMLClientSetupEvent event) {
     Log.LOGGER.info("creatania client setup started");
+    ItemBlockRenderTypes.setRenderLayer(Blocks.MANASTEEL_MANADUCT_BLOCK.get(), RenderType.cutoutMipped());
     ItemBlockRenderTypes.setRenderLayer(Blocks.TERRASTEEL_MANADUCT_BLOCK.get(), RenderType.cutoutMipped());
+    ItemBlockRenderTypes.setRenderLayer(Blocks.GAIA_MANADUCT_BLOCK.get(), RenderType.cutoutMipped());
+    ItemBlockRenderTypes.setRenderLayer(Blocks.CORRUPTED_INERT_MANA_BLOCK.get(), RenderType.translucent());
+    ItemBlockRenderTypes.setRenderLayer(Blocks.PURIFIED_INERT_MANA_BLOCK.get(), RenderType.translucent());
+    ItemBlockRenderTypes.setRenderLayer(Blocks.BOTANIA_MANA_BLOCK.get(), RenderType.translucent());
     Log.LOGGER.info("creatania client setup finished");
   }
 

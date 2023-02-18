@@ -16,11 +16,12 @@ public class BotaniaManaBlock extends Block {
   public static VanillaEffectConfiguration flightEffect;
 
   public static VanillaEffectConfiguration getFlightEffect() {
-    if (flightEffect !=null) return flightEffect;
+    if (flightEffect != null) return flightEffect;
     flightEffect = new VanillaEffectConfiguration(
       Potions.FLIGHT_EFFECT.get(),
       CommonConfig.BOTANIA_MANA_BLOCK_BUFF_FLIGHT_DURATION.get(),
-      CommonConfig.BOTANIA_MANA_BLOCK_BUFF_FLIGHT.get());
+      CommonConfig.BOTANIA_MANA_BLOCK_BUFF_FLIGHT.get(),
+      CommonConfig.BOTANIA_MANA_BLOCK_BUFF_DISABLE_WHEN_SNEAKING.get());
     return flightEffect;
   }
   public BotaniaManaBlock(Properties pProperties) {

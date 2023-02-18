@@ -2,9 +2,30 @@
 
 ## changelog
 
+### 1.18.2-0.0.21-alpha
+
+#### New
+
+- Alternative Omnibox recipe in the runic altar
+- Manaduct progression tiers: manasteel -> terrasteel -> elementium -> gaia
+- Manaduct upgrade recipes
+
+#### Changes
+
+- Ominibox recipe in agglo plate now requires 3 shafts and 3 cogs instead of 6 shafts
+
 ### 1.18.2-0.0.20-alpha
 
+#### New
 
+- Managel is now obtainable by harming a slime-like creature while it is inside mana fluid
+- Managel is now a food source (saturation, nutrition, fast eat, always eat configurable)
+- Eating managel now provides 30s of flight (configurable)
+- Buffs/Debuffs on mana blocks are disabled while sneaking (configurable)
+
+#### Changes
+
+- Manaduct inventory view is now 3d-ish
 
 ### 1.18.2-0.0.19-alpha
 
