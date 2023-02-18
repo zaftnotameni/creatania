@@ -27,32 +27,41 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import zaftnotameni.creatania.registry.BlockEntities;
 
 import java.util.Random;
+import java.util.function.Function;
 public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implements ITE<XorLeverBlockEntity> {
   public XorLeverBlock(Properties pProperties) {
     super(pProperties);
   }
-
   @Override
-  public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn,
-                               BlockHitResult hit) {
-    if (worldIn.isClientSide) {
-      addParticles(state, worldIn, pos, 1.0F);
-      return InteractionResult.SUCCESS;
-    }
-
+  public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+    if (worldIn.isClientSide) return useOnClient(state, worldIn, pos);
+    return useOnServer(worldIn, pos, player);
+  }
+  public InteractionResult useOnClient(BlockState state, Level worldIn, BlockPos pos) {
+    addParticles(state, worldIn, pos, 1.0F);
+    return InteractionResult.SUCCESS;
+  }
+  public InteractionResult useOnServer(Level worldIn, BlockPos pos, Player player) {
     return onTileEntityUse(worldIn, pos, te -> {
-      boolean sneak = player.isShiftKeyDown();
-      te.changeState(sneak);
+      te.toggleState();
       float f = .25f + ((te.state + 5) / 15f) * .5f;
-      worldIn.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.2F, f);
+      worldIn.playSound(null, pos, SoundEvents.LEVER_CLICK, SoundSource.BLOCKS, 0.4F, f);
       return InteractionResult.SUCCESS;
     });
   }
-
   @Override
   public int getSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side) {
-    return getTileEntityOptional(blockAccess, pos).map(al -> al.state)
-      .orElse(0);
+    return getTileEntityOptional(blockAccess, pos).map(computeStateSignal(blockState, side)).orElse(0);
+  }
+
+  public Function<XorLeverBlockEntity, Integer> computeStateSignal(BlockState bs, Direction side) {
+    return (te) -> {
+      var teIsOn = te.state > 0;
+      var facing = bs.getValue(FACING);
+      if (side == facing) return teIsOn ? 0 : 2;
+      if (side != facing) return teIsOn ? 2 : 0;
+      return 0;
+    };
   }
 
   @Override
@@ -79,24 +88,21 @@ public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implem
     if (isMoving || state.getBlock() == newState.getBlock())
       return;
     withTileEntityDo(worldIn, pos, te -> {
-      if (te.state != 0)
-        updateNeighbors(state, worldIn, pos);
+      if (te.state != 0) updateNeighbors(state, worldIn, pos);
       worldIn.removeBlockEntity(pos);
     });
   }
 
   private static void addParticles(BlockState state, LevelAccessor worldIn, BlockPos pos, float alpha) {
-    Direction direction = state.getValue(FACING)
-      .getOpposite();
+    Direction direction = state.getValue(FACING).getOpposite();
     Direction direction1 = getConnectedDirection(state).getOpposite();
-    double d0 =
-      (double) pos.getX() + 0.5D + 0.1D * (double) direction.getStepX() + 0.2D * (double) direction1.getStepX();
-    double d1 =
-      (double) pos.getY() + 0.5D + 0.1D * (double) direction.getStepY() + 0.2D * (double) direction1.getStepY();
-    double d2 =
-      (double) pos.getZ() + 0.5D + 0.1D * (double) direction.getStepZ() + 0.2D * (double) direction1.getStepZ();
-    worldIn.addParticle(new DustParticleOptions(new Vector3f(1.0F, 0.0F, 0.0F), alpha), d0, d1, d2, 0.0D, 0.0D,
-      0.0D);
+    double d0 = (double) pos.getX() + 0.5D + 0.1D * (double) direction.getStepX() + 0.2D * (double) direction1.getStepX();
+    double d1 = (double) pos.getY() + 0.5D + 0.1D * (double) direction.getStepY() + 0.2D * (double) direction1.getStepY();
+    double d2 = (double) pos.getZ() + 0.5D + 0.1D * (double) direction.getStepZ() + 0.2D * (double) direction1.getStepZ();
+    double xspeed = 0d;
+    double yspeed = 0d;
+    double zspeed = 0d;
+    worldIn.addParticle(new DustParticleOptions(new Vector3f(1.0F, 0.0F, 0.0F), alpha), d0, d1, d2, xspeed, yspeed, zspeed);
   }
 
   static void updateNeighbors(BlockState state, Level world, BlockPos pos) {

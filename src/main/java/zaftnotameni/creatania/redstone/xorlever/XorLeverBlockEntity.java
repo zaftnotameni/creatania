@@ -37,17 +37,14 @@ public class XorLeverBlockEntity extends SmartTileEntity {
     super.tick();
     if (lastChange > 0) {
       lastChange--;
-      if (lastChange == 0)
-        updateOutput();
+      if (lastChange == 0) updateOutput();
     }
-    if (level.isClientSide)
-      clientState.tickChaser();
+    if (level.isClientSide) clientState.tickChaser();
   }
 
   @Override
   public void initialize() {
     super.initialize();
-
   }
 
   private void updateOutput() {
@@ -60,10 +57,16 @@ public class XorLeverBlockEntity extends SmartTileEntity {
 
   public void changeState(boolean back) {
     int prevState = state;
-    state += back ? -1 : 1;
+    state += back ? -15 : 15;
     state = Mth.clamp(state, 0, 15);
-    if (prevState != state)
-      lastChange = 15;
+    if (prevState != state) lastChange = 15;
+    sendData();
+  }
+  public void toggleState() {
+    int prevState = state;
+    state = 15 - state;;
+    state = Mth.clamp(state, 0, 15);
+    if (prevState != state) lastChange = 15;
     sendData();
   }
 
