@@ -62,6 +62,7 @@ adac83fa9d178f7e75f1d5a23764dca3d28f759e data/creatania/tags/blocks/tier_2.json
 76798a28d22acb76bddbcccdf3d5cea4d12444ad data/creatania/tags/fluids/corrupt_inert_mana.json
 6f10cf7446b0d8ec134eacbc53c8001922b270d6 data/creatania/tags/fluids/pure_inert_mana.json
 bb26b9f841692d23d55edbb429fcb5fdbd9f6915 data/create/recipes/sequenced_assembly/mana_machine_component.json
+b10e633ffd04543657327c741da0ef87996596d3 data/create/recipes/sequenced_assembly/xor_lever.json
 b21439783680ae8736f9b566b452d7d0f956c6aa data/create/tags/blocks/safe_nbt.json
 bd5f14f106988cf292eb7eeb75769a600563e60a data/forge/tags/blocks/storage_blocks/lapis.json
 12fa9798b74f934998f85a84a6d1e7807be062d0 data/minecraft/tags/blocks/mineable/axe.json

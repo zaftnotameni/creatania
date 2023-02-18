@@ -56,6 +56,7 @@ public class ForgeSequencedAssemblyRecipeProvider extends SequencedAssemblyRecip
   @Override
   protected void buildCraftingRecipes(Consumer<FinishedRecipe> consumer) {
     MANA_MACHINE_COMPONENT.register(consumer);
+    XOR_LEVER.register(consumer);
   }
   @Override
   public String getName() {
