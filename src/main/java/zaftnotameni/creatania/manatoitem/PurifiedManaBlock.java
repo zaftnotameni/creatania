@@ -19,15 +19,18 @@ public class PurifiedManaBlock extends Block {
   public static final VanillaEffectConfiguration absorptionEffect = new VanillaEffectConfiguration(
     MobEffects.ABSORPTION,
     CommonConfig.PURIFIED_MANA_BLOCK_BUFF_ABSORPTION_DURATION.get(),
-    CommonConfig.PURIFIED_MANA_BLOCK_BUFF_ABSORPTION.get());
+    CommonConfig.PURIFIED_MANA_BLOCK_BUFF_ABSORPTION.get(),
+    CommonConfig.PURIFIED_MANA_BLOCK_BUFF_DISABLE_WHEN_SNEAKING.get());
   public static final VanillaEffectConfiguration saturationEffect = new VanillaEffectConfiguration(
     MobEffects.SATURATION,
     CommonConfig.PURIFIED_MANA_BLOCK_BUFF_SATURATION_DURATION.get(),
-    CommonConfig.PURIFIED_MANA_BLOCK_BUFF_SATURATION.get());
+    CommonConfig.PURIFIED_MANA_BLOCK_BUFF_SATURATION.get(),
+    CommonConfig.PURIFIED_MANA_BLOCK_BUFF_DISABLE_WHEN_SNEAKING.get());
   public static final VanillaEffectConfiguration healEffect = new VanillaEffectConfiguration(
     MobEffects.HEAL,
     CommonConfig.PURIFIED_MANA_BLOCK_BUFF_HEAL_DURATION.get(),
-    CommonConfig.PURIFIED_MANA_BLOCK_BUFF_HEAL.get());
+    CommonConfig.PURIFIED_MANA_BLOCK_BUFF_HEAL.get(),
+    CommonConfig.PURIFIED_MANA_BLOCK_BUFF_DISABLE_WHEN_SNEAKING.get());
 
   public PurifiedManaBlock(Properties pProperties) {
     super(pProperties);

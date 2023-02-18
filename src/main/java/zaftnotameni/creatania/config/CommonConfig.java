@@ -9,6 +9,7 @@ public class CommonConfig {
   public static final ForgeConfigSpec.ConfigValue<Integer> PURIFIED_MANA_BLOCK_BUFF_HEAL;
   public static final ForgeConfigSpec.ConfigValue<Integer> PURIFIED_MANA_BLOCK_BUFF_ABSORPTION;
   public static final ForgeConfigSpec.ConfigValue<Integer> PURIFIED_MANA_BLOCK_BUFF_SATURATION;
+  public static final ForgeConfigSpec.ConfigValue<Boolean> PURIFIED_MANA_BLOCK_BUFF_DISABLE_WHEN_SNEAKING;
   public static final ForgeConfigSpec.ConfigValue<Integer> MANA_MOTOR_SU_PER_RPM;
   public static final ForgeConfigSpec.ConfigValue<Integer> MANA_MOTOR_MANA_PER_TICK_PER_RPM;
   public static final ForgeConfigSpec.ConfigValue<Integer> MANA_MOTOR_RPM_PER_MANA_PER_TICK;
@@ -36,13 +37,23 @@ public class CommonConfig {
   public static final ForgeConfigSpec.ConfigValue<Integer> CORRUPTED_MANA_BLOCK_BUFF_POISON_DURATION;
   public static final ForgeConfigSpec.ConfigValue<Integer> CORRUPTED_MANA_BLOCK_BUFF_WITHER_DURATION;
   public static final ForgeConfigSpec.ConfigValue<Integer> CORRUPTED_MANA_BLOCK_BUFF_HUNGER_DURATION;
+  public static final ForgeConfigSpec.ConfigValue<Boolean> CORRUPTED_MANA_BLOCK_BUFF_DISABLE_WHEN_SNEAKING;
   public static final ForgeConfigSpec.ConfigValue<Integer> BOTANIA_MANA_BLOCK_BUFF_FLIGHT;
   public static final ForgeConfigSpec.ConfigValue<Integer> BOTANIA_MANA_BLOCK_BUFF_FLIGHT_DURATION;
+  public static final ForgeConfigSpec.ConfigValue<Boolean> BOTANIA_MANA_BLOCK_BUFF_DISABLE_WHEN_SNEAKING;
   public static final ForgeConfigSpec.ConfigValue<String> BLACKLISTED_WRENCH_BLOCKS;
   public static final ForgeConfigSpec.ConfigValue<Integer> MANA_DUCT_TIER_1_MULTIPLIER;
   public static final ForgeConfigSpec.ConfigValue<Integer> MANA_DUCT_TIER_2_MULTIPLIER;
   public static final ForgeConfigSpec.ConfigValue<Integer> MANA_DUCT_TIER_3_MULTIPLIER;
   public static final ForgeConfigSpec.ConfigValue<Integer> MANA_DUCT_TIER_4_MULTIPLIER;
+  public static final ForgeConfigSpec.ConfigValue<Boolean> MANAGEL_CAN_ALWAYS_EAT;
+  public static final ForgeConfigSpec.ConfigValue<Boolean> MANAGEL_FAST_EATING;
+  public static final ForgeConfigSpec.ConfigValue<Float> MANAGEL_FLIGHT_PROBABILITY;
+  public static final ForgeConfigSpec.ConfigValue<Float> MANAGEL_SATURATION_MODIFIER;
+  public static final ForgeConfigSpec.ConfigValue<Integer> MANAGEL_NUTRITION;
+  public static final ForgeConfigSpec.ConfigValue<Integer> MANAGEL_STACKS_TO;
+  public static final ForgeConfigSpec.ConfigValue<Integer> MANAGEL_FLIGHT_DURATION;
+  public static final ForgeConfigSpec.ConfigValue<Integer> MANAGEL_FLIGHT_MODIFIER;
 
   static {
     BUILDER.push("mana_generator");
@@ -87,6 +98,7 @@ public class CommonConfig {
     PURIFIED_MANA_BLOCK_BUFF_HEAL_DURATION = BUILDER.define("buff_heal_duration", 30 * 20);
     PURIFIED_MANA_BLOCK_BUFF_ABSORPTION_DURATION = BUILDER.define("buff_absorption_duration", 30 * 20);
     PURIFIED_MANA_BLOCK_BUFF_SATURATION_DURATION = BUILDER.define("buff_saturation_duration", 30 * 20);
+    PURIFIED_MANA_BLOCK_BUFF_DISABLE_WHEN_SNEAKING = BUILDER.define("buff_prevent_while_sneaking", true);
     BUILDER.pop();
 
     BUILDER.push("corrupted_inert_mana_block");
@@ -98,11 +110,24 @@ public class CommonConfig {
     CORRUPTED_MANA_BLOCK_BUFF_POISON_DURATION = BUILDER.define("buff_poison_duration", 30 * 20);
     CORRUPTED_MANA_BLOCK_BUFF_WITHER_DURATION = BUILDER.define("buff_wither_duration", 30 * 20);
     CORRUPTED_MANA_BLOCK_BUFF_HUNGER_DURATION = BUILDER.define("buff_hunger_duration", 30 * 20);
+    CORRUPTED_MANA_BLOCK_BUFF_DISABLE_WHEN_SNEAKING = BUILDER.define("buff_prevent_while_sneaking", true);
     BUILDER.pop();
 
     BUILDER.push("botania_mana_block");
     BOTANIA_MANA_BLOCK_BUFF_FLIGHT = BUILDER.define("buff_flight", 1);
     BOTANIA_MANA_BLOCK_BUFF_FLIGHT_DURATION = BUILDER.define("buff_flight_duration", 60 * 20);
+    BOTANIA_MANA_BLOCK_BUFF_DISABLE_WHEN_SNEAKING = BUILDER.define("buff_prevent_while_sneaking", true);
+    BUILDER.pop();
+
+    BUILDER.push("managel");
+    MANAGEL_CAN_ALWAYS_EAT = BUILDER.define("can_always_eat", true);
+    MANAGEL_FAST_EATING = BUILDER.define("can_eat_fast", true);
+    MANAGEL_FLIGHT_PROBABILITY = BUILDER.define("chance_of_providing_flight", 1f);
+    MANAGEL_SATURATION_MODIFIER = BUILDER.define("saturation_modifier", 0.1f);
+    MANAGEL_NUTRITION = BUILDER.define("nutrition_value", 1);
+    MANAGEL_FLIGHT_DURATION = BUILDER.define("nutrition_value", 15 * 20);
+    MANAGEL_FLIGHT_MODIFIER = BUILDER.define("nutrition_value", 1);
+    MANAGEL_STACKS_TO = BUILDER.define("stacks_to", 32);
     BUILDER.pop();
 
     BUILDER.push("misc");
