@@ -25,7 +25,7 @@ public class ForgeRecipeProvider extends RecipeProvider {
     );
 
     var botaniaManaFluid = new FluidStack(Fluids.BOTANIA_MANA_FLUID.fluid.get(), 1000);
-    var purifiedManaFluid = new FluidStack(Fluids.MANA_FLUID.fluid.get(), 1000);
+    var purifiedManaFluid = new FluidStack(Fluids.PURIFIED_MANA_FLUID.fluid.get(), 1000);
     var air = net.minecraft.world.level.block.Blocks.AIR;
     var corruptedInertManaBlock = new ItemStack(Blocks.CORRUPTED_INERT_MANA_BLOCK.get(), 1);
 

@@ -24,6 +24,10 @@
 - Mana Blocks have new models
 - Mana Gel has new model
 
+#### Internals
+
+- Complete rework of fluid registration
+
 ### 1.18.2-0.0.21-alpha
 
 #### New
