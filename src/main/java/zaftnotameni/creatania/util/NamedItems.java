@@ -11,7 +11,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
 public class NamedItems {
-  public static String[] BOTANIA_TALL_FLOWERS = {
+  public static final String[] BOTANIA_TALL_FLOWERS = {
     "botania:black_double_flower",
     "botania:blue_double_flower",
     "botania:brown_double_flower",

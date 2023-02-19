@@ -16,12 +16,10 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import zaftnotameni.creatania.Constants;
-import zaftnotameni.creatania.event.ModEventBus;
 import zaftnotameni.creatania.util.Log;
 
 public class Fluids {
   public static final DeferredRegister<Fluid> INDEX = DeferredRegister.create(ForgeRegistries.FLUIDS, Constants.MODID);
-
   public static final ResourceLocation WATER_STILL_RL = new ResourceLocation("block/water_still");
   public static final ResourceLocation WATER_FLOWING_RL = new ResourceLocation("block/water_flow");
   public static final ResourceLocation WATER_OVERLAY_RL = new ResourceLocation("block/water_overlay");
@@ -43,6 +41,7 @@ public class Fluids {
   public static final RegistryObject<FlowingFluid> BOTANIA_MANA_FLOWING
     = INDEX.register(Constants.BOTANIA_MANA_FLOWING, () -> new ForgeFlowingFluid.Flowing(Fluids.BOTANIA_MANA_FLUID_PROPERTIES));
 
+  public static final
   public static final ForgeFlowingFluid.Properties MANA_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
     () -> MANA_FLUID.get(),
     () -> MANA_FLOWING.get(),
