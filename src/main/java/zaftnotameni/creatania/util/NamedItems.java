@@ -10,7 +10,15 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.apache.commons.lang3.StringUtils;
 public class NamedItems {
+  public static String namespaceOf(String id) { return id.split(":")[0]; }
+  public static String pathOf(String id) { return id.split(":")[1]; }
+  public static ResourceLocation resourceOf(String id) { return new ResourceLocation(namespaceOf(id), pathOf(id)); }
+  public static ItemLike itemLikeOf(String id) { return itemLike(namespaceOf(id), pathOf(id)); }
+  public static String idToTallFlower(String id) { return id.split(":")[1]; }
+  public static String tallToMysticFlower(String tallPath) { return StringUtils.replace(tallPath, "double", "mystical"); }
+  public static String tallToFlowerPetal(String tallPath) { return StringUtils.replace(tallPath, "double_flower", "petal"); }
   public static final String[] BOTANIA_TALL_FLOWERS = {
     "botania:black_double_flower",
     "botania:blue_double_flower",
