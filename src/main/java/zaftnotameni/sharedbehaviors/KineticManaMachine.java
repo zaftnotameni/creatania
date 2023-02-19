@@ -7,11 +7,9 @@ import com.simibubi.create.foundation.tileEntity.SmartTileEntity;
 import com.simibubi.create.foundation.tileEntity.behaviour.CenteredSideValueBoxTransform;
 import com.simibubi.create.foundation.tileEntity.behaviour.scrollvalue.ScrollValueBehaviour;
 import com.simibubi.create.foundation.utility.Lang;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
@@ -68,10 +66,12 @@ public class KineticManaMachine<T extends SmartTileEntity & IAmManaMachine> {
     return (int) Math.max(1, ((float) manaPerRpm/(float) rpmPerMana) * Math.abs(te.getManaMachineGeneratedSpeed()));
   }
 
-  public CenteredSideValueBoxTransform createShaftSlot(DirectionProperty dir) { return new CenteredSideValueBoxTransform((motor, side) -> motor.getValue(dir) == side.getOpposite()); }
+  public static CenteredSideValueBoxTransform createTransformPointingAt(Direction dir) { return new CenteredSideValueBoxTransform((te, side) -> dir == side); }
+  public static CenteredSideValueBoxTransform createTransformPointingAt(DirectionProperty dir) { return new CenteredSideValueBoxTransform((te, side) -> te.getValue(dir) == side); }
+  public CenteredSideValueBoxTransform createTransformOppositeTo(DirectionProperty dir) { return new CenteredSideValueBoxTransform((te, side) -> te.getValue(dir) == side.getOpposite()); }
   public ScrollValueBehaviour createScrollBehavior(DirectionProperty dir) {
     var maxRPM = AllConfigs.SERVER.kinetics.maxMotorSpeed.get();
-    var shaftSlot = createShaftSlot(dir);
+    var shaftSlot = createTransformOppositeTo(dir);
     var behavior = new ScrollValueBehaviour(Lang.translateDirect("generic.speed"), te, shaftSlot)
       .between(-maxRPM, maxRPM)
       .withUnit(i -> Lang.translateDirect("generic.unit.rpm"))

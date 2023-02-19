@@ -47,21 +47,10 @@ public class XorLeverBlockEntity extends SmartTileEntity {
     super.initialize();
   }
 
-  private void updateOutput() {
-    XorLeverBlock.updateNeighbors(getBlockState(), level, worldPosition);
-  }
+  private void updateOutput() { XorLeverBlock.updateNeighbors(getBlockState(), level, worldPosition); }
 
   @Override
-  public void addBehaviours(List<TileEntityBehaviour> behaviours) {
-  }
-
-  public void changeState(boolean back) {
-    int prevState = state;
-    state += back ? -15 : 15;
-    state = Mth.clamp(state, 0, 15);
-    if (prevState != state) lastChange = 15;
-    sendData();
-  }
+  public void addBehaviours(List<TileEntityBehaviour> behaviours) {}
   public void toggleState() {
     int prevState = state;
     state = 15 - state;;
@@ -69,8 +58,5 @@ public class XorLeverBlockEntity extends SmartTileEntity {
     if (prevState != state) lastChange = 15;
     sendData();
   }
-
-  public int getState() {
-    return state;
-  }
+  public int getState() { return state; }
 }

@@ -25,6 +25,6 @@ public abstract class BaseManaBlock  extends Block {
 
   @Override
   public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
-    return Voxel.ALMOST_FULL_BLOCK_VOXEL;
+    return Voxel.FULL_BLOCK_VOXEL;
   }
 }

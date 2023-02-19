@@ -27,4 +27,6 @@ public class Constants {
   public static final String ELEMENTIUML_MANA_DUCT_BLOCK = "elementium_manaduct_block";
   public static final String XOR_LEVER = "xor_lever";
   public static final String XOR_LEVER_BLOCK_ENTITY = "xor_lever_block_entity";
+  public static final String ELEMENTIUM_WIRE = "elementium_wire";
+  public static final String ELEMENTIUM_WIRE_BLOCK_ENTITY = "elementium_wire_block_entity";
 }

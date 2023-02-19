@@ -105,13 +105,12 @@ public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implem
 
   static void updateNeighbors(BlockState state, Level world, BlockPos pos) {
     world.updateNeighborsAt(pos, state.getBlock());
-    world.updateNeighborsAt(pos.relative(getConnectedDirection(state).getOpposite()), state.getBlock());
   }
 
   @SuppressWarnings("deprecation")
   @Override
   public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-    return Blocks.LEVER.getShape(state, worldIn, pos, context);
+    return Blocks.DIAMOND_BLOCK.getShape(state, worldIn, pos, context);
   }
 
   @Override
