@@ -6,7 +6,10 @@
 
 #### Fixes
 
+- Botania Mana Block shows the correct icon in inventory now
 - Mana Condenser shows the correct icon in inventory now
+- Gaia manaduct renders correctly in world now
+- Elementium manaduct renders correctly in world now
 - Melting terrasteel recipe now produces the correct fluid
 - Melting elementium recipe now produces the correct fluid
 - Melting gaia recipe now produces the correct fluid

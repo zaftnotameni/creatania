@@ -1,6 +1,7 @@
 package zaftnotameni.creatania.registry;
 import com.simibubi.create.AllItems;
 import zaftnotameni.creatania.advancements.CreataniaAdvancement;
+import zaftnotameni.creatania.util.Humanity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,8 @@ public class Advancements {
       .description("Creatania is a Contraption Magical Tech Mod")
       .awardedForFree()
       .special(SILENT)),
+
+  // mana machinery
     MANA_MACHINE_COMPONENT = create("mana_machine_component", b -> b.icon(zaftnotameni.creatania.registry.Blocks.MANA_MACHINE_COMPONENT.get())
       .title("Magical... Stress")
       .description("Obtain a mana machine component, the core of all mana machines")
@@ -33,22 +36,34 @@ public class Advancements {
       .after(MANA_MACHINE_COMPONENT)
       .special(NOISY)
       .whenIconCollected()),
+    XOR_LEVER = create("xor_lever", b -> b.icon(Blocks.XOR_LEVER.get())
+      .title("Cleveraging Exorbitantly")
+      .description("Keeping redstone signals under control")
+      .after(MANA_MACHINE_COMPONENT)
+      .special(NOISY)
+      .whenIconCollected()),
     MANADUCT_TIER_1 = create("manaduct_tier_1", b -> b.icon(Blocks.MANASTEEL_MANADUCT_BLOCK.get())
-      .title("Pipe Dream")
-      .description("Ducts transfer mana without the massive efficiency loss of transmitting it through air")
+      .title("Fixing mana with duct tape")
+      .description("Sending mana from the physical world is a very inefficient process, ducts help mitigate the losses")
       .after(MANA_GENERATOR)
       .special(NOISY)
       .whenIconCollected()),
     MANADUCT_TIER_2 = create("manaduct_tier_2", b -> b.icon(Blocks.TERRASTEEL_MANADUCT_BLOCK.get())
       .title("Duct Tales")
-      .description("A more refined duct, will increase your mana gains even more")
-      .after(MANA_GENERATOR)
+      .description("A more refined duct, further reduces loss during mana transfer from a generator")
+      .after(MANADUCT_TIER_1)
       .special(NOISY)
       .whenIconCollected()),
-    MANADUCT_TIER_3 = create("manaduct_tier_3", b -> b.icon(Blocks.GAIA_MANADUCT_BLOCK.get())
-      .title("Duct taping mana")
-      .description("An even larger pipe")
-      .after(MANA_GENERATOR)
+    MANADUCT_TIER_3 = create("manaduct_tier_3", b -> b.icon(Blocks.ELEMENTIUM_MANADUCT_BLOCK.get())
+      .title("Elementarium, my dear botanate")
+      .description("An elven better duct, the folks in alfheim really know their stuff")
+      .after(MANADUCT_TIER_2)
+      .special(NOISY)
+      .whenIconCollected()),
+    MANADUCT_TIER_4 = create("manaduct_tier_4", b -> b.icon(Blocks.GAIA_MANADUCT_BLOCK.get())
+      .title("Pipe Dream")
+      .description("Defeating that guardian was a pain, but now it pays dividends")
+      .after(MANADUCT_TIER_3)
       .special(NOISY)
       .whenIconCollected()),
     MANA_CONDENSER = create("mana_condenser", b -> b.icon(zaftnotameni.creatania.registry.Blocks.MANA_CONDENSER.get())
@@ -62,9 +77,28 @@ public class Advancements {
       .description("You're now ready to generate rotation force with mana")
       .after(MANA_MACHINE_COMPONENT)
       .whenIconCollected()),
+
+  // melting
+    MOLTEN_BRASS_FLUID = melt(Fluids.MOLTEN_BRASS_FLUID),
+    MOLTEN_GAIA = melt(Fluids.MOLTEN_GAIA),
+    MOLTEN_ELEMENTIUM = melt(Fluids.MOLTEN_ELEMENTIUM),
+    MOLTEN_MANASTEEL = melt(Fluids.MOLTEN_MANASTEEL),
+    MOLTEN_TERRASTEEL = melt(Fluids.MOLTEN_TERRASTEEL),
+    MOLTEN_ANDESITE_ALLOY_FLUID = melt(Fluids.MOLTEN_ANDESITE_ALLOY_FLUID),
+    MOLTEN_COPPER_FLUID = melt(Fluids.MOLTEN_COPPER_FLUID),
+    MOLTEN_GOLD_FLUID = melt(Fluids.MOLTEN_GOLD_FLUID),
+    MOLTEN_IRON_FLUID = melt(Fluids.MOLTEN_IRON_FLUID),
+    MOLTEN_ZINC_FLUID = melt(Fluids.MOLTEN_ZINC_FLUID),
+    BOTANIA_MANA_FLUID = melt(Fluids.BOTANIA_MANA_FLUID),
+    CORRUPT_MANA_FLUID = melt(Fluids.CORRUPT_MANA_FLUID),
+    PURIFIED_MANA_FLUID = melt(Fluids.PURIFIED_MANA_FLUID),
+
+  // botanical contraptions
+
+  // secrets
     DOING_THE_LORDS_WORK = create("lords_work", b -> b.icon(net.minecraft.world.item.Items.WANDERING_TRADER_SPAWN_EGG)
       .title("More like wandering TRAITOR...")
-      .description("The llama guy got what he deserves, thanks for your service")
+      .description("The llame llama lloser got what he deserves, thanks for your service")
       .after(ROOT)
       .special(SECRET)),
     BUFF_FROM_INERT_MANA_BLOCKS = create("buff_from_purified_blocks", b -> b.icon(Blocks.PURIFIED_INERT_MANA_BLOCK.get())
@@ -94,7 +128,7 @@ public class Advancements {
       .special(SECRET)),
     PRODUCE_MANA_GEL_FROM_SLIME = create("produce_mana_gel_from_slime", b -> b.icon(Items.MANA_GEL.get())
       .title("YUMMY!")
-      .description("Produce mana gel by having a slime touch purified inert mana fluid")
+      .description("Produce mana gel by having a slime be hurt while touch purified inert mana fluid")
       .after(ROOT)
       .special(SECRET)),
     END = null;
@@ -102,6 +136,14 @@ public class Advancements {
   public static CreataniaAdvancement create(String id, UnaryOperator<CreataniaAdvancement.Builder> b) {
     return new CreataniaAdvancement(id, b);
   }
+
+  public static CreataniaAdvancement melt(Fluids.FluidEntry fe) {
+    return create("your_first_" + fe.bucket.getId().getPath(), b -> b.icon(fe.bucket.get())
+      .title(Humanity.digestItem(fe.bucket.get()))
+      .description("Grabbing a " + Humanity.digestItem(fe.bucket.get()) + " from a hot mixer")
+      .after(ROOT));
+  }
+
 
   public static void register() {}
 }

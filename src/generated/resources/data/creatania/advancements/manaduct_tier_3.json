@@ -1,8 +1,8 @@
 {
-  "parent": "creatania:mana_generator",
+  "parent": "creatania:manaduct_tier_2",
   "display": {
     "icon": {
-      "item": "creatania:gaia_manaduct_block"
+      "item": "creatania:elementium_manaduct_block"
     },
     "title": {
       "translate": "advancement.creatania.manaduct_tier_3"
@@ -23,7 +23,7 @@
         "items": [
           {
             "items": [
-              "creatania:gaia_manaduct_block"
+              "creatania:elementium_manaduct_block"
             ]
           }
         ]
