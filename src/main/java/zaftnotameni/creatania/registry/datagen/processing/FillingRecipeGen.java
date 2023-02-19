@@ -16,13 +16,13 @@ public class FillingRecipeGen extends ForgeCreateProcessingRecipeProvider {
 			var mysticalPath = StringUtils.replace(tallPath, "double", "mystical");
 			var petalPath = StringUtils.replace(tallPath, "double_flower", "petal");
 
-			create(mysticalPath + "_from_" + petalPath, b -> b.require(Fluids.MANA_FLUID.fluid.get(), 250)
+			create(mysticalPath + "_from_" + petalPath, b -> b.require(Fluids.PURIFIED_MANA_FLUID.fluid.get(), 250)
 				.require(itemLike(namespace, petalPath))
 				.output(itemLike(namespace, mysticalPath)));
-			create(tallPath + "_from_" + mysticalPath, b -> b.require(Fluids.MANA_FLUID.fluid.get(), 250)
+			create(tallPath + "_from_" + mysticalPath, b -> b.require(Fluids.PURIFIED_MANA_FLUID.fluid.get(), 250)
 				.require(itemLike(namespace, mysticalPath))
 				.output(itemLike(namespace, tallPath)));
-			create(tallPath + "_from_" + petalPath, b -> b.require(Fluids.MANA_FLUID.fluid.get(), 1000)
+			create(tallPath + "_from_" + petalPath, b -> b.require(Fluids.PURIFIED_MANA_FLUID.fluid.get(), 1000)
 				.require(itemLike(namespace, petalPath))
 				.output(itemLike(namespace, tallPath)));
 		}

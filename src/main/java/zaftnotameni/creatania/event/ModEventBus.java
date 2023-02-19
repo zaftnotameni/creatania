@@ -114,7 +114,7 @@ public class ModEventBus {
     registerBlockColors(purple, () -> Blocks.CORRUPTED_INERT_MANA_BLOCK.get());
     registerBlockColors(purple, () -> Fluids.CORRUPT_MANA_FLUID.block.get());
     registerBlockColors(cyan, () -> Blocks.PURIFIED_INERT_MANA_BLOCK.get());
-    registerBlockColors(cyan, () -> Fluids.MANA_FLUID.block.get());
+    registerBlockColors(cyan, () -> Fluids.PURIFIED_MANA_FLUID.block.get());
     registerBlockColors(wart, () -> Blocks.BOTANIA_MANA_BLOCK.get());
     registerBlockColors(wart, () -> Fluids.BOTANIA_MANA_FLUID.block.get());
   }
@@ -139,7 +139,7 @@ public class ModEventBus {
       }
     };
     registerItemColors(purple, () -> Fluids.CORRUPT_MANA_FLUID.bucket.get().asItem());
-    registerItemColors(cyan, () -> Fluids.MANA_FLUID.bucket.get().asItem());
+    registerItemColors(cyan, () -> Fluids.PURIFIED_MANA_FLUID.bucket.get().asItem());
     registerItemColors(wart, () -> Fluids.BOTANIA_MANA_FLUID.bucket.get().asItem());
   }
 }
