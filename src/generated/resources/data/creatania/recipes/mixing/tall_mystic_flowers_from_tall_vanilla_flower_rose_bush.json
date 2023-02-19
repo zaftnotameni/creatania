@@ -2,7 +2,7 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "minecraft:poppy"
+      "item": "minecraft:rose_bush"
     },
     {
       "fluid": "creatania:mana_fluid",
@@ -13,67 +13,67 @@
   "results": [
     {
       "item": "botania:black_double_flower",
-      "chance": 0.1
+      "chance": 0.0625
     },
     {
       "item": "botania:blue_double_flower",
-      "chance": 0.1
+      "chance": 0.0625
     },
     {
       "item": "botania:brown_double_flower",
-      "chance": 0.1
+      "chance": 0.0625
     },
     {
       "item": "botania:cyan_double_flower",
-      "chance": 0.1
+      "chance": 0.0625
     },
     {
       "item": "botania:gray_double_flower",
-      "chance": 0.1
+      "chance": 0.0625
     },
     {
       "item": "botania:green_double_flower",
-      "chance": 0.1
+      "chance": 0.0625
     },
     {
       "item": "botania:light_blue_double_flower",
-      "chance": 0.1
+      "chance": 0.0625
     },
     {
       "item": "botania:light_gray_double_flower",
-      "chance": 0.1
+      "chance": 0.0625
     },
     {
       "item": "botania:lime_double_flower",
-      "chance": 0.1
+      "chance": 0.0625
     },
     {
       "item": "botania:magenta_double_flower",
-      "chance": 0.1
+      "chance": 0.0625
     },
     {
       "item": "botania:orange_double_flower",
-      "chance": 0.1
+      "chance": 0.0625
     },
     {
       "item": "botania:pink_double_flower",
-      "chance": 0.1
+      "chance": 0.0625
     },
     {
       "item": "botania:purple_double_flower",
-      "chance": 0.1
+      "chance": 0.0625
     },
     {
       "item": "botania:red_double_flower",
-      "chance": 0.1
+      "chance": 0.0625
     },
     {
       "item": "botania:white_double_flower",
-      "chance": 0.1
+      "chance": 0.0625
     },
     {
       "item": "botania:yellow_double_flower",
-      "chance": 0.1
+      "chance": 0.0625
     }
   ]
 }

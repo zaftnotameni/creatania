@@ -2,14 +2,14 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "create:brass_ingot"
+      "item": "minecraft:iron_ingot"
     }
   ],
   "results": [
     {
-      "fluid": "creatania:molten_brass_fluid",
+      "fluid": "creatania:molten_iron_fluid",
       "amount": 125
     }
   ],
-  "heatRequirement": "heated"
+  "heatRequirement": "superheated"
 }

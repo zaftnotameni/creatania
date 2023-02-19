@@ -41,29 +41,43 @@ public class MixingRecipeGen extends ForgeCreateProcessingRecipeProvider {
 
 		create("molten_brass_ingot", b -> b.require(Ingredient.of(AllItems.BRASS_INGOT.get()))
 			.output(Fluids.MOLTEN_BRASS_FLUID.fluid.get(), 125)
-			.requiresHeat(HeatCondition.SUPERHEATED));
+			.requiresHeat(HeatCondition.HEATED));
 		create("molten_zinc_ingot", b -> b.require(Ingredient.of(AllItems.ZINC_INGOT.get()))
 			.output(Fluids.MOLTEN_ZINC_FLUID.fluid.get(), 125)
-			.requiresHeat(HeatCondition.SUPERHEATED));
+			.requiresHeat(HeatCondition.HEATED));
 		create("molten_andesite_alloy_from_ingot", b -> b.require(Ingredient.of(AllItems.ANDESITE_ALLOY.get()))
 			.output(Fluids.MOLTEN_ANDESITE_ALLOY_FLUID.fluid.get(), 125)
 			.requiresHeat(HeatCondition.SUPERHEATED));
 
-		Function<ProcessingRecipeBuilder, ProcessingRecipeBuilder> eachlowerOutput = b -> {
-			for (var flowerId : BOTANIA_MYSTICAL_FLOWERS) b.output(0.1f, itemLikeOf(flowerId), 1);
+		create("molten_iron_from_ingot", b -> b.require(Ingredient.of(itemLikeOf("minecraft:iron_ingot")))
+			.output(Fluids.MOLTEN_IRON_FLUID.fluid.get(), 125)
+			.requiresHeat(HeatCondition.SUPERHEATED));
+		create("molten_gold_from_ingot", b -> b.require(Ingredient.of(itemLikeOf("minecraft:gold_ingot")))
+			.output(Fluids.MOLTEN_GOLD_FLUID.fluid.get(), 125)
+			.requiresHeat(HeatCondition.HEATED));
+		create("molten_copper_from_ingot", b -> b.require(Ingredient.of(itemLikeOf("minecraft:copper_ingot")))
+			.output(Fluids.MOLTEN_COPPER_FLUID.fluid.get(), 125)
+			.requiresHeat(HeatCondition.HEATED));
+
+		Function<ProcessingRecipeBuilder, ProcessingRecipeBuilder> eachFlowerOutput = b -> {
+			for (var flowerId : BOTANIA_MYSTICAL_FLOWERS) b.output(1f/BOTANIA_MYSTICAL_FLOWERS.length, itemLikeOf(flowerId), 1);
 			return b;
 		};
 		Function<ProcessingRecipeBuilder, ProcessingRecipeBuilder> eachTallFlowerOutput = b -> {
-			for (var flowerId : BOTANIA_TALL_FLOWERS) b.output(0.1f, itemLikeOf(flowerId), 1);
+			for (var flowerId : BOTANIA_TALL_FLOWERS) b.output(1f/BOTANIA_TALL_FLOWERS.length, itemLikeOf(flowerId), 1);
 			return b;
 		};
 
-		create("mystic_flowers_from_vanilla_flowers", b -> eachTallFlowerOutput.apply(b
-			.require(itemLikeOf("minecraft:poppy")))
-			.require(Fluids.PURIFIED_MANA_FLUID.fluid.get(), 125));
-		create("tall_mystic_flowers_from_tall_vanilla_flowers", b -> eachTallFlowerOutput.apply(b
-			.require(itemLikeOf("minecraft:poppy")))
-			.require(Fluids.PURIFIED_MANA_FLUID.fluid.get(), 125));
+		for (var shortFlower : MINECRAFT_SHORT_FLOWERS) {
+			create("mystic_flowers_from_vanilla_flower_" + pathOf(shortFlower), b -> eachFlowerOutput.apply(b
+			  .require(itemLikeOf(shortFlower)))
+				.require(Fluids.PURIFIED_MANA_FLUID.fluid.get(), 125));
+		}
+		for (var tallFlower : MINECRAFT_TALL_FLOWERS) {
+			create("tall_mystic_flowers_from_tall_vanilla_flower_" + pathOf(tallFlower), b -> eachTallFlowerOutput.apply(b
+				.require(itemLikeOf(tallFlower)))
+				.require(Fluids.PURIFIED_MANA_FLUID.fluid.get(), 125));
+		}
 
 	}
 	public MixingRecipeGen(DataGenerator p_i48262_1_) {

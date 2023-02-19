@@ -2,12 +2,12 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "create:brass_ingot"
+      "item": "minecraft:gold_ingot"
     }
   ],
   "results": [
     {
-      "fluid": "creatania:molten_brass_fluid",
+      "fluid": "creatania:molten_gold_fluid",
       "amount": 125
     }
   ],

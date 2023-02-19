@@ -19,6 +19,14 @@ public class NamedItems {
   public static String idToTallFlower(String id) { return id.split(":")[1]; }
   public static String tallToMysticFlower(String tallPath) { return StringUtils.replace(tallPath, "double", "mystical"); }
   public static String tallToFlowerPetal(String tallPath) { return StringUtils.replace(tallPath, "double_flower", "petal"); }
+  public static final String[] MINECRAFT_SHORT_FLOWERS = {
+    "minecraft:poppy",
+    "minecraft:dandelion"
+  };
+  public static final String[] MINECRAFT_TALL_FLOWERS = {
+    "minecraft:rose_bush",
+    "minecraft:allium_flower_bush"
+  };
   public static final String[] BOTANIA_TALL_FLOWERS = {
     "botania:black_double_flower",
     "botania:blue_double_flower",
