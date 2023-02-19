@@ -3,6 +3,7 @@ package zaftnotameni.creatania.registry.datagen.processing;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.contraptions.processing.HeatCondition;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.world.item.crafting.Ingredient;
 import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Fluids;
 
@@ -17,6 +18,9 @@ public class MixingRecipeGen extends ForgeCreateProcessingRecipeProvider {
 		create("purified_inert_mana_fluid", b -> b.require(Blocks.PURIFIED_INERT_MANA_BLOCK.get())
 			.output(Fluids.PURIFIED_MANA_FLUID.fluid.get(), 250)
 			.requiresHeat(HeatCondition.HEATED));
+		create("molten_manasteel", b -> b.require(Ingredient.TagValue)
+			.output(Fluids.BOTANIA_MANA_FLUID.fluid.get(), 250)
+			.requiresHeat(HeatCondition.SUPERHEATED));
 	}
 	public MixingRecipeGen(DataGenerator p_i48262_1_) {
 		super(p_i48262_1_); setupRecipes();

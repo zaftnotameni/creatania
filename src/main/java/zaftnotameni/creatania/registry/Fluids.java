@@ -25,6 +25,47 @@ public class Fluids {
   public static final ResourceLocation WATER_STILL_RL = new ResourceLocation("block/water_still");
   public static final ResourceLocation WATER_FLOWING_RL = new ResourceLocation("block/water_flow");
   public static final ResourceLocation WATER_OVERLAY_RL = new ResourceLocation("block/water_overlay");
+  public static final FluidEntry MOLTEN_MANASTEEL = FluidEntry.named("molten_manasteel")
+    .withFluidAttributesFn(a -> a
+      .density(15)
+      .luminosity(2)
+      .viscosity(8)
+      .sound(SoundEvents.BUCKET_FILL_LAVA)
+      .overlay(WATER_OVERLAY_RL)
+      .color(0xff000088))
+    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
+    .auto();
+  public static final FluidEntry MOLTEN_TERRASTEEL = FluidEntry.named("molten_terrasteel")
+    .withFluidAttributesFn(a -> a
+      .density(15)
+      .luminosity(2)
+      .viscosity(8)
+      .sound(SoundEvents.BUCKET_FILL_LAVA)
+      .overlay(WATER_OVERLAY_RL)
+      .color(0xff008822))
+    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
+    .auto();
+  public static final FluidEntry MOLTEN_ELEMENTIUM = FluidEntry.named("molten_elementium")
+    .withFluidAttributesFn(a -> a
+      .density(15)
+      .luminosity(2)
+      .viscosity(8)
+      .sound(SoundEvents.BUCKET_FILL_LAVA)
+      .overlay(WATER_OVERLAY_RL)
+      .color(0xffffaaaa))
+    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
+    .auto();
+  public static final FluidEntry MOLTEN_GAIA = FluidEntry.named("molten_gaia")
+    .withFluidAttributesFn(a -> a
+      .density(15)
+      .luminosity(2)
+      .viscosity(8)
+      .sound(SoundEvents.BUCKET_FILL_LAVA)
+      .overlay(WATER_OVERLAY_RL)
+      .color(0xffffffff))
+    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
+    .auto();
+
   public static final FluidEntry PURIFIED_MANA_FLUID = FluidEntry.named(Constants.MANA_FLUID_BLOCK_NAME)
     .withFluidAttributesFn(a -> a
       .density(15)
