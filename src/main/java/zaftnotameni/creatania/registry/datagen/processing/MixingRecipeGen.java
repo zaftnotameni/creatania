@@ -1,5 +1,6 @@
 package zaftnotameni.creatania.registry.datagen.processing;
 
+import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.contraptions.processing.HeatCondition;
 import com.simibubi.create.content.contraptions.processing.ProcessingRecipeBuilder;
@@ -37,6 +38,16 @@ public class MixingRecipeGen extends ForgeCreateProcessingRecipeProvider {
 			.requiresHeat(HeatCondition.SUPERHEATED));
 		create("molten_gaia_from_ingot", b -> b.require(Ingredient.of(itemLike("botania", "gaia_ingot")))
 			.output(Fluids.MOLTEN_MANASTEEL.fluid.get(), 125)
+			.requiresHeat(HeatCondition.SUPERHEATED));
+
+		create("molten_brass_ingot", b -> b.require(Ingredient.of(AllItems.BRASS_INGOT.get()))
+			.output(Fluids.MOLTEN_BRASS_FLUID.fluid.get(), 125)
+			.requiresHeat(HeatCondition.SUPERHEATED));
+		create("molten_zinc_ingot", b -> b.require(Ingredient.of(AllItems.ZINC_INGOT.get()))
+			.output(Fluids.MOLTEN_ZINC_FLUID.fluid.get(), 125)
+			.requiresHeat(HeatCondition.SUPERHEATED));
+		create("molten_andesite_alloy_from_ingot", b -> b.require(Ingredient.of(AllItems.ANDESITE_ALLOY.get()))
+			.output(Fluids.MOLTEN_ANDESITE_ALLOY_FLUID.fluid.get(), 125)
 			.requiresHeat(HeatCondition.SUPERHEATED));
 
 		Function<ProcessingRecipeBuilder, ProcessingRecipeBuilder> eachlowerOutput = b -> {

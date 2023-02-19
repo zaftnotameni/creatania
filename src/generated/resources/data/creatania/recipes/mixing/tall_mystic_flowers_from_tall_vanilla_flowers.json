@@ -2,7 +2,7 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "tag": "botania:items/tall_flowers"
+      "tag": "minecraft:items/tall_flowers"
     },
     {
       "fluid": "creatania:mana_fluid",
