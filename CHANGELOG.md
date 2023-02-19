@@ -4,6 +4,10 @@
 
 ### 1.18.2-0.0.23-alpha
 
+#### Fixes
+
+- Mana Condenser shows the correct icon in inventory now
+
 
 ### 1.18.2-0.0.22-alpha
 
@@ -16,6 +20,7 @@
 - Botania flowers can be created from Vanilla Flowers + mana in a mixer
 - Introduced molten botania metals (no use for them yet)
 - Introduced molten create metals (no use for them yet)
+- Introduced molten vanilla metals (no use for them yet)
 
 #### Fixes
 
