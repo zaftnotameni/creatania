@@ -13,6 +13,10 @@
 - Mystical Flower to Flower Petal crushing recipe
 - Mystical Mystical Flower to Tall Flower filling recipe
 - Flower Petal to Mystical Flower filling recipe
+- Botania flowers can be created from Vanilla Flowers + mana in a mixer
+- Introduced molten botania metals (no use for them yet)
+- Introduced molten create metals (no use for them yet)
+- Introduced molten vanilla metals (no use for them yet)
 
 #### Fixes
 
@@ -23,6 +27,7 @@
 - Mana Blocks are now emissive
 - Mana Blocks have new models
 - Mana Gel has new model
+- Improved inventory perspectives for mana machines
 
 #### Internals
 

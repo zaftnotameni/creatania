@@ -2,13 +2,13 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "creatania:botania_mana_block"
+      "item": "botania:elementium_ingot"
     }
   ],
   "results": [
     {
-      "fluid": "creatania:botania_mana_fluid",
-      "amount": 250
+      "fluid": "creatania:molten_manasteel_fluid",
+      "amount": 125
     }
   ],
   "heatRequirement": "superheated"
