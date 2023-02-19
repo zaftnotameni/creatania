@@ -39,8 +39,9 @@ public class Tags {
   public static class Items {
     public static final TagKey<Item> BOTANIA_DOUBLE_MYSTICAL_FLOWERS = botaniaTag("double_mystical_flowers");
     public static final TagKey<Item> BOTANIA_MYSTICAL_FLOWERS = botaniaTag("mystical_flowers");
-    public static final TagKey<Item> MINECRAFT_FLOWERS = botaniaTag("items/flowers");
-    public static final TagKey<Item> MINECRAFT_TALL_FLOWERS = botaniaTag("items/tall_flowers");
+    public static final TagKey<Item> MINECRAFT_FLOWERS = minecraftTag("items/flowers");
+    public static final TagKey<Item> MINECRAFT_TALL_FLOWERS = minecraftTag("items/tall_flowers");
+
     public static TagKey<Item> tag(String name) { return ItemTags.create(new ResourceLocation(Constants.MODID, name)); }
     public static TagKey<Item> forgeTag(String name) { return ItemTags.create(new ResourceLocation("forge", name)); }
     public static TagKey<Item> botaniaTag(String name) { return ItemTags.create(new ResourceLocation("botania", name)); }
