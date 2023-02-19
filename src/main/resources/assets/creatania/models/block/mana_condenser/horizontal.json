@@ -4,7 +4,8 @@
 	"textures": {
 		"2": "creatania:block/gearbox",
 		"5": "creatania:block/manasteel_block",
-		"6": "creatania:block/iron_bars",
+		"7": "creatania:block/mana_block_corrupt",
+		"8": "creatania:block/iron_bars_purple",
 		"9": "creatania:block/livingrock",
 		"13": "creatania:block/mana_generator_face",
 		"particle": "creatania:block/livingrock"
@@ -246,12 +247,51 @@
 			"from": [2, 15, 2],
 			"to": [14, 15, 14],
 			"faces": {
-				"north": {"uv": [0, 0, 12, 0], "texture": "#6"},
-				"east": {"uv": [0, 0, 12, 0], "texture": "#6"},
-				"south": {"uv": [0, 0, 12, 0], "texture": "#6"},
-				"west": {"uv": [0, 0, 12, 0], "texture": "#6"},
-				"up": {"uv": [0, 0, 16, 16], "texture": "#6"},
-				"down": {"uv": [0, 0, 12, 12], "texture": "#6"}
+				"north": {"uv": [0, 0, 12, 0], "texture": "#8"},
+				"east": {"uv": [0, 0, 12, 0], "texture": "#8"},
+				"south": {"uv": [0, 0, 12, 0], "texture": "#8"},
+				"west": {"uv": [0, 0, 12, 0], "texture": "#8"},
+				"up": {"uv": [0, 0, 16, 16], "texture": "#8"},
+				"down": {"uv": [0, 0, 12, 12], "texture": "#8"}
+			}
+		},
+		{
+			"name": "east",
+			"from": [15, 4, 4],
+			"to": [15.25, 12, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 9.75]},
+			"faces": {
+				"north": {"uv": [0, 0, 0.25, 8], "texture": "#7"},
+				"east": {"uv": [0, 0, 8, 8], "texture": "#7"},
+				"south": {"uv": [0, 0, 0.25, 8], "texture": "#7"},
+				"up": {"uv": [0, 0, 8, 0.25], "rotation": 90, "texture": "#7"},
+				"down": {"uv": [0, 0, 8, 0.25], "rotation": 270, "texture": "#7"}
+			}
+		},
+		{
+			"name": "west",
+			"from": [0.75, 4, 4],
+			"to": [1, 12, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [1.125, 8, 8]},
+			"faces": {
+				"north": {"uv": [0, 0, 0.25, 8], "texture": "#7"},
+				"south": {"uv": [0, 0, 0.25, 8], "texture": "#7"},
+				"west": {"uv": [0, 0, 8, 8], "texture": "#7"},
+				"up": {"uv": [0, 0, 8, 0.25], "rotation": 270, "texture": "#7"},
+				"down": {"uv": [0, 0, 8, 0.25], "rotation": 90, "texture": "#7"}
+			}
+		},
+		{
+			"name": "north",
+			"from": [4, 4, 0.75],
+			"to": [12, 12, 1],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 8, 1]},
+			"faces": {
+				"north": {"uv": [0, 0, 8, 8], "texture": "#7"},
+				"east": {"uv": [0, 0, 0.25, 8], "texture": "#7"},
+				"west": {"uv": [0, 0, 0.25, 8], "texture": "#7"},
+				"up": {"uv": [0, 0, 8, 0.25], "texture": "#7"},
+				"down": {"uv": [0, 0, 8, 0.25], "texture": "#7"}
 			}
 		}
 	],
@@ -261,8 +301,8 @@
 			"scale": [0.4, 0.4, 0.4]
 		},
 		"gui": {
-			"rotation": [45, 45, 0],
-			"scale": [0.5, 0.5, 0.5]
+			"rotation": [22.25, 45, 0],
+			"scale": [0.7, 0.7, 0.7]
 		}
 	},
 	"groups": [
@@ -283,6 +323,12 @@
 			"origin": [8, 8, 8],
 			"color": 0,
 			"children": []
+		},
+		{
+			"name": "inset",
+			"origin": [8, 8, 1],
+			"color": 0,
+			"children": [18, 19, 20]
 		}
 	]
 }
