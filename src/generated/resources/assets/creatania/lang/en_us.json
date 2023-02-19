@@ -94,6 +94,36 @@
 
 
 
+	"_": "->------------------------]  Fluids  [------------------------<-",
+
+	"fluid.creatania.molten_gold_fluid": "Molten gold fluid",
+	"fluid.creatania.molten_gold_flowing": "Molten gold flowing",
+	"fluid.creatania.molten_copper_fluid": "Molten copper fluid",
+	"fluid.creatania.molten_copper_flowing": "Molten copper flowing",
+	"fluid.creatania.molten_iron_fluid": "Molten iron fluid",
+	"fluid.creatania.molten_iron_flowing": "Molten iron flowing",
+	"fluid.creatania.molten_brass_fluid": "Molten brass fluid",
+	"fluid.creatania.molten_brass_flowing": "Molten brass flowing",
+	"fluid.creatania.molten_zinc_fluid": "Molten zinc fluid",
+	"fluid.creatania.molten_zinc_flowing": "Molten zinc flowing",
+	"fluid.creatania.molten_andesite_alloy_fluid": "Molten andesite alloy fluid",
+	"fluid.creatania.molten_andesite_alloy_flowing": "Molten andesite alloy flowing",
+	"fluid.creatania.molten_manasteel_fluid": "Molten manasteel fluid",
+	"fluid.creatania.molten_manasteel_flowing": "Molten manasteel flowing",
+	"fluid.creatania.molten_terrasteel_fluid": "Molten terrasteel fluid",
+	"fluid.creatania.molten_terrasteel_flowing": "Molten terrasteel flowing",
+	"fluid.creatania.molten_elementium_fluid": "Molten elementium fluid",
+	"fluid.creatania.molten_elementium_flowing": "Molten elementium flowing",
+	"fluid.creatania.molten_gaia_fluid": "Molten gaia fluid",
+	"fluid.creatania.molten_gaia_flowing": "Molten gaia flowing",
+	"fluid.creatania.mana_fluid": "Mana fluid",
+	"fluid.creatania.mana_flowing": "Mana flowing",
+	"fluid.creatania.botania_mana_fluid": "Botania mana fluid",
+	"fluid.creatania.botania_mana_flowing": "Botania mana flowing",
+	"fluid.creatania.corrupt_mana_fluid": "Corrupt mana fluid",
+	"fluid.creatania.corrupt_mana_flowing": "Corrupt mana flowing",
+
+
 	"_": "->------------------------]  Items  [------------------------<-",
 
 	"item.creatania.mana_gel": "Mana gel",

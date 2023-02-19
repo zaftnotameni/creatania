@@ -6,10 +6,9 @@ import com.simibubi.create.foundation.data.LangPartial;
 import com.simibubi.create.foundation.utility.Lang;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.registry.Blocks;
+import zaftnotameni.creatania.registry.Fluids;
 import zaftnotameni.creatania.registry.Items;
 import zaftnotameni.creatania.util.Log;
-
-import java.util.logging.Logger;
 public enum LangPartials implements LangPartial {
 
   ADVANCEMENTS("Advancements", ForgeAdvancementsProvider::provideLangEntries),
@@ -17,6 +16,7 @@ public enum LangPartials implements LangPartial {
   SUBTITLES("Subtitles"),
   TOOLTIPS("Item Descriptions"),
   PONDER("Ponder Content"),
+  FLUIDS("Fluids", Fluids::provideLangEntries),
   ITEMS("Items", Items::provideLangEntries),
   BLOCKS("Blocks", Blocks::provideLangEntries),
   ;

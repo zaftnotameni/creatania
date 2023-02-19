@@ -2,6 +2,7 @@ package zaftnotameni.creatania.util;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.registries.RegistryObject;
 import org.apache.commons.lang3.StringUtils;
 
@@ -20,7 +21,7 @@ public class Humanity {
   public static String digestItem(Item in) { return digestString(in.getDescriptionId().toString()); }
   public static String digestItem(RegistryObject<Item> entry) { return digestString(entry.getId().getPath()); }
   public static String digestBlock(RegistryObject<Block> entry) { return digestString(entry.getId().getPath()); }
-
+  public static String digestFluid(RegistryObject<Fluid> entry) { return digestString(entry.getId().getPath()); }
 
   public static String keyString(String in) { return StringUtils.replace(in, ":", "."); }
   public static String keyResource(ResourceLocation in) { return keyString(in.toString()); }
@@ -28,4 +29,6 @@ public class Humanity {
   public static String keyItem(Item in) { return "block." + keyString(in.getDescriptionId().toString()); }
   public static String keyItem(RegistryObject<Item> entry) { return "item." + keyString(entry.getId().toString()); }
   public static String keyBlock(RegistryObject<Block> entry) { return "block." + keyString(entry.getId().toString()); }
+  public static String keyFluid(RegistryObject<Fluid> entry) { return "fluid." + keyString(entry.getId().toString()); }
+
 }

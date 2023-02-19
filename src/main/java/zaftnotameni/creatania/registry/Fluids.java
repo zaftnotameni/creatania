@@ -1,4 +1,6 @@
 package zaftnotameni.creatania.registry;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.BucketItem;
@@ -16,6 +18,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import zaftnotameni.creatania.Constants;
+import zaftnotameni.creatania.util.Humanity;
 import zaftnotameni.creatania.util.Log;
 
 import java.util.function.UnaryOperator;
@@ -99,6 +102,11 @@ public class Fluids {
     .withFluidPropertiesFn(f -> f.slopeFindDistance(2).levelDecreasePerBlock(2))
     .withBlockPropertiesFn(b -> b.color(MaterialColor.COLOR_PURPLE).noCollission().strength(100f))
     .auto();
+  public static JsonElement provideLangEntries() {
+    var json = new JsonObject();
+    INDEX.getEntries().forEach(entry -> json.addProperty(Humanity.keyFluid(entry), Humanity.digestFluid(entry)));
+    return json;
+  }
   public static class FluidEntry {
     public RegistryObject<FlowingFluid> fluid;
     public ForgeFlowingFluid.Properties fluidProperties;
