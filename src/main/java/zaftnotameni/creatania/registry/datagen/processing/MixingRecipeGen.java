@@ -1,5 +1,6 @@
 package zaftnotameni.creatania.registry.datagen.processing;
 
+import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.contraptions.processing.HeatCondition;
 import com.simibubi.create.content.contraptions.processing.ProcessingRecipeBuilder;
@@ -7,7 +8,6 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.crafting.Ingredient;
 import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Fluids;
-import zaftnotameni.creatania.registry.Tags;
 
 import java.util.function.Function;
 
@@ -39,6 +39,16 @@ public class MixingRecipeGen extends ForgeCreateProcessingRecipeProvider {
 			.output(Fluids.MOLTEN_MANASTEEL.fluid.get(), 125)
 			.requiresHeat(HeatCondition.SUPERHEATED));
 
+		create("molten_brass_ingot", b -> b.require(Ingredient.of(AllItems.BRASS_INGOT.get()))
+			.output(Fluids.MOLTEN_BRASS_FLUID.fluid.get(), 125)
+			.requiresHeat(HeatCondition.SUPERHEATED));
+		create("molten_zinc_ingot", b -> b.require(Ingredient.of(AllItems.ZINC_INGOT.get()))
+			.output(Fluids.MOLTEN_ZINC_FLUID.fluid.get(), 125)
+			.requiresHeat(HeatCondition.SUPERHEATED));
+		create("molten_andesite_alloy_from_ingot", b -> b.require(Ingredient.of(AllItems.ANDESITE_ALLOY.get()))
+			.output(Fluids.MOLTEN_ANDESITE_ALLOY_FLUID.fluid.get(), 125)
+			.requiresHeat(HeatCondition.SUPERHEATED));
+
 		Function<ProcessingRecipeBuilder, ProcessingRecipeBuilder> eachlowerOutput = b -> {
 			for (var flowerId : BOTANIA_MYSTICAL_FLOWERS) b.output(0.1f, itemLikeOf(flowerId), 1);
 			return b;
@@ -49,10 +59,10 @@ public class MixingRecipeGen extends ForgeCreateProcessingRecipeProvider {
 		};
 
 		create("mystic_flowers_from_vanilla_flowers", b -> eachTallFlowerOutput.apply(b
-			.require(Ingredient.of(Tags.Items.MINECRAFT_FLOWERS)))
+			.require(itemLikeOf("minecraft:poppy")))
 			.require(Fluids.PURIFIED_MANA_FLUID.fluid.get(), 125));
 		create("tall_mystic_flowers_from_tall_vanilla_flowers", b -> eachTallFlowerOutput.apply(b
-			.require(Ingredient.of(Tags.Items.MINECRAFT_TALL_FLOWERS)))
+			.require(itemLikeOf("minecraft:poppy")))
 			.require(Fluids.PURIFIED_MANA_FLUID.fluid.get(), 125));
 
 	}

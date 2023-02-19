@@ -25,44 +25,45 @@ public class Fluids {
   public static final ResourceLocation WATER_STILL_RL = new ResourceLocation("block/water_still");
   public static final ResourceLocation WATER_FLOWING_RL = new ResourceLocation("block/water_flow");
   public static final ResourceLocation WATER_OVERLAY_RL = new ResourceLocation("block/water_overlay");
+
+  public static final FluidEntry MOLTEN_GOLD_FLUID = FluidEntry.named("molten_gold")
+    .withFluidAttributesFn(a -> defaultMolten(a, 0xffffff00))
+    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
+    .auto();
+  public static final FluidEntry MOLTEN_COPPER_FLUID = FluidEntry.named("molten_copper")
+    .withFluidAttributesFn(a -> defaultMolten(a, 0xff666600))
+    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
+    .auto();
+  public static final FluidEntry MOLTEN_IRON_FLUID = FluidEntry.named("molten_iron")
+    .withFluidAttributesFn(a -> defaultMolten(a, 0xffdd0000))
+    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
+    .auto();
+  public static final FluidEntry MOLTEN_BRASS_FLUID = FluidEntry.named("molten_brass")
+    .withFluidAttributesFn(a -> defaultMolten(a, 0xffdddd33))
+    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
+    .auto();
+  public static final FluidEntry MOLTEN_ZINC_FLUID = FluidEntry.named("molten_zinc")
+    .withFluidAttributesFn(a -> defaultMolten(a, 0xff999999))
+    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
+    .auto();
+  public static final FluidEntry MOLTEN_ANDESITE_ALLOY_FLUID = FluidEntry.named("molten_andesite_alloy")
+    .withFluidAttributesFn(a -> defaultMolten(a, 0xff666666))
+    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
+    .auto();
   public static final FluidEntry MOLTEN_MANASTEEL = FluidEntry.named("molten_manasteel")
-    .withFluidAttributesFn(a -> a
-      .density(15)
-      .luminosity(2)
-      .viscosity(8)
-      .sound(SoundEvents.BUCKET_FILL_LAVA)
-      .overlay(WATER_OVERLAY_RL)
-      .color(0xff000088))
+    .withFluidAttributesFn(a -> defaultMolten(a, 0xff000088))
     .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
     .auto();
   public static final FluidEntry MOLTEN_TERRASTEEL = FluidEntry.named("molten_terrasteel")
-    .withFluidAttributesFn(a -> a
-      .density(15)
-      .luminosity(2)
-      .viscosity(8)
-      .sound(SoundEvents.BUCKET_FILL_LAVA)
-      .overlay(WATER_OVERLAY_RL)
-      .color(0xff008822))
+    .withFluidAttributesFn(a -> defaultMolten(a, 0xff008822))
     .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
     .auto();
   public static final FluidEntry MOLTEN_ELEMENTIUM = FluidEntry.named("molten_elementium")
-    .withFluidAttributesFn(a -> a
-      .density(15)
-      .luminosity(2)
-      .viscosity(8)
-      .sound(SoundEvents.BUCKET_FILL_LAVA)
-      .overlay(WATER_OVERLAY_RL)
-      .color(0xffffaaaa))
+    .withFluidAttributesFn(a -> defaultMolten(a, 0xffffaaaa))
     .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
     .auto();
   public static final FluidEntry MOLTEN_GAIA = FluidEntry.named("molten_gaia")
-    .withFluidAttributesFn(a -> a
-      .density(15)
-      .luminosity(2)
-      .viscosity(8)
-      .sound(SoundEvents.BUCKET_FILL_LAVA)
-      .overlay(WATER_OVERLAY_RL)
-      .color(0xffffffff))
+    .withFluidAttributesFn(a -> defaultMolten(a, 0xffffffff))
     .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
     .auto();
 
@@ -163,6 +164,14 @@ public class Fluids {
       }
       return this;
     }
+  }
+  public static FluidAttributes.Builder defaultMolten(FluidAttributes.Builder in, int color) {
+    return in.density(15)
+      .luminosity(2)
+      .viscosity(8)
+      .sound(SoundEvents.BUCKET_FILL_LAVA)
+      .overlay(WATER_OVERLAY_RL)
+      .color(color);
   }
   public static void register(IEventBus bus) {
     Log.LOGGER.debug("register fluids");

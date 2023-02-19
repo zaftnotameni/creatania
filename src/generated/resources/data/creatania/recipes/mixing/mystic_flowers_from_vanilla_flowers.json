@@ -2,7 +2,7 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "tag": "botania:items/flowers"
+      "item": "minecraft:poppy"
     },
     {
       "fluid": "creatania:mana_fluid",
