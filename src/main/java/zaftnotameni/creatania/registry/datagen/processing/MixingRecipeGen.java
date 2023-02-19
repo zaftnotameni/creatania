@@ -30,13 +30,13 @@ public class MixingRecipeGen extends ForgeCreateProcessingRecipeProvider {
 			.output(Fluids.MOLTEN_MANASTEEL.fluid.get(), 125)
 			.requiresHeat(HeatCondition.HEATED));
 		create("molten_terrasteel_from_ingot", b -> b.require(Ingredient.of(itemLike("botania", "terrasteel_ingot")))
-			.output(Fluids.MOLTEN_MANASTEEL.fluid.get(), 125)
+			.output(Fluids.MOLTEN_TERRASTEEL.fluid.get(), 125)
 			.requiresHeat(HeatCondition.SUPERHEATED));
 		create("molten_elementium_from_ingot", b -> b.require(Ingredient.of(itemLike("botania", "elementium_ingot")))
-			.output(Fluids.MOLTEN_MANASTEEL.fluid.get(), 125)
+			.output(Fluids.MOLTEN_ELEMENTIUM.fluid.get(), 125)
 			.requiresHeat(HeatCondition.SUPERHEATED));
 		create("molten_gaia_from_ingot", b -> b.require(Ingredient.of(itemLike("botania", "gaia_ingot")))
-			.output(Fluids.MOLTEN_MANASTEEL.fluid.get(), 125)
+			.output(Fluids.MOLTEN_GAIA.fluid.get(), 125)
 			.requiresHeat(HeatCondition.SUPERHEATED));
 
 		create("molten_brass_ingot", b -> b.require(Ingredient.of(AllItems.BRASS_INGOT.get()))

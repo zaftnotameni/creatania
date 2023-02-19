@@ -7,7 +7,13 @@
 #### Fixes
 
 - Mana Condenser shows the correct icon in inventory now
+- Melting terrasteel recipe now produces the correct fluid
+- Melting elementium recipe now produces the correct fluid
+- Melting gaia recipe now produces the correct fluid
 
+#### Changes
+
+- Molten Metal buckets have a tint
 
 ### 1.18.2-0.0.22-alpha
 
