@@ -8,7 +8,6 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.crafting.Ingredient;
 import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Fluids;
-import zaftnotameni.creatania.registry.Tags;
 
 import java.util.function.Function;
 
@@ -60,10 +59,10 @@ public class MixingRecipeGen extends ForgeCreateProcessingRecipeProvider {
 		};
 
 		create("mystic_flowers_from_vanilla_flowers", b -> eachTallFlowerOutput.apply(b
-			.require(Ingredient.of(Tags.Items.MINECRAFT_FLOWERS)))
+			.require(itemLikeOf("minecraft:poppy")))
 			.require(Fluids.PURIFIED_MANA_FLUID.fluid.get(), 125));
 		create("tall_mystic_flowers_from_tall_vanilla_flowers", b -> eachTallFlowerOutput.apply(b
-			.require(Ingredient.of(Tags.Items.MINECRAFT_TALL_FLOWERS)))
+			.require(itemLikeOf("minecraft:poppy")))
 			.require(Fluids.PURIFIED_MANA_FLUID.fluid.get(), 125));
 
 	}

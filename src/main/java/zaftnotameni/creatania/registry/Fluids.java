@@ -26,8 +26,20 @@ public class Fluids {
   public static final ResourceLocation WATER_FLOWING_RL = new ResourceLocation("block/water_flow");
   public static final ResourceLocation WATER_OVERLAY_RL = new ResourceLocation("block/water_overlay");
 
+  public static final FluidEntry MOLTEN_GOLD_FLUID = FluidEntry.named("molten_gold")
+    .withFluidAttributesFn(a -> defaultMolten(a, 0xffffff00))
+    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
+    .auto();
+  public static final FluidEntry MOLTEN_COPPER_FLUID = FluidEntry.named("molten_copper")
+    .withFluidAttributesFn(a -> defaultMolten(a, 0xff666600))
+    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
+    .auto();
+  public static final FluidEntry MOLTEN_IRON_FLUID = FluidEntry.named("molten_iron")
+    .withFluidAttributesFn(a -> defaultMolten(a, 0xffdd0000))
+    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
+    .auto();
   public static final FluidEntry MOLTEN_BRASS_FLUID = FluidEntry.named("molten_brass")
-    .withFluidAttributesFn(a -> defaultMolten(a, 0xffffff99))
+    .withFluidAttributesFn(a -> defaultMolten(a, 0xffdddd33))
     .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
     .auto();
   public static final FluidEntry MOLTEN_ZINC_FLUID = FluidEntry.named("molten_zinc")
