@@ -76,8 +76,8 @@
 	"item.creatania.botania_mana_block": "Botania mana block",
 	"item.creatania.mana_machine_component": "Mana machine component",
 	"item.creatania.mana_fluid_bucket": "Mana fluid bucket",
-	"item.creatania.corrupt_mana_fluid_bucket": "Corrupt mana fluid bucket",
 	"item.creatania.botania_mana_fluid_bucket": "Botania mana fluid bucket",
+	"item.creatania.corrupt_mana_fluid_bucket": "Corrupt mana fluid bucket",
 
 
 	"_": "->------------------------]  Blocks  [------------------------<-",
@@ -90,9 +90,9 @@
 	"block.creatania.purified_inert_mana_block": "Purified inert mana block",
 	"block.creatania.botania_mana_block": "Botania mana block",
 	"block.creatania.mana_machine_component": "Mana machine component",
-	"block.creatania.mana": "Mana",
-	"block.creatania.corrupt_mana": "Corrupt mana",
-	"block.creatania.botania_mana": "Botania mana",
+	"block.creatania.mana_fluid_block": "Mana fluid block",
+	"block.creatania.botania_mana_fluid_block": "Botania mana fluid block",
+	"block.creatania.corrupt_mana_fluid_block": "Corrupt mana fluid block",
 
 	"_": "Thank you for translating Creatania!"
 
