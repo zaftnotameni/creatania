@@ -71,7 +71,7 @@ public class ManaMotorRenderer extends KineticTileEntityRenderer {
   public static void renderFluids(KineticTileEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
     if (!(te instanceof ManaMotorBlockEntity motor)) return;
     if (motor.mana < 1) return;
-    var renderedFluid = new FluidStack(Fluids.MANA_FLUID.get(), 1000);
+    var renderedFluid = new FluidStack(Fluids.MANA_FLUID.fluid.get(), 1000);
     float ymin = getYMinForFluidLevel();
     float ymax = getYMaxForFluidLevel(motor);
     float xmin = getHorizontalMinForFluidLevel();

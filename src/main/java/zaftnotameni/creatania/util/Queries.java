@@ -9,17 +9,17 @@ public class Queries {
     var posAbove = entity.getOnPos().above();
     var posBelow = entity.getOnPos().below();
     var fluidState = level.getFluidState(pos);
-    if (fluidState.is(Fluids.MANA_FLUID.get())) return true;
+    if (fluidState.is(Fluids.MANA_FLUID.fluid.get())) return true;
     var fluidStateAbove = level.getFluidState(posAbove);
-    if (fluidStateAbove.is(Fluids.MANA_FLUID.get())) return true;
+    if (fluidStateAbove.is(Fluids.MANA_FLUID.fluid.get())) return true;
     var fluidStateBelow = level.getFluidState(posBelow);
-    if (fluidStateBelow.is(Fluids.MANA_FLUID.get())) return true;
+    if (fluidStateBelow.is(Fluids.MANA_FLUID.fluid.get())) return true;
     var blockState = level.getBlockState(pos);
-    if (blockState.is(Fluids.MANA_FLUID_BLOCK.get())) return true;
+    if (blockState.is(Fluids.MANA_FLUID.block.get())) return true;
     var blockStateAbove = level.getBlockState(posAbove);
-    if (blockStateAbove.is(Fluids.MANA_FLUID_BLOCK.get())) return true;
+    if (blockStateAbove.is(Fluids.MANA_FLUID.block.get())) return true;
     var blockStateBelow = level.getBlockState(posBelow);
-    if (blockStateBelow.is(Fluids.MANA_FLUID_BLOCK.get())) return true;
+    if (blockStateBelow.is(Fluids.MANA_FLUID.block.get())) return true;
     return false;
   }
   public static boolean isSlimeEntity(Level level, LivingEntity entity) {

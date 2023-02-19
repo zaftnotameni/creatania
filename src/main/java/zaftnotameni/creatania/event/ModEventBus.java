@@ -1,7 +1,6 @@
 package zaftnotameni.creatania.event;
 
 import com.google.common.collect.Lists;
-import com.simibubi.create.foundation.block.ITE;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
@@ -22,7 +21,6 @@ import net.minecraftforge.fml.common.Mod;
 import org.apache.commons.lang3.tuple.Pair;
 import org.jetbrains.annotations.Nullable;
 import zaftnotameni.creatania.Constants;
-import zaftnotameni.creatania.fx.particle.ManaParticles;
 import zaftnotameni.creatania.recipes.ManaGeneratorRecipe;
 import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Fluids;
@@ -114,11 +112,11 @@ public class ModEventBus {
       }
     };
     registerBlockColors(purple, () -> Blocks.CORRUPTED_INERT_MANA_BLOCK.get());
-    registerBlockColors(purple, () -> Fluids.CORRUPT_MANA_FLUID_BLOCK.get());
+    registerBlockColors(purple, () -> Fluids.CORRUPT_MANA_FLUID.block.get());
     registerBlockColors(cyan, () -> Blocks.PURIFIED_INERT_MANA_BLOCK.get());
-    registerBlockColors(cyan, () -> Fluids.MANA_FLUID_BLOCK.get());
-    registerBlockColors(wart, () -> Fluids.BOTANIA_MANA_FLUID_BLOCK.get());
+    registerBlockColors(cyan, () -> Fluids.MANA_FLUID.block.get());
     registerBlockColors(wart, () -> Blocks.BOTANIA_MANA_BLOCK.get());
+    registerBlockColors(wart, () -> Fluids.BOTANIA_MANA_FLUID.block.get());
   }
   public static void initItemColors() {
     if (!ITEM_COLORS.isEmpty()) return;
@@ -140,8 +138,8 @@ public class ModEventBus {
         return MaterialColor.WARPED_WART_BLOCK.calculateRGBColor(MaterialColor.Brightness.HIGH);
       }
     };
-    registerItemColors(purple, () -> Fluids.CORRUPT_MANA_FLUID_BUCKET.get().asItem());
-    registerItemColors(cyan, () -> Fluids.MANA_FLUID_BUCKET.get().asItem());
-    registerItemColors(wart, () -> Fluids.BOTANIA_MANA_FLUID_BUCKET.get().asItem());
+    registerItemColors(purple, () -> Fluids.CORRUPT_MANA_FLUID.bucket.get().asItem());
+    registerItemColors(cyan, () -> Fluids.MANA_FLUID.bucket.get().asItem());
+    registerItemColors(wart, () -> Fluids.BOTANIA_MANA_FLUID.bucket.get().asItem());
   }
 }

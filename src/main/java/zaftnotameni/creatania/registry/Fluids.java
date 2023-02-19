@@ -18,120 +18,111 @@ import net.minecraftforge.registries.RegistryObject;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.util.Log;
 
+import java.util.function.UnaryOperator;
+
 public class Fluids {
   public static final DeferredRegister<Fluid> INDEX = DeferredRegister.create(ForgeRegistries.FLUIDS, Constants.MODID);
   public static final ResourceLocation WATER_STILL_RL = new ResourceLocation("block/water_still");
   public static final ResourceLocation WATER_FLOWING_RL = new ResourceLocation("block/water_flow");
   public static final ResourceLocation WATER_OVERLAY_RL = new ResourceLocation("block/water_overlay");
-
-  public static final RegistryObject<FlowingFluid> MANA_FLUID
-    = INDEX.register(Constants.MANA_FLUID, () -> new ForgeFlowingFluid.Source(Fluids.MANA_FLUID_PROPERTIES));
-
-  public static final RegistryObject<FlowingFluid> MANA_FLOWING
-    = INDEX.register(Constants.MANA_FLOWING, () -> new ForgeFlowingFluid.Flowing(Fluids.MANA_FLUID_PROPERTIES));
-
-  public static final RegistryObject<FlowingFluid> CORRUPT_MANA_FLUID
-    = INDEX.register(Constants.CORRUPT_MANA_FLUID, () -> new ForgeFlowingFluid.Source(Fluids.CORRUPT_MANA_FLUID_PROPERTIES));
-
-  public static final RegistryObject<FlowingFluid> CORRUPT_MANA_FLOWING
-    = INDEX.register(Constants.CORRUPT_MANA_FLOWING, () -> new ForgeFlowingFluid.Flowing(Fluids.CORRUPT_MANA_FLUID_PROPERTIES));
-
-  public static final RegistryObject<FlowingFluid> BOTANIA_MANA_FLUID
-    = INDEX.register(Constants.BOTANIA_MANA_FLUID, () -> new ForgeFlowingFluid.Source(Fluids.BOTANIA_MANA_FLUID_PROPERTIES));
-  public static final RegistryObject<FlowingFluid> BOTANIA_MANA_FLOWING
-    = INDEX.register(Constants.BOTANIA_MANA_FLOWING, () -> new ForgeFlowingFluid.Flowing(Fluids.BOTANIA_MANA_FLUID_PROPERTIES));
-
-  public static final
-  public static final ForgeFlowingFluid.Properties MANA_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
-    () -> MANA_FLUID.get(),
-    () -> MANA_FLOWING.get(),
-    FluidAttributes.builder(WATER_STILL_RL, WATER_FLOWING_RL)
+  public static final FluidEntry MANA_FLUID = FluidEntry.named(Constants.MANA_FLUID_BLOCK_NAME)
+    .withFluidAttributesFn(a -> a
       .density(15)
       .luminosity(2)
       .viscosity(5)
       .sound(SoundEvents.HONEY_DRINK)
       .overlay(WATER_OVERLAY_RL)
       .color(0xff11aaff))
-      .slopeFindDistance(2)
-      .levelDecreasePerBlock(2)
-      .block(() -> Fluids.MANA_FLUID_BLOCK.get())
-      .bucket(() -> Fluids.MANA_FLUID_BUCKET.get());
-
-  public static final ForgeFlowingFluid.Properties BOTANIA_MANA_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
-    () -> BOTANIA_MANA_FLUID.get(),
-    () -> BOTANIA_MANA_FLOWING.get(),
-    FluidAttributes.builder(WATER_STILL_RL, WATER_FLOWING_RL)
+    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(2))
+    .auto();
+  public static final FluidEntry BOTANIA_MANA_FLUID = FluidEntry.named(Constants.BOTANIA_MANA_FLUID_BLOCK_NAME)
+    .withFluidAttributesFn(a -> a
       .density(15)
       .luminosity(2)
       .viscosity(5)
       .sound(SoundEvents.HONEY_DRINK)
       .overlay(WATER_OVERLAY_RL)
       .color(0xff44ffff))
-    .slopeFindDistance(2)
-    .levelDecreasePerBlock(2)
-    .block(() -> Fluids.BOTANIA_MANA_FLUID_BLOCK.get())
-    .bucket(() -> Fluids.BOTANIA_MANA_FLUID_BUCKET.get());
+    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(2))
+    .auto();
 
-  public static final ForgeFlowingFluid.Properties CORRUPT_MANA_FLUID_PROPERTIES = new ForgeFlowingFluid.Properties(
-    () -> CORRUPT_MANA_FLUID.get(),
-    () -> CORRUPT_MANA_FLOWING.get(),
-    FluidAttributes.builder(WATER_STILL_RL, WATER_FLOWING_RL)
+  public static final FluidEntry CORRUPT_MANA_FLUID = FluidEntry.named(Constants.CORRUPT_MANA_FLUID_BLOCK_NAME)
+    .withFluidAttributesFn(a -> a
       .density(15)
       .luminosity(2)
       .viscosity(5)
       .sound(SoundEvents.HONEY_DRINK)
       .overlay(WATER_OVERLAY_RL)
       .color(0xff440044))
-    .slopeFindDistance(2)
-    .levelDecreasePerBlock(2)
-    .block(() -> Fluids.CORRUPT_MANA_FLUID_BLOCK.get())
-    .bucket(() -> Fluids.CORRUPT_MANA_FLUID_BUCKET.get());
-
-  public static BucketItem createCorruptManaFluidBucket() {
-    return new BucketItem(Fluids.CORRUPT_MANA_FLUID, new Item.Properties().tab(CreativeModeTabs.CREATANIA_ITEMS).stacksTo(1));
+    .withFluidPropertiesFn(f -> f.slopeFindDistance(2).levelDecreasePerBlock(2))
+    .withBlockPropertiesFn(b -> b.color(MaterialColor.COLOR_PURPLE).noCollission().strength(100f))
+    .auto();
+  public static class FluidEntry {
+    public RegistryObject<FlowingFluid> fluid;
+    public ForgeFlowingFluid.Properties fluidProperties;
+    public UnaryOperator<ForgeFlowingFluid.Properties> fluidPropertiesFn;
+    public FluidAttributes.Builder fluidAttributesBuilder;
+    public UnaryOperator<FluidAttributes.Builder> fluidAttributesFn;
+    public UnaryOperator<BlockBehaviour.Properties> blockPropertiesFn;
+    public BlockBehaviour.Properties blockProperties;
+    public RegistryObject<FlowingFluid> flowing;
+    public RegistryObject<BucketItem> bucket;
+    public RegistryObject<LiquidBlock> block;
+    public String name;
+    public String fluidName;
+    public String flowingName;
+    public String bucketName;
+    public String blockName;
+    public FluidEntry(String name) { this.name = name; }
+    public static FluidEntry named(String name) { return new FluidEntry(name); }
+    public FluidEntry withFluid(RegistryObject<FlowingFluid> f) { fluid = f; return this; }
+    public FluidEntry withFluidPropertiesFn(UnaryOperator<ForgeFlowingFluid.Properties> f) { fluidPropertiesFn = f; return this; }
+    public FluidEntry withFluidAttributesBuilder(FluidAttributes.Builder f) { fluidAttributesBuilder = f; return this; }
+    public FluidEntry withFluidAttributesFn(UnaryOperator<FluidAttributes.Builder> f) { fluidAttributesFn = f; return this; }
+    public FluidEntry withBlockPropertiesFn(UnaryOperator<BlockBehaviour.Properties> f) { blockPropertiesFn = f; return this; }
+    public FluidEntry withFlowing(RegistryObject<FlowingFluid> f) { flowing = f; return this; }
+    public FluidEntry withBucket(RegistryObject<BucketItem> f) { bucket = f; return this; }
+    public FluidEntry withBlock(RegistryObject<LiquidBlock> f) { block = f; return this; }
+    public FluidEntry auto() {
+      if (fluid == null) {
+        fluidName = name + "_fluid";
+        fluid = INDEX.register(fluidName, () -> new ForgeFlowingFluid.Source(fluidProperties));
+      }
+      if (flowing == null) {
+        flowingName = name + "_flowing";
+        flowing = INDEX.register(flowingName, () -> new ForgeFlowingFluid.Flowing(fluidProperties));
+      }
+      if (fluidAttributesBuilder == null) {
+        fluidAttributesBuilder = FluidAttributes.builder(WATER_STILL_RL, WATER_FLOWING_RL);
+      }
+      if (fluidAttributesFn != null) {
+        fluidAttributesFn.apply(fluidAttributesBuilder);
+      }
+      if (fluidProperties == null) {
+        fluidProperties = new ForgeFlowingFluid.Properties(() -> fluid.get(), () -> flowing.get(), fluidAttributesBuilder).block(() -> block.get()).bucket(() -> bucket.get());
+      }
+      if (fluidPropertiesFn != null) {
+        fluidPropertiesFn.apply(fluidProperties);
+      }
+      if (bucket == null) {
+        bucketName = name + "_fluid_bucket";
+        bucket = Items.INDEX.register(bucketName, () -> new BucketItem(() -> fluid.get(), new Item.Properties()
+          .tab(CreativeModeTabs.CREATANIA_ITEMS).stacksTo(1)));
+      }
+      if (blockProperties == null) {
+        blockProperties = BlockBehaviour.Properties.of(Material.LAVA);
+      }
+      if (blockPropertiesFn == null) {
+        blockPropertiesFn = x -> x;
+      }
+      blockProperties = blockPropertiesFn.apply(blockProperties);
+      if (block == null) {
+        blockName = name + "_fluid_block";
+        block = Blocks.INDEX.register(blockName, () -> new LiquidBlock(() -> fluid.get(), blockProperties));
+      }
+      return this;
+    }
   }
-  public static BucketItem createManaFluidBucket() {
-    return new BucketItem(Fluids.MANA_FLUID, new Item.Properties().tab(CreativeModeTabs.CREATANIA_ITEMS).stacksTo(1));
-  }
-  public static BucketItem createBotaniaManaFluidBucket() {
-    return new BucketItem(Fluids.BOTANIA_MANA_FLUID, new Item.Properties().tab(CreativeModeTabs.CREATANIA_ITEMS).stacksTo(1));
-  }
-  public static final RegistryObject<Item> MANA_FLUID_BUCKET = Items.INDEX.register(
-    Constants.MANA_FLUID_BUCKET_NAME, () -> createManaFluidBucket());
-  public static final RegistryObject<Item> CORRUPT_MANA_FLUID_BUCKET = Items.INDEX.register(
-    Constants.CORRUPT_MANA_FLUID_BUCKET_NAME, () -> createCorruptManaFluidBucket());
-  public static final RegistryObject<Item> BOTANIA_MANA_FLUID_BUCKET = Items.INDEX.register(
-    Constants.BOTANIA_MANA_FLUID_BUCKET_NAME, () -> createBotaniaManaFluidBucket());
-  public static LiquidBlock createCorruptManaFluidBlock() {
-    return new LiquidBlock(() -> CORRUPT_MANA_FLUID.get(), BlockBehaviour.Properties
-      .of(Material.LAVA)
-      .color(MaterialColor.COLOR_PURPLE)
-      .noCollission()
-      .strength(100f));
-  }
-  public static LiquidBlock createManaFluidBlock() {
-    return new LiquidBlock(() -> MANA_FLUID.get(), BlockBehaviour.Properties
-      .of(Material.WATER)
-      .color(MaterialColor.COLOR_CYAN)
-      .noCollission()
-      .strength(100f));
-  }
-  public static LiquidBlock createBotaniaManaFluidBlock() {
-    return new LiquidBlock(() -> BOTANIA_MANA_FLUID.get(), BlockBehaviour.Properties
-      .of(Material.LAVA)
-      .color(MaterialColor.COLOR_LIGHT_BLUE)
-      .noOcclusion()
-      .lightLevel(x -> 4)
-      .noCollission()
-      .strength(100f));
-  }
-  public static final RegistryObject<LiquidBlock> MANA_FLUID_BLOCK = Blocks.INDEX.register(
-    Constants.MANA_FLUID_BLOCK_NAME, () -> createManaFluidBlock());
-  public static final RegistryObject<LiquidBlock> CORRUPT_MANA_FLUID_BLOCK = Blocks.INDEX.register(
-    Constants.CORRUPT_MANA_FLUID_BLOCK_NAME, () -> createCorruptManaFluidBlock());
-  public static final RegistryObject<LiquidBlock> BOTANIA_MANA_FLUID_BLOCK = Blocks.INDEX.register(
-    Constants.BOTANIA_MANA_FLUID_BLOCK_NAME, () -> createBotaniaManaFluidBlock());
-
   public static void register(IEventBus bus) {
     Log.LOGGER.debug("register fluids");
     INDEX.register(bus);

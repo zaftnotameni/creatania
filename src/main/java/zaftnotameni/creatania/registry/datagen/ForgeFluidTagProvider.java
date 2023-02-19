@@ -1,8 +1,6 @@
 package zaftnotameni.creatania.registry.datagen;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.FluidTagsProvider;
-import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.registry.Fluids;
@@ -14,8 +12,8 @@ public class ForgeFluidTagProvider extends FluidTagsProvider {
 
   @Override
   protected void addTags() {
-    tag(Tags.Fluids.PURE_INERT_MANA).add(Fluids.MANA_FLUID.get());
-    tag(Tags.Fluids.CORRUPT_INERT_MANA).add(Fluids.CORRUPT_MANA_FLUID.get());
+    tag(Tags.Fluids.PURE_INERT_MANA).add(Fluids.MANA_FLUID.fluid.get());
+    tag(Tags.Fluids.CORRUPT_INERT_MANA).add(Fluids.CORRUPT_MANA_FLUID.fluid.get());
   }
 }
 
