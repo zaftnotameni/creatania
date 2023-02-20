@@ -1,0 +1,79 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:poppy"
+    },
+    {
+      "fluid": "creatania:pure_mana",
+      "nbt": {},
+      "amount": 125
+    }
+  ],
+  "results": [
+    {
+      "item": "botania:black_mystical_flower",
+      "chance": 0.0625
+    },
+    {
+      "item": "botania:blue_mystical_flower",
+      "chance": 0.0625
+    },
+    {
+      "item": "botania:brown_mystical_flower",
+      "chance": 0.0625
+    },
+    {
+      "item": "botania:cyan_mystical_flower",
+      "chance": 0.0625
+    },
+    {
+      "item": "botania:gray_mystical_flower",
+      "chance": 0.0625
+    },
+    {
+      "item": "botania:green_mystical_flower",
+      "chance": 0.0625
+    },
+    {
+      "item": "botania:light_blue_mystical_flower",
+      "chance": 0.0625
+    },
+    {
+      "item": "botania:light_gray_mystical_flower",
+      "chance": 0.0625
+    },
+    {
+      "item": "botania:lime_mystical_flower",
+      "chance": 0.0625
+    },
+    {
+      "item": "botania:magenta_mystical_flower",
+      "chance": 0.0625
+    },
+    {
+      "item": "botania:orange_mystical_flower",
+      "chance": 0.0625
+    },
+    {
+      "item": "botania:pink_mystical_flower",
+      "chance": 0.0625
+    },
+    {
+      "item": "botania:purple_mystical_flower",
+      "chance": 0.0625
+    },
+    {
+      "item": "botania:red_mystical_flower",
+      "chance": 0.0625
+    },
+    {
+      "item": "botania:white_mystical_flower",
+      "chance": 0.0625
+    },
+    {
+      "item": "botania:yellow_mystical_flower",
+      "chance": 0.0625
+    }
+  ]
+}

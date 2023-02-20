@@ -1,0 +1,38 @@
+{
+  "parent": "creatania:mana_machine_component",
+  "display": {
+    "icon": {
+      "item": "creatania:mana_motor"
+    },
+    "title": {
+      "translate": "advancement.creatania.mana_motor"
+    },
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.creatania.mana_motor.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "creatania:mana_motor"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ]
+}

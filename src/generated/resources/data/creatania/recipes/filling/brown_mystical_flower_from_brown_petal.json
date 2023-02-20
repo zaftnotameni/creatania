@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "botania:brown_petal"
+    },
+    {
+      "fluid": "creatania:pure_mana",
+      "nbt": {},
+      "amount": 250
+    }
+  ],
+  "results": [
+    {
+      "item": "botania:brown_mystical_flower"
+    }
+  ]
+}

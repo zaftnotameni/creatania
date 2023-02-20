@@ -1,0 +1,15 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:gold_ingot"
+    }
+  ],
+  "results": [
+    {
+      "fluid": "creatania:molten_gold",
+      "amount": 125
+    }
+  ],
+  "heatRequirement": "heated"
+}

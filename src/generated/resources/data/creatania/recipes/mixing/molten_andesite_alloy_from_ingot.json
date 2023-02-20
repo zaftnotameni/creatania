@@ -1,0 +1,15 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "create:andesite_alloy"
+    }
+  ],
+  "results": [
+    {
+      "fluid": "creatania:molten_andesite",
+      "amount": 125
+    }
+  ],
+  "heatRequirement": "superheated"
+}

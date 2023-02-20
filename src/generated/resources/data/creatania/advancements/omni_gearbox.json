@@ -1,0 +1,38 @@
+{
+  "parent": "creatania:mana_machine_component",
+  "display": {
+    "icon": {
+      "item": "creatania:omnibox"
+    },
+    "title": {
+      "translate": "advancement.creatania.omni_gearbox"
+    },
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.creatania.omni_gearbox.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "creatania:omnibox"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ]
+}

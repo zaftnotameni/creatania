@@ -1,0 +1,15 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "botania:terrasteel_ingot"
+    }
+  ],
+  "results": [
+    {
+      "fluid": "creatania:molten_terrasteel",
+      "amount": 125
+    }
+  ],
+  "heatRequirement": "superheated"
+}

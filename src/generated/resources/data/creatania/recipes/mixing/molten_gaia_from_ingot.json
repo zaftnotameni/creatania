@@ -1,0 +1,15 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "botania:gaia_ingot"
+    }
+  ],
+  "results": [
+    {
+      "fluid": "creatania:molten_gaia",
+      "amount": 125
+    }
+  ],
+  "heatRequirement": "superheated"
+}

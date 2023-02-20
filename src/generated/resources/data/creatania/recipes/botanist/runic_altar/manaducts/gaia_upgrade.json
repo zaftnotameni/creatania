@@ -1,0 +1,15 @@
+{
+  "type": "botania:runic_altar",
+  "ingredients": [
+    {
+      "item": "botania:gaia_ingot"
+    },
+    {
+      "item": "creatania:manaducts/elementium"
+    }
+  ],
+  "mana": 88888,
+  "output": {
+    "item": "creatania:manaducts/gaia"
+  }
+}

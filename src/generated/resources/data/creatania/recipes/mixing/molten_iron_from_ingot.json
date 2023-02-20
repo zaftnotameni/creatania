@@ -1,0 +1,15 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:iron_ingot"
+    }
+  ],
+  "results": [
+    {
+      "fluid": "creatania:molten_iron",
+      "amount": 125
+    }
+  ],
+  "heatRequirement": "superheated"
+}
