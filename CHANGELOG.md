@@ -2,11 +2,21 @@
 
 ## changelog
 
+### 1.18.2-0.1.2-alpha
+
+
+
 ### 1.18.2-0.1.1-alpha
 
 #### Fixes
 
 - Fluids render in their designated color again
+- Advancements related to molten fluids are back
+- Includes missing recipe file for fluid conversion
+
+#### Known Issues
+
+- Mana Blocks let you see the bottom of the world
 
 ### 1.18.2-0.1.0-alpha
 
