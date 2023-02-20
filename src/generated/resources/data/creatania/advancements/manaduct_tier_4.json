@@ -2,7 +2,7 @@
   "parent": "creatania:manaduct_tier_3",
   "display": {
     "icon": {
-      "item": "creatania:gaia_manaduct_block"
+      "item": "creatania:manaducts/gaia"
     },
     "title": {
       "translate": "advancement.creatania.manaduct_tier_4"
@@ -23,7 +23,7 @@
         "items": [
           {
             "items": [
-              "creatania:gaia_manaduct_block"
+              "creatania:manaducts/gaia"
             ]
           }
         ]

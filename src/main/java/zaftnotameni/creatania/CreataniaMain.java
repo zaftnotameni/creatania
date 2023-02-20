@@ -35,6 +35,7 @@ public class CreataniaMain {
   public static void registrySetup(IEventBus bus) {
     Potions.register(bus);
     Particles.register(bus);
+    Index.all().registerEventListeners(bus);
     Items.register(bus);
     Blocks.register(bus);
     Fluids.register(bus);

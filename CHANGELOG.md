@@ -4,7 +4,9 @@
 
 ### 1.18.2-0.0.24-alpha
 
+#### Internals
 
+- Massive registrate migration
 
 ### 1.18.2-0.0.23-alpha
 

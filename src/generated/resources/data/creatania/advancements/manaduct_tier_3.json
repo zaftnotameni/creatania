@@ -2,7 +2,7 @@
   "parent": "creatania:manaduct_tier_2",
   "display": {
     "icon": {
-      "item": "creatania:elementium_manaduct_block"
+      "item": "creatania:manaducts/elementium"
     },
     "title": {
       "translate": "advancement.creatania.manaduct_tier_3"
@@ -23,7 +23,7 @@
         "items": [
           {
             "items": [
-              "creatania:elementium_manaduct_block"
+              "creatania:manaducts/elementium"
             ]
           }
         ]

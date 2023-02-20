@@ -33,7 +33,10 @@ import zaftnotameni.creatania.mana.manablock.BaseManaBlock;
 import zaftnotameni.creatania.mana.manablock.BotaniaManaBlock;
 import zaftnotameni.creatania.mana.manablock.CorruptedManaBlock;
 import zaftnotameni.creatania.mana.manablock.PurifiedManaBlock;
-import zaftnotameni.creatania.mana.manaduct.*;
+import zaftnotameni.creatania.mana.manaduct.ElementiumManaductBlock;
+import zaftnotameni.creatania.mana.manaduct.GaiaManaductBlock;
+import zaftnotameni.creatania.mana.manaduct.ManasteelManaductBlock;
+import zaftnotameni.creatania.mana.manaduct.TerrasteelManaductBlock;
 import zaftnotameni.creatania.stress.omnibox.OmniboxBlock;
 import zaftnotameni.creatania.stress.xorlever.XorLeverBlock;
 import zaftnotameni.creatania.util.Humanity;
@@ -44,6 +47,7 @@ import java.util.function.Supplier;
 
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
+import static zaftnotameni.creatania.mana.manaduct.BaseManaductBlock.registerManaduct;
 
 public class Blocks {
   public static final DeferredRegister<Block> INDEX = DeferredRegister.create(ForgeRegistries.BLOCKS, Constants.MODID);
@@ -111,21 +115,17 @@ public class Blocks {
     .transform(customItemModel())
     .register();
 
-  public static final RegistryObject<ManasteelManaductBlock> MANASTEEL_MANADUCT_BLOCK = registerBlockWithItem(
-    Constants.MANASTEEL_MANA_DUCT_BLOCK,
-    () -> new ManasteelManaductBlock(BaseManaductBlock.makeManaductProperties()));
+  public static final BlockEntry<ManasteelManaductBlock> MANASTEEL_MANADUCT_BLOCK = registerManaduct(
+    ManasteelManaductBlock.NAME, "Manasteel Manaduct", Tags.Blocks.TIER_1, ManasteelManaductBlock::new);
 
-  public static final RegistryObject<TerrasteelManaductBlock> TERRASTEEL_MANADUCT_BLOCK = registerBlockWithItem(
-    Constants.TERRASTEEL_MANA_DUCT_BLOCK,
-    () -> new TerrasteelManaductBlock(BaseManaductBlock.makeManaductProperties()));
+  public static final BlockEntry<TerrasteelManaductBlock> TERRASTEEL_MANADUCT_BLOCK = registerManaduct(
+    TerrasteelManaductBlock.NAME, "Terrasteel Manaduct", Tags.Blocks.TIER_2, TerrasteelManaductBlock::new);
 
-  public static final RegistryObject<ElementiumManaductBlock> ELEMENTIUM_MANADUCT_BLOCK = registerBlockWithItem(
-    Constants.ELEMENTIUML_MANA_DUCT_BLOCK,
-    () -> new ElementiumManaductBlock(BaseManaductBlock.makeManaductProperties()));
+  public static final BlockEntry<ElementiumManaductBlock> ELEMENTIUM_MANADUCT_BLOCK = registerManaduct(
+    ElementiumManaductBlock.NAME, "Elementium Manaduct", Tags.Blocks.TIER_3, ElementiumManaductBlock::new);
 
-  public static final RegistryObject<GaiaManaductBlock> GAIA_MANADUCT_BLOCK = registerBlockWithItem(
-    Constants.GAIA_MANA_DUCT_BLOCK,
-    () -> new GaiaManaductBlock(BaseManaductBlock.makeManaductProperties()));
+  public static final BlockEntry<GaiaManaductBlock> GAIA_MANADUCT_BLOCK = registerManaduct(
+    GaiaManaductBlock.NAME, "Gaia Manaduct", Tags.Blocks.TIER_4, GaiaManaductBlock::new);
 
   public static final RegistryObject<CorruptedManaBlock> CORRUPTED_INERT_MANA_BLOCK = registerBlockWithItem(
     Constants.CORRUPTED_INERT_MANA_BLOCK,

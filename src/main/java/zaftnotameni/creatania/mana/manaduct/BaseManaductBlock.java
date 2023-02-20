@@ -1,11 +1,16 @@
 package zaftnotameni.creatania.mana.manaduct;
 import com.google.common.collect.ImmutableMap;
+import com.simibubi.create.foundation.data.AssetLookup;
+import com.tterrag.registrate.util.entry.BlockEntry;
+import com.tterrag.registrate.util.nullness.NonNullFunction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.FaceAttachedHorizontalDirectionalBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -16,10 +21,16 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
+import zaftnotameni.creatania.registry.Index;
+import zaftnotameni.creatania.registry.Tags;
 import zaftnotameni.creatania.util.Voxel;
 
 import java.util.function.Function;
-public class BaseManaductBlock extends Block {
+
+import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.ATTACH_FACE;
+import static zaftnotameni.creatania.registry.CreataniaRegistrate.sameAsBlockItemModel;
+public class BaseManaductBlock extends FaceAttachedHorizontalDirectionalBlock {
   public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
   public int manaMultiplier = 1;
@@ -41,7 +52,7 @@ public class BaseManaductBlock extends Block {
   }
 
   @Override
-  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) { pBuilder.add(FACING); }
+  protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> pBuilder) { pBuilder.add(FACING).add(ATTACH_FACE); }
 
   @Nullable
   @Override
@@ -76,5 +87,16 @@ public class BaseManaductBlock extends Block {
       .lightLevel(x -> 15)
       .hasPostProcess((x, y, z) -> true)
       .emissiveRendering((x, y, z) -> true);
+  }
+  public static <T extends BaseManaductBlock> BlockEntry<T> registerManaduct(String name, String friendlyName, TagKey<Block> tier, NonNullFunction<Properties, T> factory) {
+    return Index.all().block(name, factory)
+      .transform(pickaxeOnly())
+      .tag(tier, Tags.Blocks.MANADUCT)
+      .blockstate((c, p) -> p.horizontalFaceBlock(c.get(), AssetLookup.partialBaseModel(c, p)))
+      .lang(friendlyName)
+      .item()
+      .model(sameAsBlockItemModel(name, "block"))
+      .build()
+      .register();
   }
 }

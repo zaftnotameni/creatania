@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "creatania:elementium_manaduct_block"
+          "name": "creatania:manaducts/gaia"
         }
       ],
       "conditions": [

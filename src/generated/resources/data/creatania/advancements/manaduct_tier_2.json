@@ -2,7 +2,7 @@
   "parent": "creatania:manaduct_tier_1",
   "display": {
     "icon": {
-      "item": "creatania:terrasteel_manaduct_block"
+      "item": "creatania:manaducts/terrasteel"
     },
     "title": {
       "translate": "advancement.creatania.manaduct_tier_2"
@@ -23,7 +23,7 @@
         "items": [
           {
             "items": [
-              "creatania:terrasteel_manaduct_block"
+              "creatania:manaducts/terrasteel"
             ]
           }
         ]

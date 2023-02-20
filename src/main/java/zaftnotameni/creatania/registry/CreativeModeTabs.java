@@ -1,4 +1,5 @@
 package zaftnotameni.creatania.registry;
+import com.tterrag.registrate.util.nullness.NonNullSupplier;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.item.CreativeModeTab;
@@ -11,4 +12,5 @@ public class CreativeModeTabs {
     @Override
     public Component getDisplayName() { return new TextComponent("Creatania"); }
   };
+  public static NonNullSupplier<CreativeModeTab> creataniaCreativeTab = () -> CreativeModeTabs.CREATANIA_ITEMS;
 }

@@ -1,6 +1,6 @@
 {
   "replace": false,
   "values": [
-    "creatania:elementium_manaduct_block"
+    "creatania:manaducts/elementium"
   ]
 }

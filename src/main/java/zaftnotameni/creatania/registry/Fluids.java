@@ -18,6 +18,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import zaftnotameni.creatania.Constants;
+import zaftnotameni.creatania.mana.fluids.BaseFlowingManaFluid;
 import zaftnotameni.creatania.util.Humanity;
 import zaftnotameni.creatania.util.Log;
 
@@ -140,7 +141,7 @@ public class Fluids {
       }
       if (flowing == null) {
         flowingName = name + "_flowing";
-        flowing = INDEX.register(flowingName, () -> new ForgeFlowingFluid.Flowing(fluidProperties));
+        flowing = INDEX.register(flowingName, () -> new BaseFlowingManaFluid(fluidProperties));
       }
       if (fluidAttributesBuilder == null) {
         fluidAttributesBuilder = FluidAttributes.builder(WATER_STILL_RL, WATER_FLOWING_RL);

@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "creatania:manasteel_manaduct_block"
+          "name": "creatania:manaducts/manasteel"
         }
       ],
       "conditions": [
