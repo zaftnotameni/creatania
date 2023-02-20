@@ -102,11 +102,8 @@ public class ModEventBus {
     var elem = colorOfBlock(MaterialColor.COLOR_PINK);
     var gaia = colorOfBlock(MaterialColor.COLOR_LIGHT_GRAY);
     registerBlockColors(purple, () -> Blocks.CORRUPT_MANA_BLOCK.get());
-    registerBlockColors(purple, () -> Fluids.CORRUPT_MANA_FLUID.block.get());
     registerBlockColors(cyan, () -> Blocks.PURE_MANA_BLOCK.get());
-    registerBlockColors(cyan, () -> Fluids.PURIFIED_MANA_FLUID.block.get());
     registerBlockColors(wart, () -> Blocks.REAL_MANA_BLOCK.get());
-    registerBlockColors(wart, () -> Fluids.BOTANIA_MANA_FLUID.block.get());
 //    registerBlockColors(gold, () -> Fluids.MOLTEN_GOLD.get().getBucket().asItem());
 //    registerBlockColors(iron, () -> Fluids.MOLTEN_IRON.get().getBucket().asItem());
 //    registerBlockColors(copper, () -> Fluids.MOLTEN_COPPER.get().getBucket().asItem());
@@ -138,9 +135,9 @@ public class ModEventBus {
     var terra = colorOf(MaterialColor.COLOR_GREEN);
     var elem = colorOf(MaterialColor.COLOR_PINK);
     var gaia = colorOf(MaterialColor.COLOR_LIGHT_GRAY);
-    registerItemColors(purple, () -> Fluids.CORRUPT_MANA_FLUID.bucket.get().asItem());
-    registerItemColors(cyan, () -> Fluids.PURIFIED_MANA_FLUID.bucket.get().asItem());
-    registerItemColors(wart, () -> Fluids.BOTANIA_MANA_FLUID.bucket.get().asItem());
+    registerItemColors(purple, () -> Fluids.CORRUPT_MANA.get().getBucket().asItem());
+    registerItemColors(cyan, () -> Fluids.PURE_MANA.get().getBucket().asItem());
+    registerItemColors(wart, () -> Fluids.REAL_MANA.get().getBucket().asItem());
     registerItemColors(gold, () -> Fluids.MOLTEN_GOLD.get().getBucket().asItem());
     registerItemColors(iron, () -> Fluids.MOLTEN_IRON.get().getBucket().asItem());
     registerItemColors(copper, () -> Fluids.MOLTEN_COPPER.get().getBucket().asItem());

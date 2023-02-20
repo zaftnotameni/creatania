@@ -24,8 +24,8 @@ public class ForgeRecipeProvider extends RecipeProvider {
       ItemPredicate.Builder.item().of(Blocks.MANA_CASING.get().asItem()).build()
     );
 
-    var botaniaManaFluid = new FluidStack(Fluids.BOTANIA_MANA_FLUID.fluid.get(), 1000);
-    var purifiedManaFluid = new FluidStack(Fluids.PURIFIED_MANA_FLUID.fluid.get(), 1000);
+    var botaniaManaFluid = new FluidStack(Fluids.REAL_MANA.get(), 1000);
+    var purifiedManaFluid = new FluidStack(Fluids.PURE_MANA.get(), 1000);
     var air = net.minecraft.world.level.block.Blocks.AIR;
     var corruptedInertManaBlock = new ItemStack(Blocks.CORRUPT_MANA_BLOCK.get(), 1);
 

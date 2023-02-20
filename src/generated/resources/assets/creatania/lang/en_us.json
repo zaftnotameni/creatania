@@ -36,12 +36,6 @@
 	"advancement.creatania.mana_condenser.desc": "You're now ready to extract mana out of thin air, though it might be corrupted in the process",
 	"advancement.creatania.mana_motor": "Don't Stress over it... you'll MANAge just fine",
 	"advancement.creatania.mana_motor.desc": "You're now ready to generate rotation force with mana",
-	"advancement.creatania.your_first_botania_mana_fluid_bucket": "Item . creatania . botania mana fluid bucket",
-	"advancement.creatania.your_first_botania_mana_fluid_bucket.desc": "Grabbing a Item . creatania . botania mana fluid bucket from a hot mixer",
-	"advancement.creatania.your_first_corrupt_mana_fluid_bucket": "Item . creatania . corrupt mana fluid bucket",
-	"advancement.creatania.your_first_corrupt_mana_fluid_bucket.desc": "Grabbing a Item . creatania . corrupt mana fluid bucket from a hot mixer",
-	"advancement.creatania.your_first_mana_fluid_bucket": "Item . creatania . mana fluid bucket",
-	"advancement.creatania.your_first_mana_fluid_bucket.desc": "Grabbing a Item . creatania . mana fluid bucket from a hot mixer",
 	"advancement.creatania.lords_work": "More like wandering TRAITOR...",
 	"advancement.creatania.lords_work.desc": "The llame llama lloser got what he deserves, thanks for your service§7\n(Hidden Advancement)",
 	"advancement.creatania.buff_from_purified_blocks": "Power Overwhelming!",
@@ -76,27 +70,15 @@
 
 	"_": "->------------------------]  Fluids  [------------------------<-",
 
-	"fluid.creatania.mana_fluid": "Mana fluid",
-	"fluid.creatania.mana_flowing": "Mana flowing",
-	"fluid.creatania.botania_mana_fluid": "Botania mana fluid",
-	"fluid.creatania.botania_mana_flowing": "Botania mana flowing",
-	"fluid.creatania.corrupt_mana_fluid": "Corrupt mana fluid",
-	"fluid.creatania.corrupt_mana_flowing": "Corrupt mana flowing",
 
 
 	"_": "->------------------------]  Items  [------------------------<-",
 
 	"item.creatania.mana_gel": "Mana gel",
-	"item.creatania.mana_fluid_bucket": "Mana fluid bucket",
-	"item.creatania.botania_mana_fluid_bucket": "Botania mana fluid bucket",
-	"item.creatania.corrupt_mana_fluid_bucket": "Corrupt mana fluid bucket",
 
 
 	"_": "->------------------------]  Blocks  [------------------------<-",
 
-	"block.creatania.mana_fluid_block": "Mana fluid block",
-	"block.creatania.botania_mana_fluid_block": "Botania mana fluid block",
-	"block.creatania.corrupt_mana_fluid_block": "Corrupt mana fluid block",
 
 	"_": "Thank you for translating Creatania!"
 

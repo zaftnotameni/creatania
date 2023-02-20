@@ -16,13 +16,13 @@ import static zaftnotameni.creatania.util.NamedItems.*;
 public class MixingRecipeGen extends ForgeCreateProcessingRecipeProvider {
 	public void setupRecipes() {
 		create("real_botania_mana_fluid", b -> b.require(Blocks.REAL_MANA_BLOCK.get())
-			.output(Fluids.BOTANIA_MANA_FLUID.fluid.get(), 250)
+			.output(Fluids.REAL_MANA.get(), 250)
 			.requiresHeat(HeatCondition.SUPERHEATED));
 		create("corrupted_inert_mana_fluid", b -> b.require(Blocks.CORRUPT_MANA_BLOCK.get())
-			.output(Fluids.CORRUPT_MANA_FLUID.fluid.get(), 250)
+			.output(Fluids.CORRUPT_MANA.get(), 250)
 			.requiresHeat(HeatCondition.HEATED));
 		create("purified_inert_mana_fluid", b -> b.require(Blocks.PURE_MANA_BLOCK.get())
-			.output(Fluids.PURIFIED_MANA_FLUID.fluid.get(), 250)
+			.output(Fluids.PURE_MANA.get(), 250)
 			.requiresHeat(HeatCondition.HEATED));
 
 
@@ -71,12 +71,12 @@ public class MixingRecipeGen extends ForgeCreateProcessingRecipeProvider {
 		for (var shortFlower : MINECRAFT_SHORT_FLOWERS) {
 			create("mystic_flowers_from_vanilla_flower_" + pathOf(shortFlower), b -> eachFlowerOutput.apply(b
 			  .require(itemLikeOf(shortFlower)))
-				.require(Fluids.PURIFIED_MANA_FLUID.fluid.get(), 125));
+				.require(Fluids.PURE_MANA.get(), 125));
 		}
 		for (var tallFlower : MINECRAFT_TALL_FLOWERS) {
 			create("tall_mystic_flowers_from_tall_vanilla_flower_" + pathOf(tallFlower), b -> eachTallFlowerOutput.apply(b
 				.require(itemLikeOf(tallFlower)))
-				.require(Fluids.PURIFIED_MANA_FLUID.fluid.get(), 125));
+				.require(Fluids.PURE_MANA.get(), 125));
 		}
 
 	}

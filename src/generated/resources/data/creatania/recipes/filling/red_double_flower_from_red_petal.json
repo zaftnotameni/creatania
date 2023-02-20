@@ -5,7 +5,7 @@
       "item": "botania:red_petal"
     },
     {
-      "fluid": "creatania:mana_fluid",
+      "fluid": "creatania:molten_pure_mana",
       "nbt": {},
       "amount": 1000
     }

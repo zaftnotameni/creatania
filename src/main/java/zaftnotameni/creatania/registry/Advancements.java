@@ -1,7 +1,6 @@
 package zaftnotameni.creatania.registry;
 import com.simibubi.create.AllItems;
 import zaftnotameni.creatania.advancements.CreataniaAdvancement;
-import zaftnotameni.creatania.util.Humanity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,9 +88,9 @@ public class Advancements {
 ////    MOLTEN_GOLD_FLUID = melt(Fluids.MOLTEN_GOLD),
 //    MOLTEN_IRON_FLUID = melt(Fluids.MOLTEN_IRON_FLUID),
 //    MOLTEN_ZINC_FLUID = melt(Fluids.MOLTEN_ZINC_FLUID),
-    BOTANIA_MANA_FLUID = melt(Fluids.BOTANIA_MANA_FLUID),
-    CORRUPT_MANA_FLUID = melt(Fluids.CORRUPT_MANA_FLUID),
-    PURIFIED_MANA_FLUID = melt(Fluids.PURIFIED_MANA_FLUID),
+//    BOTANIA_MANA_FLUID = melt(Fluids.BOTANIA_MANA_FLUID),
+//    CORRUPT_MANA_FLUID = melt(Fluids.CORRUPT_MANA_FLUID),
+//    PURIFIED_MANA_FLUID = melt(Fluids.PURIFIED_MANA_FLUID),
 
   // botanical contraptions
 
@@ -143,12 +142,12 @@ public class Advancements {
 //      .description("Grabbing a " + Humanity.digestItem(fe.get().getBucket()) + " from a hot mixer")
 //      .after(ROOT));
 //  }
-  public static CreataniaAdvancement melt(Fluids.FluidEntry fe) {
-    return create("your_first_" + fe.bucket.getId().getPath(), b -> b.icon(fe.bucket.get())
-      .title(Humanity.digestItem(fe.bucket.get()))
-      .description("Grabbing a " + Humanity.digestItem(fe.bucket.get()) + " from a hot mixer")
-      .after(ROOT));
-  }
+//  public static CreataniaAdvancement melt(Fluids.FluidEntry fe) {
+//    return create("your_first_" + fe.bucket.getId().getPath(), b -> b.icon(fe.bucket.get())
+//      .title(Humanity.digestItem(fe.bucket.get()))
+//      .description("Grabbing a " + Humanity.digestItem(fe.bucket.get()) + " from a hot mixer")
+//      .after(ROOT));
+//  }
 
 
   public static void register() {}
