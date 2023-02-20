@@ -63,7 +63,7 @@ public class Fluids {
   }
 
   public static FluidEntry<ForgeFlowingFluid.Flowing> registerManaFluid(String name, int color) {
-    return Index.all().waterLikeFluid("molten_" + name, Colored::new)
+    return Index.all().waterLikeFluid(name, Colored::new)
       .lang("Molten " + StringUtils.capitalize(name))
       .attributes(b -> defaultMolten(b, color).sound(HONEY_DRINK))
       .properties(p -> p.levelDecreasePerBlock(2)

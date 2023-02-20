@@ -4,6 +4,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 import zaftnotameni.creatania.Constants;
+import zaftnotameni.creatania.registry.datagen.botania.*;
 import zaftnotameni.creatania.registry.datagen.processing.ForgeCreateProcessingRecipeProvider;
 
 @Mod.EventBusSubscriber(modid = Constants.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -28,8 +29,14 @@ public class ForgeDatagenInitializer {
     generator.addProvider(new ForgeSequencedAssemblyRecipeProvider(generator));
     generator.addProvider(new ForgeAdvancementsProvider(generator));
 
+
     if (evt.includeServer()) {
       ForgeCreateProcessingRecipeProvider.registerAll(generator);
+      generator.addProvider(new ElvenTradeRecipeGen(generator));
+      generator.addProvider(new ManaInfusionRecipeGen(generator));
+      generator.addProvider(new RuneAltarRecipeGen(generator));
+      generator.addProvider(new TerraPlateRecipeGen(generator));
+      generator.addProvider(new PureDaisyRecipeGen(generator));
     }
 
   }

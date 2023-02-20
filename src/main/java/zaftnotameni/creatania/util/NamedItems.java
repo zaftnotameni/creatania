@@ -7,6 +7,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -66,6 +67,21 @@ public class NamedItems {
 
   public static ItemLike itemLike(String namespace, String path) { return ForgeRegistries.ITEMS.getValue(new ResourceLocation(namespace, path)); }
 
+  public static Ingredient livingrock() {
+    return Ingredient.of(itemLike("botania", "livingrock"));
+  }
+  public static Ingredient terrasteelingot() {
+    return Ingredient.of(itemLike("botania", "terrasteel_ingot"));
+  }
+  public static Ingredient manasteelingot() {
+    return Ingredient.of(itemLike("botania", "manasteel_ingot"));
+  }
+  public static Ingredient elementiumingot() {
+    return Ingredient.of(itemLike("botania", "elementium_ingot"));
+  }
+  public static Ingredient gaiaingot() {
+    return Ingredient.of(itemLike("botania", "gaia_ingot"));
+  }
   public static class I {
 
   public static TagKey<Item> redstone() {
