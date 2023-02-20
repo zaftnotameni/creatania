@@ -5,12 +5,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.particle.GlowParticle;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
@@ -18,7 +15,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import org.apache.commons.lang3.tuple.Pair;
-import org.jetbrains.annotations.Nullable;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.recipes.ManaGeneratorRecipe;
 import zaftnotameni.creatania.registry.Blocks;
@@ -92,35 +88,41 @@ public class ModEventBus {
   }
   public static void initBlockColors() {
     if (!BLOCK_COLORS.isEmpty()) return;
-    var purple = new BlockColor() {
-      @Override
-      public int getColor(BlockState pState, @Nullable BlockAndTintGetter pLevel, @Nullable BlockPos pPos, int pTintIndex) {
-        return MaterialColor.COLOR_PURPLE.calculateRGBColor(MaterialColor.Brightness.LOW);
-      }
-    };
-    var cyan = new BlockColor() {
-      @Override
-      public int getColor(BlockState pState, @Nullable BlockAndTintGetter pLevel, @Nullable BlockPos pPos, int pTintIndex) {
-        return MaterialColor.COLOR_CYAN.calculateRGBColor(MaterialColor.Brightness.HIGH);
-      }
-    };
-    var wart = new BlockColor() {
-      @Override
-      public int getColor(BlockState pState, @Nullable BlockAndTintGetter pLevel, @Nullable BlockPos pPos, int pTintIndex) {
-        return MaterialColor.WARPED_WART_BLOCK.calculateRGBColor(MaterialColor.Brightness.HIGH);
-      }
-    };
+    var purple = colorOfBlock(MaterialColor.COLOR_PURPLE);
+    var cyan = colorOfBlock(MaterialColor.COLOR_CYAN);
+    var wart = colorOfBlock(MaterialColor.WARPED_WART_BLOCK);
+    var iron = colorOfBlock(MaterialColor.TERRACOTTA_RED);
+    var copper = colorOfBlock(MaterialColor.COLOR_ORANGE);
+    var gold = colorOfBlock(MaterialColor.GOLD);
+    var zinc = colorOfBlock(MaterialColor.COLOR_GRAY);
+    var andesite = colorOfBlock(MaterialColor.COLOR_GRAY);
+    var brass = colorOfBlock(MaterialColor.COLOR_YELLOW);
+    var mana = colorOfBlock(MaterialColor.COLOR_BLUE);
+    var terra = colorOfBlock(MaterialColor.COLOR_GREEN);
+    var elem = colorOfBlock(MaterialColor.COLOR_PINK);
+    var gaia = colorOfBlock(MaterialColor.COLOR_LIGHT_GRAY);
     registerBlockColors(purple, () -> Blocks.CORRUPT_MANA_BLOCK.get());
     registerBlockColors(purple, () -> Fluids.CORRUPT_MANA_FLUID.block.get());
     registerBlockColors(cyan, () -> Blocks.PURE_MANA_BLOCK.get());
     registerBlockColors(cyan, () -> Fluids.PURIFIED_MANA_FLUID.block.get());
     registerBlockColors(wart, () -> Blocks.REAL_MANA_BLOCK.get());
     registerBlockColors(wart, () -> Fluids.BOTANIA_MANA_FLUID.block.get());
+//    registerBlockColors(gold, () -> Fluids.MOLTEN_GOLD.get().getBucket().asItem());
+//    registerBlockColors(iron, () -> Fluids.MOLTEN_IRON.get().getBucket().asItem());
+//    registerBlockColors(copper, () -> Fluids.MOLTEN_COPPER.get().getBucket().asItem());
+//    registerBlockColors(zinc, () -> Fluids.MOLTEN_ZINC.get().getBucket().asItem());
+//    registerBlockColors(andesite, () -> Fluids.MOLTEN_ANDESITE.get().getBucket().asItem());
+//    registerBlockColors(brass, () -> Fluids.MOLTEN_BRASS.get().getBucket().asItem());
+//    registerBlockColors(mana, () -> Fluids.MOLTEN_MANASTEEL.get().getBucket().asItem());
+//    registerBlockColors(terra, () -> Fluids.MOLTEN_TERRASTEEL.get().getBucket().asItem());
+//    registerBlockColors(elem, () -> Fluids.MOLTEN_ELEMENTIUM.get().getBucket().asItem());
+//    registerBlockColors(gaia, () -> Fluids.MOLTEN_GAIA.get().getBucket().asItem());
   }
 
   public static ItemColor colorOf(MaterialColor c) {
     return (pStack, pTintIndex) -> c.calculateRGBColor(MaterialColor.Brightness.HIGH);
   }
+  public static BlockColor colorOfBlock(MaterialColor c) { return (pState, pLevel, pPos, pTintIndex) -> c.calculateRGBColor(MaterialColor.Brightness.HIGH); }
   public static void initItemColors() {
     if (!ITEM_COLORS.isEmpty()) return;
     var purple = colorOf(MaterialColor.COLOR_PURPLE);
@@ -139,15 +141,15 @@ public class ModEventBus {
     registerItemColors(purple, () -> Fluids.CORRUPT_MANA_FLUID.bucket.get().asItem());
     registerItemColors(cyan, () -> Fluids.PURIFIED_MANA_FLUID.bucket.get().asItem());
     registerItemColors(wart, () -> Fluids.BOTANIA_MANA_FLUID.bucket.get().asItem());
-    registerItemColors(gold, () -> Fluids.MOLTEN_GOLD_FLUID.bucket.get().asItem());
-    registerItemColors(iron, () -> Fluids.MOLTEN_IRON_FLUID.bucket.get().asItem());
-    registerItemColors(copper, () -> Fluids.MOLTEN_COPPER_FLUID.bucket.get().asItem());
-    registerItemColors(zinc, () -> Fluids.MOLTEN_ZINC_FLUID.bucket.get().asItem());
-    registerItemColors(andesite, () -> Fluids.MOLTEN_ANDESITE_ALLOY_FLUID.bucket.get().asItem());
-    registerItemColors(brass, () -> Fluids.MOLTEN_BRASS_FLUID.bucket.get().asItem());
-    registerItemColors(mana, () -> Fluids.MOLTEN_MANASTEEL.bucket.get().asItem());
-    registerItemColors(terra, () -> Fluids.MOLTEN_TERRASTEEL.bucket.get().asItem());
-    registerItemColors(elem, () -> Fluids.MOLTEN_ELEMENTIUM.bucket.get().asItem());
-    registerItemColors(gaia, () -> Fluids.MOLTEN_GAIA.bucket.get().asItem());
+    registerItemColors(gold, () -> Fluids.MOLTEN_GOLD.get().getBucket().asItem());
+    registerItemColors(iron, () -> Fluids.MOLTEN_IRON.get().getBucket().asItem());
+    registerItemColors(copper, () -> Fluids.MOLTEN_COPPER.get().getBucket().asItem());
+    registerItemColors(zinc, () -> Fluids.MOLTEN_ZINC.get().getBucket().asItem());
+    registerItemColors(andesite, () -> Fluids.MOLTEN_ANDESITE.get().getBucket().asItem());
+    registerItemColors(brass, () -> Fluids.MOLTEN_BRASS.get().getBucket().asItem());
+    registerItemColors(mana, () -> Fluids.MOLTEN_MANASTEEL.get().getBucket().asItem());
+    registerItemColors(terra, () -> Fluids.MOLTEN_TERRASTEEL.get().getBucket().asItem());
+    registerItemColors(elem, () -> Fluids.MOLTEN_ELEMENTIUM.get().getBucket().asItem());
+    registerItemColors(gaia, () -> Fluids.MOLTEN_GAIA.get().getBucket().asItem());
   }
 }

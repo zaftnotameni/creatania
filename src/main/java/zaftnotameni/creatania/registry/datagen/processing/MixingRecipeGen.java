@@ -27,36 +27,36 @@ public class MixingRecipeGen extends ForgeCreateProcessingRecipeProvider {
 
 
 		create("molten_manasteel_from_ingot", b -> b.require(Ingredient.of(itemLike("botania", "manasteel_ingot")))
-			.output(Fluids.MOLTEN_MANASTEEL.fluid.get(), 125)
+			.output(Fluids.MOLTEN_MANASTEEL.get(), 125)
 			.requiresHeat(HeatCondition.HEATED));
 		create("molten_terrasteel_from_ingot", b -> b.require(Ingredient.of(itemLike("botania", "terrasteel_ingot")))
-			.output(Fluids.MOLTEN_TERRASTEEL.fluid.get(), 125)
+			.output(Fluids.MOLTEN_TERRASTEEL.get(), 125)
 			.requiresHeat(HeatCondition.SUPERHEATED));
 		create("molten_elementium_from_ingot", b -> b.require(Ingredient.of(itemLike("botania", "elementium_ingot")))
-			.output(Fluids.MOLTEN_ELEMENTIUM.fluid.get(), 125)
+			.output(Fluids.MOLTEN_ELEMENTIUM.get(), 125)
 			.requiresHeat(HeatCondition.SUPERHEATED));
 		create("molten_gaia_from_ingot", b -> b.require(Ingredient.of(itemLike("botania", "gaia_ingot")))
-			.output(Fluids.MOLTEN_GAIA.fluid.get(), 125)
+			.output(Fluids.MOLTEN_GAIA.get(), 125)
 			.requiresHeat(HeatCondition.SUPERHEATED));
 
 		create("molten_brass_ingot", b -> b.require(Ingredient.of(AllItems.BRASS_INGOT.get()))
-			.output(Fluids.MOLTEN_BRASS_FLUID.fluid.get(), 125)
+			.output(Fluids.MOLTEN_BRASS.get(), 125)
 			.requiresHeat(HeatCondition.HEATED));
 		create("molten_zinc_ingot", b -> b.require(Ingredient.of(AllItems.ZINC_INGOT.get()))
-			.output(Fluids.MOLTEN_ZINC_FLUID.fluid.get(), 125)
+			.output(Fluids.MOLTEN_ZINC.get(), 125)
 			.requiresHeat(HeatCondition.HEATED));
 		create("molten_andesite_alloy_from_ingot", b -> b.require(Ingredient.of(AllItems.ANDESITE_ALLOY.get()))
-			.output(Fluids.MOLTEN_ANDESITE_ALLOY_FLUID.fluid.get(), 125)
+			.output(Fluids.MOLTEN_ANDESITE.get(), 125)
 			.requiresHeat(HeatCondition.SUPERHEATED));
 
 		create("molten_iron_from_ingot", b -> b.require(Ingredient.of(itemLikeOf("minecraft:iron_ingot")))
-			.output(Fluids.MOLTEN_IRON_FLUID.fluid.get(), 125)
+			.output(Fluids.MOLTEN_IRON.get(), 125)
 			.requiresHeat(HeatCondition.SUPERHEATED));
 		create("molten_gold_from_ingot", b -> b.require(Ingredient.of(itemLikeOf("minecraft:gold_ingot")))
-			.output(Fluids.MOLTEN_GOLD_FLUID.fluid.get(), 125)
+			.output(Fluids.MOLTEN_GOLD.get(), 125)
 			.requiresHeat(HeatCondition.HEATED));
 		create("molten_copper_from_ingot", b -> b.require(Ingredient.of(itemLikeOf("minecraft:copper_ingot")))
-			.output(Fluids.MOLTEN_COPPER_FLUID.fluid.get(), 125)
+			.output(Fluids.MOLTEN_COPPER.get(), 125)
 			.requiresHeat(HeatCondition.HEATED));
 
 		Function<ProcessingRecipeBuilder, ProcessingRecipeBuilder> eachFlowerOutput = b -> {

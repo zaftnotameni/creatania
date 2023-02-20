@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "creatania:corrupt_mana_flowing",
-    "creatania:corrupt_mana_fluid",
-    "creatania:mana_flowing",
-    "creatania:mana_fluid"
-  ]
-}

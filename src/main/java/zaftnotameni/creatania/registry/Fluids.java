@@ -1,10 +1,13 @@
 package zaftnotameni.creatania.registry;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.tterrag.registrate.util.nullness.NonNullBiFunction;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.FlowingFluid;
@@ -17,6 +20,7 @@ import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.apache.commons.lang3.StringUtils;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.mana.fluids.BaseFlowingManaFluid;
 import zaftnotameni.creatania.util.Humanity;
@@ -24,59 +28,35 @@ import zaftnotameni.creatania.util.Log;
 
 import java.util.function.UnaryOperator;
 
+import static net.minecraft.sounds.SoundEvents.HONEY_DRINK;
+
 public class Fluids {
   public static final DeferredRegister<Fluid> INDEX = DeferredRegister.create(ForgeRegistries.FLUIDS, Constants.MODID);
   public static final ResourceLocation WATER_STILL_RL = new ResourceLocation("block/water_still");
   public static final ResourceLocation WATER_FLOWING_RL = new ResourceLocation("block/water_flow");
   public static final ResourceLocation WATER_OVERLAY_RL = new ResourceLocation("block/water_overlay");
+  public static final ResourceLocation LAVA_STILL_RL = new ResourceLocation("block/lava_still");
+  public static final ResourceLocation LAVA_FLOWING_RL = new ResourceLocation("block/lava_flow");
+  public static final ResourceLocation LAVA_OVERLAY_RL = new ResourceLocation("block/water_overlay");
 
-  public static final FluidEntry MOLTEN_GOLD_FLUID = FluidEntry.named("molten_gold")
-    .withFluidAttributesFn(a -> defaultMolten(a, 0xffffff00))
-    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
-    .auto();
-  public static final FluidEntry MOLTEN_COPPER_FLUID = FluidEntry.named("molten_copper")
-    .withFluidAttributesFn(a -> defaultMolten(a, 0xff666600))
-    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
-    .auto();
-  public static final FluidEntry MOLTEN_IRON_FLUID = FluidEntry.named("molten_iron")
-    .withFluidAttributesFn(a -> defaultMolten(a, 0xffdd0000))
-    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
-    .auto();
-  public static final FluidEntry MOLTEN_BRASS_FLUID = FluidEntry.named("molten_brass")
-    .withFluidAttributesFn(a -> defaultMolten(a, 0xffdddd33))
-    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
-    .auto();
-  public static final FluidEntry MOLTEN_ZINC_FLUID = FluidEntry.named("molten_zinc")
-    .withFluidAttributesFn(a -> defaultMolten(a, 0xff999999))
-    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
-    .auto();
-  public static final FluidEntry MOLTEN_ANDESITE_ALLOY_FLUID = FluidEntry.named("molten_andesite_alloy")
-    .withFluidAttributesFn(a -> defaultMolten(a, 0xff666666))
-    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
-    .auto();
-  public static final FluidEntry MOLTEN_MANASTEEL = FluidEntry.named("molten_manasteel")
-    .withFluidAttributesFn(a -> defaultMolten(a, 0xff000088))
-    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
-    .auto();
-  public static final FluidEntry MOLTEN_TERRASTEEL = FluidEntry.named("molten_terrasteel")
-    .withFluidAttributesFn(a -> defaultMolten(a, 0xff008822))
-    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
-    .auto();
-  public static final FluidEntry MOLTEN_ELEMENTIUM = FluidEntry.named("molten_elementium")
-    .withFluidAttributesFn(a -> defaultMolten(a, 0xffffaaaa))
-    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
-    .auto();
-  public static final FluidEntry MOLTEN_GAIA = FluidEntry.named("molten_gaia")
-    .withFluidAttributesFn(a -> defaultMolten(a, 0xffffffff))
-    .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(3))
-    .auto();
+
+  public static final com.tterrag.registrate.util.entry.FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_GOLD = registerMoltenFluid("gold", 0xffffff00);
+  public static final com.tterrag.registrate.util.entry.FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_IRON = registerMoltenFluid("iron", 0xffdd0000);
+  public static final com.tterrag.registrate.util.entry.FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_COPPER = registerMoltenFluid("copper", 0xff666600);
+  public static final com.tterrag.registrate.util.entry.FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ZINC = registerMoltenFluid("zinc", 0xff999999);
+  public static final com.tterrag.registrate.util.entry.FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_BRASS = registerMoltenFluid("brass", 0xffdddd33);
+  public static final com.tterrag.registrate.util.entry.FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ANDESITE = registerMoltenFluid("andesite", 0xff666666);
+  public static final com.tterrag.registrate.util.entry.FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_MANASTEEL = registerMoltenFluid("manasteel", 0xff000088);
+  public static final com.tterrag.registrate.util.entry.FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_TERRASTEEL = registerMoltenFluid("terrasteel", 0xff008822);
+  public static final com.tterrag.registrate.util.entry.FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ELEMENTIUM = registerMoltenFluid("elementium", 0xffffaaaa);
+  public static final com.tterrag.registrate.util.entry.FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_GAIA = registerMoltenFluid("gaia", 0xffffffff);
 
   public static final FluidEntry PURIFIED_MANA_FLUID = FluidEntry.named(Constants.MANA_FLUID_BLOCK_NAME)
     .withFluidAttributesFn(a -> a
       .density(15)
       .luminosity(2)
       .viscosity(5)
-      .sound(SoundEvents.HONEY_DRINK)
+      .sound(HONEY_DRINK)
       .overlay(WATER_OVERLAY_RL)
       .color(0xff11aaff))
     .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(2))
@@ -86,7 +66,7 @@ public class Fluids {
       .density(15)
       .luminosity(2)
       .viscosity(5)
-      .sound(SoundEvents.HONEY_DRINK)
+      .sound(HONEY_DRINK)
       .overlay(WATER_OVERLAY_RL)
       .color(0xff44ffff))
     .withFluidPropertiesFn(p -> p.slopeFindDistance(2).levelDecreasePerBlock(2))
@@ -97,7 +77,7 @@ public class Fluids {
       .density(15)
       .luminosity(2)
       .viscosity(5)
-      .sound(SoundEvents.HONEY_DRINK)
+      .sound(HONEY_DRINK)
       .overlay(WATER_OVERLAY_RL)
       .color(0xff440044))
     .withFluidPropertiesFn(f -> f.slopeFindDistance(2).levelDecreasePerBlock(2))
@@ -179,11 +159,65 @@ public class Fluids {
       .luminosity(2)
       .viscosity(8)
       .sound(SoundEvents.BUCKET_FILL_LAVA)
-      .overlay(WATER_OVERLAY_RL)
+      .overlay(LAVA_OVERLAY_RL)
       .color(color);
   }
   public static void register(IEventBus bus) {
     Log.LOGGER.debug("register fluids");
     INDEX.register(bus);
+  }
+
+  public static com.tterrag.registrate.util.entry.FluidEntry<ForgeFlowingFluid.Flowing> registerManaFluid(String name, int color) {
+    return Index.all().waterLikeFluid("molten_" + name, Colored::new)
+      .lang("Molten " + StringUtils.capitalize(name))
+      .attributes(b -> defaultMolten(b, color).sound(HONEY_DRINK))
+      .properties(p -> p.levelDecreasePerBlock(2)
+        .tickRate(5 * 20)
+        .slopeFindDistance(3)
+        .explosionResistance(100f))
+      .tag(Tags.Fluids.MOLTEN)
+      .source(ForgeFlowingFluid.Source::new)
+      .bucket()
+      .model((ctx, prov) -> prov.generated(ctx::getEntry, new ResourceLocation("minecraft", "item/lava_bucket")))
+      .tag(Tags.Items.tag("buckets/molten/" + name))
+      .build()
+      .block()
+      .build()
+      .register();
+  }
+
+  public static com.tterrag.registrate.util.entry.FluidEntry<ForgeFlowingFluid.Flowing> registerMoltenFluid(String name, int color) {
+    return Index.all().waterLikeFluid("molten_" + name, Colored::new)
+      .lang("Molten " + StringUtils.capitalize(name))
+      .attributes(b -> defaultMolten(b, color))
+      .properties(p -> p.levelDecreasePerBlock(2)
+        .tickRate(5 * 20)
+        .slopeFindDistance(3)
+        .explosionResistance(100f))
+      .tag(Tags.Fluids.MOLTEN)
+      .source(ForgeFlowingFluid.Source::new)
+      .bucket()
+      .model((ctx, prov) -> prov.generated(ctx::getEntry, new ResourceLocation("minecraft", "item/lava_bucket")))
+      .tag(Tags.Items.tag("buckets/molten/" + name))
+      .build()
+      .block()
+      .build()
+      .register();
+  }
+
+  public static class Colored extends FluidAttributes {
+    public Colored(Builder builder, Fluid fluid) { super(builder, fluid); }
+    public int color = 0x00ffffff;
+    public static NonNullBiFunction<Builder, Fluid, FluidAttributes> from(int color) {
+      return (b, f) -> {
+        var self = new Colored(b, f);
+        self.color = color;
+        return self;
+      };
+    }
+    @Override
+    public int getColor(BlockAndTintGetter world, BlockPos pos) {
+      return color;
+    }
   }
 }

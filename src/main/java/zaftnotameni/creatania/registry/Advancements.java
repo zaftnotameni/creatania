@@ -79,16 +79,16 @@ public class Advancements {
       .whenIconCollected()),
 
   // melting
-    MOLTEN_BRASS_FLUID = melt(Fluids.MOLTEN_BRASS_FLUID),
-    MOLTEN_GAIA = melt(Fluids.MOLTEN_GAIA),
-    MOLTEN_ELEMENTIUM = melt(Fluids.MOLTEN_ELEMENTIUM),
-    MOLTEN_MANASTEEL = melt(Fluids.MOLTEN_MANASTEEL),
-    MOLTEN_TERRASTEEL = melt(Fluids.MOLTEN_TERRASTEEL),
-    MOLTEN_ANDESITE_ALLOY_FLUID = melt(Fluids.MOLTEN_ANDESITE_ALLOY_FLUID),
-    MOLTEN_COPPER_FLUID = melt(Fluids.MOLTEN_COPPER_FLUID),
-    MOLTEN_GOLD_FLUID = melt(Fluids.MOLTEN_GOLD_FLUID),
-    MOLTEN_IRON_FLUID = melt(Fluids.MOLTEN_IRON_FLUID),
-    MOLTEN_ZINC_FLUID = melt(Fluids.MOLTEN_ZINC_FLUID),
+//    MOLTEN_BRASS_FLUID = melt(Fluids.MOLTEN_BRASS),
+//    MOLTEN_GAIA = melt(Fluids.MOLTEN_GAIA),
+//    MOLTEN_ELEMENTIUM = melt(Fluids.MOLTEN_ELEMENTIUM),
+//    MOLTEN_MANASTEEL = melt(Fluids.MOLTEN_MANASTEEL),
+//    MOLTEN_TERRASTEEL = melt(Fluids.MOLTEN_TERRASTEEL),
+//    MOLTEN_ANDESITE_ALLOY_FLUID = melt(Fluids.MOLTEN_ANDESITE_ALLOY_FLUID),
+//    MOLTEN_COPPER_FLUID = melt(Fluids.MOLTEN_COPPER_FLUID),
+////    MOLTEN_GOLD_FLUID = melt(Fluids.MOLTEN_GOLD),
+//    MOLTEN_IRON_FLUID = melt(Fluids.MOLTEN_IRON_FLUID),
+//    MOLTEN_ZINC_FLUID = melt(Fluids.MOLTEN_ZINC_FLUID),
     BOTANIA_MANA_FLUID = melt(Fluids.BOTANIA_MANA_FLUID),
     CORRUPT_MANA_FLUID = melt(Fluids.CORRUPT_MANA_FLUID),
     PURIFIED_MANA_FLUID = melt(Fluids.PURIFIED_MANA_FLUID),
@@ -137,6 +137,12 @@ public class Advancements {
     return new CreataniaAdvancement(id, b);
   }
 
+//  public static CreataniaAdvancement melt(FluidEntry<ForgeFlowingFluid.Flowing> fe) {
+//    return create("your_first_" + fe.get().getBucket().getId().getPath(), b -> b.icon(fe.get().getBucket())
+//      .title(Humanity.digestItem(fe.get().getBucket()))
+//      .description("Grabbing a " + Humanity.digestItem(fe.get().getBucket()) + " from a hot mixer")
+//      .after(ROOT));
+//  }
   public static CreataniaAdvancement melt(Fluids.FluidEntry fe) {
     return create("your_first_" + fe.bucket.getId().getPath(), b -> b.icon(fe.bucket.get())
       .title(Humanity.digestItem(fe.bucket.get()))

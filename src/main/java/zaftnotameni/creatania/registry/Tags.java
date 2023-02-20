@@ -36,6 +36,7 @@ public class Tags {
   public static class Fluids {
     public static final TagKey<Fluid> PURE_INERT_MANA = tag("pure_inert_mana");
     public static final TagKey<Fluid> CORRUPT_INERT_MANA = tag("corrupt_inert_mana");
+    public static final TagKey<Fluid> MOLTEN = tag("fluid/molten");
     public static TagKey<Fluid> tag(String name) { return FluidTags.create(new ResourceLocation(Constants.MODID, name)); }
     public static TagKey<Fluid> forgeTag(String name) { return FluidTags.create(new ResourceLocation("forge", name)); }
   }
