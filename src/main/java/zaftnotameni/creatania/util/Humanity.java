@@ -1,4 +1,5 @@
 package zaftnotameni.creatania.util;
+import com.tterrag.registrate.util.entry.RegistryEntry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -31,4 +32,10 @@ public class Humanity {
   public static String keyBlock(RegistryObject<Block> entry) { return "block." + keyString(entry.getId().toString()); }
   public static String keyFluid(RegistryObject<Fluid> entry) { return "fluid." + keyString(entry.getId().toString()); }
 
+  public static String keyBlock(RegistryEntry<Block> entry) { return "block." + keyString(entry.getId().toString()); }
+  public static String keyItem(RegistryEntry<Item> entry) { return "block." + keyString(entry.getId().toString()); }
+  public static String keyFluid(RegistryEntry<Fluid> entry) { return "block." + keyString(entry.getId().toString()); }
+  public static String digestBlock(RegistryEntry<Block> entry) { return digestString(entry.get().getName().getString()); }
+  public static String digestItem(RegistryEntry<Item> entry) { return digestString(entry.get().getDescription().getString()); }
+  public static String digestFluid(RegistryEntry<Fluid> entry) { return digestString(entry.get().getRegistryType().getName()); }
 }

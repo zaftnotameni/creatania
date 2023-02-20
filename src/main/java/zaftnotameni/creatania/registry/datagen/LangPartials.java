@@ -23,13 +23,13 @@ public enum LangPartials implements LangPartial {
   public final String displayName;
   public Supplier<JsonElement> provider;
 
-  private LangPartials(String displayName) {
+  public LangPartials(String displayName) {
     this.displayName = displayName;
     String fileName = Lang.asId(name());
     this.provider = () -> LangPartial.fromResource(Constants.MODID, fileName);
   }
 
-  private LangPartials(String displayName, Supplier<JsonElement> provider) {
+  public LangPartials(String displayName, Supplier<JsonElement> provider) {
     this.displayName = displayName;
     this.provider = provider;
   }

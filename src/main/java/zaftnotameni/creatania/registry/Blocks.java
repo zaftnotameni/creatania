@@ -17,8 +17,6 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.machines.manacondenser.ManaCondenserBlock;
@@ -33,7 +31,6 @@ import zaftnotameni.creatania.mana.manaduct.ManasteelManaductBlock;
 import zaftnotameni.creatania.mana.manaduct.TerrasteelManaductBlock;
 import zaftnotameni.creatania.stress.omnibox.OmniboxBlock;
 import zaftnotameni.creatania.stress.xorlever.XorLeverBlock;
-import zaftnotameni.creatania.util.Humanity;
 import zaftnotameni.creatania.util.Log;
 import zaftnotameni.sharedbehaviors.ManaCasing;
 
@@ -41,12 +38,11 @@ import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 import static zaftnotameni.creatania.mana.manablock.BaseManaBlock.registerManablock;
 import static zaftnotameni.creatania.mana.manaduct.BaseManaductBlock.registerManaduct;
+import static zaftnotameni.creatania.util.Humanity.digestResource;
+import static zaftnotameni.creatania.util.Humanity.keyResource;
 
 public class Blocks {
-  public static final DeferredRegister<Block> INDEX = DeferredRegister.create(ForgeRegistries.BLOCKS, Constants.MODID);
-
-  public static final CreateRegistrate CREATE_REGISTRATE = Index.getCreateRegistrate()
-    .creativeModeTab(() -> CreativeModeTabs.CREATANIA_ITEMS);
+  public static final CreateRegistrate CREATE_REGISTRATE = Index.getCreateRegistrate().creativeModeTab(() -> CreativeModeTabs.CREATANIA_ITEMS);
 
   public static final BlockEntry<ManaMotorBlock> MANA_MOTOR = CREATE_REGISTRATE
     .block(Constants.MANA_MOTOR, ManaMotorBlock::new)
@@ -133,12 +129,11 @@ public class Blocks {
 
   public static void register(IEventBus bus) {
     Log.LOGGER.debug("register blocks");
-    INDEX.register(bus);
   }
 
   public static JsonElement provideLangEntries() {
     var json = new JsonObject();
-    INDEX.getEntries().forEach(entry -> json.addProperty(Humanity.keyBlock(entry), Humanity.digestBlock(entry)));
+    Index.all().getAll(Block.class).forEach(entry -> json.addProperty("block." + keyResource(entry.getId()), digestResource(entry.getId())));
     return json;
   }
 

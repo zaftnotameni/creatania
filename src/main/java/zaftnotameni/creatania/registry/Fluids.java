@@ -11,17 +11,14 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.StringUtils;
-import zaftnotameni.creatania.Constants;
-import zaftnotameni.creatania.util.Humanity;
 import zaftnotameni.creatania.util.Log;
 
 import static net.minecraft.sounds.SoundEvents.HONEY_DRINK;
+import static zaftnotameni.creatania.util.Humanity.digestResource;
+import static zaftnotameni.creatania.util.Humanity.keyResource;
 
 public class Fluids {
-  public static final DeferredRegister<Fluid> INDEX = DeferredRegister.create(ForgeRegistries.FLUIDS, Constants.MODID);
   public static final ResourceLocation WATER_STILL_RL = new ResourceLocation("block/water_still");
   public static final ResourceLocation WATER_FLOWING_RL = new ResourceLocation("block/water_flow");
   public static final ResourceLocation WATER_OVERLAY_RL = new ResourceLocation("block/water_overlay");
@@ -50,7 +47,7 @@ public class Fluids {
 
   public static JsonElement provideLangEntries() {
     var json = new JsonObject();
-    INDEX.getEntries().forEach(entry -> json.addProperty(Humanity.keyFluid(entry), Humanity.digestFluid(entry)));
+    Index.all().getAll(Fluid.class).forEach(entry -> json.addProperty("fluid." + keyResource(entry.getId()), digestResource(entry.getId())));
     return json;
   }
   public static FluidAttributes.Builder defaultMolten(FluidAttributes.Builder in, int color) {
@@ -63,7 +60,6 @@ public class Fluids {
   }
   public static void register(IEventBus bus) {
     Log.LOGGER.debug("register fluids");
-    INDEX.register(bus);
   }
 
   public static FluidEntry<ForgeFlowingFluid.Flowing> registerManaFluid(String name, int color) {
