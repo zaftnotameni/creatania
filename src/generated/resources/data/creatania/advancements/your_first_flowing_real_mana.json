@@ -1,0 +1,30 @@
+{
+  "parent": "creatania:root",
+  "display": {
+    "icon": {
+      "item": "creatania:real_mana_bucket"
+    },
+    "title": {
+      "translate": "advancement.creatania.your_first_flowing_real_mana"
+    },
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.creatania.your_first_flowing_real_mana.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false,
+    "hidden": false
+  },
+  "criteria": {
+    "0": {
+      "trigger": "create:your_first_flowing_real_mana_builtin",
+      "conditions": {}
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ]
+}

@@ -4,6 +4,10 @@
 
 ### 1.18.2-0.1.1-alpha
 
+#### Fixes
+
+- Fluids render in their designated color again
+
 ### 1.18.2-0.1.0-alpha
 
 #### Breaking Changes
