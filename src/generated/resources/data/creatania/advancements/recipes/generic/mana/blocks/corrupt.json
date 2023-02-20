@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "creatania:corrupted_inert_mana_block"
+      "creatania:mana/blocks/corrupt"
     ]
   },
   "criteria": {
@@ -12,7 +12,7 @@
         "items": [
           {
             "items": [
-              "creatania:mana_machine_component"
+              "creatania:mana/machines/casing"
             ]
           }
         ]
@@ -21,7 +21,7 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "creatania:corrupted_inert_mana_block"
+        "recipe": "creatania:mana/blocks/corrupt"
       }
     }
   },

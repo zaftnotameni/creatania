@@ -2,7 +2,7 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "creatania:botania_mana_block"
+      "item": "creatania:mana/blocks/real"
     }
   ],
   "results": [

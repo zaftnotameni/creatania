@@ -15,13 +15,13 @@ import static zaftnotameni.creatania.util.NamedItems.*;
 
 public class MixingRecipeGen extends ForgeCreateProcessingRecipeProvider {
 	public void setupRecipes() {
-		create("real_botania_mana_fluid", b -> b.require(Blocks.BOTANIA_MANA_BLOCK.get())
+		create("real_botania_mana_fluid", b -> b.require(Blocks.REAL_MANA_BLOCK.get())
 			.output(Fluids.BOTANIA_MANA_FLUID.fluid.get(), 250)
 			.requiresHeat(HeatCondition.SUPERHEATED));
-		create("corrupted_inert_mana_fluid", b -> b.require(Blocks.CORRUPTED_INERT_MANA_BLOCK.get())
+		create("corrupted_inert_mana_fluid", b -> b.require(Blocks.CORRUPT_MANA_BLOCK.get())
 			.output(Fluids.CORRUPT_MANA_FLUID.fluid.get(), 250)
 			.requiresHeat(HeatCondition.HEATED));
-		create("purified_inert_mana_fluid", b -> b.require(Blocks.PURIFIED_INERT_MANA_BLOCK.get())
+		create("purified_inert_mana_fluid", b -> b.require(Blocks.PURE_MANA_BLOCK.get())
 			.output(Fluids.PURIFIED_MANA_FLUID.fluid.get(), 250)
 			.requiresHeat(HeatCondition.HEATED));
 

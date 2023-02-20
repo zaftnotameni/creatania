@@ -2,7 +2,15 @@
 
 ## changelog
 
-### 1.18.2-0.0.24-alpha
+### 1.18.2-0.1.0-alpha
+
+#### Breaking Changes
+
+- !!! many item IDs have changed, it will result in existing worlds being broken or items being deleted
+
+#### Changes
+
+- Manaducts (all) are now attached to surfaces, breaking the block under it will make it pop out
 
 #### Internals
 

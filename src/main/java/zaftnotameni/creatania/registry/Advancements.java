@@ -18,7 +18,7 @@ public class Advancements {
       .special(SILENT)),
 
   // mana machinery
-    MANA_MACHINE_COMPONENT = create("mana_machine_component", b -> b.icon(zaftnotameni.creatania.registry.Blocks.MANA_MACHINE_COMPONENT.get())
+    MANA_MACHINE_COMPONENT = create("mana_machine_component", b -> b.icon(zaftnotameni.creatania.registry.Blocks.MANA_CASING.get())
       .title("Magical... Stress")
       .description("Obtain a mana machine component, the core of all mana machines")
       .after(ROOT)
@@ -101,17 +101,17 @@ public class Advancements {
       .description("The llame llama lloser got what he deserves, thanks for your service")
       .after(ROOT)
       .special(SECRET)),
-    BUFF_FROM_INERT_MANA_BLOCKS = create("buff_from_purified_blocks", b -> b.icon(Blocks.PURIFIED_INERT_MANA_BLOCK.get())
+    BUFF_FROM_INERT_MANA_BLOCKS = create("buff_from_purified_blocks", b -> b.icon(Blocks.PURE_MANA_BLOCK.get())
       .title("Power Overwhelming!")
       .description("Purified mana might be inert, but still contains a lot of power within")
       .after(ROOT)
       .special(SECRET)),
-    BUFF_FROM_REAL_MANA_BLOCKS = create("buff_from_real_mana_blocks", b -> b.icon(Blocks.BOTANIA_MANA_BLOCK.get())
+    BUFF_FROM_REAL_MANA_BLOCKS = create("buff_from_real_mana_blocks", b -> b.icon(Blocks.REAL_MANA_BLOCK.get())
       .title("Flying High")
       .description("Botania mana blocks are the real deal, pure condensed magical power")
       .after(ROOT)
       .special(SECRET)),
-    DEBUFF_FROM_INERT_MANA_BLOCKS = create("debuff_from_corrupt_blocks", b -> b.icon(Blocks.CORRUPTED_INERT_MANA_BLOCK.get())
+    DEBUFF_FROM_INERT_MANA_BLOCKS = create("debuff_from_corrupt_blocks", b -> b.icon(Blocks.CORRUPT_MANA_BLOCK.get())
       .title("Watch your step!")
       .description("Corrupt mana might be inert, but still extremely dangerous")
       .after(ROOT)

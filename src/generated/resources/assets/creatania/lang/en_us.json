@@ -127,10 +127,6 @@
 	"_": "->------------------------]  Items  [------------------------<-",
 
 	"item.creatania.mana_gel": "Mana gel",
-	"item.creatania.corrupted_inert_mana_block": "Corrupted inert mana block",
-	"item.creatania.purified_inert_mana_block": "Purified inert mana block",
-	"item.creatania.botania_mana_block": "Botania mana block",
-	"item.creatania.mana_machine_component": "Mana machine component",
 	"item.creatania.molten_gold_fluid_bucket": "Molten gold fluid bucket",
 	"item.creatania.molten_copper_fluid_bucket": "Molten copper fluid bucket",
 	"item.creatania.molten_iron_fluid_bucket": "Molten iron fluid bucket",
@@ -148,10 +144,6 @@
 
 	"_": "->------------------------]  Blocks  [------------------------<-",
 
-	"block.creatania.corrupted_inert_mana_block": "Corrupted inert mana block",
-	"block.creatania.purified_inert_mana_block": "Purified inert mana block",
-	"block.creatania.botania_mana_block": "Botania mana block",
-	"block.creatania.mana_machine_component": "Mana machine component",
 	"block.creatania.molten_gold_fluid_block": "Molten gold fluid block",
 	"block.creatania.molten_copper_fluid_block": "Molten copper fluid block",
 	"block.creatania.molten_iron_fluid_block": "Molten iron fluid block",

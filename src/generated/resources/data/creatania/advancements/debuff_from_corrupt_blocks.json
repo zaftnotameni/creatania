@@ -2,7 +2,7 @@
   "parent": "creatania:root",
   "display": {
     "icon": {
-      "item": "creatania:corrupted_inert_mana_block"
+      "item": "creatania:mana/blocks/corrupt"
     },
     "title": {
       "translate": "advancement.creatania.debuff_from_corrupt_blocks"

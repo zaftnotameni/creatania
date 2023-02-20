@@ -110,11 +110,11 @@ public class ModEventBus {
         return MaterialColor.WARPED_WART_BLOCK.calculateRGBColor(MaterialColor.Brightness.HIGH);
       }
     };
-    registerBlockColors(purple, () -> Blocks.CORRUPTED_INERT_MANA_BLOCK.get());
+    registerBlockColors(purple, () -> Blocks.CORRUPT_MANA_BLOCK.get());
     registerBlockColors(purple, () -> Fluids.CORRUPT_MANA_FLUID.block.get());
-    registerBlockColors(cyan, () -> Blocks.PURIFIED_INERT_MANA_BLOCK.get());
+    registerBlockColors(cyan, () -> Blocks.PURE_MANA_BLOCK.get());
     registerBlockColors(cyan, () -> Fluids.PURIFIED_MANA_FLUID.block.get());
-    registerBlockColors(wart, () -> Blocks.BOTANIA_MANA_BLOCK.get());
+    registerBlockColors(wart, () -> Blocks.REAL_MANA_BLOCK.get());
     registerBlockColors(wart, () -> Fluids.BOTANIA_MANA_FLUID.block.get());
   }
 

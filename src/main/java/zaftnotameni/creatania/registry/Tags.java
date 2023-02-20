@@ -10,9 +10,12 @@ import net.minecraft.world.level.material.Fluid;
 import zaftnotameni.creatania.Constants;
 public class Tags {
   public static class Blocks {
-    public static final TagKey<Block> PURE_INERT_MANA = tag("pure_inert_mana");
-    public static final TagKey<Block> CORRUPT_INERT_MANA = tag("corrupt_inert_mana");
-    public static final TagKey<Block> BOTANIA_MANA = tag("botania_mana");
+    public static final TagKey<Block> ALL_MANA = tag("mana/all");
+    public static final TagKey<Block> INERT_MANA = tag("mana/inert");
+    public static final TagKey<Block> REAL_MANA = tag("mana/real");
+    public static final TagKey<Block> PURE_MANA = tag("mana/pure");
+    public static final TagKey<Block> CORRUPT_MANA = tag("mana/corrupt");
+    public static final TagKey<Block> ACTIVE_MANA = tag("mana/active");
     public static final TagKey<Block> PREVENTS_ENDER_TELEPORTATION = tag("prevents_ender_teleportation");
     public static final TagKey<Block> BLACKLISTED_FOR_WRENCH_PICKUP = tag("blacklisted_for_wrench_pickup");
     public static final TagKey<Block> MANADUCT = tag("manaduct");

@@ -11,7 +11,8 @@ import zaftnotameni.creatania.effects.VanillaEffectConfiguration;
 import zaftnotameni.creatania.registry.Advancements;
 
 import static zaftnotameni.creatania.util.Actions.killSlimeProduceManagelGrantAchievement;
-public class PurifiedManaBlock extends BaseManaBlock {
+public class PureManaBlock extends BaseManaBlock {
+  public static final String NAME = "mana/blocks/pure";
   public static final VanillaEffectConfiguration absorptionEffect = new VanillaEffectConfiguration(
     MobEffects.ABSORPTION,
     CommonConfig.PURIFIED_MANA_BLOCK_BUFF_ABSORPTION_DURATION.get(),
@@ -28,7 +29,7 @@ public class PurifiedManaBlock extends BaseManaBlock {
     CommonConfig.PURIFIED_MANA_BLOCK_BUFF_HEAL.get(),
     CommonConfig.PURIFIED_MANA_BLOCK_BUFF_DISABLE_WHEN_SNEAKING.get());
 
-  public PurifiedManaBlock(Properties pProperties) {
+  public PureManaBlock(Properties pProperties) {
     super(pProperties);
   }
 

@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "creatania:mana_machine_component"
+          "name": "creatania:mana/blocks/pure"
         }
       ],
       "conditions": [

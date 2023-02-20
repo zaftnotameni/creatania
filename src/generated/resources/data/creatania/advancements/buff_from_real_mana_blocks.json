@@ -2,7 +2,7 @@
   "parent": "creatania:root",
   "display": {
     "icon": {
-      "item": "creatania:botania_mana_block"
+      "item": "creatania:mana/blocks/real"
     },
     "title": {
       "translate": "advancement.creatania.buff_from_real_mana_blocks"

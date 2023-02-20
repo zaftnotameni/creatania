@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "creatania:botania_mana_block"
+          "name": "creatania:mana/blocks/real"
         }
       ],
       "conditions": [

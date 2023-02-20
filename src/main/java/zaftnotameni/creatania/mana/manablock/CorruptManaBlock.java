@@ -12,7 +12,8 @@ import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.effects.VanillaEffectConfiguration;
 import zaftnotameni.creatania.registry.Advancements;
 import zaftnotameni.creatania.util.ScanArea;
-public class CorruptedManaBlock extends BaseManaBlock {
+public class CorruptManaBlock extends BaseManaBlock {
+  public static final String NAME = "mana/blocks/corrupt";
   public static final VanillaEffectConfiguration witherEffect = new VanillaEffectConfiguration(
     MobEffects.WITHER,
     CommonConfig.CORRUPTED_MANA_BLOCK_BUFF_WITHER_DURATION.get(),
@@ -33,7 +34,7 @@ public class CorruptedManaBlock extends BaseManaBlock {
     CommonConfig.CORRUPTED_MANA_BLOCK_BUFF_HUNGER_DURATION.get(),
     CommonConfig.CORRUPTED_MANA_BLOCK_BUFF_HUNGER.get(),
     CommonConfig.CORRUPTED_MANA_BLOCK_BUFF_DISABLE_WHEN_SNEAKING.get());
-  public CorruptedManaBlock(Properties pProperties) {
+  public CorruptManaBlock(Properties pProperties) {
     super(pProperties);
   }
 

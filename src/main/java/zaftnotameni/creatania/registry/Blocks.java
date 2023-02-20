@@ -13,26 +13,20 @@ import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.machines.manacondenser.ManaCondenserBlock;
 import zaftnotameni.creatania.machines.managenerator.ManaGeneratorBlock;
 import zaftnotameni.creatania.machines.manamotor.ManaMotorBlock;
-import zaftnotameni.creatania.mana.manablock.BaseManaBlock;
-import zaftnotameni.creatania.mana.manablock.BotaniaManaBlock;
-import zaftnotameni.creatania.mana.manablock.CorruptedManaBlock;
-import zaftnotameni.creatania.mana.manablock.PurifiedManaBlock;
+import zaftnotameni.creatania.mana.manablock.CorruptManaBlock;
+import zaftnotameni.creatania.mana.manablock.PureManaBlock;
+import zaftnotameni.creatania.mana.manablock.RealManaBlock;
 import zaftnotameni.creatania.mana.manaduct.ElementiumManaductBlock;
 import zaftnotameni.creatania.mana.manaduct.GaiaManaductBlock;
 import zaftnotameni.creatania.mana.manaduct.ManasteelManaductBlock;
@@ -41,12 +35,11 @@ import zaftnotameni.creatania.stress.omnibox.OmniboxBlock;
 import zaftnotameni.creatania.stress.xorlever.XorLeverBlock;
 import zaftnotameni.creatania.util.Humanity;
 import zaftnotameni.creatania.util.Log;
-import zaftnotameni.sharedbehaviors.ManaMachineComponentBlock;
-
-import java.util.function.Supplier;
+import zaftnotameni.sharedbehaviors.ManaCasing;
 
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
+import static zaftnotameni.creatania.mana.manablock.BaseManaBlock.registerManablock;
 import static zaftnotameni.creatania.mana.manaduct.BaseManaductBlock.registerManaduct;
 
 public class Blocks {
@@ -127,30 +120,16 @@ public class Blocks {
   public static final BlockEntry<GaiaManaductBlock> GAIA_MANADUCT_BLOCK = registerManaduct(
     GaiaManaductBlock.NAME, "Gaia Manaduct", Tags.Blocks.TIER_4, GaiaManaductBlock::new);
 
-  public static final RegistryObject<CorruptedManaBlock> CORRUPTED_INERT_MANA_BLOCK = registerBlockWithItem(
-    Constants.CORRUPTED_INERT_MANA_BLOCK,
-    () -> new CorruptedManaBlock(BaseManaBlock.makeManablockProperties().destroyTime(10f)));
+  public static final BlockEntry<CorruptManaBlock> CORRUPT_MANA_BLOCK = registerManablock(
+    CorruptManaBlock.NAME, "Corrupt Mana Block", Tags.Blocks.CORRUPT_MANA, Tags.Blocks.INERT_MANA, CorruptManaBlock::new);
 
-  public static final RegistryObject<PurifiedManaBlock> PURIFIED_INERT_MANA_BLOCK = registerBlockWithItem(
-    Constants.PURIFIED_INERT_MANA_BLOCK,
-    () -> new PurifiedManaBlock(BaseManaBlock.makeManablockProperties()));
+  public static final BlockEntry<PureManaBlock> PURE_MANA_BLOCK = registerManablock(
+    PureManaBlock.NAME, "Pure Mana Block", Tags.Blocks.PURE_MANA, Tags.Blocks.INERT_MANA, PureManaBlock::new);
 
-  public static final RegistryObject<BotaniaManaBlock> BOTANIA_MANA_BLOCK = registerBlockWithItem(
-    Constants.BOTANIA_MANA_BLOCK,
-    () -> new BotaniaManaBlock(BaseManaBlock.makeManablockProperties()));
+  public static final BlockEntry<RealManaBlock> REAL_MANA_BLOCK = registerManablock(
+    RealManaBlock.NAME, "Real Mana Block", Tags.Blocks.REAL_MANA, Tags.Blocks.ACTIVE_MANA, RealManaBlock::new);
 
-  public static final RegistryObject<ManaMachineComponentBlock> MANA_MACHINE_COMPONENT = registerBlockWithItem(
-    Constants.MANA_MACHINE_COMPONENT,
-    () -> new ManaMachineComponentBlock(BlockBehaviour.Properties.of(Material.STONE).destroyTime(1f)));
-
-  public static <T extends Block> RegistryObject<T> registerBlockWithItem(String name, Supplier<T> createBlock) {
-    RegistryObject<T> block = INDEX.register(name, createBlock);
-    registerBlockItem(name, block, CreativeModeTabs.CREATANIA_ITEMS);
-    return block;
-  }
-  private static <T extends Block> RegistryObject<Item> registerBlockItem(String name, RegistryObject<T> block, CreativeModeTab tab) {
-    return Items.INDEX.register(name, () -> new BlockItem(block.get(), new Item.Properties().tab(tab)));
-  }
+  public static final BlockEntry<ManaCasing> MANA_CASING = ManaCasing.registerSelf();
 
   public static void register(IEventBus bus) {
     Log.LOGGER.debug("register blocks");

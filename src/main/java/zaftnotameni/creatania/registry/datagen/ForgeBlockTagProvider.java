@@ -41,20 +41,11 @@ public class ForgeBlockTagProvider extends BlockTagsProvider {
       Blocks.MANA_GENERATOR.get());
 
     tag(Tags.Blocks.PREVENTS_ENDER_TELEPORTATION).add(
-      Blocks.CORRUPTED_INERT_MANA_BLOCK.get());
+      Blocks.CORRUPT_MANA_BLOCK.get());
 
     tag(Tags.Blocks.MANA_MACHINE).add(
       Blocks.MANA_CONDENSER.get(),
       Blocks.MANA_GENERATOR.get(),
       Blocks.MANA_MOTOR.get());
-
-    tag(Tags.Blocks.PURE_INERT_MANA).add(
-      Blocks.PURIFIED_INERT_MANA_BLOCK.get());
-
-    tag(Tags.Blocks.CORRUPT_INERT_MANA).add(
-      Blocks.CORRUPTED_INERT_MANA_BLOCK.get());
-
-    tag(Tags.Blocks.BOTANIA_MANA).add(
-      Blocks.BOTANIA_MANA_BLOCK.get());
   }
 }

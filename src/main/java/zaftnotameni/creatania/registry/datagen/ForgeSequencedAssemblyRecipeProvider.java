@@ -20,7 +20,7 @@ public class ForgeSequencedAssemblyRecipeProvider extends SequencedAssemblyRecip
   }
   GeneratedRecipe MANA_MACHINE_COMPONENT = create(Constants.MANA_MACHINE_COMPONENT, r -> r.require(livingwood())
     .transitionTo(Items.INCOMPLETE_MANA_MACHINE_COMPONENT.get())
-    .addOutput(new ItemStack(Blocks.MANA_MACHINE_COMPONENT.get().asItem(), 2), 1f)
+    .addOutput(new ItemStack(Blocks.MANA_CASING.get().asItem(), 2), 1f)
     .loops(1)
     .addStep(CuttingRecipe::new, rr -> rr)
     .addStep(DeployerApplicationRecipe::new, rr -> rr.require(manasteel())));

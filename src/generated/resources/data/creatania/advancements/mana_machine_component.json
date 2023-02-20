@@ -2,7 +2,7 @@
   "parent": "creatania:root",
   "display": {
     "icon": {
-      "item": "creatania:mana_machine_component"
+      "item": "creatania:mana/machines/casing"
     },
     "title": {
       "translate": "advancement.creatania.mana_machine_component"
@@ -23,7 +23,7 @@
         "items": [
           {
             "items": [
-              "creatania:mana_machine_component"
+              "creatania:mana/machines/casing"
             ]
           }
         ]

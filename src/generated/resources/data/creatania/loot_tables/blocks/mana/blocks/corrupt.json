@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "creatania:corrupted_inert_mana_block"
+          "name": "creatania:mana/blocks/corrupt"
         }
       ],
       "conditions": [

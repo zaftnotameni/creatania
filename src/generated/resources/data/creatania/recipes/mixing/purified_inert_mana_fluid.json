@@ -2,7 +2,7 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "creatania:purified_inert_mana_block"
+      "item": "creatania:mana/blocks/pure"
     }
   ],
   "results": [

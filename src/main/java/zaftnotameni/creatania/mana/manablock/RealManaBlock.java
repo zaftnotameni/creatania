@@ -11,7 +11,8 @@ import zaftnotameni.creatania.network.Networking;
 import zaftnotameni.creatania.network.PacketUpdateFlight;
 import zaftnotameni.creatania.registry.Advancements;
 import zaftnotameni.creatania.registry.Potions;
-public class BotaniaManaBlock extends BaseManaBlock {
+public class RealManaBlock extends BaseManaBlock {
+  public static final String NAME = "mana/blocks/real";
   public static VanillaEffectConfiguration flightEffect;
 
   public static VanillaEffectConfiguration getFlightEffect() {
@@ -23,7 +24,7 @@ public class BotaniaManaBlock extends BaseManaBlock {
       CommonConfig.BOTANIA_MANA_BLOCK_BUFF_DISABLE_WHEN_SNEAKING.get());
     return flightEffect;
   }
-  public BotaniaManaBlock(Properties pProperties) {
+  public RealManaBlock(Properties pProperties) {
     super(pProperties);
   }
   @Override

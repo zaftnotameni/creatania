@@ -4,7 +4,7 @@
   "fluidIngredients": [],
   "itemResults": [
     {
-      "item": "creatania:corrupted_inert_mana_block",
+      "item": "creatania:mana/blocks/corrupt",
       "count": 1
     }
   ],

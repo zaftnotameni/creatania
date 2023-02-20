@@ -21,13 +21,13 @@ public class ForgeRecipeProvider extends RecipeProvider {
   @Override
   protected void buildCraftingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
     InventoryChangeTrigger.TriggerInstance trigger = inventoryTrigger(
-      ItemPredicate.Builder.item().of(Blocks.MANA_MACHINE_COMPONENT.get().asItem()).build()
+      ItemPredicate.Builder.item().of(Blocks.MANA_CASING.get().asItem()).build()
     );
 
     var botaniaManaFluid = new FluidStack(Fluids.BOTANIA_MANA_FLUID.fluid.get(), 1000);
     var purifiedManaFluid = new FluidStack(Fluids.PURIFIED_MANA_FLUID.fluid.get(), 1000);
     var air = net.minecraft.world.level.block.Blocks.AIR;
-    var corruptedInertManaBlock = new ItemStack(Blocks.CORRUPTED_INERT_MANA_BLOCK.get(), 1);
+    var corruptedInertManaBlock = new ItemStack(Blocks.CORRUPT_MANA_BLOCK.get(), 1);
 
     new ManaGeneratorRecipeBuilder(
       Inputs.fromFluidIngredient(FluidIngredient.fromFluidStack(purifiedManaFluid)),

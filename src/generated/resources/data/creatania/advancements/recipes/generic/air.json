@@ -12,7 +12,7 @@
         "items": [
           {
             "items": [
-              "creatania:mana_machine_component"
+              "creatania:mana/machines/casing"
             ]
           }
         ]

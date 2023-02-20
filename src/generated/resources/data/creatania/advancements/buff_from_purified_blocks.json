@@ -2,7 +2,7 @@
   "parent": "creatania:root",
   "display": {
     "icon": {
-      "item": "creatania:purified_inert_mana_block"
+      "item": "creatania:mana/blocks/pure"
     },
     "title": {
       "translate": "advancement.creatania.buff_from_purified_blocks"

@@ -87,7 +87,7 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
     BlockEntity entityBelow = this.level.getBlockEntity(this.worldPosition.below());
     if (entityBelow == null) return;
     entityBelow.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP).ifPresent((inventoryBelow) -> {
-      ItemStack stack = new ItemStack(Blocks.CORRUPTED_INERT_MANA_BLOCK.get().asItem());
+      ItemStack stack = new ItemStack(Blocks.CORRUPT_MANA_BLOCK.get().asItem());
       for (int i = 0; i < inventoryBelow.getSlots(); i++) {
         if (!inventoryBelow.isItemValid(i, stack)) continue;
         if (!inventoryBelow.insertItem(i, stack, true).isEmpty()) continue;

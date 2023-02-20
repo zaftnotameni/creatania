@@ -33,9 +33,9 @@ public class CreataniaMain {
     bus.addListener(FMLCompleteSetup::run);
   }
   public static void registrySetup(IEventBus bus) {
+    Index.all().registerEventListeners(bus);
     Potions.register(bus);
     Particles.register(bus);
-    Index.all().registerEventListeners(bus);
     Items.register(bus);
     Blocks.register(bus);
     Fluids.register(bus);

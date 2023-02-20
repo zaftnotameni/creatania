@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "creatania:block/mana/blocks/corrupt/block"
+    }
+  }
+}

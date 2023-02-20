@@ -14,8 +14,8 @@ public class FMLCommonSetup {
   public static void run(final FMLCommonSetupEvent event) {
     Log.LOGGER.info("creatania setup started");
     BlockStressValues.registerProvider(MODID, AllConfigs.SERVER.kinetics.stressValues);
-    BoilerHeaters.registerHeater(Blocks.BOTANIA_MANA_BLOCK.get(), (level, pos, state) -> 4);
-    BoilerHeaters.registerHeater(Blocks.PURIFIED_INERT_MANA_BLOCK.get(), (level, pos, state) -> 2);
+    BoilerHeaters.registerHeater(Blocks.REAL_MANA_BLOCK.get(), (level, pos, state) -> 4);
+    BoilerHeaters.registerHeater(Blocks.PURE_MANA_BLOCK.get(), (level, pos, state) -> 2);
     Networking.registerMessages();
     event.enqueueWork(() -> {
       Advancements.register();
