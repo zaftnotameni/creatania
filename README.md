@@ -23,14 +23,24 @@ Connecting Create and Botania.
 - Mana Condenser (SU -> corrupted inert mana blocks, requires SU)
 - Mana Generator (purified inert mana fluid -> botania mana, requires SU)
 
+### Food?
+
+- Mana gel is a mysterious item, it is said to provide great benefits when eaten, but seems like the way to acquire it has been lost. Maybe there is a secret?
+
 ### Fluids
 
 - Inert mana fluid: a fluid version of mana, can be used for transportation in pipes/trains but must go through another machine to become botania mana.
+- Molten metals: Botania, Create, and Vanilla metals are given a molten form (not utilized at the moment)
+
+### Flowers
+
+- Blazunia: functional flower, consumes mana, lights up blaze burners in a radius.
 
 ### Blocks
 
 - Purified Inert Mana block: can be melted to inert mana fluid using a superheated mixer.
-- Corrupted Inert Mana block: can be purified via pure daisy to become a purified inert mana block
+- Corrupted Inert Mana block: can be purified via pure daisy to become a purified inert mana block.
+- Real Mana block: requires infusing lots of mana into a inert mana block.
 
 ### Mechanics
 
@@ -39,39 +49,22 @@ Connecting Create and Botania.
 SU can be used to generate mana through an 4-step process.
 
 1. SU is used in a mana condenser to generate corrupted mana blocks
-2. corrupted mana blocks are used with a pure daisy to make inert mana blocks
-3. Inert mana blocks can be superheated into Inert mana fluid
-4. Inert mana fluid can be converted to mana using a mana generator
+2. corrupted mana blocks are used with a pure daisy to make pure inert mana blocks
+3. Pure Inert mana blocks can be superheated into Inert mana fluid
+4. Pure Inert mana fluid can be converted to mana using a mana generator
+
+Alternatively, steps 2 and 3 can be reversed:
+
+1. SU is used in a mana condenser to generate corrupted mana blocks
+2. Corrupted Inert mana blocks can be superheated into Corrupted Inert mana fluid
+3. Corrupted mana fluid can be purified by a pure daisy to pure inert mana fluid
+4. Pure Inert mana fluid can be converted to mana using a mana generator
 
 #### SU Generation
 
 Mana can be converted directly to SU via a Mana Motor.
 
 ### Development
-
-#### TO-DO List
-
-- [x] Loot Tables for all blocks
-- [x] Lock to horizontal
-  - [x] Mana Motor
-  - [x] Mana Generator
-  - [x] Mana Condenser
-- [ ] Recipes
-  - [x] Mana Machine (intermediate block)
-  - [x] Mana Motor
-  - [x] Mana Generator
-  - [x] Mana Condenser
-  - [ ] Mana Gel
-- [ ] Functionality
-  - [x] Mana Condenser generates 
-- [x] Mining level tags for all blocks
-- [ ] Art
-  - [ ] pipe connection for mana generator
-  - [ ] mana gel
-  - [ ] corrupted mana block
-  - [ ] purified mana block
-  - [ ] purified mana machine
-  - [ ] mana fluid + bucket
 
 Setup Process:
 ==============================
