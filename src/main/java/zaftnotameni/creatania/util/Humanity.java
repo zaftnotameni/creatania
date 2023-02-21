@@ -27,7 +27,7 @@ public class Humanity {
   public static String digestBlock(RegistryObject<Block> entry) { return digestString(entry.getId().getPath()); }
   public static String digestFluid(RegistryObject<Fluid> entry) { return digestString(entry.getId().getPath()); }
 
-  public static String keyString(String in) { return StringUtils.replace(in, ":", "."); }
+  public static String keyString(String in) { return StringUtils.replace(StringUtils.replace(in, ":", "."), "/", "."); }
   public static String keyResource(ResourceLocation in) { return keyString(in.toString()); }
   public static String keyBlock(Block in) { return "item." + keyString(in.getDescriptionId().toString()); }
   public static String keyItem(Item in) { return "block." + keyString(in.getDescriptionId().toString()); }

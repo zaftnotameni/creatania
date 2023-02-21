@@ -32,17 +32,21 @@ public class CrushingRecipeGen extends ForgeCreateProcessingRecipeProvider {
 			create("botania_flower_crushing_tall_to_mystical",
 				() -> itemLike(namespace, tallPath),
 				b -> b.duration(150)
-				.output(1f, itemLike(namespace, mysticalPath), 2)
+				.output(1f, itemLike(namespace, mysticalPath), 4)
+				.output(0.1f, itemLike(namespace, mysticalPath), 1)
 				.output(0.1f, itemLike(namespace, mysticalPath), 1));
 			create("botania_flower_crushing_tall_to_petal",
 				() -> itemLike(namespace, tallPath),
 				b -> b.duration(150)
-					.output(1f, itemLike(namespace, petalPath), 4)
-					.output(0.1f, itemLike(namespace, petalPath), 2));
+					.output(1f, itemLike(namespace, petalPath), 6)
+					.output(0.1f, itemLike(namespace, petalPath), 1)
+					.output(0.1f, itemLike(namespace, petalPath), 1)
+					.output(0.1f, itemLike(namespace, petalPath), 1));
 			create("botania_flower_crushing_mystical_to_petal",
 				() -> itemLike(namespace, mysticalPath),
 				b -> b.duration(150)
-					.output(1f, itemLike(namespace, petalPath), 2)
+					.output(1f, itemLike(namespace, petalPath), 4)
+					.output(0.1f, itemLike(namespace, petalPath), 1)
 					.output(0.1f, itemLike(namespace, petalPath), 1));
 		}
 	}

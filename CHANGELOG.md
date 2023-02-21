@@ -2,17 +2,25 @@
 
 ## changelog
 
+### 1.18.2-0.1.3-alpha
+
 ### 1.18.2-0.1.2-alpha
 
 #### New
 
 - Mana Motor shows a mana hud (from botania) when looking at it with the wand of the forest
 - Mana Generator shows a mana hud (from botania) when looking at it with the wand of the forest
+- Prototype version of a functional flower to feed blaze burners given mana
+
+#### Changes
+
+- Flower/Petal crushing recipes produce more output
 
 #### Fixes
 
 - Mana fluids are tagged correctly
 - Added missing translations
+- Transparent blocks no longer let you see through the world
 
 ### 1.18.2-0.1.1-alpha
 

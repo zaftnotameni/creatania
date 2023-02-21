@@ -19,10 +19,10 @@ public class FillingRecipeGen extends ForgeCreateProcessingRecipeProvider {
 			create(mysticalPath + "_from_" + petalPath, b -> b.require(Fluids.PURE_MANA.get(), 250)
 				.require(itemLike(namespace, petalPath))
 				.output(itemLike(namespace, mysticalPath)));
-			create(tallPath + "_from_" + mysticalPath, b -> b.require(Fluids.PURE_MANA.get(), 250)
+			create(tallPath + "_from_" + mysticalPath, b -> b.require(net.minecraft.world.level.material.Fluids.WATER, 250)
 				.require(itemLike(namespace, mysticalPath))
 				.output(itemLike(namespace, tallPath)));
-			create(tallPath + "_from_" + petalPath, b -> b.require(Fluids.PURE_MANA.get(), 1000)
+			create(tallPath + "_from_" + petalPath, b -> b.require(Fluids.REAL_MANA.get(), 1000)
 				.require(itemLike(namespace, petalPath))
 				.output(itemLike(namespace, tallPath)));
 		}

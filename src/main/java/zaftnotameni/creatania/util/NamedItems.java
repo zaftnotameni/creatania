@@ -25,8 +25,7 @@ public class NamedItems {
     "minecraft:dandelion"
   };
   public static final String[] MINECRAFT_TALL_FLOWERS = {
-    "minecraft:rose_bush",
-    "minecraft:allium_flower_bush"
+    "minecraft:rose_bush"
   };
   public static final String[] BOTANIA_TALL_FLOWERS = {
     "botania:black_double_flower",

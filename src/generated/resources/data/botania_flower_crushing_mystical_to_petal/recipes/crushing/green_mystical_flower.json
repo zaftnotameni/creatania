@@ -8,7 +8,11 @@
   "results": [
     {
       "item": "botania:green_petal",
-      "count": 2
+      "count": 4
+    },
+    {
+      "item": "botania:green_petal",
+      "chance": 0.1
     },
     {
       "item": "botania:green_petal",

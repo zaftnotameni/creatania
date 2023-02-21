@@ -5,7 +5,7 @@
       "item": "botania:cyan_mystical_flower"
     },
     {
-      "fluid": "creatania:pure_mana",
+      "fluid": "minecraft:water",
       "nbt": {},
       "amount": 250
     }
