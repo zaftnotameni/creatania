@@ -7,6 +7,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -27,6 +28,8 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import static zaftnotameni.creatania.util.Text.*;
 
 public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmManaMachine, Log.IHasTickLogger, IAmParticleEmittingMachine, IWandHUD {
   public boolean isFirstTick = true;
@@ -52,7 +55,32 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
       .withBaseRpm(32);
     return this.manaMachine;
   }
+  @Override
+  public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+    super.addToGoggleTooltip(tooltip, isPlayerSneaking);
 
+    purple("").forGoggles(tooltip);
+
+    muted("Stress Units consumed per RPM:").space()
+      .add(gray(String.valueOf(this.getManaMachine().stressUnitsPerRpm))).forGoggles(tooltip);
+
+    purple("").forGoggles(tooltip);
+
+    muted("Pure Mana Consumed at current speed:").space()
+      .add(aqua(String.valueOf(this.getManaConsumedAtCurrentSpeed()))).forGoggles(tooltip);
+
+    purple("").forGoggles(tooltip);
+
+    muted("Pure Mana consumed per RPM:").space()
+      .add(red(String.valueOf(this.getManaMachine().manaPerRpmPerTick))).forGoggles(tooltip);
+
+    purple("").forGoggles(tooltip);
+
+    muted("Real Mana Produced at current speed:").space()
+      .add(red("LOW")).forGoggles(tooltip);
+
+    return true;
+  }
   @Override
   protected void read(CompoundTag compound, boolean clientPacket) {
     super.read(compound, clientPacket);
@@ -204,6 +232,13 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   public Log.RateLimited getLogger() { return logger; }
   public void setLogger(Log.RateLimited pLogger) { logger = pLogger; }
 
+  public int getManaConsumedAtCurrentSpeed() {
+    var conversionRate = this.getManaConversionRate();
+    var manaToBeGenerated = this.getManaProductionRate();
+    var manaFluidRequired = manaToBeGenerated * conversionRate;
+    return manaFluidRequired;
+  }
+
   public int ductCheckTickCount = 0;
   public void serverTick() {
     this.active = false;
@@ -215,8 +250,7 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
     if (this.shouldAbortServerTick()) return;
 
     var conversionRate = this.getManaConversionRate();
-    var manaToBeGenerated = this.getManaProductionRate();
-    var manaFluidRequired = manaToBeGenerated * conversionRate;
+    var manaFluidRequired = this.getManaConsumedAtCurrentSpeed();
     var manaFluidAvailable = this.getManaGeneratorFluidHandler().getManaFluidAvailable();
     var hasEnoughManaFluidToProduceMana = manaFluidRequired <= manaFluidAvailable;
     if (hasEnoughManaFluidToProduceMana) {

@@ -123,4 +123,7 @@ public class KineticManaMachine<T extends SmartTileEntity & IAmManaMachine> {
       () -> () -> LazyOptional.empty()
     );
   }
+  public int getMaximumSUPossible() {
+    return stressUnitsPerRpm * AllConfigs.SERVER.kinetics.maxMotorSpeed.get();
+  }
 }

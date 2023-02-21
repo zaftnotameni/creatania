@@ -6,6 +6,8 @@ import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -26,6 +28,8 @@ import zaftnotameni.sharedbehaviors.KineticManaMachine;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
+
+import static zaftnotameni.creatania.util.Text.*;
 
 /**
  * Consumes SU and adds Corrupted Inert Mana blocks in the inventory below
@@ -54,26 +58,57 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
     return Math.max(1, (int) Math.abs(this.getSpeed()));
   }
   @Override
+  public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+    super.addToGoggleTooltip(tooltip, isPlayerSneaking);
+
+    purple("").forGoggles(tooltip);
+
+    muted("Stress Units consumed per RPM:").space()
+      .add(gray(String.valueOf(CommonConfig.MANA_CONDENSER_SU_PER_RPM.get()))).forGoggles(tooltip);
+
+    purple("").forGoggles(tooltip);
+
+    purple("Corrupt Mana Production:").forGoggles(tooltip);
+    muted("At current speed: every").space()
+      .add(purple(String.valueOf(getEveryTicks()))).space()
+      .add(muted("ticks")).forGoggles(tooltip);
+
+    purple("").forGoggles(tooltip);
+
+    muted("At max speed:").space()
+      .add(purple(" every tick")).forGoggles(tooltip);
+
+    return true;
+  }
+  @Override
   public void addBehaviours(List<TileEntityBehaviour> behaviours) {
     this.activeStateSynchronizerBehavior = new ActiveStateSynchronizerBehavior(this);
     behaviours.add(this.activeStateSynchronizerBehavior);
     super.addBehaviours(behaviours);
   }
   public float tickCounter = 0f;
+  public float getPercentageOfMaxRPM() {
+    var maxPossibleRpm = AllConfigs.SERVER.kinetics.maxMotorSpeed.get();
+    return Math.max(0.01f, this.getNormalizedRPM() / (float) maxPossibleRpm);
+  }
+  public float getTickCounterIncrease() {
+    return this.getPercentageOfMaxRPM() / (Math.max(1, CommonConfig.MANA_CONDENSER_THROTTLE_PER_RPM_BELOW_MAX.get()));
+  }
+  public int getEveryTicks() {
+    var tickCounterIncrease = getTickCounterIncrease();
+    return Mth.ceil(1.0 / tickCounterIncrease);
+  }
   public void serverTick() {
     this.active = false;
     this.firstTick = false;
     var rpm = this.getNormalizedRPM();
-    var maxPossibleRpm = AllConfigs.SERVER.kinetics.maxMotorSpeed.get();
-    var percentageOfMaxRpm = Math.max(0.01f, rpm / (float) maxPossibleRpm);
-
     var requiredMana = getManaConsumptionRate();
     if (this.doesNotMeetRequirementsToCondenseMana(rpm, requiredMana)) {
       return;
     }
     if (requiredMana > 0) this.receiveMana(-requiredMana);
 
-    tickCounter += percentageOfMaxRpm / (Math.max(1, CommonConfig.MANA_CONDENSER_THROTTLE_PER_RPM_BELOW_MAX.get()));
+    tickCounter += getTickCounterIncrease();
     if (tickCounter > 1f) {
       this.insertCorruptedManaBlockBelow();
       tickCounter = 0;
@@ -107,7 +142,7 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
 
   @Override
   public float calculateStressApplied() {
-    float impact = CommonConfig.MANA_CONDENSER_SU_PER_RPM.get() * Math.abs(this.getSpeed());
+    float impact = CommonConfig.MANA_CONDENSER_SU_PER_RPM.get();
     this.lastStressApplied = impact;
     return impact;
   }

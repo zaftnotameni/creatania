@@ -4,6 +4,15 @@
 
 ### 1.18.2-0.1.3-alpha
 
+#### New
+
+- Command to create a checkerboard floor, great for demos like ponder scenes
+  `/creatania checkerboardfloor <int range> <block block1> <block block2>`
+
+#### Changes
+
+- Mana Motor/Generator/Condenser show information about production/consumption rate in the goggles tooltip
+
 ### 1.18.2-0.1.2-alpha
 
 #### New
