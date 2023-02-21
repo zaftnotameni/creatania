@@ -37,6 +37,7 @@ public class ForgeDatagenInitializer {
       generator.addProvider(new RuneAltarRecipeGen(generator));
       generator.addProvider(new TerraPlateRecipeGen(generator));
       generator.addProvider(new PureDaisyRecipeGen(generator));
+      generator.addProvider(new ForgeLangProvider(generator));
     }
 
   }

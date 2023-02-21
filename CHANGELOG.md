@@ -15,6 +15,7 @@
 #### Changes
 
 - Flower/Petal crushing recipes produce more output
+- Improved translations by using translations straight from Registrate instead of using logic
 
 #### Fixes
 
