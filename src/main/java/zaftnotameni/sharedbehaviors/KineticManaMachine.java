@@ -1,5 +1,6 @@
 package zaftnotameni.sharedbehaviors;
 import com.google.common.base.Predicates;
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.contraptions.base.DirectionalKineticBlock;
 import com.simibubi.create.content.contraptions.components.motor.CreativeMotorTileEntity;
 import com.simibubi.create.foundation.config.AllConfigs;
@@ -7,15 +8,25 @@ import com.simibubi.create.foundation.tileEntity.SmartTileEntity;
 import com.simibubi.create.foundation.tileEntity.behaviour.CenteredSideValueBoxTransform;
 import com.simibubi.create.foundation.tileEntity.behaviour.scrollvalue.ScrollValueBehaviour;
 import com.simibubi.create.foundation.utility.Lang;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.core.Direction;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.AABB;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fml.DistExecutor;
+import vazkii.botania.api.BotaniaAPIClient;
+import vazkii.botania.api.BotaniaForgeClientCapabilities;
+import vazkii.botania.api.block.IWandHUD;
 import vazkii.botania.api.mana.spark.IManaSpark;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -99,5 +110,17 @@ public class KineticManaMachine<T extends SmartTileEntity & IAmManaMachine> {
   }
   public static BlockState rotate(BlockState state, Direction direction) {
     return state.setValue(DirectionalKineticBlock.FACING, state.getValue(DirectionalKineticBlock.FACING).getClockWise(Direction.Axis.Y));
+  }
+
+  public static void renderSimpleBotaniaHud(Level level, BlockState bs, PoseStack ps, int color, int current, int max) {
+    if (level == null || !level.isClientSide()) return;
+    String name = I18n.get(bs.getBlock().getDescriptionId());
+    BotaniaAPIClient.instance().drawSimpleManaHUD(ps, color, current,max, name);
+  }
+  public static <T> LazyOptional<T>  handleBotaniaManaHudCapability(@Nonnull Capability<T> cap, @Nullable Direction side, IWandHUD self) {
+    return DistExecutor.unsafeRunForDist(
+      () -> () -> (cap == BotaniaForgeClientCapabilities.WAND_HUD) ? LazyOptional.of(() -> self).cast() : LazyOptional.empty(),
+      () -> () -> LazyOptional.empty()
+    );
   }
 }

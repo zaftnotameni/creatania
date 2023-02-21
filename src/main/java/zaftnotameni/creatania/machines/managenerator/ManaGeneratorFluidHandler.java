@@ -61,6 +61,10 @@ public class ManaGeneratorFluidHandler {
     return primaryTank.getFluidLevel().getValue() * 1000;
   }
 
+  public float getManaTankCapacity(){
+    return CommonConfig.MANA_GENERATOR_MAX_MANA_FLUID_STORAGE.get();
+  }
+
   public void read(CompoundTag compound, boolean clientPacket) {
 
   }

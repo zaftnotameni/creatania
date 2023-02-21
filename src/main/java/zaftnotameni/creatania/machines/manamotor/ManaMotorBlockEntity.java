@@ -1,10 +1,14 @@
 package zaftnotameni.creatania.machines.manamotor;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.contraptions.base.GeneratingKineticTileEntity;
 import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
 import com.simibubi.create.foundation.tileEntity.behaviour.scrollvalue.ScrollValueBehaviour;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -14,6 +18,9 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import vazkii.botania.api.BotaniaForgeCapabilities;
+import vazkii.botania.api.block.IWandHUD;
+import vazkii.botania.api.block.IWandable;
+import vazkii.botania.api.mana.IManaPool;
 import vazkii.botania.api.mana.IManaReceiver;
 import vazkii.botania.api.mana.spark.IManaSpark;
 import vazkii.botania.api.mana.spark.ISparkAttachable;
@@ -33,7 +40,7 @@ import java.util.List;
  *
  * If there is not enough mana, it still rotates but produces 0 SU.
  */
-public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements IManaReceiver, ISparkAttachable, IAmManaMachine {
+public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements IManaReceiver, IManaPool, ISparkAttachable, IAmManaMachine, IWandHUD, IWandable {
   public static final boolean UPDATE_MANA_ON_EVERY_TICK = true;
   public static final boolean UPDATE_MANA_ON_LAZY_TICK = !UPDATE_MANA_ON_EVERY_TICK;
   public ManaMotorBehavior manaMotorBehavior;
@@ -41,6 +48,7 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
   public ActiveStateSynchronizerBehavior activeStateSynchronizerBehavior;
   public LazyOptional<IManaReceiver> lazyManaReceiver = LazyOptional.empty();
   public LazyOptional<ISparkAttachable> lazySparkAttachable = LazyOptional.empty();
+  public LazyOptional<IWandable> lazyWandable = LazyOptional.empty();
   public int mana = 0;
   public int manaPerTick = 0;
   public boolean active = false;
@@ -56,8 +64,12 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
   public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
     var block = this.getBlockState().getBlock();
     if (!(block instanceof ManaMotorBlock motorBlock)) return super.getCapability(cap, side);
-
+    if (cap == BotaniaForgeCapabilities.WANDABLE) return lazyWandable.cast();
     if (cap == BotaniaForgeCapabilities.SPARK_ATTACHABLE) return lazySparkAttachable.cast();
+
+    var result = KineticManaMachine.handleBotaniaManaHudCapability(cap, side, this);
+    if (result.isPresent()) return result.cast();
+
     if (side == null) return super.getCapability(cap, side);
     var sameAxisAsShaft =
       motorBlock.hasShaftTowards(this.level, this.worldPosition, this.getBlockState(), side.getOpposite()) ||
@@ -153,6 +165,7 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
     super.invalidateCaps();
     this.lazyManaReceiver.invalidate();
     this.lazySparkAttachable.invalidate();
+    this.lazyWandable.invalidate();
   }
 
   @Override
@@ -160,6 +173,7 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
     super.onLoad();
     lazyManaReceiver = LazyOptional.of(() -> this);
     lazySparkAttachable = LazyOptional.of(() -> this);
+    lazyWandable = LazyOptional.of(() -> this);
   }
   @Override
   public void onSpeedChanged(float previousSpeed) {
@@ -189,4 +203,28 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
   public void setManaMachineLastCapacityProvided(float value) { this.lastCapacityProvided = value; }
   @Override
   public void setManaMachineLastStressImpact(float value) { this.lastStressApplied = value; }
+  @Override
+  public void renderHUD(PoseStack ms, Minecraft mc) {
+    KineticManaMachine.renderSimpleBotaniaHud(level, getBlockState(), ms, 0xffff0000, this.getCurrentMana(), this.getManaMachine().manaCap);
+  }
+  public boolean isValidBinding() {
+    // noinspection ConstantConditions,deprecation,deprecation
+    return true;
+  }
+  @Override
+  public boolean onUsedByWand(@org.jetbrains.annotations.Nullable Player player, ItemStack stack, Direction side) {
+    return true;
+  }
+  @Override
+  public boolean isOutputtingPower() {
+    return false;
+  }
+  @Override
+  public DyeColor getColor() {
+    return DyeColor.PURPLE;
+  }
+  @Override
+  public void setColor(DyeColor color) {
+
+  }
 }

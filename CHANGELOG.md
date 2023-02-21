@@ -4,7 +4,9 @@
 
 ### 1.18.2-0.1.2-alpha
 
+#### Fixes
 
+- Mana fluids are tagged correctly
 
 ### 1.18.2-0.1.1-alpha
 

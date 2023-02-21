@@ -13,7 +13,10 @@ public class Humanity {
     var firstPass = StringUtils.capitalize(StringUtils.join(StringUtils.splitByCharacterTypeCamelCase(in), StringUtils.SPACE));
     var secondPass = StringUtils.split(firstPass, "_");
     var thirdPass = Arrays.stream(secondPass).map(StringUtils::trimToEmpty).filter(s -> !s.isBlank()).toArray();
-    return StringUtils.replace(StringUtils.join(thirdPass, StringUtils.SPACE), ":", ".");
+    var fourthPass = StringUtils.join(thirdPass, StringUtils.SPACE);
+    var fifthPass = StringUtils.replace(fourthPass, "/", ".");
+    var sixthPass = StringUtils.replace(fifthPass, ":", ".");
+    return sixthPass;
   }
   public static String digestResource(ResourceLocation in) {
     return digestString(in.getPath());

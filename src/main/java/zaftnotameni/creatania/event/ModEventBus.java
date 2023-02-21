@@ -31,6 +31,8 @@ import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = Constants.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEventBus {
+
+
   @SubscribeEvent
   public static void registerRecipeTypes(final RegistryEvent.Register<RecipeSerializer<?>> evt) {
     Registry.register(

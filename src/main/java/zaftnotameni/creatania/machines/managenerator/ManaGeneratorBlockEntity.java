@@ -1,7 +1,9 @@
 package zaftnotameni.creatania.machines.managenerator;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.contraptions.base.KineticTileEntity;
 import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -10,6 +12,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
+import vazkii.botania.api.block.IWandHUD;
 import vazkii.botania.api.block.IWandable;
 import vazkii.botania.api.mana.IManaReceiver;
 import zaftnotameni.creatania.config.CommonConfig;
@@ -25,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmManaMachine, Log.IHasTickLogger, IAmParticleEmittingMachine {
+public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmManaMachine, Log.IHasTickLogger, IAmParticleEmittingMachine, IWandHUD {
   public boolean isFirstTick = true;
   public boolean active;
   public boolean duct;
@@ -81,22 +84,25 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   @Nonnull
   @Override
   public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
+    var result = KineticManaMachine.handleBotaniaManaHudCapability(cap, side, this);
+    if (result.isPresent()) return result.cast();
+
     if (side == null) {
-      Log.LOGGER.info("no side provided when checking for capability {}", cap.getName());
+      Log.throttled(100).log(l -> l.info("no side provided when checking for capability {}", cap.getName()));
       return super.getCapability(cap, side);
     }
     var block = this.getBlockState().getBlock();
     if (!(block instanceof  ManaGeneratorBlock)){
-      Log.LOGGER.info("block is not a mana generator block when checking for capability {}", cap.getName());
+      Log.throttled(100).log(l -> l.info("block is not a mana generator block when checking for capability {}", cap.getName()));
       return super.getCapability(cap, side);
     }
     if (!((ManaGeneratorBlock) block).hasShaftTowards(this.level, this.worldPosition, this.getBlockState(), side.getOpposite())) {
-      Log.LOGGER.info("side is not opposite to the shaft when checking for capability {}", cap.getName());
+      Log.throttled(100).log(l -> l.info("side is not opposite to the shaft when checking for capability {}", cap.getName()));
       return super.getCapability(cap, side);
     }
     var foundCapability = this.getManaGeneratorFluidHandler().getCapability(cap, side);
     if (foundCapability != null) {
-      Log.RateLimited.of(this, 20 * 30).log((logger) -> logger.debug("connection could be established when checking for capability {}", cap.getName()));
+      Log.throttled(100).log(l -> l.debug("connection could be established when checking for capability {}", cap.getName()));
       return foundCapability;
     }
     return super.getCapability(cap, side);
@@ -261,5 +267,9 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   public void updateGeneratedRotation(int i) { }
   @Override
   public boolean shouldEmitParticles() { return true; }
+  @Override
+  public void renderHUD(PoseStack ms, Minecraft mc) {
+    KineticManaMachine.renderSimpleBotaniaHud(level, getBlockState(), ms, 0xff0088aa, (int) this.getManaGeneratorFluidHandler().getManaFluidAvailable(), (int) this.getManaGeneratorFluidHandler().getManaTankCapacity());
+  }
 }
 

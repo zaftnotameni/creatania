@@ -20,12 +20,6 @@
     "creatania:flowing_molten_elementium",
     "creatania:molten_elementium",
     "creatania:flowing_molten_gaia",
-    "creatania:molten_gaia",
-    "creatania:flowing_pure_mana",
-    "creatania:pure_mana",
-    "creatania:flowing_corrupt_mana",
-    "creatania:corrupt_mana",
-    "creatania:flowing_real_mana",
-    "creatania:real_mana"
+    "creatania:molten_gaia"
   ]
 }

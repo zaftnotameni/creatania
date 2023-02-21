@@ -10,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.EntityTeleportEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.event.entity.living.LivingFallEvent;
@@ -21,6 +22,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.StringUtils;
 import zaftnotameni.creatania.Constants;
+import zaftnotameni.creatania.commands.CreataniaTesterCommand;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.registry.Advancements;
 import zaftnotameni.creatania.registry.Tags;
@@ -34,6 +36,10 @@ import static zaftnotameni.creatania.util.Queries.isSlimeEntity;
 
 @Mod.EventBusSubscriber(modid = Constants.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeEventBus {
+  @SubscribeEvent
+  public static void onCommandRegister(RegisterCommandsEvent event) {
+    new CreataniaTesterCommand(event.getDispatcher());
+  }
   public static void slimy(Level level, LivingEntity entity) {
     if (level.isClientSide()) return;
     if (!isSlimeEntity(level, entity)) return;

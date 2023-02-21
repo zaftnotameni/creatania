@@ -1,3 +1,4 @@
+a2d55fd6c0bd23efc59983f9ee64e252785c8263 assets/creatania/blockstates/blazunia.json
 db7fca96a856aa0154dbe192496c2125afc052f9 assets/creatania/blockstates/corrupt_mana.json
 ccb4d459cad57a401048973005059c3b7618a39b assets/creatania/blockstates/mana/blocks/corrupt.json
 fdf7b361cdeecc99c56750561fd76f7d8814fe66 assets/creatania/blockstates/mana/blocks/pure.json
@@ -25,7 +26,8 @@ bc7f3a73a1ee8c05d4e0564370a44eba16472aff assets/creatania/blockstates/molten_zin
 9fedfdf94a3e03dfa4eb96b8ddcc6f770798a496 assets/creatania/blockstates/real_mana.json
 7721ebeb12dc04d79f81d6176f51d71633a8b479 assets/creatania/blockstates/xor_lever.json
 73136d6a88b7ad56b469e05eff6c950db8b4c47b assets/creatania/lang/en_ud.json
-e22556bd00870b70ce0b64070de51cbd030e0475 assets/creatania/lang/en_us.json
+0b9aba63f1dcb25ffee39e0112ca44a4da5f072a assets/creatania/lang/en_us.json
+30d508bd05f1c22be8a383e893c95921c0604dc3 assets/creatania/models/block/blazunia.json
 75ad02da5d3f618277e80db83fe2ff8dc2a3c24f assets/creatania/models/block/corrupt_mana.json
 75ad02da5d3f618277e80db83fe2ff8dc2a3c24f assets/creatania/models/block/molten_andesite.json
 75ad02da5d3f618277e80db83fe2ff8dc2a3c24f assets/creatania/models/block/molten_brass.json
@@ -39,6 +41,7 @@ e22556bd00870b70ce0b64070de51cbd030e0475 assets/creatania/lang/en_us.json
 75ad02da5d3f618277e80db83fe2ff8dc2a3c24f assets/creatania/models/block/molten_zinc.json
 75ad02da5d3f618277e80db83fe2ff8dc2a3c24f assets/creatania/models/block/pure_mana.json
 75ad02da5d3f618277e80db83fe2ff8dc2a3c24f assets/creatania/models/block/real_mana.json
+06cf6f4114319afced59d3d7f8b4e9ae242563b3 assets/creatania/models/item/blazunia.json
 5da15b722354cad254fb17ef617fff82dc0bc737 assets/creatania/models/item/corrupt_mana_bucket.json
 f93fb5d1113cae6f5f03ca4432f549410884c324 assets/creatania/models/item/incomplete_mana_machine_component.json
 cf807157f672c3f17b27ae99de3e46c23750b2dd assets/creatania/models/item/incomplete_xor_lever.json
@@ -149,6 +152,7 @@ bf2fe481b73c4c9dfd3b8f0fc6187d9e0e10a208 data/creatania/advancements/your_first_
 a7a98e34dd0195875408b3b5c9846a774dbc0184 data/creatania/advancements/your_first_flowing_molten_zinc.json
 ce1f8bd7530e451f013b5eaf36b7f024ca927bda data/creatania/advancements/your_first_flowing_pure_mana.json
 ff9a08e4dda358971c2f4eb9a0f32f9c15aa1309 data/creatania/advancements/your_first_flowing_real_mana.json
+5e9214146d5bde272b70f49243dd7925ef6e5e1c data/creatania/loot_tables/blocks/blazunia.json
 5c1df8443043b3fe3b665dba348e2ff188bcbe31 data/creatania/loot_tables/blocks/corrupt_mana.json
 775d2ed8663b82b702ea221668d22d6dadd1af51 data/creatania/loot_tables/blocks/mana/blocks/corrupt.json
 db70b27657a4ec70bc7a68aa2a93cbd1356880e2 data/creatania/loot_tables/blocks/mana/blocks/pure.json
@@ -272,7 +276,11 @@ a23dcf09bcd6d08789c9a2ecc03bd6d0a2723eae data/creatania/tags/blocks/tier_1.json
 4a25dbb233d79d919a161865fc0337338a7d0f50 data/creatania/tags/blocks/tier_2.json
 4278c027e16937231415ccc034c308f07dba1c4a data/creatania/tags/blocks/tier_3.json
 e3edfa6648b35b39a3ffdbe44cf3723facb32f9f data/creatania/tags/blocks/tier_4.json
-a8f7064d368c2cde41c8b8cc4032c5e32642c049 data/creatania/tags/fluids/fluid/molten.json
+51ddfc99028cb8964fa2b74726734afdc6e6cb78 data/creatania/tags/fluids/fluid/mana/all.json
+f6af4b0da906dbd7db1f84f0a95a43a1cb5b6459 data/creatania/tags/fluids/fluid/mana/corrupt.json
+b09b05b07ea2bd633925a9ff77c43df1918704bb data/creatania/tags/fluids/fluid/mana/pure.json
+3dfefbbac236fb1c25c75df93a5530fde3304618 data/creatania/tags/fluids/fluid/mana/real.json
+68ee6019bf6466e2a4c9cf58c1989429e363d560 data/creatania/tags/fluids/fluid/molten.json
 0489caa6e8f8f8ace7bfc7fa99adfd673f20a688 data/creatania/tags/items/buckets/molten/andesite.json
 b6f4155a10bd33d908b5d89d561adc1675a72b81 data/creatania/tags/items/buckets/molten/brass.json
 af7477a9ad05c232a3ea949ddc0d7df82154b3e0 data/creatania/tags/items/buckets/molten/copper.json
