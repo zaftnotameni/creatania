@@ -4,9 +4,15 @@
 
 ### 1.18.2-0.1.2-alpha
 
+#### New
+
+- Mana Motor shows a mana hud (from botania) when looking at it with the wand of the forest
+- Mana Generator shows a mana hud (from botania) when looking at it with the wand of the forest
+
 #### Fixes
 
 - Mana fluids are tagged correctly
+- Added missing translations
 
 ### 1.18.2-0.1.1-alpha
 
