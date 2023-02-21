@@ -15,8 +15,8 @@ import zaftnotameni.creatania.food.ManaGelItem;
 import zaftnotameni.creatania.util.Humanity;
 import zaftnotameni.creatania.util.Log;
 
-import static zaftnotameni.creatania.util.Humanity.digestResource;
 import static zaftnotameni.creatania.util.Humanity.keyResource;
+import static zaftnotameni.creatania.util.Humanity.lang;
 
 public class Items {
   public static final DeferredRegister<Item> INDEX = DeferredRegister.create(ForgeRegistries.ITEMS, Constants.MODID);
@@ -39,7 +39,9 @@ public class Items {
   public static JsonElement provideLangEntries() {
     var json = new JsonObject();
     INDEX.getEntries().forEach(entry -> json.addProperty(Humanity.keyItem(entry), Humanity.digestItem(entry)));
-    Index.all().getAll(Item.class).forEach(entry -> json.addProperty("item." + keyResource(entry.getId()), digestResource(entry.getId())));
+    Index.all().getAll(Item.class).forEach(
+      entry -> json.addProperty("item." + keyResource(entry.getId()),
+        Humanity.slashes(lang.get().getAutomaticName (entry))));
     return json;
   }
 }

@@ -17,10 +17,10 @@ public class CreataniaTesterCommand {
           Commands.argument("range", IntegerArgumentType.integer(1, 300)).then(
             Commands.argument("block1", BlockStateArgument.block()).then(
               Commands.argument("block2", BlockStateArgument.block())
-                .executes(CreataniaTesterCommand::creataniaTest))))));
+                .executes(CreataniaTesterCommand::checkerboardfloor))))));
   }
 
-  public static int creataniaTest(CommandContext<CommandSourceStack> command) {
+  public static int checkerboardfloor(CommandContext<CommandSourceStack> command) {
     var source = command.getSource();
     var range = IntegerArgumentType.getInteger(command, "range");
     var b1 = BlockStateArgument.getBlock(command, "block1").getState();

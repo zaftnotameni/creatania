@@ -2,6 +2,12 @@
 
 ## changelog
 
+### 1.18.2-0.1.4-alpha
+
+#### Changes
+
+- Small improvements to auto translations
+
 ### 1.18.2-0.1.3-alpha
 
 #### New

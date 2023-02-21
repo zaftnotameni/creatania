@@ -33,6 +33,7 @@ import zaftnotameni.creatania.mana.manaduct.ManasteelManaductBlock;
 import zaftnotameni.creatania.mana.manaduct.TerrasteelManaductBlock;
 import zaftnotameni.creatania.stress.omnibox.OmniboxBlock;
 import zaftnotameni.creatania.stress.xorlever.XorLeverBlock;
+import zaftnotameni.creatania.util.Humanity;
 import zaftnotameni.creatania.util.Log;
 import zaftnotameni.sharedbehaviors.ManaCasing;
 
@@ -40,8 +41,8 @@ import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 import static zaftnotameni.creatania.mana.manablock.BaseManaBlock.registerManablock;
 import static zaftnotameni.creatania.mana.manaduct.BaseManaductBlock.registerManaduct;
-import static zaftnotameni.creatania.util.Humanity.digestResource;
 import static zaftnotameni.creatania.util.Humanity.keyResource;
+import static zaftnotameni.creatania.util.Humanity.lang;
 
 public class Blocks {
   public static final CreateRegistrate CREATE_REGISTRATE = Index.getCreateRegistrate().creativeModeTab(() -> CreativeModeTabs.CREATANIA_ITEMS);
@@ -144,7 +145,9 @@ public class Blocks {
 
   public static JsonElement provideLangEntries() {
     var json = new JsonObject();
-    Index.all().getAll(Block.class).forEach(entry -> json.addProperty("block." + keyResource(entry.getId()), digestResource(entry.getId())));
+    Index.all().getAll(Block.class).forEach(
+      entry -> json.addProperty("block." + keyResource(entry.getId()),
+        Humanity.slashes(lang.get().getAutomaticName (entry))));
     return json;
   }
 

@@ -27,6 +27,7 @@ import net.minecraftforge.fluids.ForgeFlowingFluid;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import zaftnotameni.creatania.util.Humanity;
 import zaftnotameni.creatania.util.Log;
 
 import java.util.Map;
@@ -35,8 +36,8 @@ import java.util.Random;
 
 import static net.minecraft.sounds.SoundEvents.HONEY_BLOCK_PLACE;
 import static net.minecraft.sounds.SoundEvents.HONEY_DRINK;
-import static zaftnotameni.creatania.util.Humanity.digestResource;
 import static zaftnotameni.creatania.util.Humanity.keyResource;
+import static zaftnotameni.creatania.util.Humanity.lang;
 
 public class Fluids {
   public static final ResourceLocation WATER_STILL_RL = new ResourceLocation("block/water_still");
@@ -67,7 +68,9 @@ public class Fluids {
 
   public static JsonElement provideLangEntries() {
     var json = new JsonObject();
-    Index.all().getAll(Fluid.class).forEach(entry -> json.addProperty("fluid." + keyResource(entry.getId()), digestResource(entry.getId())));
+    Index.all().getAll(Fluid.class).forEach(
+      entry -> json.addProperty("fluid." + keyResource(entry.getId()),
+        Humanity.slashes(lang.get().getAutomaticName (entry))));
     return json;
   }
   public static FluidAttributes.Builder defaultMolten(FluidAttributes.Builder in, int color) {
