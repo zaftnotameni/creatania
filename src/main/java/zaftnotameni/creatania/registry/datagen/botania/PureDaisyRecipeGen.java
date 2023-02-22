@@ -44,6 +44,27 @@ public class PureDaisyRecipeGen extends BotaniaBaseRecipeGen implements DataProv
       .successFunction("botania:ender_air_release")
       .build()
       .saveAs(Index.resource("corrupt_solid_pure_mana"), pCache);
+
+    start()
+      .inputTypeBlock(Fluids.MOLTEN_ANDESITE.get().getSource().getRegistryName().toString())
+      .time(20 * 1200)
+      .fluidResult(new FluidStack(Fluids.MOLTEN_MANASTEEL.get().getSource(), 1))
+      .build()
+      .saveAs(Index.resource("andesite_to_manasteel"), pCache);
+
+    start()
+      .inputTypeBlock(Fluids.MOLTEN_ZINC.get().getSource().getRegistryName().toString())
+      .time(20 * 2400)
+      .fluidResult(new FluidStack(Fluids.MOLTEN_TERRASTEEL.get().getSource(), 1))
+      .build()
+      .saveAs(Index.resource("zinc_to_terrasteel"), pCache);
+
+    start()
+      .inputTypeBlock(Fluids.MOLTEN_BRASS.get().getSource().getRegistryName().toString())
+      .time(20 * 3600)
+      .fluidResult(new FluidStack(Fluids.MOLTEN_ELEMENTIUM.get().getSource(), 1))
+      .build()
+      .saveAs(Index.resource("brass_to_elementium"), pCache);
   }
   @Override
   public String getName() {

@@ -1,0 +1,13 @@
+{
+  "type": "botania:elven_trade",
+  "ingredients": [
+    {
+      "item": "create:railway_casing"
+    }
+  ],
+  "output": [
+    {
+      "item": "create:andesite_casing"
+    }
+  ]
+}

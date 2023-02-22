@@ -2,6 +2,7 @@ package zaftnotameni.creatania.machines.managenerator;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.contraptions.base.KineticTileEntity;
+import com.simibubi.create.foundation.config.AllConfigs;
 import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -61,11 +62,6 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
 
     purple("").forGoggles(tooltip);
 
-    muted("Stress Units consumed per RPM:").space()
-      .add(gray(String.valueOf(this.getManaMachine().stressUnitsPerRpm))).forGoggles(tooltip);
-
-    purple("").forGoggles(tooltip);
-
     muted("Pure Mana Consumed at current speed:").space()
       .add(aqua(String.valueOf(this.getManaConsumedAtCurrentSpeed()))).forGoggles(tooltip);
 
@@ -76,8 +72,10 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
 
     purple("").forGoggles(tooltip);
 
+    String[] manaLabel = { "ALMOST NOTHING", "EXTREMELY LOW", "VERY LOW", "LOW" };
+    var index = Math.round(Math.abs(this.getSpeed()) * AllConfigs.SERVER.kinetics.maxMotorSpeed.get() / 4f);
     muted("Real Mana Produced at current speed:").space()
-      .add(red("LOW")).forGoggles(tooltip);
+      .add(red(manaLabel[index % 4])).forGoggles(tooltip);
 
     return true;
   }

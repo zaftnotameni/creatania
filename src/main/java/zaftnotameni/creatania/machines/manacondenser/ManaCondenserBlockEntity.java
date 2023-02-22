@@ -53,7 +53,7 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
     return super.getCapability(cap, side);
   }
   public int getNormalizedRPM() {
-    var min = CommonConfig.MANA_CONDENSER_SU_PER_RPM.get();
+    var min = 1;
     if (Math.abs(this.getSpeed()) < min) return 0;
     return Math.max(1, (int) Math.abs(this.getSpeed()));
   }
@@ -63,20 +63,22 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
 
     purple("").forGoggles(tooltip);
 
-    muted("Stress Units consumed per RPM:").space()
-      .add(gray(String.valueOf(CommonConfig.MANA_CONDENSER_SU_PER_RPM.get()))).forGoggles(tooltip);
-
-    purple("").forGoggles(tooltip);
-
     purple("Corrupt Mana Production:").forGoggles(tooltip);
-    muted("At current speed: every").space()
-      .add(purple(String.valueOf(getEveryTicks()))).space()
-      .add(muted("ticks")).forGoggles(tooltip);
+    if (Math.abs(this.getSpeed()) > 0)
+      muted("At current speed: every").space()
+        .add(purple(String.valueOf(getEveryTicks()))).space()
+        .add(muted("ticks")).forGoggles(tooltip);
+    else
+      muted("At current speed:").space()
+        .add(red("Never")).forGoggles(tooltip);
 
     purple("").forGoggles(tooltip);
 
-    muted("At max speed:").space()
-      .add(purple(" every tick")).forGoggles(tooltip);
+    var correctionFactor = (float) (Math.max(1, CommonConfig.MANA_CONDENSER_THROTTLE_PER_RPM_BELOW_MAX.get())) *
+      (float) Math.max(1, CommonConfig.MANA_CONDENSER_THROTTLE_MINIMUM_TICKS_PER_BLOCK.get());
+    muted("At max speed: every").space()
+      .add(purple(String.valueOf((int) Math.ceil(correctionFactor)))).space()
+      .add(muted("ticks")).forGoggles(tooltip);
 
     return true;
   }
@@ -89,14 +91,16 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
   public float tickCounter = 0f;
   public float getPercentageOfMaxRPM() {
     var maxPossibleRpm = AllConfigs.SERVER.kinetics.maxMotorSpeed.get();
-    return Math.max(0.01f, this.getNormalizedRPM() / (float) maxPossibleRpm);
+    return Math.max(0.01f, 100000f * this.getNormalizedRPM() / (float) maxPossibleRpm);
   }
   public float getTickCounterIncrease() {
-    return this.getPercentageOfMaxRPM() / (Math.max(1, CommonConfig.MANA_CONDENSER_THROTTLE_PER_RPM_BELOW_MAX.get()));
+    var correctionFactor = (float) (Math.max(1, CommonConfig.MANA_CONDENSER_THROTTLE_PER_RPM_BELOW_MAX.get())) *
+      (float) Math.max(1, CommonConfig.MANA_CONDENSER_THROTTLE_MINIMUM_TICKS_PER_BLOCK.get());
+    return (float) this.getPercentageOfMaxRPM() / correctionFactor;
   }
   public int getEveryTicks() {
     var tickCounterIncrease = getTickCounterIncrease();
-    return Mth.ceil(1.0 / tickCounterIncrease);
+    return Mth.ceil(100000f / (tickCounterIncrease));
   }
   public void serverTick() {
     this.active = false;
@@ -109,7 +113,7 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
     if (requiredMana > 0) this.receiveMana(-requiredMana);
 
     tickCounter += getTickCounterIncrease();
-    if (tickCounter > 1f) {
+    if (tickCounter > 100000f) {
       this.insertCorruptedManaBlockBelow();
       tickCounter = 0;
     }

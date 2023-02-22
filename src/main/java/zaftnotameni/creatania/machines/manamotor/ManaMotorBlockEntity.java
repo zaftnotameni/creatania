@@ -105,11 +105,6 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
 
     purple("").forGoggles(tooltip);
 
-    muted("Stress Units produced per RPM:").space()
-      .add(gray(String.valueOf(this.getManaMachine().stressUnitsPerRpm))).forGoggles(tooltip);
-
-    purple("").forGoggles(tooltip);
-
     muted("Maximum SU Produced:").space()
       .add(gray(String.valueOf(this.getManaMachine().getMaximumSUPossible()))).space()
       .add(muted("at")).space()

@@ -1,0 +1,13 @@
+{
+  "type": "botania:elven_trade",
+  "ingredients": [
+    {
+      "item": "create:copper_casing"
+    }
+  ],
+  "output": [
+    {
+      "item": "create:brass_casing"
+    }
+  ]
+}

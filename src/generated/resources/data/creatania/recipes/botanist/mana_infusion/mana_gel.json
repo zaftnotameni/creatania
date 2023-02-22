@@ -3,7 +3,7 @@
   "input": {
     "item": "minecraft:slime_ball"
   },
-  "mana": 5000,
+  "mana": 1000000,
   "output": {
     "item": "creatania:mana_gel"
   },

@@ -34,6 +34,15 @@ public class BotaniaBaseRecipeGen {
     return j;
   }
 
+  public static JsonObject jingredientOutputs(JsonObject root, NonNullList<Ingredient> ingrs) {
+    var arr = new JsonArray();
+    for (var i : ingrs) { arr.add(i.toJson()); }
+    return jingredientOutputs(root, arr);
+  }
+  public static JsonObject jingredientOutputs(JsonObject root, JsonArray ingr) {
+    root.add("output", ingr);
+    return root;
+  }
   public static JsonObject jingredients(JsonObject root, NonNullList<Ingredient> ingrs) {
     var arr = new JsonArray();
     for (var i : ingrs) { arr.add(i.toJson()); }
@@ -98,6 +107,7 @@ public class BotaniaBaseRecipeGen {
   public static class Builder {
     public JsonObject root;
     public NonNullList<Ingredient> ingredients = NonNullList.create();
+    public NonNullList<Ingredient> ingredientOutputs = NonNullList.create();
     public ItemStack itemResult = ItemStack.EMPTY;
     public FluidStack fluidResult = FluidStack.EMPTY;
     public int mana = 0;
@@ -120,6 +130,7 @@ public class BotaniaBaseRecipeGen {
       if (!StringUtils.isAnyBlank(inputBlock, inputType)) jinputBlock(root, inputType, inputBlock);
       if (time > 0) jtime(root, time);
       if (mana > 0) jmana(root, mana);
+      if (ingredientOutputs.size() > 0) jingredientOutputs(root, ingredientOutputs);
       if (!itemResult.isEmpty()) jitemResult(root, resultName, innerOutput, itemResult);
       if (!fluidResult.isEmpty()) jfluidResult(root, resultName, innerOutput, fluidResult);
       if (!StringUtils.isAnyBlank(successFunction)) jsuccessFunction(root, successFunction);
@@ -158,6 +169,10 @@ public class BotaniaBaseRecipeGen {
     }
     public Builder ingredient(Ingredient i) {
       ingredients.add(i);
+      return this;
+    }
+    public Builder ingredientOutput(Ingredient i) {
+      ingredientOutputs.add(i);
       return this;
     }
     public Builder saveAs(ResourceLocation id, String suffix, HashCache pCache) {

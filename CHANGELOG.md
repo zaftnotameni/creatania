@@ -4,10 +4,24 @@
 
 ### 1.18.2-0.1.5-alpha
 
+#### Changes
+
+- Defaults balancing (make sure to delete your config files if you want the new defaults)
+- Remove custom "rpm per su" and "su per rpm" tooltips now that they show automatically via create
+
 #### New
 
-- Mana Infusion recipe for Mana Casing (super expensive in terms of mana, intentional)
-- Mana Infusion recipe for Mana Gel (super expensive in terms of mana, intentional)
+- Mana Infusion recipe: Mana Casing (super expensive in terms of mana, intentional)
+- Mana Infusion recipe: Mana Gel (super expensive in terms of mana, intentional)
+- Mana Infusion recipe: XOR Lever (super expensive in terms of mana, intentional)
+- Elven Trade recipe: manasteel manaduct for terrasteel manaduct
+- Elven Trade recipe: andesite alloy for manasteel
+- Elven Trade recipe: magma cream for mana gel
+- Elven Trade recipe: slime ball for mana gel
+- Elven Trade recipe: zinc for terrasteel
+- Elven Trade recipe: brass for elementium
+- Elven Trade recipe: analog lever for xor lever
+- Elven Trade casing loop: andesite -> mana -> copper -> brass -> train -> andesite
 
 ### 1.18.2-0.1.4-alpha
 

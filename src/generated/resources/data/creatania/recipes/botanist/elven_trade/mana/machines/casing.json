@@ -1,0 +1,13 @@
+{
+  "type": "botania:elven_trade",
+  "ingredients": [
+    {
+      "item": "create:andesite_casing"
+    }
+  ],
+  "output": [
+    {
+      "item": "creatania:mana/machines/casing"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "botania:elven_trade",
+  "ingredients": [
+    {
+      "item": "creatania:manaducts/manasteel"
+    }
+  ],
+  "output": [
+    {
+      "item": "creatania:manaducts/terrasteel"
+    }
+  ]
+}
