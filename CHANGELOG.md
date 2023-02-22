@@ -4,7 +4,10 @@
 
 ### 1.18.2-0.1.5-alpha
 
+#### New
 
+- Mana Infusion recipe for Mana Casing (super expensive in terms of mana, intentional)
+- Mana Infusion recipe for Mana Gel (super expensive in terms of mana, intentional)
 
 ### 1.18.2-0.1.4-alpha
 

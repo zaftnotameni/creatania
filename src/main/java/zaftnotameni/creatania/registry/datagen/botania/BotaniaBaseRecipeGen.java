@@ -43,6 +43,13 @@ public class BotaniaBaseRecipeGen {
     root.add("ingredients", ingr);
     return root;
   }
+  public static JsonObject jcatalyst(JsonObject root, String type, String block) {
+    var input = empty();
+    input.addProperty("type", type);
+    input.addProperty("block", block);
+    root.add("catalyst", input);
+    return root;
+  }
   public static JsonObject jinputBlock(JsonObject root, String type, String block) {
     var input = empty();
     input.addProperty("type", type);
@@ -60,6 +67,13 @@ public class BotaniaBaseRecipeGen {
   }
   public static JsonObject jsuccessFunction(JsonObject root, String fn) {
     root.addProperty("success_function", fn);
+    return root;
+  }
+  public static JsonObject jinputItem(JsonObject root, ItemStack stack) {
+    var in = empty();
+    in.addProperty("item", stack.getItem().getRegistryName().toString());
+    if (stack.getCount() > 1) in.addProperty("count", stack.getCount());
+    root.add("input", in);
     return root;
   }
   public static JsonObject jfluidResult(JsonObject root, String resultName, String innerName, FluidStack stack) {
@@ -94,11 +108,14 @@ public class BotaniaBaseRecipeGen {
     public String innerOutput;
     public String inputType;
     public String inputBlock;
+    public ItemStack inputItem;
     public String successFunction;
+    public String catalystBlockName;
     public Builder(JsonObject root, DataGenerator generator, String typeName, String resultName, String innerOutput) {
       this.root = root; this.generator = generator; this.typeName = typeName; this.resultName = resultName; this.innerOutput = innerOutput;
     }
     public Builder build() {
+      if (inputItem != null) jinputItem(root, inputItem);
       if (ingredients.size() > 0) jingredients(root, ingredients);
       if (!StringUtils.isAnyBlank(inputBlock, inputType)) jinputBlock(root, inputType, inputBlock);
       if (time > 0) jtime(root, time);
@@ -106,6 +123,7 @@ public class BotaniaBaseRecipeGen {
       if (!itemResult.isEmpty()) jitemResult(root, resultName, innerOutput, itemResult);
       if (!fluidResult.isEmpty()) jfluidResult(root, resultName, innerOutput, fluidResult);
       if (!StringUtils.isAnyBlank(successFunction)) jsuccessFunction(root, successFunction);
+      if (!StringUtils.isAnyBlank(catalystBlockName)) jcatalyst(root, "block", catalystBlockName);
       return this;
     }
     public Builder inputTypeBlock(String block) {
@@ -119,6 +137,14 @@ public class BotaniaBaseRecipeGen {
     }
     public Builder fluidResult(FluidStack fs) {
       this.fluidResult = fs;
+      return this;
+    }
+    public Builder inputItem(Ingredient i) {
+      this.inputItem = i.getItems()[0];
+      return this;
+    }
+    public Builder catalystBlockName(String c) {
+      this.catalystBlockName = c;
       return this;
     }
     public Builder successFunction(String fn) {
