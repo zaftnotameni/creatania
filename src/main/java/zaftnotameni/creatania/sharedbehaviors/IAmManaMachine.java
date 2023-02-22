@@ -1,4 +1,4 @@
-package zaftnotameni.sharedbehaviors;
+package zaftnotameni.creatania.sharedbehaviors;
 import net.minecraft.world.level.block.state.BlockState;
 public interface IAmManaMachine {
   public boolean isManaMachineActive();

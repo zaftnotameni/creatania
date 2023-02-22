@@ -27,10 +27,10 @@ import vazkii.botania.api.mana.IManaReceiver;
 import vazkii.botania.api.mana.spark.IManaSpark;
 import vazkii.botania.api.mana.spark.ISparkAttachable;
 import zaftnotameni.creatania.config.CommonConfig;
+import zaftnotameni.creatania.sharedbehaviors.ActiveStateSynchronizerBehavior;
+import zaftnotameni.creatania.sharedbehaviors.IAmManaMachine;
+import zaftnotameni.creatania.sharedbehaviors.KineticManaMachine;
 import zaftnotameni.creatania.util.Log;
-import zaftnotameni.sharedbehaviors.ActiveStateSynchronizerBehavior;
-import zaftnotameni.sharedbehaviors.IAmManaMachine;
-import zaftnotameni.sharedbehaviors.KineticManaMachine;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

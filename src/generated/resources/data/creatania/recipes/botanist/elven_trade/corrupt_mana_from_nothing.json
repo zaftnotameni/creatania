@@ -1,0 +1,13 @@
+{
+  "type": "botania:elven_trade",
+  "ingredients": [
+    {
+      "item": "minecraft:bucket"
+    }
+  ],
+  "output": [
+    {
+      "item": "creatania:corrupt_mana_bucket"
+    }
+  ]
+}

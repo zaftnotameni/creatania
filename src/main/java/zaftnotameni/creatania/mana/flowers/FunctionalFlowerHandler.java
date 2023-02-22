@@ -20,7 +20,7 @@ import vazkii.botania.api.BotaniaForgeClientCapabilities;
 import vazkii.botania.api.internal.IManaNetwork;
 import vazkii.botania.api.mana.IManaCollector;
 import vazkii.botania.api.mana.IManaPool;
-import zaftnotameni.sharedbehaviors.KineticManaMachine;
+import zaftnotameni.creatania.sharedbehaviors.KineticManaMachine;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

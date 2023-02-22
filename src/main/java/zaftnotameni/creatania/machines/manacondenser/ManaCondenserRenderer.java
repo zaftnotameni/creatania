@@ -15,7 +15,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 import zaftnotameni.creatania.config.ClientConfig;
 import zaftnotameni.creatania.registry.Particles;
-import zaftnotameni.sharedbehaviors.IAmParticleEmittingMachine;
+import zaftnotameni.creatania.sharedbehaviors.IAmParticleEmittingMachine;
 public class ManaCondenserRenderer extends KineticTileEntityRenderer {
   public ManaCondenserRenderer(BlockEntityRendererProvider.Context context) {
     super(context);

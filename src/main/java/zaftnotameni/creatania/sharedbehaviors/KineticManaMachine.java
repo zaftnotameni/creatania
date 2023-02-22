@@ -1,4 +1,4 @@
-package zaftnotameni.sharedbehaviors;
+package zaftnotameni.creatania.sharedbehaviors;
 import com.google.common.base.Predicates;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.contraptions.base.DirectionalKineticBlock;

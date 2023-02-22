@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import zaftnotameni.creatania.registry.BlockEntities;
-import zaftnotameni.sharedbehaviors.KineticManaMachine;
+import zaftnotameni.creatania.sharedbehaviors.KineticManaMachine;
 
 import static zaftnotameni.creatania.util.Voxel.ALMOST_FULL_BLOCK_VOXEL;
 import static zaftnotameni.creatania.util.Voxel.FULL_BLOCK_VOXEL;

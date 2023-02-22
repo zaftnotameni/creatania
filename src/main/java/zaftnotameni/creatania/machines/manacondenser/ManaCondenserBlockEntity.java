@@ -20,10 +20,10 @@ import vazkii.botania.api.BotaniaForgeCapabilities;
 import vazkii.botania.api.mana.IManaReceiver;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.registry.Blocks;
-import zaftnotameni.sharedbehaviors.ActiveStateSynchronizerBehavior;
-import zaftnotameni.sharedbehaviors.IAmManaMachine;
-import zaftnotameni.sharedbehaviors.IAmParticleEmittingMachine;
-import zaftnotameni.sharedbehaviors.KineticManaMachine;
+import zaftnotameni.creatania.sharedbehaviors.ActiveStateSynchronizerBehavior;
+import zaftnotameni.creatania.sharedbehaviors.IAmManaMachine;
+import zaftnotameni.creatania.sharedbehaviors.IAmParticleEmittingMachine;
+import zaftnotameni.creatania.sharedbehaviors.KineticManaMachine;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

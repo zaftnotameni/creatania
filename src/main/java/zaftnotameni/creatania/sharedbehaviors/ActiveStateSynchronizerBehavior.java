@@ -1,4 +1,4 @@
-package zaftnotameni.sharedbehaviors;
+package zaftnotameni.creatania.sharedbehaviors;
 import com.simibubi.create.foundation.tileEntity.SmartTileEntity;
 import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
 import com.simibubi.create.foundation.tileEntity.behaviour.BehaviourType;

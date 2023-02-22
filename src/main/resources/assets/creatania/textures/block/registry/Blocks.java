@@ -31,10 +31,10 @@ import zaftnotameni.creatania.mana.manaduct.ElementiumManaductBlock;
 import zaftnotameni.creatania.mana.manaduct.GaiaManaductBlock;
 import zaftnotameni.creatania.mana.manaduct.ManasteelManaductBlock;
 import zaftnotameni.creatania.mana.manaduct.TerrasteelManaductBlock;
+import zaftnotameni.creatania.sharedbehaviors.ManaCasing;
 import zaftnotameni.creatania.stress.omnibox.OmniboxBlock;
 import zaftnotameni.creatania.stress.xorlever.XorLeverBlock;
 import zaftnotameni.creatania.util.Log;
-import zaftnotameni.sharedbehaviors.ManaCasing;
 
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;

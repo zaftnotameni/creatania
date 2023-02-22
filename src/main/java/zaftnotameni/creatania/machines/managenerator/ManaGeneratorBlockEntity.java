@@ -19,11 +19,11 @@ import vazkii.botania.api.block.IWandable;
 import vazkii.botania.api.mana.IManaReceiver;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.mana.manaduct.BaseManaductBlock;
+import zaftnotameni.creatania.sharedbehaviors.ActiveStateSynchronizerBehavior;
+import zaftnotameni.creatania.sharedbehaviors.IAmManaMachine;
+import zaftnotameni.creatania.sharedbehaviors.IAmParticleEmittingMachine;
+import zaftnotameni.creatania.sharedbehaviors.KineticManaMachine;
 import zaftnotameni.creatania.util.Log;
-import zaftnotameni.sharedbehaviors.ActiveStateSynchronizerBehavior;
-import zaftnotameni.sharedbehaviors.IAmManaMachine;
-import zaftnotameni.sharedbehaviors.IAmParticleEmittingMachine;
-import zaftnotameni.sharedbehaviors.KineticManaMachine;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;

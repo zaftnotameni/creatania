@@ -1,4 +1,4 @@
-package zaftnotameni.sharedbehaviors;
+package zaftnotameni.creatania.sharedbehaviors;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.world.level.block.Block;
