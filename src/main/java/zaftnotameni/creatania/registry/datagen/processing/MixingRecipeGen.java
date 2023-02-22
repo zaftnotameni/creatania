@@ -1,10 +1,13 @@
 package zaftnotameni.creatania.registry.datagen.processing;
 
+import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.contraptions.processing.HeatCondition;
 import com.simibubi.create.content.contraptions.processing.ProcessingRecipeBuilder;
+import com.simibubi.create.foundation.fluid.FluidIngredient;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Fluids;
@@ -15,6 +18,38 @@ import static zaftnotameni.creatania.util.NamedItems.*;
 
 public class MixingRecipeGen extends ForgeCreateProcessingRecipeProvider {
 	public void setupRecipes() {
+		create("mana_pylon", b -> b
+			.require(FluidIngredient.fromFluid(Fluids.MOLTEN_MANASTEEL.get(), 500))
+			.require(AllItems.GOLDEN_SHEET.get())
+			.require(AllItems.GOLDEN_SHEET.get())
+			.require(AllItems.GOLDEN_SHEET.get())
+			.require(AllItems.GOLDEN_SHEET.get())
+			.output(itemLike("botania", "mana_pylon")));
+
+		create("iron_ore", b ->b
+			.require(FluidIngredient.fromFluid(Fluids.MOLTEN_MANASTEEL.get(), 125))
+			.require(FluidIngredient.fromFluid(Fluids.MOLTEN_IRON.get(), 125))
+			.require(Items.STONE)
+			.output(Items.IRON_ORE));
+
+		create("copper_ore", b ->b
+			.require(FluidIngredient.fromFluid(Fluids.MOLTEN_TERRASTEEL.get(), 125))
+			.require(FluidIngredient.fromFluid(Fluids.MOLTEN_COPPER.get(), 125))
+			.require(Items.STONE)
+			.output(Items.COPPER_ORE));
+
+		create("zinc_ore", b ->b
+			.require(FluidIngredient.fromFluid(Fluids.MOLTEN_TERRASTEEL.get(), 125))
+			.require(FluidIngredient.fromFluid(Fluids.MOLTEN_ZINC.get(), 125))
+			.require(Items.STONE)
+			.output(AllBlocks.ZINC_ORE.get()));
+
+		create("gold_ore", b ->b
+			.require(FluidIngredient.fromFluid(Fluids.MOLTEN_ELEMENTIUM.get(), 125))
+			.require(FluidIngredient.fromFluid(Fluids.MOLTEN_GOLD.get(), 125))
+			.require(Items.STONE)
+			.output(Items.GOLD_ORE));
+
 		create("real_botania_mana_fluid", b -> b.require(Blocks.REAL_MANA_BLOCK.get())
 			.output(Fluids.REAL_MANA.get(), 250)
 			.requiresHeat(HeatCondition.SUPERHEATED));

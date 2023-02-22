@@ -2,9 +2,20 @@
 
 ## changelog
 
+### 1.18.2-0.1.7-alpha
+
+
 ### 1.18.2-0.1.6-alpha
 
+#### New
 
+- Alternative Mana Pylon recipe using a mixer
+- Alternative Natura Pylon recipe using filling
+- Ender Pearl recipe using filling
+- Magical ore restoration
+- Cheap Rose Quartz via elven trade
+- Polishing rose quartz using mana
+- Bucket trading with elves
 
 ### 1.18.2-0.1.5-alpha
 

@@ -7,6 +7,7 @@ import net.minecraft.data.HashCache;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import zaftnotameni.creatania.registry.Blocks;
+import zaftnotameni.creatania.registry.Fluids;
 import zaftnotameni.creatania.registry.Index;
 
 import java.io.IOException;
@@ -18,6 +19,13 @@ public class ElvenTradeRecipeGen extends BotaniaBaseRecipeGen implements DataPro
   }
   @Override
   public void run(HashCache pCache) throws IOException {
+    start()
+      .ingredient(Ingredient.of(Items.REDSTONE))
+      .ingredient(Ingredient.of(Items.QUARTZ))
+      .ingredientOutput(Ingredient.of(AllItems.ROSE_QUARTZ.get()))
+      .build()
+      .saveAs(AllItems.ROSE_QUARTZ.getId(), pCache);
+
     start()
       .ingredient(Ingredient.of(AllBlocks.ANDESITE_CASING.get()))
       .ingredientOutput(Ingredient.of(Blocks.MANA_CASING.get()))
@@ -89,6 +97,24 @@ public class ElvenTradeRecipeGen extends BotaniaBaseRecipeGen implements DataPro
       .ingredientOutput(elementiumingot())
       .build()
       .saveAs(Index.resource("elementium_via_brass"), pCache);
+
+    start()
+      .ingredient(Ingredient.of(Items.BUCKET.asItem()))
+      .ingredientOutput(Ingredient.of(Fluids.CORRUPT_MANA.get().getBucket().asItem()))
+      .build()
+      .saveAs(Index.resource("corrupt_mana_from_nothing"), pCache);
+
+    start()
+      .ingredient(Ingredient.of(Fluids.CORRUPT_MANA.get().getBucket().asItem()))
+      .ingredientOutput(Ingredient.of(Items.LAVA_BUCKET.asItem()))
+      .build()
+      .saveAs(Index.resource("lava_via_corrupt_mana"), pCache);
+
+    start()
+      .ingredient(Ingredient.of(Fluids.PURE_MANA.get().getBucket().asItem()))
+      .ingredientOutput(Ingredient.of(Fluids.REAL_MANA.get().getBucket().asItem()))
+      .build()
+      .saveAs(Index.resource("real_mana_via_pure_mana"), pCache);
 
   }
   @Override

@@ -1,5 +1,6 @@
 package zaftnotameni.creatania.registry.datagen.botania;
 import com.simibubi.create.AllBlocks;
+import com.simibubi.create.AllItems;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
@@ -16,6 +17,13 @@ public class ManaInfusionRecipeGen extends BotaniaBaseRecipeGen implements DataP
   @Override
   public void run(HashCache pCache) throws IOException {
     start()
+      .inputItem(Ingredient.of(AllItems.ROSE_QUARTZ.get()))
+      .mana(hundreth())
+      .itemResult(new ItemStack(AllItems.POLISHED_ROSE_QUARTZ.get(), 1))
+      .build()
+      .saveAs(AllItems.POLISHED_ROSE_QUARTZ.getId(), pCache);
+
+    start()
       .inputItem(Ingredient.of(AllBlocks.ANDESITE_CASING.get()))
       .mana(third())
       .itemResult(new ItemStack(Blocks.MANA_CASING.get(), 1))
@@ -24,7 +32,7 @@ public class ManaInfusionRecipeGen extends BotaniaBaseRecipeGen implements DataP
 
     start()
       .inputItem(Ingredient.of(AllBlocks.ANALOG_LEVER.get()))
-      .mana(quarter())
+      .mana(sixteenth())
       .itemResult(new ItemStack(zaftnotameni.creatania.registry.Blocks.XOR_LEVER.get(), 1))
       .build()
       .saveAs(zaftnotameni.creatania.registry.Blocks.XOR_LEVER.getId(), pCache);
