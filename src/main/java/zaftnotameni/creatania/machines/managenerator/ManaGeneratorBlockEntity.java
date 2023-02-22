@@ -73,7 +73,7 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
     purple("").forGoggles(tooltip);
 
     String[] manaLabel = { "ALMOST NOTHING", "EXTREMELY LOW", "VERY LOW", "LOW" };
-    var index = Math.round(Math.abs(this.getSpeed()) * AllConfigs.SERVER.kinetics.maxMotorSpeed.get() / 4f);
+    var index = Math.round(Math.abs(this.getSpeed()) * 3f /  AllConfigs.SERVER.kinetics.maxMotorSpeed.get());
     muted("Real Mana Produced at current speed:").space()
       .add(red(manaLabel[index % 4])).forGoggles(tooltip);
 
