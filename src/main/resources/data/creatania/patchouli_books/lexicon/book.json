@@ -1,0 +1,8 @@
+{
+    "name": "Creatania",
+    "subtitle": "v. 1.18.2-0.0.11-alpha",
+    "book_texture": "patchouli:textures/gui/book_green.png",
+    "version": 0,
+    "landing_text": "",
+    "extend": "botania:lexicon"
+}
