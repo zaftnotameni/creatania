@@ -3,7 +3,6 @@ package zaftnotameni.creatania.registry;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.simibubi.create.content.contraptions.itemAssembly.SequencedAssemblyItem;
-import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -21,8 +20,6 @@ import static zaftnotameni.creatania.util.Humanity.lang;
 public class Items {
   public static final DeferredRegister<Item> INDEX = DeferredRegister.create(ForgeRegistries.ITEMS, Constants.MODID);
 
-  public static final CreateRegistrate CREATE_REGISTRATE = Index.getCreateRegistrate().creativeModeTab(() -> CreativeModeTabs.CREATANIA_ITEMS);
-
   public static final RegistryObject<ManaGelItem> MANA_GEL = INDEX.register(Constants.MANA_GEL_ITEM_NAME, () -> new ManaGelItem());
 
   public static final ItemEntry<SequencedAssemblyItem> INCOMPLETE_MANA_MACHINE_COMPONENT = sequencedIngredient(Constants.INCOMPLETE_MANA_MACHINE_COMPONENT);
@@ -34,7 +31,7 @@ public class Items {
     INDEX.register(bus);
   }
   private static ItemEntry<SequencedAssemblyItem> sequencedIngredient(String name) {
-    return CREATE_REGISTRATE.item(name, SequencedAssemblyItem::new).register();
+    return Index.all().item(name, SequencedAssemblyItem::new).register();
   }
   public static JsonElement provideLangEntries() {
     var json = new JsonObject();

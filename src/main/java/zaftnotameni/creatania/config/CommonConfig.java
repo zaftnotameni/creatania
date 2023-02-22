@@ -3,6 +3,7 @@ import net.minecraftforge.common.ForgeConfigSpec;
 public class CommonConfig {
   public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
   public static final ForgeConfigSpec SPEC;
+  public static final StressProvider.CreataniaStressProvider stressProvider = new StressProvider.CreataniaStressProvider();
   public static final ForgeConfigSpec.ConfigValue<Integer> PURIFIED_MANA_BLOCK_BUFF_HEAL_DURATION;
   public static final ForgeConfigSpec.ConfigValue<Integer> PURIFIED_MANA_BLOCK_BUFF_ABSORPTION_DURATION;
   public static final ForgeConfigSpec.ConfigValue<Integer> PURIFIED_MANA_BLOCK_BUFF_SATURATION_DURATION;
@@ -136,6 +137,12 @@ public class CommonConfig {
     XOR_LEVER_SIGNAL_STRENGTH = BUILDER.define("xor_lever_signal_strength", 2);
     BUILDER.pop();
 
+    BUILDER.push("stress");
+    // stressProvider.registerAll(BUILDER);
+    BUILDER.pop();
+
     SPEC = BUILDER.build();
+
+
   }
 }

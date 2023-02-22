@@ -25,8 +25,8 @@ bc7f3a73a1ee8c05d4e0564370a44eba16472aff assets/creatania/blockstates/molten_zin
 459322c7eba066f31e2a54efca5ed5fb55c6a680 assets/creatania/blockstates/pure_mana.json
 9fedfdf94a3e03dfa4eb96b8ddcc6f770798a496 assets/creatania/blockstates/real_mana.json
 7721ebeb12dc04d79f81d6176f51d71633a8b479 assets/creatania/blockstates/xor_lever.json
-73cb2e181da55b292be9c329ab2f8514c89c59ee assets/creatania/lang/en_ud.json
-5e3321f9aca7fc81a4bd95fa0e715370ee4477aa assets/creatania/lang/en_us.json
+9e773ff39f1e0343243b5c04f86810ea5838e1c7 assets/creatania/lang/en_ud.json
+b7cddd3bbc12524c89834ad8de2adbde21193b77 assets/creatania/lang/en_us.json
 30d508bd05f1c22be8a383e893c95921c0604dc3 assets/creatania/models/block/blazunia.json
 75ad02da5d3f618277e80db83fe2ff8dc2a3c24f assets/creatania/models/block/corrupt_mana.json
 75ad02da5d3f618277e80db83fe2ff8dc2a3c24f assets/creatania/models/block/molten_andesite.json
@@ -297,8 +297,8 @@ c63da30cf35a15739e7b24c9da2a877030c492ee data/creatania/tags/items/buckets/molte
 b10e633ffd04543657327c741da0ef87996596d3 data/create/recipes/sequenced_assembly/xor_lever.json
 b21439783680ae8736f9b566b452d7d0f956c6aa data/create/tags/blocks/safe_nbt.json
 bd5f14f106988cf292eb7eeb75769a600563e60a data/forge/tags/blocks/storage_blocks/lapis.json
-12fa9798b74f934998f85a84a6d1e7807be062d0 data/minecraft/tags/blocks/mineable/axe.json
-12fa9798b74f934998f85a84a6d1e7807be062d0 data/minecraft/tags/blocks/mineable/pickaxe.json
+fe7d769021c7e744b9706874afbf591d7cb43c7c data/minecraft/tags/blocks/mineable/axe.json
+b57977c915c7a986c1e05770523db5012252c458 data/minecraft/tags/blocks/mineable/pickaxe.json
 a8f7064d368c2cde41c8b8cc4032c5e32642c049 data/minecraft/tags/fluids/water.json
 74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/minecraft/tags/items/acacia_logs.json
 74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/minecraft/tags/items/anvil.json

@@ -8,7 +8,6 @@ import com.simibubi.create.foundation.block.BlockStressDefaults;
 import com.simibubi.create.foundation.block.ItemUseOverrides;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.BlockStateGen;
-import com.simibubi.create.foundation.data.CreateRegistrate;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
@@ -45,9 +44,7 @@ import static zaftnotameni.creatania.util.Humanity.keyResource;
 import static zaftnotameni.creatania.util.Humanity.lang;
 
 public class Blocks {
-  public static final CreateRegistrate CREATE_REGISTRATE = Index.getCreateRegistrate().creativeModeTab(() -> CreativeModeTabs.CREATANIA_ITEMS);
-
-  public static final BlockEntry<ManaMotorBlock> MANA_MOTOR = CREATE_REGISTRATE
+  public static final BlockEntry<ManaMotorBlock> MANA_MOTOR = Index.all()
     .block(Constants.MANA_MOTOR, ManaMotorBlock::new)
     .initialProperties(SharedProperties::stone)
     .blockstate(BlockStateGen.directionalAxisBlockProvider())
@@ -58,7 +55,7 @@ public class Blocks {
     .transform(customItemModel())
     .register();
 
-  public static final BlockEntry<ManaGeneratorBlock> MANA_GENERATOR = CREATE_REGISTRATE
+  public static final BlockEntry<ManaGeneratorBlock> MANA_GENERATOR = Index.all()
     .block(Constants.MANA_GENERATOR, ManaGeneratorBlock::new)
     .initialProperties(SharedProperties::softMetal)
     .blockstate(BlockStateGen.directionalAxisBlockProvider())
@@ -70,7 +67,7 @@ public class Blocks {
     .transform(customItemModel())
     .register();
 
-  public static final BlockEntry<ManaCondenserBlock> MANA_CONDENSER = CREATE_REGISTRATE
+  public static final BlockEntry<ManaCondenserBlock> MANA_CONDENSER = Index.all()
     .block(Constants.MANA_CONDENSER, ManaCondenserBlock::new)
     .initialProperties(SharedProperties::softMetal)
     .blockstate(BlockStateGen.directionalAxisBlockProvider())
@@ -82,7 +79,7 @@ public class Blocks {
     .transform(customItemModel())
     .register();
 
-  public static final BlockEntry<OmniboxBlock> OMNIBOX = CREATE_REGISTRATE
+  public static final BlockEntry<OmniboxBlock> OMNIBOX = Index.all()
     .block(Constants.OMNIBOX, OmniboxBlock::new)
     .initialProperties(SharedProperties::stone)
     .blockstate(BlockStateGen.directionalBlockProvider(false))
@@ -96,7 +93,7 @@ public class Blocks {
     .transform(customItemModel())
     .register();
 
-  public static final BlockEntry<XorLeverBlock> XOR_LEVER = CREATE_REGISTRATE
+  public static final BlockEntry<XorLeverBlock> XOR_LEVER = Index.all()
     .block(Constants.XOR_LEVER, XorLeverBlock::new)
     .initialProperties(() -> net.minecraft.world.level.block.Blocks.LEVER)
     .transform(axeOrPickaxe())

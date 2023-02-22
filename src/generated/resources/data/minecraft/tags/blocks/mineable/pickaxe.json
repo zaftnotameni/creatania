@@ -5,6 +5,15 @@
     "creatania:mana_generator",
     "creatania:mana_condenser",
     "creatania:omnibox",
-    "creatania:xor_lever"
+    "creatania:xor_lever",
+    "creatania:manaducts/manasteel",
+    "creatania:manaducts/terrasteel",
+    "creatania:manaducts/elementium",
+    "creatania:manaducts/gaia",
+    "creatania:mana/blocks/corrupt",
+    "creatania:mana/blocks/pure",
+    "creatania:mana/blocks/real",
+    "creatania:mana/machines/casing",
+    "creatania:blazunia"
   ]
 }

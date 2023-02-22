@@ -5,6 +5,8 @@
     "creatania:mana_generator",
     "creatania:mana_condenser",
     "creatania:omnibox",
-    "creatania:xor_lever"
+    "creatania:xor_lever",
+    "creatania:mana/machines/casing",
+    "creatania:blazunia"
   ]
 }

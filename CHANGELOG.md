@@ -4,6 +4,10 @@
 
 ### 1.18.2-0.1.4-alpha
 
+#### New
+
+- Proper registration with the create stress system now shows the usual "Stress Impact", "Stress Capacity" in tooltips for mana motor/generator
+
 #### Changes
 
 - Small improvements to auto translations
