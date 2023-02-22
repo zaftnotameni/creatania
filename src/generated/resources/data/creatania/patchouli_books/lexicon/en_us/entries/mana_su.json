@@ -1,0 +1,78 @@
+{
+    "name": "Generating Mana with SU",
+    "icon": "creatania:mana_condenser",
+    "category": "creatania:machines",
+    "pages": [
+        {
+            "type": "text",
+            "text": "Generating Botania Mana is not a simple conversion. We figured out that if we could pull some Mana from the air, we could work with that. It turns out we could only get Inert Corrupted Mana blocks. We found these corrupted blocks tricky and potentially dangerous. We also learned to be very careful handling them. After much trial and error, we discovered the secret to pure Botania Mana."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "creatania:mana_condenser",
+            "title": "Step 1: Mana Condenser",
+            "text": "The Mana Condenser \"condenses\" mana from the air using only SU - however, the mana is corrupt. The corrupted mana blocks are inserted directly into an inventory, with available space, below the machine."
+        },
+        {
+            "type": "patchouli:text",
+            "title": "Step 2: Purifying",
+            "text": "We then thought, what if we placed the corrupted blocks around a Pure Daisy? It turns out that Pure Daisies have powerful purifying properties that not only purify the corrupted blocks but seem to have beneficial attributes. We named this discovery Inert Mana Blocks.$(br2)Placing Corrupt Mana Blocks around a Pure Daisy purifies corrupt mana blocks into Inert Mana Blocks."
+        },
+        {
+            "type": "patchouli:multiblock",
+            "name": "Purify Corrupted Mana",
+            "text": " Leaving Inert Mana Blocks placed around a Pure Daisy causes them to turn into corrupted blocks again.",
+            "multiblock": {
+                "mapping": {
+                    "0": "botania:pure_daisy",
+                    "C": "creatania:mana/blocks/corrupt"
+                },
+                "pattern": [
+                    [
+                        "CCC",
+                        "C0C",
+                        "CCC"
+                    ]
+                ]
+            }
+        },
+        {
+            "type": "patchouli:text",
+            "title": "Step 3: Inert Liquid Mana",
+            "text": "We now had a \"Mana\" block that was safe to handle. However, we were still a long way from having usable mana that we could use to make Botania tools, weapons, and other magical items. To the touch, the blocks felt like gelatin. We knew if you heat gelatin, it liquefies. Would the same apply to Inert Mana Blocks?"
+        },
+        {
+            "type": "patchouli:multiblock",
+            "name": "Purify Corrupted Mana",
+            "text": "Liquify Inert Mana Blocks in a superheated Mixer and Basin to produce Inert Liquid Mana.",
+            "multiblock": {
+                "mapping": {
+                    "M": "create:mechanical_mixer{NeedsUpdate:0b,Network:{AddedStress:4.0f,Capacity:1048576.0f,Id:2748779118534L,Size:3,Stress:256.0f},Running:0b,Source:{X:10,Y:-57,Z:11},Speed:-64.0f,Ticks:0}",
+                    "0": "create:basin[facing=down]{DisabledSpoutput:[],Filter:{Count:1b,id:'minecraft:air'},FilterAmount:0,FluidOverflow:[],InputItems:{Items:[{Count:1b,Slot:0,id:'creatania:mana/blocks/corrupt'}],Size:9},InputTanks:[{Level:{Speed:0.25f,Target:0.0f,Value:0.0f},TankContent:{Amount:0,FluidName:'minecraft:empty'}},{Level:{Speed:0.25f,Target:0.0f,Value:0.0f},TankContent:{Amount:0,FluidName:'minecraft:empty'}}],OutputItems:{Items:[],Size:9},OutputTanks:[{Level:{Speed:0.25f,Target:0.0f,Value:0.0f},TankContent:{Amount:0,FluidName:'minecraft:empty'}},{Level:{Speed:0.25f,Target:0.0f,Value:0.0f},TankContent:{Amount:0,FluidName:'minecraft:empty'}}],Overflow:[]}",
+                    "B": "create:blaze_burner[blaze=seething,facing=west]{burnTimeRemaining:3110,fuelLevel:2}",
+                    "A": "minecraft:air"
+                },
+                "pattern": [
+                    ["M"],
+                    ["A"],
+                    ["0"],
+                    ["B"]
+                ]
+            }
+        },
+        {
+            "type": "patchouli:text",
+            "text": "We had lots of Inert Liquid Mana, but we still had no clue how to put this liquid into a Mana Pool. We needed to discover the secret of Botania Mana! Transforming Inert Liquid Mana to Botania Mana happened by accident. We guard the details of this secret are guarded under heavy security."
+        },
+        {
+            "type": "patchouli:text",
+            "title": "Step 4: Mana Generator",
+            "text": "Just kidding! No. Seriously, I am not revealing how the Mana Generator operates. However, when powered with SU, the Mana Generator consumes Inert Liquid Mana and adds Botania Mana to a mana pool when placed above the machine."
+        },
+        {
+            "type": "patchouli:text",
+            "title": "Improved Efficiency",
+            "text": "To improve efficiency and production, modify steps 2 and 3.$(li)Step 2 - Liquify Inert Corrupted Mana Blocks. Inert Corrupted Mana Blocks can be liquified in a superheated Mixer and Basin to produce Corrupted Inert Liquid Mana.$(li)Step 3 Purify Corrupted Fluid Mana Corrupted Fluid Mana is purified via *Pure Daisy to produce Inert Fluid Mana.$(br)*Use Floating Pure Daisy"
+        }
+    ]
+}

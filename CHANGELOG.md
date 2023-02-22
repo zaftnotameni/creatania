@@ -7,6 +7,7 @@
 #### New
 
 - Proper registration with the create stress system now shows the usual "Stress Impact", "Stress Capacity" in tooltips for mana motor/generator
+- Initial version of extending the botania patchouli book with creatania mana machines by ClaudiusMinimums
 
 #### Changes
 
