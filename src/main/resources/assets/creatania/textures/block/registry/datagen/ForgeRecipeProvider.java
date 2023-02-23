@@ -8,9 +8,9 @@ import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import zaftnotameni.creatania.recipes.Inputs;
-import zaftnotameni.creatania.recipes.ManaCondenserRecipeBuilder;
-import zaftnotameni.creatania.recipes.ManaGeneratorRecipeBuilder;
 import zaftnotameni.creatania.recipes.Outputs;
+import zaftnotameni.creatania.recipes.condenser.ManaCondenserRecipeBuilder;
+import zaftnotameni.creatania.recipes.generator.ManaGeneratorRecipeBuilder;
 import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Fluids;
 

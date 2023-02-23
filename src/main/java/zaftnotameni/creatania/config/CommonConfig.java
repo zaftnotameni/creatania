@@ -57,6 +57,11 @@ public class CommonConfig {
   public static final ForgeConfigSpec.ConfigValue<Integer> MANAGEL_FLIGHT_DURATION;
   public static final ForgeConfigSpec.ConfigValue<Integer> MANAGEL_FLIGHT_MODIFIER;
   public static final ForgeConfigSpec.ConfigValue<Integer> XOR_LEVER_SIGNAL_STRENGTH;
+  public static final ForgeConfigSpec.ConfigValue<String> COBBLEGEN_FLOWING_TRANSFORMATIONS;
+  public static final ForgeConfigSpec.ConfigValue<String> COBBLEGEN_SOURCEB_TRANSFORMATIONS;
+  public static final ForgeConfigSpec.ConfigValue<String> COBBLEGEN_MANA_PYLON_TRANSFORMATIONS;
+  public static final ForgeConfigSpec.ConfigValue<String> COBBLEGEN_NATURA_PYLON_TRANSFORMATIONS;
+  public static final ForgeConfigSpec.ConfigValue<String> COBBLEGEN_GAIA_PYLON_TRANSFORMATIONS;
 
   static {
     BUILDER.push("mana_generator");
@@ -139,9 +144,14 @@ public class CommonConfig {
     XOR_LEVER_SIGNAL_STRENGTH = BUILDER.define("xor_lever_signal_strength", 2);
     BUILDER.pop();
 
-    BUILDER.push("stress");
-    // stressProvider.registerAll(BUILDER);
+    BUILDER.push("morethancobblegen");
+    COBBLEGEN_FLOWING_TRANSFORMATIONS = BUILDER.define("flowing", "");
+    COBBLEGEN_SOURCEB_TRANSFORMATIONS = BUILDER.define("source2", "");
+    COBBLEGEN_MANA_PYLON_TRANSFORMATIONS = BUILDER.define("mana_pylon", "");
+    COBBLEGEN_NATURA_PYLON_TRANSFORMATIONS = BUILDER.define("natura_pylon", "");
+    COBBLEGEN_GAIA_PYLON_TRANSFORMATIONS = BUILDER.define("gaia_pylon", "");
     BUILDER.pop();
+
 
     SPEC = BUILDER.build();
 

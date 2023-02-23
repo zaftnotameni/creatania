@@ -36,6 +36,7 @@ import java.util.Random;
 
 import static net.minecraft.sounds.SoundEvents.HONEY_BLOCK_PLACE;
 import static net.minecraft.sounds.SoundEvents.HONEY_DRINK;
+import static zaftnotameni.creatania.util.Fluids.specialFluidInteraction;
 import static zaftnotameni.creatania.util.Humanity.keyResource;
 import static zaftnotameni.creatania.util.Humanity.lang;
 
@@ -88,9 +89,9 @@ public class Fluids {
 
   public static FluidEntry<ForgeFlowingFluid.Flowing> registerManaFluid(String name, int color, TagKey<Fluid> tag) {
     return Index.all().waterLikeFluid(name, Colored.from(color))
-      .lang("Molten " + StringUtils.capitalize(name))
+      .lang("Liquid " + StringUtils.capitalize(name))
       .attributes(b -> defaultMolten(b, color).sound(HONEY_DRINK, HONEY_BLOCK_PLACE))
-      .properties(p -> p.tickRate(5 * 20)
+      .properties(p -> p.tickRate(1 * 20)
         .levelDecreasePerBlock(2)
         .slopeFindDistance(3)
         .explosionResistance(100f))
@@ -106,7 +107,7 @@ public class Fluids {
   }
 
   public static FluidEntry<ForgeFlowingFluid.Flowing> registerMoltenFluid(String name, int color) {
-    return Index.all().waterLikeFluid("molten_" + name, Colored.from(color))
+    return Index.all().lavaLikeFluid("molten_" + name, Colored.from(color))
       .lang("Molten " + StringUtils.capitalize(name))
       .attributes(b -> defaultMolten(b, color))
       .properties(p -> p.tickRate(5 * 20)
@@ -124,6 +125,10 @@ public class Fluids {
       .register();
   }
 
+
+
+
+
   public static class Colored extends FluidAttributes {
     public Colored(Builder builder, Fluid fluid) { super(builder, fluid); }
     public int color = 0x00ffffff;
@@ -140,6 +145,17 @@ public class Fluids {
     }
   }
 
+  public static class CreataniaFlowingFluidFlowing extends ForgeFlowingFluid.Flowing {
+
+    public CreataniaFlowingFluidFlowing(Properties properties) {
+      super(properties);
+    }
+    @Override
+    protected boolean canSpreadTo(BlockGetter pLevel, BlockPos pFromPos, BlockState pFromBlockState, Direction pDirection, BlockPos pToPos, BlockState pToBlockState, FluidState pToFluidState, Fluid pFluid) {
+      return specialFluidInteraction(pLevel, pFromBlockState, pToPos, pToFluidState) ||
+        super.canSpreadTo(pLevel, pFromPos, pFromBlockState, pDirection, pToPos, pToBlockState, pToFluidState, pFluid);
+    }
+  }
   public static class CreataniaFlowingFluidSource extends ForgeFlowingFluid.Source {
     public CreataniaFlowingFluidSource(Properties properties) {
       super(properties);

@@ -40,21 +40,26 @@ public class CreataniaRegistrate extends CreateRegistrate {
     return fluid(name,
       Fluids.WATER_STILL_RL,
       Fluids.WATER_FLOWING_RL,
-      attributesFactory);
+      attributesFactory,
+      Fluids.CreataniaFlowingFluidFlowing::new);
   }
   public FluidBuilder<ForgeFlowingFluid.Flowing, CreateRegistrate> lavaLikeFluid(String name,
                                                                                      NonNullBiFunction<FluidAttributes.Builder, Fluid, FluidAttributes> attributesFactory) {
     return fluid(name,
       Fluids.LAVA_STILL_RL,
       Fluids.LAVA_FLOWING_RL,
-      attributesFactory);
+      attributesFactory,
+      Fluids.CreataniaFlowingFluidFlowing::new);
+
   }
   public FluidBuilder<ForgeFlowingFluid.Flowing, CreateRegistrate> texturedFluid(String name,
                                                                                  NonNullBiFunction<FluidAttributes.Builder, Fluid, FluidAttributes> attributesFactory) {
     return fluid(name,
       Index.resource("fluid/" + name + "_still"),
       Index.resource("fluid/" + name + "_flow"),
-      attributesFactory);
+      attributesFactory,
+    Fluids.CreataniaFlowingFluidFlowing::new);
+
   }
 
   public CreataniaRegistrate creativeModeTabFor(NonNullSupplier<CreativeModeTab> creataniaCreativeTab) {

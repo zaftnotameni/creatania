@@ -40,6 +40,7 @@ public class ForgeEventBus {
   public static void onCommandRegister(RegisterCommandsEvent event) {
     new CreataniaTesterCommand(event.getDispatcher());
   }
+
   public static void slimy(Level level, LivingEntity entity) {
     if (level.isClientSide()) return;
     if (!isSlimeEntity(level, entity)) return;
