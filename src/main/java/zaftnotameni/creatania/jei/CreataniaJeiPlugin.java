@@ -7,7 +7,8 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
-import zaftnotameni.creatania.recipes.cobblegen.CobblegenRecipe;
+import net.minecraft.world.item.crafting.RecipeManager;
+import zaftnotameni.creatania.recipes.cobblegen.AllCobblegenRecipes;
 import zaftnotameni.creatania.recipes.cobblegen.CobblegenRecipeCategory;
 import zaftnotameni.creatania.recipes.condenser.ManaCondenserRecipe;
 import zaftnotameni.creatania.recipes.condenser.ManaCondenserRecipeCategory;
@@ -24,20 +25,25 @@ public class CreataniaJeiPlugin implements IModPlugin {
   public void registerCategories(IRecipeCategoryRegistration registration) {
     registration.addRecipeCategories(new ManaGeneratorRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     registration.addRecipeCategories(new ManaCondenserRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
-    registration.addRecipeCategories(new CobblegenRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+    CobblegenRecipeCategory.register(registration);
     IModPlugin.super.registerCategories(registration);
   }
   @Override
   public void registerRecipes(IRecipeRegistration registration) {
-    var manager = Minecraft.getInstance().level.getRecipeManager();
-    var generatorRecipes = manager.getAllRecipesFor(ManaGeneratorRecipe.Type.INSTANCE);
-    registration.addRecipes(new RecipeType<>(ManaGeneratorRecipeCategory.UID, ManaGeneratorRecipe.class), generatorRecipes);
-    var condenserRecipes = manager.getAllRecipesFor(ManaCondenserRecipe.Type.INSTANCE);
-    registration.addRecipes(new RecipeType<>(ManaCondenserRecipeCategory.UID, ManaCondenserRecipe.class), condenserRecipes);
-    var cobblegenRecipes = manager.getAllRecipesFor(CobblegenRecipe.TYPE);
-    registration.addRecipes(new RecipeType<>(CobblegenRecipeCategory.UID, CobblegenRecipe.class), cobblegenRecipes);
+    var level = Minecraft.getInstance().level;
+    var manager = level.getRecipeManager();
+    registerManaGeneratorRecipes(registration, manager);
+    registerManaCondenserRecipes(registration, manager);
+    AllCobblegenRecipes.register(registration, level);
     IModPlugin.super.registerRecipes(registration);
   }
-
+  private static void registerManaGeneratorRecipes(IRecipeRegistration registration, RecipeManager manager) {
+    var generatorRecipes = manager.getAllRecipesFor(ManaGeneratorRecipe.Type.INSTANCE);
+    registration.addRecipes(new RecipeType<>(ManaGeneratorRecipeCategory.UID, ManaGeneratorRecipe.class), generatorRecipes);
+  }
+  private static void registerManaCondenserRecipes(IRecipeRegistration registration, RecipeManager manager) {
+    var condenserRecipes = manager.getAllRecipesFor(ManaCondenserRecipe.Type.INSTANCE);
+    registration.addRecipes(new RecipeType<>(ManaCondenserRecipeCategory.UID, ManaCondenserRecipe.class), condenserRecipes);
+  }
 
 }

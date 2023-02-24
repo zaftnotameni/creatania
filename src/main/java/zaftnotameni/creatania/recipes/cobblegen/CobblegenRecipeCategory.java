@@ -6,6 +6,7 @@ import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
@@ -17,6 +18,9 @@ public class CobblegenRecipeCategory extends CreataniaRecipeProcessingCategory<C
   public final static ResourceLocation UID = CobblegenRecipe.TypeInfo.id;
   public CobblegenRecipeCategory(IGuiHelper helper) {
     super(helper, helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(Blocks.REAL_MANA_BLOCK.get())));
+  }
+  public static void register(IRecipeCategoryRegistration registration) {
+    registration.addRecipeCategories(new CobblegenRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
   }
   @Override
   public Component getTitle() {
