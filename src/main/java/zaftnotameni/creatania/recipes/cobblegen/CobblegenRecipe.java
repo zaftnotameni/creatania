@@ -22,6 +22,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import zaftnotameni.creatania.registry.Fluids;
 import zaftnotameni.creatania.registry.Index;
 import zaftnotameni.creatania.registry.Recipes;
 
@@ -59,6 +60,8 @@ public class CobblegenRecipe<C extends Container> extends ProcessingRecipe<C> {
     return all;
   }
   public static class CobblegenRecipeMatch {
+    public List<FluidIngredient.FluidStackIngredient> fluidsRequireSource = new ArrayList<>();
+    public List<BlockPos> sourcesToBeErased = new ArrayList<>();
     public FluidIngredient.FluidStackIngredient fluidA;
     public boolean fluidARequiresSource;
     public FluidIngredient.FluidStackIngredient fluidB;
@@ -90,18 +93,34 @@ public class CobblegenRecipe<C extends Container> extends ProcessingRecipe<C> {
       var fs = level.getFluidState(pPos);
       for (var r : recipes) {
         if (!r.target.test(new FluidStack(fs.getType(), 1))) continue;
-        if (r.targetRequiresSource && !fs.isSource()) continue;
-        return r;
+        for (var f : r.fluidsRequireSource) if (!r.sourcesToBeErased.contains(pPos)) if (f.test(new FluidStack(fs.getType(), 1)) && fs.isSource()) {
+          r.sourcesToBeErased.add(pPos);
+        }
+        if (r.sourcesToBeErased.size() == r.fluidsRequireSource.size()) return r;
       }
       for (var d : Direction.values()) {
         if (d == pDirection.getOpposite()) continue;
         var pos = pPos.relative(d);
         var neighbor = serverLevel.getFluidState(pos);
         for (var r : recipes) {
-          if (!r.target.test(new FluidStack(neighbor.getType(), 1))) continue;
-          if (r.targetRequiresSource && !neighbor.isSource()) continue;
-          if (r.targetRequiresSource && neighbor.isSource()) { r.sourceState = neighbor; r.sourcePos = pos; }
-          return r;
+          if (!r.target.test(new FluidStack(neighbor.getType(), 1)) &&
+            !r.target.test(new FluidStack(fs.getType(), 1)) &&
+            !r.originator.isSame(fs.getType()) &&
+            !r.originator.isSame(neighbor.getType())) continue;
+          for (var f : r.fluidsRequireSource) {
+            if (!r.sourcesToBeErased.contains(pPos)) if (f.test(new FluidStack(fs.getType(), 1)) && fs.isSource()) {
+               r.sourcesToBeErased.add(pPos);
+            }
+            if (r.sourcesToBeErased.contains(pos)) continue;
+            if (f.test(new FluidStack(neighbor.getType(), 1)) && neighbor.isSource()) {
+              r.sourcesToBeErased.add(pos);
+            }
+            if (r.sourcesToBeErased.contains(pos)) continue;
+            if (f.test(new FluidStack (r.originator, 1)) && (r.originator instanceof Fluids.CreataniaFlowingFluidSource)) {
+              r.sourcesToBeErased.add(pos);
+            }
+          }
+          if (r.sourcesToBeErased.size() == r.fluidsRequireSource.size()) return r;
         }
       }
       return null;
@@ -115,13 +134,14 @@ public class CobblegenRecipe<C extends Container> extends ProcessingRecipe<C> {
         if (m.fluidA.test(new FluidStack(originator, 1))) {
           m.originator = originator;
           m.target = m.fluidB;
-          m.targetRequiresSource = m.fluidBRequiresSource;
         }
         if (m.fluidB.test(new FluidStack(originator, 1))) {
           m.originator = originator;
           m.target = m.fluidA;
-          m.targetRequiresSource = m.fluidARequiresSource;
         }
+        if (m.fluidARequiresSource) m.fluidsRequireSource.add(m.fluidA);
+        if (m.fluidBRequiresSource) m.fluidsRequireSource.add(m.fluidB);
+        m.targetRequiresSource = m.fluidARequiresSource || m.fluidBRequiresSource;
         if (m.target == null) return;
         matchingRecipes.add(m);
       });

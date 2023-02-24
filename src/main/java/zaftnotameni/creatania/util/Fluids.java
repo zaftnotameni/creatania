@@ -52,7 +52,7 @@ public class Fluids {
       var recipe = getCobbleGenRecipeMatchingTarget(pLevel, recipes, pPos, pBlockState, pDirection, pFluidState);
       if (recipe == null) return false;
       serverLevel.setBlockAndUpdate(pPos, recipe.output.defaultBlockState());
-      if (recipe.targetRequiresSource) serverLevel.setBlockAndUpdate(recipe.sourcePos, Blocks.AIR.defaultBlockState());
+      for (var s : recipe.sourcesToBeErased) serverLevel.setBlockAndUpdate(s, Blocks.AIR.defaultBlockState());
       Log.LOGGER.debug("Special cobblegen {} + {} = {}", recipe.fluidA.serialize().toString(), recipe.fluidB.serialize().toString(), recipe.output.getRegistryName().toString());
       return true;
     } catch (RuntimeException e) {
