@@ -10,6 +10,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
+import zaftnotameni.creatania.recipes.base.CreataniaRecipe;
+import zaftnotameni.creatania.recipes.base.Inputs;
+import zaftnotameni.creatania.recipes.base.Outputs;
 public class ItemFluidRecipeSerializer {
   public static <T extends CreataniaRecipe> T fromJson(ResourceLocation id, JsonObject json, CreataniaRecipe.Factory<T> factory) {
     JsonArray itemIngredients = GsonHelper.getAsJsonArray(json, "itemIngredients");

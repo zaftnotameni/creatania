@@ -68,7 +68,6 @@ public class CobblegenRecipeGen extends ForgeCreateProcessingRecipeProvider {
 	}
 	@Override
 	protected IRecipeTypeInfo getRecipeType() {
-		return CobblegenRecipe.TypeInfo.instance.get();
+		return CobblegenRecipe.TYPE.asRecipeTypeInfo();
 	}
-
 }

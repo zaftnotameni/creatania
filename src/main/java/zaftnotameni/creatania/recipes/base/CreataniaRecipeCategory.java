@@ -1,4 +1,4 @@
-package zaftnotameni.creatania.recipes;
+package zaftnotameni.creatania.recipes.base;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableStatic;

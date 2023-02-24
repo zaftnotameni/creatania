@@ -1,4 +1,4 @@
-package zaftnotameni.creatania.recipes;
+package zaftnotameni.creatania.recipes.base;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.crafting.Ingredient;

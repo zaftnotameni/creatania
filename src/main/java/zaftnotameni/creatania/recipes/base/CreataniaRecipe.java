@@ -1,4 +1,4 @@
-package zaftnotameni.creatania.recipes;
+package zaftnotameni.creatania.recipes.base;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.crafting.Recipe;

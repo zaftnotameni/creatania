@@ -7,6 +7,8 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import zaftnotameni.creatania.recipes.cobblegen.CobblegenRecipe;
+import zaftnotameni.creatania.recipes.cobblegen.CobblegenRecipeCategory;
 import zaftnotameni.creatania.recipes.condenser.ManaCondenserRecipe;
 import zaftnotameni.creatania.recipes.condenser.ManaCondenserRecipeCategory;
 import zaftnotameni.creatania.recipes.generator.ManaGeneratorRecipe;
@@ -22,6 +24,7 @@ public class CreataniaJeiPlugin implements IModPlugin {
   public void registerCategories(IRecipeCategoryRegistration registration) {
     registration.addRecipeCategories(new ManaGeneratorRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     registration.addRecipeCategories(new ManaCondenserRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
+    registration.addRecipeCategories(new CobblegenRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
     IModPlugin.super.registerCategories(registration);
   }
   @Override
@@ -31,6 +34,10 @@ public class CreataniaJeiPlugin implements IModPlugin {
     registration.addRecipes(new RecipeType<>(ManaGeneratorRecipeCategory.UID, ManaGeneratorRecipe.class), generatorRecipes);
     var condenserRecipes = manager.getAllRecipesFor(ManaCondenserRecipe.Type.INSTANCE);
     registration.addRecipes(new RecipeType<>(ManaCondenserRecipeCategory.UID, ManaCondenserRecipe.class), condenserRecipes);
+    var cobblegenRecipes = manager.getAllRecipesFor(CobblegenRecipe.TYPE);
+    registration.addRecipes(new RecipeType<>(CobblegenRecipeCategory.UID, CobblegenRecipe.class), cobblegenRecipes);
     IModPlugin.super.registerRecipes(registration);
   }
+
+
 }

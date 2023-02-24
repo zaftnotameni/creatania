@@ -13,9 +13,9 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import zaftnotameni.creatania.recipes.Inputs;
 import zaftnotameni.creatania.recipes.ItemFluidRecipeSerializer;
-import zaftnotameni.creatania.recipes.Outputs;
+import zaftnotameni.creatania.recipes.base.Inputs;
+import zaftnotameni.creatania.recipes.base.Outputs;
 import zaftnotameni.creatania.registry.Index;
 
 import java.util.function.Consumer;
