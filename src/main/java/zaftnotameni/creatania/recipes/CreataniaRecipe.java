@@ -4,9 +4,6 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.crafting.Recipe;
 import org.apache.commons.lang3.function.TriFunction;
 import zaftnotameni.creatania.util.Functional;
-
-import java.util.Objects;
-import java.util.function.Function;
 public abstract class CreataniaRecipe implements Recipe<SimpleContainer> {
   public Inputs inputs;
   public Outputs outputs;

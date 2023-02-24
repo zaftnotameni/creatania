@@ -33,7 +33,7 @@ public abstract class ForgeCreateProcessingRecipeProvider extends CreateRecipePr
 		GENERATORS.add(new MillingRecipeGen(gen));
 		GENERATORS.add(new CuttingRecipeGen(gen));
 		GENERATORS.add(new WashingRecipeGen(gen));
-		// GENERATORS.add(new PolishingRecipeGen(gen));
+		GENERATORS.add(new CobblegenRecipeGen(gen));
 		GENERATORS.add(new DeployingRecipeGen(gen));
 		GENERATORS.add(new MixingRecipeGen(gen));
 		GENERATORS.add(new CompactingRecipeGen(gen));

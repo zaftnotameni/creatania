@@ -1,4 +1,4 @@
-package zaftnotameni.creatania.recipes;
+package zaftnotameni.creatania.recipes.generator;
 import com.google.gson.JsonObject;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
@@ -13,16 +13,19 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import zaftnotameni.creatania.recipes.Inputs;
+import zaftnotameni.creatania.recipes.ItemFluidRecipeSerializer;
+import zaftnotameni.creatania.recipes.Outputs;
 import zaftnotameni.creatania.registry.Index;
 
 import java.util.function.Consumer;
-public class ManaCondenserRecipeBuilder implements RecipeBuilder {
+public class ManaGeneratorRecipeBuilder implements RecipeBuilder {
   public final Inputs inputs;
   public final Outputs outputs;
   public final Advancement.Builder advancement = Advancement.Builder.advancement();
   public final String recipeIdPrefix;
 
-  public ManaCondenserRecipeBuilder(Inputs inputs, Outputs outputs, String pRecipeIdPrefix) {
+  public ManaGeneratorRecipeBuilder(Inputs inputs, Outputs outputs, String pRecipeIdPrefix) {
     this.inputs = inputs;
     this.outputs = outputs;
     this.recipeIdPrefix = pRecipeIdPrefix;
@@ -47,7 +50,7 @@ public class ManaCondenserRecipeBuilder implements RecipeBuilder {
       .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(pRecipeId))
       .rewards(AdvancementRewards.Builder.recipe(pRecipeId)).requirements(RequirementsStrategy.OR);
 
-    pFinishedRecipeConsumer.accept(new ManaCondenserRecipeBuilder.Result(pRecipeId, this.inputs, this.outputs,
+    pFinishedRecipeConsumer.accept(new ManaGeneratorRecipeBuilder.Result(pRecipeId, this.inputs, this.outputs,
       this.advancement, createAdvancementId(pRecipeId), this.recipeIdPrefix));
   }
   @NotNull
@@ -80,7 +83,7 @@ public class ManaCondenserRecipeBuilder implements RecipeBuilder {
 
     @Override
     public ResourceLocation getId() {
-      return Index.resource(this.getRecipeIdPrefix() + "_from_mana_condenser");
+      return Index.resource(this.getRecipeIdPrefix() + "_from_mana_generator");
     }
 
     public String getRecipeIdPrefix() {
@@ -90,7 +93,7 @@ public class ManaCondenserRecipeBuilder implements RecipeBuilder {
 
     @Override
     public RecipeSerializer<?> getType() {
-      return ManaCondenserRecipe.Serializer.INSTANCE;
+      return ManaGeneratorRecipe.Serializer.INSTANCE;
     }
 
     @javax.annotation.Nullable

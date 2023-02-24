@@ -20,7 +20,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.tuple.Pair;
 import zaftnotameni.creatania.Constants;
-import zaftnotameni.creatania.recipes.ManaGeneratorRecipe;
+import zaftnotameni.creatania.recipes.generator.ManaGeneratorRecipe;
 import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Fluids;
 import zaftnotameni.creatania.registry.Particles;

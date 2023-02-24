@@ -1,23 +1,20 @@
-package zaftnotameni.creatania.recipes;
-import com.google.gson.JsonArray;
+package zaftnotameni.creatania.recipes.generator;
 import com.google.gson.JsonObject;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.SimpleContainer;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.Nullable;
+import zaftnotameni.creatania.recipes.CreataniaRecipe;
+import zaftnotameni.creatania.recipes.Inputs;
+import zaftnotameni.creatania.recipes.ItemFluidRecipeSerializer;
+import zaftnotameni.creatania.recipes.Outputs;
 import zaftnotameni.creatania.registry.Index;
 
 public class ManaGeneratorRecipe extends CreataniaRecipe {

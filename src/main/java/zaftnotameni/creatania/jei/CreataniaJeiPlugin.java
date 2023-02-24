@@ -7,10 +7,10 @@ import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
-import zaftnotameni.creatania.recipes.ManaCondenserRecipe;
-import zaftnotameni.creatania.recipes.ManaCondenserRecipeCategory;
-import zaftnotameni.creatania.recipes.ManaGeneratorRecipe;
-import zaftnotameni.creatania.recipes.ManaGeneratorRecipeCategory;
+import zaftnotameni.creatania.recipes.condenser.ManaCondenserRecipe;
+import zaftnotameni.creatania.recipes.condenser.ManaCondenserRecipeCategory;
+import zaftnotameni.creatania.recipes.generator.ManaGeneratorRecipe;
+import zaftnotameni.creatania.recipes.generator.ManaGeneratorRecipeCategory;
 import zaftnotameni.creatania.registry.Index;
 @JeiPlugin
 public class CreataniaJeiPlugin implements IModPlugin {

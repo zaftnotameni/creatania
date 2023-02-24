@@ -4,6 +4,13 @@
 
 ### 1.18.2-0.1.7-alpha
 
+#### New
+
+- Mana based "Cobblegen" fully customizable with standard JSON recipes
+
+#### Changes
+
+- Mana Fluid tick rate increased
 
 ### 1.18.2-0.1.6-alpha
 

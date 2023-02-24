@@ -1,28 +1,19 @@
-package zaftnotameni.creatania.recipes;
+package zaftnotameni.creatania.recipes.condenser;
 
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
-import mezz.jei.api.gui.drawable.IDrawable;
-import mezz.jei.api.gui.drawable.IDrawableStatic;
-import mezz.jei.api.gui.ingredient.IRecipeSlotTooltipCallback;
-import mezz.jei.api.gui.ingredient.IRecipeSlotView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
-import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
+import zaftnotameni.creatania.recipes.CreataniaRecipeCategory;
 import zaftnotameni.creatania.registry.Blocks;
-import zaftnotameni.creatania.registry.Fluids;
 import zaftnotameni.creatania.registry.Index;
-
-import java.util.List;
 public class ManaCondenserRecipeCategory extends CreataniaRecipeCategory<ManaCondenserRecipe> {
   public final static ResourceLocation UID = Index.resource(ManaCondenserRecipe.Type.ID);
   public ManaCondenserRecipeCategory(IGuiHelper helper) {
