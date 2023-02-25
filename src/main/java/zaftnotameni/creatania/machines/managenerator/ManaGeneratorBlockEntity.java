@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -18,11 +19,11 @@ import vazkii.botania.api.block.IWandHUD;
 import vazkii.botania.api.block.IWandable;
 import vazkii.botania.api.mana.IManaReceiver;
 import zaftnotameni.creatania.config.CommonConfig;
+import zaftnotameni.creatania.machines.manamachine.ActiveStateSynchronizerBehavior;
+import zaftnotameni.creatania.machines.manamachine.IAmManaMachine;
+import zaftnotameni.creatania.machines.manamachine.IAmParticleEmittingMachine;
+import zaftnotameni.creatania.machines.manamachine.KineticManaMachine;
 import zaftnotameni.creatania.mana.manaduct.BaseManaductBlock;
-import zaftnotameni.creatania.sharedbehaviors.ActiveStateSynchronizerBehavior;
-import zaftnotameni.creatania.sharedbehaviors.IAmManaMachine;
-import zaftnotameni.creatania.sharedbehaviors.IAmParticleEmittingMachine;
-import zaftnotameni.creatania.sharedbehaviors.KineticManaMachine;
 import zaftnotameni.creatania.util.Log;
 
 import javax.annotation.Nonnull;
@@ -134,12 +135,14 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
     return super.getCapability(cap, side);
   }
   public int getNormalizedRPM() {
+    return Mth.clamp(this.getManaMachineAbsoluteSpeed(), CommonConfig.MANA_GENERATOR_MINIMUM_RPM.get(),CommonConfig.MANA_GENERATOR_MAXIMUM_RPM.get());
+  }
+  @Override
+  public int getManaMachineAbsoluteSpeed() {
     var min = CommonConfig.MANA_GENERATOR_MINIMUM_RPM.get();
     if (Math.abs(this.getSpeed()) < min) return 0;
-    return Math.max(CommonConfig.MANA_GENERATOR_MINIMUM_RPM.get(),
-      Math.min(CommonConfig.MANA_GENERATOR_MAXIMUM_RPM.get(), (int) Math.abs(this.getSpeed())));
+    return (int) this.getSpeed();
   }
-
   public IManaReceiver manaReceiverAt(BlockPos pos) {
     var blockEntity = this.level.getBlockEntity(pos);
     if (blockEntity != null && blockEntity instanceof IManaReceiver receiver) { return receiver; }
@@ -230,6 +233,10 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   public Log.RateLimited getLogger() { return logger; }
   public void setLogger(Log.RateLimited pLogger) { logger = pLogger; }
 
+  @Override
+  public int getManaConsumptionRate() {
+    return this.getManaConsumedAtCurrentSpeed();
+  }
   public int getManaConsumedAtCurrentSpeed() {
     var conversionRate = this.getManaConversionRate();
     var manaToBeGenerated = this.getManaProductionRate();

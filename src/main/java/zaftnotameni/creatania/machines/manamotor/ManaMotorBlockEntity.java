@@ -27,9 +27,9 @@ import vazkii.botania.api.mana.IManaReceiver;
 import vazkii.botania.api.mana.spark.IManaSpark;
 import vazkii.botania.api.mana.spark.ISparkAttachable;
 import zaftnotameni.creatania.config.CommonConfig;
-import zaftnotameni.creatania.sharedbehaviors.ActiveStateSynchronizerBehavior;
-import zaftnotameni.creatania.sharedbehaviors.IAmManaMachine;
-import zaftnotameni.creatania.sharedbehaviors.KineticManaMachine;
+import zaftnotameni.creatania.machines.manamachine.ActiveStateSynchronizerBehavior;
+import zaftnotameni.creatania.machines.manamachine.IAmManaMachine;
+import zaftnotameni.creatania.machines.manamachine.KineticManaMachine;
 import zaftnotameni.creatania.util.Log;
 
 import javax.annotation.Nonnull;
@@ -126,6 +126,10 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
   }
   @Override
   public void setManaMachineMana(int value) { this.mana = value; }
+  @Override
+  public int getManaMachineAbsoluteSpeed() {
+    return (int) Math.abs(this.getSpeed());
+  }
   @Override
   public int getManaMachineGeneratedSpeed() { return (int) this.getGeneratedSpeed(); }
   public void recomputeManaPerTick() {
@@ -249,5 +253,9 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
   @Override
   public void setColor(DyeColor color) {
 
+  }
+  @Override
+  public int getManaConsumptionRate() {
+    return this.manaPerTick;
   }
 }

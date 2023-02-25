@@ -19,11 +19,11 @@ import net.minecraftforge.items.CapabilityItemHandler;
 import vazkii.botania.api.BotaniaForgeCapabilities;
 import vazkii.botania.api.mana.IManaReceiver;
 import zaftnotameni.creatania.config.CommonConfig;
+import zaftnotameni.creatania.machines.manamachine.ActiveStateSynchronizerBehavior;
+import zaftnotameni.creatania.machines.manamachine.IAmManaMachine;
+import zaftnotameni.creatania.machines.manamachine.IAmParticleEmittingMachine;
+import zaftnotameni.creatania.machines.manamachine.KineticManaMachine;
 import zaftnotameni.creatania.registry.Blocks;
-import zaftnotameni.creatania.sharedbehaviors.ActiveStateSynchronizerBehavior;
-import zaftnotameni.creatania.sharedbehaviors.IAmManaMachine;
-import zaftnotameni.creatania.sharedbehaviors.IAmParticleEmittingMachine;
-import zaftnotameni.creatania.sharedbehaviors.KineticManaMachine;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -52,10 +52,9 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
     if (cap == BotaniaForgeCapabilities.MANA_RECEIVER) return lazyManaReceiver.cast();
     return super.getCapability(cap, side);
   }
-  public int getNormalizedRPM() {
-    var min = 1;
-    if (Math.abs(this.getSpeed()) < min) return 0;
-    return Math.max(1, (int) Math.abs(this.getSpeed()));
+  @Override
+  public int getManaMachineAbsoluteSpeed() {
+    return (int) Math.abs(this.getSpeed());
   }
   @Override
   public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
@@ -91,7 +90,7 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
   public float tickCounter = 0f;
   public float getPercentageOfMaxRPM() {
     var maxPossibleRpm = AllConfigs.SERVER.kinetics.maxMotorSpeed.get();
-    return Math.max(0.01f, 100000f * this.getNormalizedRPM() / (float) maxPossibleRpm);
+    return Math.max(0.01f, 100000f * this.getManaMachineAbsoluteSpeed() / (float) maxPossibleRpm);
   }
   public float getTickCounterIncrease() {
     var correctionFactor = (float) (Math.max(1, CommonConfig.MANA_CONDENSER_THROTTLE_PER_RPM_BELOW_MAX.get())) *
@@ -105,7 +104,7 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
   public void serverTick() {
     this.active = false;
     this.firstTick = false;
-    var rpm = this.getNormalizedRPM();
+    var rpm = this.getManaMachineAbsoluteSpeed();
     var requiredMana = getManaConsumptionRate();
     if (this.doesNotMeetRequirementsToCondenseMana(rpm, requiredMana)) {
       return;
@@ -142,7 +141,7 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
     if (this.level == null || this.level.isClientSide()) return;
     serverTick();
   }
-  public int getManaConsumptionRate() { return getNormalizedRPM() * CommonConfig.MANA_CONDENSER_MANA_PER_TICK_PER_RPM.get(); }
+  public int getManaConsumptionRate() { return getManaMachineAbsoluteSpeed() * CommonConfig.MANA_CONDENSER_MANA_PER_TICK_PER_RPM.get(); }
 
   @Override
   public float calculateStressApplied() {

@@ -6,6 +6,7 @@
 
 #### New
 
+- JEI plugin for mysterious cobblegen
 - Mana based "Cobblegen" fully customizable with standard JSON recipes
 
 #### Changes

@@ -1,4 +1,4 @@
-package zaftnotameni.creatania.sharedbehaviors;
+package zaftnotameni.creatania.machines.manamachine;
 import com.google.common.base.Predicates;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.contraptions.base.DirectionalKineticBlock;
@@ -125,5 +125,10 @@ public class KineticManaMachine<T extends SmartTileEntity & IAmManaMachine> {
   }
   public int getMaximumSUPossible() {
     return stressUnitsPerRpm * AllConfigs.SERVER.kinetics.maxMotorSpeed.get();
+  }
+  public int getAbsoluteSpeed() {
+    var min = 1f;
+    if (Math.abs(te.getSpeed()) < min) return 0;
+    return Math.max((int) min, (int) Math.abs(te.getSpeed()));
   }
 }
