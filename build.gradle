@@ -10,9 +10,9 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath 'org.parchmentmc:librarian:1.+'
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: "${forgegradle_version}", changing: false
+        // classpath "org.spongepowered:mixingradle:${mixingradle_version}"
+        classpath "org.parchmentmc:librarian:${librarian_version}"
     }
 }
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
@@ -22,7 +22,7 @@ plugins {
 }
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
-apply plugin: 'org.spongepowered.mixin'
+// apply plugin: 'org.spongepowered.mixin'
 
 
 
@@ -30,13 +30,13 @@ version = "${creatania_currentversion}"
 group = 'zaftnotameni.creatania' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'creatania'
 
-// Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
-    mappings channel: 'parchment', version: '2022.11.06-1.18.2'
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+    // mappings channel: 'official', version: "${mc_version}"
+    mappings channel: 'parchment', version: "${parchment_version}-${mc_version}"
+    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
     // Default run configurations.
     // These can be tweaked, removed, or duplicated as needed.
     runs {
@@ -157,6 +157,7 @@ repositories {
         url = "https://modmaven.dev"
     }
     maven { url 'https://maven.blamejared.com' }
+    maven { url "https://modmaven.dev" }
     maven {
         name = 'tterrag maven'
         url = 'https://maven.tterrag.com/'
@@ -165,24 +166,68 @@ repositories {
         name = 'Sponge Snapshots'
         url = 'https://repo.spongepowered.org/repository/maven-public/'
     }
+    maven {
+        // Location of the maven that hosts JEI files (and TiC)
+        name 'Progwml6 maven'
+        url 'https://dvs1.progwml6.com/files/maven'
+    }
+    maven {
+        // Location of a maven mirror for JEI files, as a fallback
+        name 'ModMaven'
+        url 'https://modmaven.k-4u.nl'
+    }
+    maven {
+        // Location of the maven for vazkii's mods
+        name 'blamejared'
+        url 'https://maven.blamejared.com'
+    }
+    maven {
+        // Location of the maven for mixed mappings, Registrate, and Flywheel
+        name 'tterrag maven'
+        url 'https://maven.tterrag.com'
+    }
+    maven {
+        url 'https://www.cursemaven.com'
+        content {
+            includeGroup "curse.maven"
+        }
+    }
+    maven {
+        //location of the maven for dynamic trees
+        url 'https://harleyoconnor.com/maven'
+    }
+    maven {
+        //location of the maven for curios api
+        url = "https://maven.theillusivec4.top/"
+    }
+    maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+        content {
+            includeGroup "maven.modrinth"
+        }
+    }
 
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.2-40.2.1'
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    // minecraft 'net.minecraftforge:forge:1.19.2-43.2.6'
+    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+    // annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
+    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
+    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
 
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.2-5.0.6.3:api")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.2-5.0.6.3")
+    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_minecraft_version}-${curios_version}:api")
+    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_minecraft_version}-${curios_version}")
 
-    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-67:api")
-    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-67")
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.3-78:api")
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.3-78:api")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.3-78")
 
-    compileOnly fg.deobf("vazkii.botania:Botania:${botania_version}:api")
-    runtimeOnly fg.deobf("vazkii.botania:Botania:${botania_version}")
+    compileOnly fg.deobf("vazkii.botania:Botania:${botania_version}-FORGE:api")
+    runtimeOnly fg.deobf("vazkii.botania:Botania:${botania_version}-FORGE")
 
     implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}:slim") { transitive = false }
     implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
