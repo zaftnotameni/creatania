@@ -23,7 +23,7 @@ public class ForgeDatagenInitializer {
   }
   public static void serverDataGen(DataGenerator generator, ExistingFileHelper helper) {
 //    var blockTagProvider = new ForgeBlockTagProvider(generator, helper);
-
+//
 //    generator.addProvider(true,blockTagProvider);
 //    generator.addProvider(true,new ForgeItemTagProvider(generator, blockTagProvider, helper));
 //    generator.addProvider(true,new ForgeRecipeProvider(generator));

@@ -1,5 +1,12 @@
 package zaftnotameni.creatania.config;
+import com.electronwill.nightconfig.core.file.CommentedFileConfig;
+import com.electronwill.nightconfig.core.file.FileNotFoundAction;
+import com.electronwill.nightconfig.core.io.ParsingException;
+import com.electronwill.nightconfig.core.io.WritingMode;
 import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.fml.loading.FMLPaths;
+
+import java.nio.file.Path;
 public class CommonConfig {
   public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
   public static final ForgeConfigSpec SPEC;
@@ -50,8 +57,8 @@ public class CommonConfig {
   public static final ForgeConfigSpec.ConfigValue<Integer> MANA_DUCT_TIER_4_MULTIPLIER;
   public static final ForgeConfigSpec.ConfigValue<Boolean> MANAGEL_CAN_ALWAYS_EAT;
   public static final ForgeConfigSpec.ConfigValue<Boolean> MANAGEL_FAST_EATING;
-  public static final ForgeConfigSpec.ConfigValue<Float> MANAGEL_FLIGHT_PROBABILITY;
-  public static final ForgeConfigSpec.ConfigValue<Float> MANAGEL_SATURATION_MODIFIER;
+  public static final ForgeConfigSpec.ConfigValue<Double> MANAGEL_FLIGHT_PROBABILITY;
+  public static final ForgeConfigSpec.ConfigValue<Double> MANAGEL_SATURATION_MODIFIER;
   public static final ForgeConfigSpec.ConfigValue<Integer> MANAGEL_NUTRITION;
   public static final ForgeConfigSpec.ConfigValue<Integer> MANAGEL_STACKS_TO;
   public static final ForgeConfigSpec.ConfigValue<Integer> MANAGEL_FLIGHT_DURATION;
@@ -131,8 +138,8 @@ public class CommonConfig {
     BUILDER.push("managel");
     MANAGEL_CAN_ALWAYS_EAT = BUILDER.define("can_always_eat", true);
     MANAGEL_FAST_EATING = BUILDER.define("can_eat_fast", true);
-    MANAGEL_FLIGHT_PROBABILITY = BUILDER.define("chance_of_providing_flight", 1f);
-    MANAGEL_SATURATION_MODIFIER = BUILDER.define("saturation_modifier", 0.1f);
+    MANAGEL_FLIGHT_PROBABILITY = BUILDER.define("chance_of_providing_flight", 1.0);
+    MANAGEL_SATURATION_MODIFIER = BUILDER.define("saturation_modifier", 0.1);
     MANAGEL_NUTRITION = BUILDER.define("nutrition_value", 1);
     MANAGEL_FLIGHT_DURATION = BUILDER.define("flight_duration", 15 * 20);
     MANAGEL_FLIGHT_MODIFIER = BUILDER.define("flight_modifier", 1);
@@ -154,5 +161,32 @@ public class CommonConfig {
 
 
     SPEC = BUILDER.build();
+  }
+
+  public CommentedFileConfig configData;
+  public static CommonConfig instance = new CommonConfig();
+  public void load()
+  {
+    final Path configFolder = FMLPaths.CONFIGDIR.get();
+    FMLPaths.getOrCreateGameRelativePath(configFolder, "default config directory");
+    loadFrom(configFolder.resolve("creatania-common.toml"));
+    SPEC.acceptConfig(configData);
+  }
+  public void loadFrom(final Path configFile)
+  {
+    configData = CommentedFileConfig.builder(configFile).sync()
+      .onFileNotFound(FileNotFoundAction.CREATE_EMPTY)
+      .autosave().autoreload()
+      .writingMode(WritingMode.REPLACE)
+      .build();
+    try
+    {
+      configData.load();
+    }
+    catch (ParsingException e)
+    {
+      throw new RuntimeException("Failed to load creatania config from " + configFile, e);
+    }
+    configData.save();
   }
 }

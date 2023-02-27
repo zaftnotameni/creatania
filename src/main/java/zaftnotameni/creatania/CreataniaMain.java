@@ -39,7 +39,7 @@ public class CreataniaMain {
     CreataniaPotions.register(bus);
     Particles.register(bus);
     CreataniaItems.register(bus);
-//    Blocks.register(bus);
+    Blocks.register(bus);
     CreataniaFluids.ALL.register(bus);
     BlockEntities.register(bus);
     CreataniaRecipes.register(bus);

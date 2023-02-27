@@ -3,6 +3,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.simple.SimpleChannel;
+import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.network.ClientProxy;
 import zaftnotameni.creatania.network.IAmProxy;
 import zaftnotameni.creatania.network.ServerProxy;
@@ -20,5 +21,6 @@ public class StaticInit {
 
   public static void run() {
     zaftnotameni.creatania.config.Index.register();
+    CommonConfig.instance.load();
   }
 }

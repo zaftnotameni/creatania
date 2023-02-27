@@ -8,9 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import zaftnotameni.creatania.Constants;
-import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.food.ManaGelItem;
 import zaftnotameni.creatania.util.Log;
 
@@ -21,10 +19,6 @@ public class CreataniaItems {
   public static final ItemEntry<ManaGelItem> MANA_GEL = CreataniaIndex.all()
     .item(Constants.MANA_GEL_ITEM_NAME, (p) -> ManaGelItem.create(p))
     .register();
-  public static final RegistryObject<ManaGelItem> MANA_GEL_ITEM = INDEX.register(
-    "mana_gel", () -> ManaGelItem.create(new Item.Properties().stacksTo(
-      CommonConfig.MANAGEL_STACKS_TO.get() // <------ gets called too soon
-    )));
 
   public static final ItemEntry<SequencedAssemblyItem> INCOMPLETE_MANA_MACHINE_COMPONENT = sequencedIngredient(Constants.INCOMPLETE_MANA_MACHINE_COMPONENT);
 
