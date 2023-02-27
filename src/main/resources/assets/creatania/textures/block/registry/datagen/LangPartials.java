@@ -7,7 +7,7 @@ import com.simibubi.create.foundation.utility.Lang;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.CreataniaFluids;
-import zaftnotameni.creatania.registry.Items;
+import zaftnotameni.creatania.registry.CreataniaItems;
 import zaftnotameni.creatania.util.Log;
 public enum LangPartials implements LangPartial {
 
@@ -17,7 +17,7 @@ public enum LangPartials implements LangPartial {
   TOOLTIPS("Item Descriptions"),
   PONDER("Ponder Content"),
   FLUIDS("Fluids", CreataniaFluids::provideLangEntries),
-  ITEMS("Items", Items::provideLangEntries),
+  ITEMS("Items", CreataniaItems::provideLangEntries),
   BLOCKS("Blocks", Blocks::provideLangEntries),
   ;
   public final String displayName;

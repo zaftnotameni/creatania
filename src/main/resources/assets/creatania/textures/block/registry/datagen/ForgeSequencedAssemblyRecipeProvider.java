@@ -11,7 +11,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.registry.Blocks;
-import zaftnotameni.creatania.registry.Items;
+import zaftnotameni.creatania.registry.CreataniaItems;
 
 import java.util.function.Consumer;
 public class ForgeSequencedAssemblyRecipeProvider extends SequencedAssemblyRecipeGen {
@@ -19,14 +19,14 @@ public class ForgeSequencedAssemblyRecipeProvider extends SequencedAssemblyRecip
     super(p_i48262_1_);
   }
   GeneratedRecipe MANA_MACHINE_COMPONENT = create(Constants.MANA_MACHINE_COMPONENT, r -> r.require(livingwood())
-    .transitionTo(Items.INCOMPLETE_MANA_MACHINE_COMPONENT.get())
+    .transitionTo(CreataniaItems.INCOMPLETE_MANA_MACHINE_COMPONENT.get())
     .addOutput(new ItemStack(Blocks.MANA_CASING.get().asItem(), 2), 1f)
     .loops(1)
     .addStep(CuttingRecipe::new, rr -> rr)
     .addStep(DeployerApplicationRecipe::new, rr -> rr.require(manasteel())));
 
   GeneratedRecipe XOR_LEVER = create(Constants.XOR_LEVER, r -> r.require(lever())
-    .transitionTo(Items.INCOMPLETE_XOR_LEVER.get())
+    .transitionTo(CreataniaItems.INCOMPLETE_XOR_LEVER.get())
     .addOutput(new ItemStack(Blocks.XOR_LEVER.get().asItem(), 2), 1f)
     .loops(1)
     .addStep(CuttingRecipe::new, rr -> rr)

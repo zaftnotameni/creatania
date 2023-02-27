@@ -13,7 +13,7 @@ import static zaftnotameni.creatania.advancements.CreataniaAdvancement.TaskType.
 public class Advancements {
   public static final List<CreataniaAdvancement> ENTRIES = new ArrayList<>();
   public static final CreataniaAdvancement START = null,
-    ROOT = create("root", b -> b.icon(Items.MANA_GEL.get())
+    ROOT = create("root", b -> b.icon(CreataniaItems.MANA_GEL.get())
       .title("Welcome to Creatania")
       .description("Creatania is a Contraption Magical Tech Mod")
       .awardedForFree()
@@ -128,7 +128,7 @@ public class Advancements {
       .description("Corrupt mana blocks, among its many properties, can prevent ender entities from teleporting")
       .after(ROOT)
       .special(SECRET)),
-    PRODUCE_MANA_GEL_FROM_SLIME = create("produce_mana_gel_from_slime", b -> b.icon(Items.MANA_GEL.get())
+    PRODUCE_MANA_GEL_FROM_SLIME = create("produce_mana_gel_from_slime", b -> b.icon(CreataniaItems.MANA_GEL.get())
       .title("YUMMY!")
       .description("Produce mana gel by having a slime be hurt while touch purified inert mana fluid")
       .after(ROOT)

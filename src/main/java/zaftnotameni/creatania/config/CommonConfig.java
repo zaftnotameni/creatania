@@ -154,7 +154,5 @@ public class CommonConfig {
 
 
     SPEC = BUILDER.build();
-
-
   }
 }
