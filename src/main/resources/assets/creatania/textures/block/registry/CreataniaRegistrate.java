@@ -30,28 +30,28 @@ public class CreataniaRegistrate extends AbstractRegistrate<CreataniaRegistrate>
     };
   }
   public FluidBuilder<ForgeFlowingFluid.Flowing, CreataniaRegistrate> standardFluid(String name) {
-    return fluid(name, Index.resource("fluid/" + name + "_still"), Index.resource("fluid/" + name + "_flow"));
+    return fluid(name, CreataniaIndex.resource("fluid/" + name + "_still"), CreataniaIndex.resource("fluid/" + name + "_flow"));
   }
 
   public FluidBuilder<ForgeFlowingFluid.Flowing, CreataniaRegistrate> waterLikeFluid(String name,
                                                                                      NonNullBiFunction<FluidAttributes.Builder, Fluid, FluidAttributes> attributesFactory) {
     return fluid(name,
-      Fluids.WATER_STILL_RL,
-      Fluids.WATER_FLOWING_RL,
+      CreataniaFluids.WATER_STILL_RL,
+      CreataniaFluids.WATER_FLOWING_RL,
       attributesFactory);
   }
   public FluidBuilder<ForgeFlowingFluid.Flowing, CreataniaRegistrate> lavaLikeFluid(String name,
                                                                                      NonNullBiFunction<FluidAttributes.Builder, Fluid, FluidAttributes> attributesFactory) {
     return fluid(name,
-      Fluids.LAVA_STILL_RL,
-      Fluids.LAVA_FLOWING_RL,
+      CreataniaFluids.LAVA_STILL_RL,
+      CreataniaFluids.LAVA_FLOWING_RL,
       attributesFactory);
   }
   public FluidBuilder<ForgeFlowingFluid.Flowing, CreataniaRegistrate> texturedFluid(String name,
                                                                                  NonNullBiFunction<FluidAttributes.Builder, Fluid, FluidAttributes> attributesFactory) {
     return fluid(name,
-      Index.resource("fluid/" + name + "_still"),
-      Index.resource("fluid/" + name + "_flow"),
+      CreataniaIndex.resource("fluid/" + name + "_still"),
+      CreataniaIndex.resource("fluid/" + name + "_flow"),
       attributesFactory);
   }
 

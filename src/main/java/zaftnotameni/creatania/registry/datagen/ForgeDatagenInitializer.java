@@ -5,11 +5,12 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import zaftnotameni.creatania.Constants;
+import zaftnotameni.creatania.registry.datagen.processing.ForgeCreateProcessingRecipeProvider;
 
 @Mod.EventBusSubscriber(modid = Constants.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ForgeDatagenInitializer {
   @SubscribeEvent
-  public static void configureForgeDatagen(GatherDataEvent evt) {
+  public static void onGatherDataEvent(GatherDataEvent evt) {
     var generator = evt.getGenerator();
     var helper = evt.getExistingFileHelper();
     // var helper = new ExistingFileHelper(Collections.emptyList(), Collections.emptySet(), false, null, null);
@@ -32,7 +33,7 @@ public class ForgeDatagenInitializer {
 //    generator.addProvider(true,new ForgeSequencedAssemblyRecipeProvider(generator));
 //    generator.addProvider(true,new ForgeAdvancementsProvider(generator));
 //
-//    ForgeCreateProcessingRecipeProvider.registerAll(generator);
+    ForgeCreateProcessingRecipeProvider.registerAll(generator);
 //    generator.addProvider(true,new ElvenTradeRecipeGen(generator));
 //    generator.addProvider(true,new ManaInfusionRecipeGen(generator));
 //    generator.addProvider(true,new RuneAltarRecipeGen(generator));

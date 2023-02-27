@@ -81,19 +81,19 @@ public class Advancements {
       .whenIconCollected()),
 
   // melting
-    MOLTEN_BRASS_FLUID = melt(Fluids.MOLTEN_BRASS),
-    MOLTEN_GAIA = melt(Fluids.MOLTEN_GAIA),
-    MOLTEN_ELEMENTIUM = melt(Fluids.MOLTEN_ELEMENTIUM),
-    MOLTEN_MANASTEEL = melt(Fluids.MOLTEN_MANASTEEL),
-    MOLTEN_TERRASTEEL = melt(Fluids.MOLTEN_TERRASTEEL),
-    MOLTEN_ANDESITE = melt(Fluids.MOLTEN_ANDESITE),
-    MOLTEN_COPPER_FLUID = melt(Fluids.MOLTEN_COPPER),
-    MOLTEN_GOLD_FLUID = melt(Fluids.MOLTEN_GOLD),
-    MOLTEN_IRON_FLUID = melt(Fluids.MOLTEN_IRON),
-    MOLTEN_ZINC_FLUID = melt(Fluids.MOLTEN_ZINC),
-    BOTANIA_MANA_FLUID = melt(Fluids.REAL_MANA),
-    CORRUPT_MANA_FLUID = melt(Fluids.CORRUPT_MANA),
-    PURIFIED_MANA_FLUID = melt(Fluids.PURE_MANA),
+    MOLTEN_BRASS_FLUID = melt(CreataniaFluids.MOLTEN_BRASS),
+    MOLTEN_GAIA = melt(CreataniaFluids.MOLTEN_GAIA),
+    MOLTEN_ELEMENTIUM = melt(CreataniaFluids.MOLTEN_ELEMENTIUM),
+    MOLTEN_MANASTEEL = melt(CreataniaFluids.MOLTEN_MANASTEEL),
+    MOLTEN_TERRASTEEL = melt(CreataniaFluids.MOLTEN_TERRASTEEL),
+    MOLTEN_ANDESITE = melt(CreataniaFluids.MOLTEN_ANDESITE),
+    MOLTEN_COPPER_FLUID = melt(CreataniaFluids.MOLTEN_COPPER),
+    MOLTEN_GOLD_FLUID = melt(CreataniaFluids.MOLTEN_GOLD),
+    MOLTEN_IRON_FLUID = melt(CreataniaFluids.MOLTEN_IRON),
+    MOLTEN_ZINC_FLUID = melt(CreataniaFluids.MOLTEN_ZINC),
+    BOTANIA_MANA_FLUID = melt(CreataniaFluids.REAL_MANA),
+    CORRUPT_MANA_FLUID = melt(CreataniaFluids.CORRUPT_MANA),
+    PURIFIED_MANA_FLUID = melt(CreataniaFluids.PURE_MANA),
 
   // botanical contraptions
 

@@ -67,7 +67,7 @@ public class Fluids {
 
   public static JsonElement provideLangEntries() {
     var json = new JsonObject();
-    Index.all().getAll(Fluid.class).forEach(entry -> json.addProperty("fluid." + keyResource(entry.getId()), digestResource(entry.getId())));
+    CreataniaIndex.all().getAll(Fluid.class).forEach(entry -> json.addProperty("fluid." + keyResource(entry.getId()), digestResource(entry.getId())));
     return json;
   }
   public static FluidAttributes.Builder defaultMolten(FluidAttributes.Builder in, int color) {
@@ -84,7 +84,7 @@ public class Fluids {
   }
 
   public static FluidEntry<ForgeFlowingFluid.Flowing> registerManaFluid(String name, int color, TagKey<Fluid> tag) {
-    return Index.all().waterLikeFluid(name, Colored.from(color))
+    return CreataniaIndex.all().waterLikeFluid(name, Colored.from(color))
       .lang("Molten " + StringUtils.capitalize(name))
       .attributes(b -> defaultMolten(b, color).sound(HONEY_DRINK, HONEY_BLOCK_PLACE))
       .properties(p -> p.tickRate(5 * 20)
@@ -103,7 +103,7 @@ public class Fluids {
   }
 
   public static FluidEntry<ForgeFlowingFluid.Flowing> registerMoltenFluid(String name, int color) {
-    return Index.all().waterLikeFluid("molten_" + name, Colored.from(color))
+    return CreataniaIndex.all().waterLikeFluid("molten_" + name, Colored.from(color))
       .lang("Molten " + StringUtils.capitalize(name))
       .attributes(b -> defaultMolten(b, color))
       .properties(p -> p.tickRate(5 * 20)

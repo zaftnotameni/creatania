@@ -10,7 +10,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.StringUtils;
-import zaftnotameni.creatania.registry.Index;
+import zaftnotameni.creatania.registry.CreataniaIndex;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -147,7 +147,7 @@ public class BotaniaBaseRecipeGen {
     }
   }
   public static Path getPath(Path root, String typeName, String path) {
-    return getPath(root, typeName, Index.resource(path), "");
+    return getPath(root, typeName, CreataniaIndex.resource(path), "");
   }
   public static  Path getPath(Path root, String typeName, ResourceLocation id, String suffix) {
     return root.resolve("data/" + id.getNamespace() + "/recipes/botanist/" + typeName + "/" + id.getPath() + suffix + ".json");

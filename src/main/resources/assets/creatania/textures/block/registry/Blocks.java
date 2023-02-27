@@ -44,7 +44,7 @@ import static zaftnotameni.creatania.util.Humanity.digestResource;
 import static zaftnotameni.creatania.util.Humanity.keyResource;
 
 public class Blocks {
-  public static final CreateRegistrate CREATE_REGISTRATE = Index.getCreateRegistrate().creativeModeTab(() -> CreativeModeTabs.CREATANIA_ITEMS);
+  public static final CreateRegistrate CREATE_REGISTRATE = CreataniaIndex.getCreateRegistrate().creativeModeTab(() -> CreativeModeTabs.CREATANIA_ITEMS);
 
   public static final BlockEntry<ManaMotorBlock> MANA_MOTOR = CREATE_REGISTRATE
     .block(Constants.MANA_MOTOR, ManaMotorBlock::new)
@@ -129,7 +129,7 @@ public class Blocks {
 
   public static final BlockEntry<ManaCasing> MANA_CASING = ManaCasing.registerSelf();
 
-  public static final BlockEntry<BlazuniaFunctionalFlowerBlock> BLAZUNIA_BLOCK = Index.all()
+  public static final BlockEntry<BlazuniaFunctionalFlowerBlock> BLAZUNIA_BLOCK = CreataniaIndex.all()
     .block("blazunia", BlazuniaFunctionalFlowerBlock::new)
     .lang("Blazunia")
     .transform(axeOrPickaxe())
@@ -144,7 +144,7 @@ public class Blocks {
 
   public static JsonElement provideLangEntries() {
     var json = new JsonObject();
-    Index.all().getAll(Block.class).forEach(entry -> json.addProperty("block." + keyResource(entry.getId()), digestResource(entry.getId())));
+    CreataniaIndex.all().getAll(Block.class).forEach(entry -> json.addProperty("block." + keyResource(entry.getId()), digestResource(entry.getId())));
     return json;
   }
 

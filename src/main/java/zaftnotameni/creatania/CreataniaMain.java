@@ -1,11 +1,12 @@
 package zaftnotameni.creatania;
 
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import zaftnotameni.creatania.registry.BlockEntities;
-import zaftnotameni.creatania.registry.Particles;
+import zaftnotameni.creatania.event.forgebus.OnRightClickBlock;
+import zaftnotameni.creatania.registry.*;
 import zaftnotameni.creatania.registry.datagen.ForgeDatagenInitializer;
 import zaftnotameni.creatania.setup.*;
 
@@ -23,7 +24,7 @@ public class CreataniaMain {
   }
 
   public static void forgeEventBusListeners() {
-//    MinecraftForge.EVENT_BUS.register(ForgeEventBus.class);
+    MinecraftForge.EVENT_BUS.register(OnRightClickBlock.class);
   }
   public static void modEventBusListeners(IEventBus bus) {
     bus.addListener(FMLCommonSetup::run);
@@ -31,16 +32,16 @@ public class CreataniaMain {
     bus.addListener(InterModQueueSetup::run);
     bus.addListener(InterModQueueProcess::run);
     bus.addListener(FMLCompleteSetup::run);
+    bus.addListener(EventPriority.LOWEST, ForgeDatagenInitializer::onGatherDataEvent);
   }
   public static void registrySetup(IEventBus bus) {
-//    Index.all().registerEventListeners(bus);
+    CreataniaIndex.all().registerEventListeners(bus);
 //    Potions.register(bus);
     Particles.register(bus);
 //    Items.register(bus);
 //    Blocks.register(bus);
-//    Fluids.register(bus);
+    CreataniaFluids.ALL.register(bus);
     BlockEntities.register(bus);
-//    Recipes.register(bus);
-    bus.addListener(EventPriority.LOWEST, ForgeDatagenInitializer::configureForgeDatagen);
+    CreataniaRecipes.register(bus);
   }
 }

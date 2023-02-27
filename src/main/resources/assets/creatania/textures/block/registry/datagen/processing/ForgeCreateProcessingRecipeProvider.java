@@ -14,7 +14,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.fluids.FluidAttributes;
 import zaftnotameni.creatania.Constants;
-import zaftnotameni.creatania.registry.Index;
+import zaftnotameni.creatania.registry.CreataniaIndex;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -120,7 +120,7 @@ public abstract class ForgeCreateProcessingRecipeProvider extends CreateRecipePr
 	 */
 	<T extends ProcessingRecipe<?>> GeneratedRecipe create(String name,
 		UnaryOperator<ProcessingRecipeBuilder<T>> transform) {
-		return create(Index.resource(name), transform);
+		return create(CreataniaIndex.resource(name), transform);
 	}
 
 	protected abstract IRecipeTypeInfo getRecipeType();
@@ -133,7 +133,7 @@ public abstract class ForgeCreateProcessingRecipeProvider extends CreateRecipePr
 		return () -> {
 			ResourceLocation registryName = RegisteredObjects.getKeyOrThrow(item.get()
 				.asItem());
-			return Index.resource(registryName.getPath() + suffix);
+			return CreataniaIndex.resource(registryName.getPath() + suffix);
 		};
 	}
 

@@ -11,7 +11,7 @@
 //
 //import static zaftnotameni.creatania.recipes.cobblegen.CobblegenRecipeMatch.getCobbleGenRecipeMatchingTarget;
 //import static zaftnotameni.creatania.recipes.cobblegen.CobblegenRecipeMatch.getCobbleGenRecipesMatchingOriginator;
-//public class Fluids {
+public class Fluids {
 //  public static boolean specialCobblegenSpread(LevelAccessor pLevel, BlockPos pPos, BlockState pBlockState, Direction pDirection, FluidState pFluidState, ForgeFlowingFluid self) {
 //    try {
 //      if (!(pLevel instanceof ServerLevel serverLevel)) return false;
@@ -33,4 +33,4 @@
 //      return false;
 //    }
 //  }
-//}
+}

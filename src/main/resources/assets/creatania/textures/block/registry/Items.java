@@ -21,7 +21,7 @@ import static zaftnotameni.creatania.util.Humanity.keyResource;
 public class Items {
   public static final DeferredRegister<Item> INDEX = DeferredRegister.create(ForgeRegistries.ITEMS, Constants.MODID);
 
-  public static final CreateRegistrate CREATE_REGISTRATE = Index.getCreateRegistrate().creativeModeTab(() -> CreativeModeTabs.CREATANIA_ITEMS);
+  public static final CreateRegistrate CREATE_REGISTRATE = CreataniaIndex.getCreateRegistrate().creativeModeTab(() -> CreativeModeTabs.CREATANIA_ITEMS);
 
   public static final RegistryObject<ManaGelItem> MANA_GEL = INDEX.register(Constants.MANA_GEL_ITEM_NAME, () -> new ManaGelItem());
 
@@ -39,7 +39,7 @@ public class Items {
   public static JsonElement provideLangEntries() {
     var json = new JsonObject();
     INDEX.getEntries().forEach(entry -> json.addProperty(Humanity.keyItem(entry), Humanity.digestItem(entry)));
-    Index.all().getAll(Item.class).forEach(entry -> json.addProperty("item." + keyResource(entry.getId()), digestResource(entry.getId())));
+    CreataniaIndex.all().getAll(Item.class).forEach(entry -> json.addProperty("item." + keyResource(entry.getId()), digestResource(entry.getId())));
     return json;
   }
 }

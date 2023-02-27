@@ -5,7 +5,7 @@ import com.simibubi.create.foundation.utility.RegisteredObjects;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import zaftnotameni.creatania.registry.Index;
+import zaftnotameni.creatania.registry.CreataniaIndex;
 
 import java.util.function.Supplier;
 
@@ -15,7 +15,7 @@ public class HauntingRecipeGen extends ForgeCreateProcessingRecipeProvider {
 	}
 
 	public GeneratedRecipe convert(Supplier<Ingredient> input, Supplier<ItemLike> result) {
-		return create(Index.resource(RegisteredObjects.getKeyOrThrow(result.get()
+		return create(CreataniaIndex.resource(RegisteredObjects.getKeyOrThrow(result.get()
 			.asItem())
 			.getPath()),
 			p -> p.withItemIngredients(input.get())

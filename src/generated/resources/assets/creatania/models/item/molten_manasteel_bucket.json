@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "creatania:item/molten_manasteel_bucket"
+  }
+}

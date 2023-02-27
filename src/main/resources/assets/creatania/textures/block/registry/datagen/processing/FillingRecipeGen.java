@@ -3,7 +3,7 @@ package zaftnotameni.creatania.registry.datagen.processing;
 import com.simibubi.create.AllRecipeTypes;
 import net.minecraft.data.DataGenerator;
 import org.apache.commons.lang3.StringUtils;
-import zaftnotameni.creatania.registry.Fluids;
+import zaftnotameni.creatania.registry.CreataniaFluids;
 import zaftnotameni.creatania.util.NamedItems;
 
 import static zaftnotameni.creatania.util.NamedItems.itemLike;
@@ -16,13 +16,13 @@ public class FillingRecipeGen extends ForgeCreateProcessingRecipeProvider {
 			var mysticalPath = StringUtils.replace(tallPath, "double", "mystical");
 			var petalPath = StringUtils.replace(tallPath, "double_flower", "petal");
 
-			create(mysticalPath + "_from_" + petalPath, b -> b.require(Fluids.PURE_MANA.get(), 250)
+			create(mysticalPath + "_from_" + petalPath, b -> b.require(CreataniaFluids.PURE_MANA.get(), 250)
 				.require(itemLike(namespace, petalPath))
 				.output(itemLike(namespace, mysticalPath)));
-			create(tallPath + "_from_" + mysticalPath, b -> b.require(Fluids.PURE_MANA.get(), 250)
+			create(tallPath + "_from_" + mysticalPath, b -> b.require(CreataniaFluids.PURE_MANA.get(), 250)
 				.require(itemLike(namespace, mysticalPath))
 				.output(itemLike(namespace, tallPath)));
-			create(tallPath + "_from_" + petalPath, b -> b.require(Fluids.PURE_MANA.get(), 1000)
+			create(tallPath + "_from_" + petalPath, b -> b.require(CreataniaFluids.PURE_MANA.get(), 1000)
 				.require(itemLike(namespace, petalPath))
 				.output(itemLike(namespace, tallPath)));
 		}

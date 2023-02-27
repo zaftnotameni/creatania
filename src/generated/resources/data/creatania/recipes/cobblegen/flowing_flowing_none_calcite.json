@@ -1,0 +1,20 @@
+{
+  "type": "creatania:cobblegen",
+  "ingredients": [
+    {
+      "amount": 1,
+      "fluid": "creatania:pure_mana",
+      "nbt": {}
+    },
+    {
+      "amount": 1,
+      "fluid": "creatania:molten_gaia",
+      "nbt": {}
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:calcite"
+    }
+  ]
+}

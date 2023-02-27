@@ -19,7 +19,7 @@ import zaftnotameni.creatania.stress.xorlever.XorLeverRenderer;
 import zaftnotameni.creatania.util.Log;
 
 public class BlockEntities {
-  public static final CreateRegistrate CREATE_REGISTRATE = Index.getCreateRegistrate()
+  public static final CreateRegistrate CREATE_REGISTRATE = CreataniaIndex.getCreateRegistrate()
     .creativeModeTab(() -> CreativeModeTabs.CREATANIA_ITEMS);
 
   public static final BlockEntityEntry<ManaMotorBlockEntity> MANA_MOTOR_BLOCK_ENTITY = CREATE_REGISTRATE

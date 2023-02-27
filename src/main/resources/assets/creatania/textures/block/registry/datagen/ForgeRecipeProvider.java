@@ -12,7 +12,7 @@ import zaftnotameni.creatania.recipes.base.Outputs;
 import zaftnotameni.creatania.recipes.condenser.ManaCondenserRecipeBuilder;
 import zaftnotameni.creatania.recipes.generator.ManaGeneratorRecipeBuilder;
 import zaftnotameni.creatania.registry.Blocks;
-import zaftnotameni.creatania.registry.Fluids;
+import zaftnotameni.creatania.registry.CreataniaFluids;
 
 import java.util.function.Consumer;
 public class ForgeRecipeProvider extends RecipeProvider {
@@ -24,8 +24,8 @@ public class ForgeRecipeProvider extends RecipeProvider {
       ItemPredicate.Builder.item().of(Blocks.MANA_CASING.get().asItem()).build()
     );
 
-    var botaniaManaFluid = new FluidStack(Fluids.REAL_MANA.get(), 1000);
-    var purifiedManaFluid = new FluidStack(Fluids.PURE_MANA.get(), 1000);
+    var botaniaManaFluid = new FluidStack(CreataniaFluids.REAL_MANA.get(), 1000);
+    var purifiedManaFluid = new FluidStack(CreataniaFluids.PURE_MANA.get(), 1000);
     var air = net.minecraft.world.level.block.Blocks.AIR;
     var corruptedInertManaBlock = new ItemStack(Blocks.CORRUPT_MANA_BLOCK.get(), 1);
 
