@@ -2,10 +2,10 @@ package zaftnotameni.creatania.util;
 import com.simibubi.create.foundation.utility.Lang;
 import com.simibubi.create.foundation.utility.LangBuilder;
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 public class Text {
   public static LangBuilder colored(String text, ChatFormatting color) {
-    return Lang.builder().add(new TextComponent(text)).style(color);
+    return Lang.builder().add(Component.literal(text)).style(color);
   }
   public static LangBuilder muted(String text) { return colored(text, ChatFormatting.DARK_GRAY); }
   public static LangBuilder gray(String text) { return colored(text, ChatFormatting.GRAY); }

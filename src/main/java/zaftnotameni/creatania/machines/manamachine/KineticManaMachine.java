@@ -22,8 +22,8 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.DistExecutor;
 import vazkii.botania.api.BotaniaAPIClient;
 import vazkii.botania.api.BotaniaForgeClientCapabilities;
-import vazkii.botania.api.block.IWandHUD;
-import vazkii.botania.api.mana.spark.IManaSpark;
+import vazkii.botania.api.block.WandHUD;
+import vazkii.botania.api.mana.spark.ManaSpark;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -54,13 +54,13 @@ public class KineticManaMachine<T extends SmartTileEntity & IAmManaMachine> {
   }
   public float calculateStressRegardless() { return calculateStress(() -> true, te::setManaMachineLastStressImpact); }
   public float calculateStressActiveOnly() { return calculateStress(te::isManaMachineActive, te::setManaMachineLastCapacityProvided); }
-  public IManaSpark getAttachedSpark() {
+  public ManaSpark getAttachedSpark() {
     var level = te.getLevel();
     if (level == null) return null;
     var sparks = level.getEntitiesOfClass(Entity.class,
-      new AABB(te.getBlockPos().above(), te.getBlockPos().above().offset(1, 1, 1)), Predicates.instanceOf(IManaSpark.class));
+      new AABB(te.getBlockPos().above(), te.getBlockPos().above().offset(1, 1, 1)), Predicates.instanceOf(ManaSpark.class));
     if (sparks.isEmpty()) return null;
-    return (IManaSpark) sparks.get(0);
+    return (ManaSpark) sparks.get(0);
   }
   public int getAvailableSpaceForMana() { return this.manaCap - te.getManaMachineMana(); }
   public void receiveMana(int pMana) { this.updateMana(te.getManaMachineMana() + pMana); }
@@ -117,7 +117,7 @@ public class KineticManaMachine<T extends SmartTileEntity & IAmManaMachine> {
     String name = I18n.get(bs.getBlock().getDescriptionId());
     BotaniaAPIClient.instance().drawSimpleManaHUD(ps, color, current,max, name);
   }
-  public static <T> LazyOptional<T>  handleBotaniaManaHudCapability(@Nonnull Capability<T> cap, @Nullable Direction side, IWandHUD self) {
+  public static <T> LazyOptional<T>  handleBotaniaManaHudCapability(@Nonnull Capability<T> cap, @Nullable Direction side, WandHUD self) {
     return DistExecutor.unsafeRunForDist(
       () -> () -> (cap == BotaniaForgeClientCapabilities.WAND_HUD) ? LazyOptional.of(() -> self).cast() : LazyOptional.empty(),
       () -> () -> LazyOptional.empty()

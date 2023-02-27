@@ -17,9 +17,9 @@ import net.minecraftforge.fml.DistExecutor;
 import vazkii.botania.api.BotaniaAPI;
 import vazkii.botania.api.BotaniaForgeCapabilities;
 import vazkii.botania.api.BotaniaForgeClientCapabilities;
-import vazkii.botania.api.internal.IManaNetwork;
-import vazkii.botania.api.mana.IManaCollector;
-import vazkii.botania.api.mana.IManaPool;
+import vazkii.botania.api.internal.ManaNetwork;
+import vazkii.botania.api.mana.ManaCollector;
+import vazkii.botania.api.mana.ManaPool;
 import zaftnotameni.creatania.machines.manamachine.KineticManaMachine;
 
 import javax.annotation.Nonnull;
@@ -28,9 +28,9 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
   public static final ResourceLocation MANA_POOL = new ResourceLocation("botania", "mana_pool");
   public static final ResourceLocation MANA_SPREADER = new ResourceLocation("botania", "mana_spreader");
   public BlockPos poolPosition;
-  public IManaPool pool;
+  public ManaPool pool;
   public BlockPos spreaderPosition;
-  public IManaCollector spreader;
+  public ManaCollector spreader;
   public boolean isFloating = false;
   public int bindRange = 10;
   public int mana = 0;
@@ -50,8 +50,8 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
   public FunctionalFlowerHandler withMana(int x) { this.mana = x; return this; }
   public FunctionalFlowerHandler withMaxMana(int x) { this.maxMana = x; return this; }
   public FunctionalFlowerHandler withMaxTransfer(int x) { this.maxTransfer = x; return this; }
-  public FunctionalFlowerHandler withPool(IManaPool x) { this.pool = x; return this; }
-  public FunctionalFlowerHandler withSpreader(IManaCollector x) { this.spreader = x; return this; }
+  public FunctionalFlowerHandler withPool(ManaPool x) { this.pool = x; return this; }
+  public FunctionalFlowerHandler withSpreader(ManaCollector x) { this.spreader = x; return this; }
   public FunctionalFlowerHandler withSelf(T x) { this.self = x; return this; }
   public FunctionalFlowerHandler withIsGenerating(boolean x) { this.isGenerating = x; return this; }
   public FunctionalFlowerHandler withIsFloating(boolean x) { this.isFloating = x; return this; }
@@ -84,16 +84,16 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
       BlockEntity te = this.self.getLevel().getBlockEntity(this.poolPosition);
       if (this.isGenerating) {
         this.pool = null;
-        if (!(te instanceof IManaCollector)) {
+        if (!(te instanceof ManaCollector)) {
           this.spreader = null;
         } else {
-          this.spreader = (IManaCollector) te;
+          this.spreader = (ManaCollector) te;
         }
       } else {
-        if (!(te instanceof IManaPool)) {
+        if (!(te instanceof ManaPool)) {
           this.pool = null;
         } else {
-          this.pool = (IManaPool) te;
+          this.pool = (ManaPool) te;
         }
         this.spreader = null;
       }
@@ -101,10 +101,10 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
 
     if (this.pool == null) {
       if (this.isGenerating) {
-        IManaNetwork network = BotaniaAPI.instance().getManaNetworkInstance();
+        ManaNetwork network = BotaniaAPI.instance().getManaNetworkInstance();
         int size = network.getAllCollectorsInWorld(this.self.getLevel()).size();
         if (size != this.sizeLastCheck) {
-          IManaCollector te = network.getClosestCollector(this.self.getBlockPos(), this.self.getLevel(), this.bindRange);
+          ManaCollector te = network.getClosestCollector(this.self.getBlockPos(), this.self.getLevel(), this.bindRange);
           if (te != null) {
             this.poolPosition = te.getManaReceiverPos();
             this.pool = null;
@@ -114,10 +114,10 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
           this.sizeLastCheck = size;
         }
       } else {
-        IManaNetwork network = BotaniaAPI.instance().getManaNetworkInstance();
+        ManaNetwork network = BotaniaAPI.instance().getManaNetworkInstance();
         int size = network.getAllPoolsInWorld(this.self.getLevel()).size();
         if (size != this.sizeLastCheck) {
-          IManaPool te = network.getClosestPool(this.self.getBlockPos(), this.self.getLevel(), this.bindRange);
+          ManaPool te = network.getClosestPool(this.self.getBlockPos(), this.self.getLevel(), this.bindRange);
           if (te != null) {
             this.poolPosition = te.getManaReceiverPos();
             this.pool = te;
@@ -199,15 +199,15 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
     double dist = pos.distSqr(this.self.getBlockPos());
     if ((double) squaredRange >= dist) {
       BlockEntity tile = player.level.getBlockEntity(pos);
-      if (this.isGenerating && tile instanceof IManaCollector) {
+      if (this.isGenerating && tile instanceof ManaCollector) {
         this.spreaderPosition = tile.getBlockPos();
-        this.spreader = (IManaCollector) tile;
+        this.spreader = (ManaCollector) tile;
         this.pool = null;
         this.self.setChanged();
         return true;
-      } else if (!this.isGenerating && tile instanceof IManaPool) {
+      } else if (!this.isGenerating && tile instanceof ManaPool) {
         this.poolPosition = tile.getBlockPos();
-        this.pool = (IManaPool) tile;
+        this.pool = (ManaPool) tile;
         this.spreader = null;
         this.self.setChanged();
         return true;

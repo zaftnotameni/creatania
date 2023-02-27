@@ -22,6 +22,7 @@ plugins {
 }
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
+// apply from: 'https://raw.githubusercontent.com/SizableShrimp/ForgeUpdatesRemapper/main/remapper.gradle'
 // apply plugin: 'org.spongepowered.mixin'
 
 
@@ -222,9 +223,8 @@ dependencies {
     compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_minecraft_version}-${curios_version}:api")
     runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:${curios_minecraft_version}-${curios_version}")
 
-    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.3-78:api")
-    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.3-78:api")
-    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.3-78")
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}:api")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${patchouli_version}")
 
     compileOnly fg.deobf("vazkii.botania:Botania:${botania_version}-FORGE:api")
     runtimeOnly fg.deobf("vazkii.botania:Botania:${botania_version}-FORGE")

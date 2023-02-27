@@ -2,9 +2,9 @@ package zaftnotameni.creatania.registry.datagen;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import net.minecraft.core.Registry;
+import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
-import net.minecraft.data.HashCache;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.LootPool;
@@ -29,7 +29,7 @@ public class ForgeBlockLootProvider implements DataProvider {
   public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
   public ForgeBlockLootProvider(DataGenerator generator) { this.generator = generator;  }
   @Override
-  public void run(HashCache pCache) throws IOException {
+  public void run(CachedOutput pCache) throws IOException {
     var tables = new HashMap<ResourceLocation, LootTable.Builder>();
     for (var b : Registry.BLOCK) {
       ResourceLocation id = Registry.BLOCK.getKey(b);
@@ -42,7 +42,7 @@ public class ForgeBlockLootProvider implements DataProvider {
     }
     for (Map.Entry<ResourceLocation, LootTable.Builder> e : tables.entrySet()) {
       Path path = getPath(generator.getOutputFolder(), e.getKey());
-      DataProvider.save(GSON, pCache, LootTables.serialize(e.getValue().setParamSet(LootContextParamSets.BLOCK).build()), path);
+      DataProvider.saveStable (pCache, LootTables.serialize(e.getValue().setParamSet(LootContextParamSets.BLOCK).build()), path);
     }
   }
   protected static LootTable.Builder genRegular(Block b) {

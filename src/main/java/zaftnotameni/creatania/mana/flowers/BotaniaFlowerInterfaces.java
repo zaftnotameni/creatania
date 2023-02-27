@@ -1,5 +1,5 @@
 package zaftnotameni.creatania.mana.flowers;
-import vazkii.botania.api.block.IWandBindable;
-import vazkii.botania.api.block.IWandHUD;
-import vazkii.botania.api.block.IWandable;
-public interface BotaniaFlowerInterfaces extends IWandBindable, IWandable, IWandHUD { int doTick(); }
+import vazkii.botania.api.block.WandBindable;
+import vazkii.botania.api.block.WandHUD;
+import vazkii.botania.api.block.Wandable;
+public interface BotaniaFlowerInterfaces extends WandBindable, Wandable, WandHUD { int doTick(); }

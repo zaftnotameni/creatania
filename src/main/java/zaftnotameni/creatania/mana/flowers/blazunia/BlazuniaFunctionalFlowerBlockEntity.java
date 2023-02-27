@@ -20,7 +20,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import vazkii.botania.api.block.IWandHUD;
+import vazkii.botania.api.block.WandHUD;
 import zaftnotameni.creatania.mana.flowers.BotaniaFlowerInterfaces;
 import zaftnotameni.creatania.mana.flowers.FunctionalFlowerHandler;
 
@@ -31,7 +31,7 @@ import java.util.function.Supplier;
 
 import static zaftnotameni.creatania.mana.flowers.blazunia.BlazeBurnerInteraction.*;
 
-@OnlyIn(value = Dist.CLIENT, _interface = IWandHUD.class)
+@OnlyIn(value = Dist.CLIENT, _interface = WandHUD.class)
 public class BlazuniaFunctionalFlowerBlockEntity extends SmartTileEntity implements BotaniaFlowerInterfaces {
   public LazyOptional<FunctionalFlowerHandler> lazyFlowerHandler = LazyOptional.of(() -> new FunctionalFlowerHandler(this)
     .withColor(0xffffff00)

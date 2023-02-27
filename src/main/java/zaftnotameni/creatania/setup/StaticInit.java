@@ -19,6 +19,6 @@ public class StaticInit {
   public static IAmProxy proxy = DistExecutor.runForDist(() -> ClientProxy::new, () -> ServerProxy::new);
 
   public static void run() {
-
+    zaftnotameni.creatania.config.Index.register();
   }
 }

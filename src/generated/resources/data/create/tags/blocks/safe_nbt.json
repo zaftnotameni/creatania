@@ -1,9 +1,0 @@
-{
-  "replace": false,
-  "values": [
-    "creatania:mana_generator",
-    "creatania:mana_condenser",
-    "creatania:omnibox",
-    "creatania:xor_lever"
-  ]
-}
