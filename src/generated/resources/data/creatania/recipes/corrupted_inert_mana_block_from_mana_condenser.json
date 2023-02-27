@@ -1,0 +1,12 @@
+{
+  "type": "creatania:mana_condenser",
+  "fluidIngredients": [],
+  "fluidResults": [],
+  "itemIngredients": [],
+  "itemResults": [
+    {
+      "count": 1,
+      "item": "creatania:mana/blocks/corrupt"
+    }
+  ]
+}

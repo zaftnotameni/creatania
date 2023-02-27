@@ -1,0 +1,30 @@
+{
+  "parent": "creatania:root",
+  "criteria": {
+    "0": {
+      "conditions": {},
+      "trigger": "create:your_first_flowing_molten_iron_builtin"
+    }
+  },
+  "display": {
+    "announce_to_chat": false,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.creatania.your_first_flowing_molten_iron.desc"
+    },
+    "frame": "task",
+    "hidden": false,
+    "icon": {
+      "item": "creatania:molten_iron_bucket"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.creatania.your_first_flowing_molten_iron"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ]
+}

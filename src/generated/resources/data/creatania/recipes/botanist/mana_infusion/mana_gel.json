@@ -1,0 +1,14 @@
+{
+  "type": "botania:mana_infusion",
+  "catalyst": {
+    "type": "block",
+    "block": "botania:gaia_pylon"
+  },
+  "input": {
+    "item": "minecraft:slime_ball"
+  },
+  "mana": 1000000,
+  "output": {
+    "item": "creatania:mana_gel"
+  }
+}

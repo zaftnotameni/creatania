@@ -1,5 +1,7 @@
 {
   "values": [
-    "creatania:manaducts/manasteel"
+    "creatania:mana_generator",
+    "creatania:mana_motor",
+    "creatania:mana_condenser"
   ]
 }

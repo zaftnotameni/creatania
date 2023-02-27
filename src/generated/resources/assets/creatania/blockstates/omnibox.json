@@ -1,0 +1,82 @@
+{
+  "variants": {
+    "axis=x,facing=down": {
+      "model": "creatania:block/omnibox",
+      "x": 180
+    },
+    "axis=x,facing=east": {
+      "model": "creatania:block/omnibox",
+      "x": 90,
+      "y": 90
+    },
+    "axis=x,facing=north": {
+      "model": "creatania:block/omnibox",
+      "x": 90
+    },
+    "axis=x,facing=south": {
+      "model": "creatania:block/omnibox",
+      "x": 90,
+      "y": 180
+    },
+    "axis=x,facing=up": {
+      "model": "creatania:block/omnibox"
+    },
+    "axis=x,facing=west": {
+      "model": "creatania:block/omnibox",
+      "x": 90,
+      "y": 270
+    },
+    "axis=y,facing=down": {
+      "model": "creatania:block/omnibox",
+      "x": 180
+    },
+    "axis=y,facing=east": {
+      "model": "creatania:block/omnibox",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,facing=north": {
+      "model": "creatania:block/omnibox",
+      "x": 90
+    },
+    "axis=y,facing=south": {
+      "model": "creatania:block/omnibox",
+      "x": 90,
+      "y": 180
+    },
+    "axis=y,facing=up": {
+      "model": "creatania:block/omnibox"
+    },
+    "axis=y,facing=west": {
+      "model": "creatania:block/omnibox",
+      "x": 90,
+      "y": 270
+    },
+    "axis=z,facing=down": {
+      "model": "creatania:block/omnibox",
+      "x": 180
+    },
+    "axis=z,facing=east": {
+      "model": "creatania:block/omnibox",
+      "x": 90,
+      "y": 90
+    },
+    "axis=z,facing=north": {
+      "model": "creatania:block/omnibox",
+      "x": 90
+    },
+    "axis=z,facing=south": {
+      "model": "creatania:block/omnibox",
+      "x": 90,
+      "y": 180
+    },
+    "axis=z,facing=up": {
+      "model": "creatania:block/omnibox"
+    },
+    "axis=z,facing=west": {
+      "model": "creatania:block/omnibox",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

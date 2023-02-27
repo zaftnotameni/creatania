@@ -1,0 +1,12 @@
+{
+  "type": "botania:pure_daisy",
+  "input": {
+    "type": "block",
+    "block": "creatania:mana/blocks/pure"
+  },
+  "output": {
+    "name": "creatania:mana/blocks/corrupt"
+  },
+  "success_function": "botania:ender_air_release",
+  "time": 200
+}

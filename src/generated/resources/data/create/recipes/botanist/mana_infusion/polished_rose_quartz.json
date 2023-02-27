@@ -1,0 +1,10 @@
+{
+  "type": "botania:mana_infusion",
+  "input": {
+    "item": "create:rose_quartz"
+  },
+  "mana": 10000,
+  "output": {
+    "item": "create:polished_rose_quartz"
+  }
+}

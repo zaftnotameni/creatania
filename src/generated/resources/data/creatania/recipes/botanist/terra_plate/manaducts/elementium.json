@@ -1,0 +1,18 @@
+{
+  "type": "botania:terra_plate",
+  "ingredients": [
+    {
+      "item": "botania:elementium_ingot"
+    },
+    {
+      "item": "creatania:mana/machines/casing"
+    },
+    {
+      "item": "create:smart_fluid_pipe"
+    }
+  ],
+  "mana": 66666,
+  "result": {
+    "item": "creatania:manaducts/elementium"
+  }
+}

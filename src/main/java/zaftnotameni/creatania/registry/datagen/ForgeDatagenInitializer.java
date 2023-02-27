@@ -5,6 +5,7 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import zaftnotameni.creatania.Constants;
+import zaftnotameni.creatania.registry.datagen.botania.*;
 import zaftnotameni.creatania.registry.datagen.processing.ForgeCreateProcessingRecipeProvider;
 
 @Mod.EventBusSubscriber(modid = Constants.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -22,22 +23,22 @@ public class ForgeDatagenInitializer {
 
   }
   public static void serverDataGen(DataGenerator generator, ExistingFileHelper helper) {
-//    var blockTagProvider = new ForgeBlockTagProvider(generator, helper);
-//
-//    generator.addProvider(true,blockTagProvider);
-//    generator.addProvider(true,new ForgeItemTagProvider(generator, blockTagProvider, helper));
-//    generator.addProvider(true,new ForgeRecipeProvider(generator));
-//    generator.addProvider(true,new ForgeBlockLootProvider(generator));
-//    generator.addProvider(true,new ForgeFluidTagProvider(generator, helper));
-//    generator.addProvider(true,new ForgeBlockstatesProvider(generator, helper));
-//    generator.addProvider(true,new ForgeSequencedAssemblyRecipeProvider(generator));
-//    generator.addProvider(true,new ForgeAdvancementsProvider(generator));
+    var blockTagProvider = new ForgeBlockTagProvider(generator, helper);
+
+    generator.addProvider(true,blockTagProvider);
+    generator.addProvider(true,new ForgeItemTagProvider(generator, blockTagProvider, helper));
+    generator.addProvider(true,new ForgeRecipeProvider(generator));
+    generator.addProvider(true,new ForgeBlockLootProvider(generator));
+    generator.addProvider(true,new ForgeFluidTagProvider(generator, helper));
+    generator.addProvider(true,new ForgeBlockstatesProvider(generator, helper));
+    generator.addProvider(true,new ForgeSequencedAssemblyRecipeProvider(generator));
+    generator.addProvider(true,new ForgeAdvancementsProvider(generator));
 //
     ForgeCreateProcessingRecipeProvider.registerAll(generator);
-//    generator.addProvider(true,new ElvenTradeRecipeGen(generator));
-//    generator.addProvider(true,new ManaInfusionRecipeGen(generator));
-//    generator.addProvider(true,new RuneAltarRecipeGen(generator));
-//    generator.addProvider(true,new TerraPlateRecipeGen(generator));
-//    generator.addProvider(true,new PureDaisyRecipeGen(generator));
+    generator.addProvider(true,new ElvenTradeRecipeGen(generator));
+    generator.addProvider(true,new ManaInfusionRecipeGen(generator));
+    generator.addProvider(true,new RuneAltarRecipeGen(generator));
+    generator.addProvider(true,new TerraPlateRecipeGen(generator));
+    generator.addProvider(true,new PureDaisyRecipeGen(generator));
   }
 }

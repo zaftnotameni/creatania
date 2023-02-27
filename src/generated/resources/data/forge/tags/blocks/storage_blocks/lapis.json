@@ -1,0 +1,13 @@
+{
+  "values": [
+    "create:andesite_casing",
+    "create:copper_casing",
+    "create:brass_casing",
+    "create:railway_casing",
+    "create:fluid_tank",
+    "create:encased_fluid_pipe",
+    "create:fluid_pipe",
+    "creatania:omnibox",
+    "creatania:mana_generator"
+  ]
+}

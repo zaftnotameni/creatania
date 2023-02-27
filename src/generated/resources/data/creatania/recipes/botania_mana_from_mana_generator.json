@@ -1,0 +1,18 @@
+{
+  "type": "creatania:mana_generator",
+  "fluidIngredients": [
+    {
+      "amount": 1000,
+      "fluid": "creatania:pure_mana",
+      "nbt": {}
+    }
+  ],
+  "fluidResults": [
+    {
+      "amount": 1000,
+      "fluid": "creatania:flowing_real_mana"
+    }
+  ],
+  "itemIngredients": [],
+  "itemResults": []
+}

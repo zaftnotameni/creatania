@@ -1,0 +1,30 @@
+{
+  "parent": "creatania:root",
+  "criteria": {
+    "0": {
+      "conditions": {},
+      "trigger": "create:prevent_ender_entity_from_teleporting_builtin"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.creatania.prevent_ender_entity_from_teleporting.desc"
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "item": "minecraft:ender_pearl"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.creatania.prevent_ender_entity_from_teleporting"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ]
+}

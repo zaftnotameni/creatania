@@ -1,0 +1,6 @@
+// 1.19.2	2023-02-27T21:12:19.9058769	Tags for minecraft:block
+0d39a84dbc847f39ee0b882016fd6208482b12a0 data/botania/tags/blocks/terra_plate_base.json
+b9dce2cf21c322199582da98c77db5bc91b8fbb4 data/creatania/tags/blocks/mana_machine.json
+b5a9b1b8a3b28be02beeac7dc092627d56417060 data/creatania/tags/blocks/prevents_ender_teleportation.json
+a9adf498469c04363e213635f8b439deca18333f data/creatania/tags/blocks/tier_1.json
+499ec1dfa21ef4dd35d711d291a02465d1b30347 data/forge/tags/blocks/storage_blocks/lapis.json

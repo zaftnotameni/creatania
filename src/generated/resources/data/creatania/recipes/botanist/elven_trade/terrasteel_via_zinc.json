@@ -1,0 +1,13 @@
+{
+  "type": "botania:elven_trade",
+  "ingredients": [
+    {
+      "item": "create:zinc_ingot"
+    }
+  ],
+  "output": [
+    {
+      "item": "botania:terrasteel_ingot"
+    }
+  ]
+}

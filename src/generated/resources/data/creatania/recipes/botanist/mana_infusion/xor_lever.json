@@ -1,0 +1,10 @@
+{
+  "type": "botania:mana_infusion",
+  "input": {
+    "item": "create:analog_lever"
+  },
+  "mana": 100000,
+  "output": {
+    "item": "creatania:xor_lever"
+  }
+}

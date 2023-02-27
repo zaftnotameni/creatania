@@ -1,0 +1,11 @@
+{
+  "type": "botania:pure_daisy",
+  "input": {
+    "type": "block",
+    "block": "creatania:molten_andesite"
+  },
+  "output": {
+    "name": "creatania:molten_manasteel"
+  },
+  "time": 24000
+}

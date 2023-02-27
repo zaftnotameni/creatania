@@ -1,0 +1,13 @@
+{
+  "type": "botania:elven_trade",
+  "ingredients": [
+    {
+      "item": "minecraft:magma_cream"
+    }
+  ],
+  "output": [
+    {
+      "item": "creatania:mana_gel"
+    }
+  ]
+}

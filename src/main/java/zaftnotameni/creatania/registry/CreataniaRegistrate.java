@@ -21,8 +21,7 @@ public class CreataniaRegistrate extends CreateRegistrate {
     String... folders) {
     return (c, p) -> {
       String path = "block";
-      for (String string : folders)
-        path += "/" + ("_".equals(string) ? c.getName() : string);
+      for (String string : folders) path += "/" + ("_".equals(string) ? c.getName() : string);
       p.withExistingParent("item/" + c.getName(), p.modLoc(path));
     };
   }

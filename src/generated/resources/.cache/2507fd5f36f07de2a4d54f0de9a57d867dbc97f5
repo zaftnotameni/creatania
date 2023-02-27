@@ -1,0 +1,8 @@
+// 1.19.2	2023-02-27T21:12:19.9098668	Creatania Rune Altar Recipes
+c82a849aa83f16d9679b751b22d2f262d3f4c0bc data/creatania/recipes/botanist/runic_altar/manaducts/elementium_upgrade.json
+d211200796fed6ebf03c2a5e553a5054f0b87003 data/creatania/recipes/botanist/runic_altar/manaducts/gaia_upgrade.json
+dc3509f285f07f866259741a86368690de36a7c9 data/creatania/recipes/botanist/runic_altar/manaducts/terrasteel_upgrade.json
+a47134d91a0951d5f9298cd36a9a8edb51893203 data/creatania/recipes/botanist/runic_altar/mana_condenser.json
+9080d6b982c88200a75b088703061d89a8d09549 data/creatania/recipes/botanist/runic_altar/mana_generator.json
+7dbb6122f1bdb3f5628f006ddca70757609055ac data/creatania/recipes/botanist/runic_altar/mana_motor.json
+a07d9fb875f3fd1c0ef556a7134c8c0a98e32e29 data/creatania/recipes/botanist/runic_altar/omnibox.json

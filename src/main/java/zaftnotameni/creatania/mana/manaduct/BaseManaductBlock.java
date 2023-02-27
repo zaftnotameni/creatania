@@ -3,6 +3,7 @@ import com.google.common.collect.ImmutableMap;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.TagKey;
@@ -88,9 +89,11 @@ public class BaseManaductBlock extends FaceAttachedHorizontalDirectionalBlock {
       .hasPostProcess((x, y, z) -> true)
       .emissiveRendering((x, y, z) -> true);
   }
+  @SuppressWarnings("removal")
   public static <T extends BaseManaductBlock> BlockEntry<T> registerManaduct(String name, String friendlyName, TagKey<Block> tier, NonNullFunction<Properties, T> factory) {
     return CreataniaIndex.all().block(name, factory)
       .transform(pickaxeOnly())
+      .addLayer(() -> RenderType::cutoutMipped)
       .tag(tier, Tags.Blocks.MANADUCT)
       .blockstate((c, p) -> p.horizontalFaceBlock(c.get(), AssetLookup.partialBaseModel(c, p)))
       .lang(friendlyName)

@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "axis_along_first=false,facing=down": {
+      "model": "creatania:block/mana_motor/horizontal",
+      "x": 270,
+      "y": 90
+    },
+    "axis_along_first=false,facing=east": {
+      "model": "creatania:block/mana_motor/horizontal",
+      "y": 270
+    },
+    "axis_along_first=false,facing=north": {
+      "model": "creatania:block/mana_motor/vertical",
+      "y": 180
+    },
+    "axis_along_first=false,facing=south": {
+      "model": "creatania:block/mana_motor/vertical"
+    },
+    "axis_along_first=false,facing=up": {
+      "model": "creatania:block/mana_motor/horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis_along_first=false,facing=west": {
+      "model": "creatania:block/mana_motor/horizontal",
+      "y": 90
+    },
+    "axis_along_first=true,facing=down": {
+      "model": "creatania:block/mana_motor/horizontal",
+      "x": 270
+    },
+    "axis_along_first=true,facing=east": {
+      "model": "creatania:block/mana_motor/vertical",
+      "y": 270
+    },
+    "axis_along_first=true,facing=north": {
+      "model": "creatania:block/mana_motor/horizontal",
+      "y": 180
+    },
+    "axis_along_first=true,facing=south": {
+      "model": "creatania:block/mana_motor/horizontal"
+    },
+    "axis_along_first=true,facing=up": {
+      "model": "creatania:block/mana_motor/horizontal",
+      "x": 90
+    },
+    "axis_along_first=true,facing=west": {
+      "model": "creatania:block/mana_motor/vertical",
+      "y": 90
+    }
+  }
+}

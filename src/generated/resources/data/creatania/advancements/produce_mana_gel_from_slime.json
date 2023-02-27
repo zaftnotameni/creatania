@@ -1,0 +1,30 @@
+{
+  "parent": "creatania:root",
+  "criteria": {
+    "0": {
+      "conditions": {},
+      "trigger": "create:produce_mana_gel_from_slime_builtin"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.creatania.produce_mana_gel_from_slime.desc"
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "item": "creatania:mana_gel"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.creatania.produce_mana_gel_from_slime"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ]
+}

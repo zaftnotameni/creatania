@@ -1,0 +1,47 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "botania:livingwood"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "count": 2,
+      "item": "creatania:mana/machines/casing"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:cutting",
+      "ingredients": [
+        {
+          "item": "creatania:incomplete_mana_machine_component"
+        }
+      ],
+      "results": [
+        {
+          "item": "creatania:incomplete_mana_machine_component"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "creatania:incomplete_mana_machine_component"
+        },
+        {
+          "item": "botania:manasteel_ingot"
+        }
+      ],
+      "results": [
+        {
+          "item": "creatania:incomplete_mana_machine_component"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "creatania:incomplete_mana_machine_component"
+  }
+}

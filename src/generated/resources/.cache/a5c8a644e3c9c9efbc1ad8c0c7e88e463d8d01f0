@@ -1,4 +1,5 @@
-// 1.19.2	2023-02-27T20:04:26.6407254	Registrate Provider for creatania [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+// 1.19.2	2023-02-27T20:39:14.8334744	Registrate Provider for creatania [Recipes, Advancements, Loot tables, Tags (blocks), Tags (items), Tags (fluids), Tags (entity_types), Blockstates, Item models, Lang (en_us/en_ud)]
+986d03835c554898739a703ad52218795a2ffd8f assets/creatania/blockstates/blazunia.json
 26a75d6302232f92d0b92fc51c63febef196c9fc assets/creatania/blockstates/corrupt_mana.json
 490564ab4eec9c8508ec577bc30b8ad115904430 assets/creatania/blockstates/manaducts/elementium.json
 3a4b6e9efe66ff666701a0240e191930a0bf3901 assets/creatania/blockstates/manaducts/gaia.json
@@ -8,6 +9,9 @@ a094a7fb5c067eb33469f1956499a83d4c968b99 assets/creatania/blockstates/manaducts/
 0cb175b203419a80f879a238226c7c5a197fc51b assets/creatania/blockstates/mana/blocks/pure.json
 65f5a46b7bac64c65b1d3e0dbac274b97d0c0b0d assets/creatania/blockstates/mana/blocks/real.json
 16688eacc557680823cae6cd84ee71f917035778 assets/creatania/blockstates/mana/machines/casing.json
+018df1e05750a64404b65af246508f2de9a267ad assets/creatania/blockstates/mana_condenser.json
+01caa0aa839103f4c290cb3f38cd2094e0194707 assets/creatania/blockstates/mana_generator.json
+24c05700c9c4a22173f11e7c3af1a733edf1f0e5 assets/creatania/blockstates/mana_motor.json
 caf8d62d7f36799c92494f651d38ed0def22ab0f assets/creatania/blockstates/molten_andesite.json
 7f20e65b913af0a1b68a70dfc81b3b6ef0ae15c0 assets/creatania/blockstates/molten_brass.json
 85a772b6dfd8b415c1da9c48782c0dc37d5759d3 assets/creatania/blockstates/molten_copper.json
@@ -18,10 +22,13 @@ caf8d62d7f36799c92494f651d38ed0def22ab0f assets/creatania/blockstates/molten_and
 83c6771d8035625ebbd0bc7257ca9832237845ed assets/creatania/blockstates/molten_manasteel.json
 a4d32792353bf28342234327ec8b4df55aaf4866 assets/creatania/blockstates/molten_terrasteel.json
 8eba1033469fcd27dde0c852cf0157d61cfe099d assets/creatania/blockstates/molten_zinc.json
+c22c98f62110fd3d829139061767b6d5482c770a assets/creatania/blockstates/omnibox.json
 89addb58a655afc87f79e5ad013cbb6b78d92eb3 assets/creatania/blockstates/pure_mana.json
 f0e08e846400c29fa78eee44444173b060c863f5 assets/creatania/blockstates/real_mana.json
-e4a5f7bb3c4d7faa95942858027c711e3cbc9a2e assets/creatania/lang/en_ud.json
-26a00c124340ed10205218e1c44354131d9c9e29 assets/creatania/lang/en_us.json
+af9d198c32e303ae9dac8e7b4d598ba322723358 assets/creatania/blockstates/xor_lever.json
+234cc6a1fc558b4541a4812781442c32e5cd410f assets/creatania/lang/en_ud.json
+df2b35cc3881d4c29030d8d4eb4d2b319e72ea9b assets/creatania/lang/en_us.json
+d91d43c3b68fec0ee1892dfe12f79ecff669f907 assets/creatania/models/block/blazunia.json
 50812bd51e14ec5ea223afe239c89730a63e43b1 assets/creatania/models/block/corrupt_mana.json
 8c6cee784ebf1452d6ebda6523e512c1e72099f3 assets/creatania/models/block/molten_andesite.json
 8c6cee784ebf1452d6ebda6523e512c1e72099f3 assets/creatania/models/block/molten_brass.json
@@ -35,6 +42,7 @@ e4a5f7bb3c4d7faa95942858027c711e3cbc9a2e assets/creatania/lang/en_ud.json
 8c6cee784ebf1452d6ebda6523e512c1e72099f3 assets/creatania/models/block/molten_zinc.json
 50812bd51e14ec5ea223afe239c89730a63e43b1 assets/creatania/models/block/pure_mana.json
 50812bd51e14ec5ea223afe239c89730a63e43b1 assets/creatania/models/block/real_mana.json
+0bc36dc81cb00eb9ab1099da9178383313d1d0a3 assets/creatania/models/item/blazunia.json
 67a16946ea293f8af88ba4352d1927bc2cae745a assets/creatania/models/item/corrupt_mana_bucket.json
 026a0acf57f66a5dae6952d0f2084ff2bfba26b0 assets/creatania/models/item/incomplete_mana_machine_component.json
 e82315647236a331ef6880a8345fa6e61385b6f7 assets/creatania/models/item/incomplete_xor_lever.json
@@ -46,7 +54,10 @@ e840ce0a3f3ca879bddc5663efdb718b2deaedaf assets/creatania/models/item/manaducts/
 c425a12f18d1a823575c29bb1d8bb067f2ac3811 assets/creatania/models/item/mana/blocks/pure.json
 cec8d67bc8bf5b27d846667bb2da91293e7f4ee4 assets/creatania/models/item/mana/blocks/real.json
 382eb9cbe1271b280a8b10fc8c73059d3c421fcd assets/creatania/models/item/mana/machines/casing.json
+b756f4d1946c4a50e3c40291ccebfd9a0b6e235a assets/creatania/models/item/mana_condenser.json
 b5e1460c431884b9d5978c74c53059c93ef86e62 assets/creatania/models/item/mana_gel.json
+7833b28097584a1e0956e5219455032d12f95f9d assets/creatania/models/item/mana_generator.json
+b5a7dbd95b77c8a8137a76ab08c079320881e576 assets/creatania/models/item/mana_motor.json
 a97996817ed5be91d027658a40325948969e875f assets/creatania/models/item/molten_andesite_bucket.json
 a6f4428fa49f1365f879824ff84b07ae715d0e00 assets/creatania/models/item/molten_brass_bucket.json
 43f56b1ac1dcf751f98267c8d24bca653a18e414 assets/creatania/models/item/molten_copper_bucket.json
@@ -57,8 +68,11 @@ e0da8d3a809aad53c18945e765e32414d647b9d6 assets/creatania/models/item/molten_gol
 2478daf8cb2a50478c0a824d4f0bc46d6da4a4e6 assets/creatania/models/item/molten_manasteel_bucket.json
 e1058d1c63ae130c79a46cca804d081ac6aa5860 assets/creatania/models/item/molten_terrasteel_bucket.json
 16322883409f238661b55c6bf8685f07741e5cf7 assets/creatania/models/item/molten_zinc_bucket.json
+1c9414c3a8774f07109c3fd5e325672cc70fe9d9 assets/creatania/models/item/omnibox.json
 7f638d5b5c41713e252faeb9cf2068a049faff41 assets/creatania/models/item/pure_mana_bucket.json
 ef4b44c62b0e32d720bb0362fbfd3ea7a7570142 assets/creatania/models/item/real_mana_bucket.json
+8bd10315f8e653fcef684ec698fe6bf93ec874e6 assets/creatania/models/item/xor_lever.json
+986a2598bde2c7f9b4a6a85aaede52ac76713069 data/creatania/loot_tables/blocks/blazunia.json
 ba1dea0bc23d8e0cf2d534714eebc0d6728dc300 data/creatania/loot_tables/blocks/manaducts/elementium.json
 440b8fb84ca0001aae6cb08111e072f01ed9504e data/creatania/loot_tables/blocks/manaducts/gaia.json
 f46512eceea0327f2b9221096d4e44e44f8a5696 data/creatania/loot_tables/blocks/manaducts/manasteel.json
@@ -67,6 +81,11 @@ bdf25451ab0ac3dc055c29fbb7333556ba7a4fa8 data/creatania/loot_tables/blocks/manad
 4d3dc8b95c15efbd8386691bc9d83fc6393519d4 data/creatania/loot_tables/blocks/mana/blocks/pure.json
 c0b6ec27e80eaabe6373e6dd34834d2ff9f1498d data/creatania/loot_tables/blocks/mana/blocks/real.json
 0d6ddd2d4fc211e50a7dccd9dc63fef889710787 data/creatania/loot_tables/blocks/mana/machines/casing.json
+f4bb508c36b8cbf4c2397143e3734af008b7f9d0 data/creatania/loot_tables/blocks/mana_condenser.json
+6a922d606ddd71878535fb41bd90a368a6570eb2 data/creatania/loot_tables/blocks/mana_generator.json
+f0a3293083add9375c73e97796c9f8ac05b237b7 data/creatania/loot_tables/blocks/mana_motor.json
+24e5525c11fc8ae03bd652145bc9633f4efe27f8 data/creatania/loot_tables/blocks/omnibox.json
+bf7dbb5bf7d0703bdd1fd2287acac489a6e0d5c0 data/creatania/loot_tables/blocks/xor_lever.json
 5d1f1931c0e43cf1a2ad7102c399585d7fea78f7 data/creatania/tags/blocks/manaduct.json
 d7cb0a40721ec44a886a762f841f0c7a1d1a86e3 data/creatania/tags/blocks/mana/active.json
 7421c7419bd9d363363b56d99b343f69972d0bac data/creatania/tags/blocks/mana/all.json
@@ -78,5 +97,6 @@ d7cb0a40721ec44a886a762f841f0c7a1d1a86e3 data/creatania/tags/blocks/mana/real.js
 f65f7e4097535ebcf3aef4a929bf7eab67b33b3c data/creatania/tags/blocks/tier_2.json
 b72118c87dc8a92c93e7b9e0f945d9f5c02f60f4 data/creatania/tags/blocks/tier_3.json
 a319135e3bbcaeb51d885f92df267304531fc777 data/creatania/tags/blocks/tier_4.json
-e56bbb6ae9599d61d2f7c926556a47a684a4570b data/minecraft/tags/blocks/mineable/axe.json
-15ac72724ced3da44ab901881b6912319d546487 data/minecraft/tags/blocks/mineable/pickaxe.json
+10e9eb21e9afa1ca9dca22ee8cf116b8274844dd data/create/tags/blocks/safe_nbt.json
+36950e91d13d6db6ac43d7ebf7c9809e2e956367 data/minecraft/tags/blocks/mineable/axe.json
+7b486a95ab2563b95a141a07d0fb5b204d7002ce data/minecraft/tags/blocks/mineable/pickaxe.json

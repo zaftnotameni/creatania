@@ -1,0 +1,30 @@
+{
+  "parent": "creatania:root",
+  "criteria": {
+    "0": {
+      "conditions": {},
+      "trigger": "create:lords_work_builtin"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.creatania.lords_work.desc"
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "item": "minecraft:wandering_trader_spawn_egg"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.creatania.lords_work"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "type": "botania:runic_altar",
+  "ingredients": [
+    {
+      "item": "creatania:mana/machines/casing"
+    },
+    {
+      "item": "botania:mana_powder"
+    },
+    {
+      "item": "create:shaft"
+    },
+    {
+      "item": "create:iron_sheet"
+    },
+    {
+      "item": "create:iron_sheet"
+    },
+    {
+      "item": "create:iron_sheet"
+    },
+    {
+      "item": "create:iron_sheet"
+    },
+    {
+      "item": "minecraft:iron_bars"
+    }
+  ],
+  "mana": 5000,
+  "output": {
+    "item": "creatania:mana_motor"
+  }
+}

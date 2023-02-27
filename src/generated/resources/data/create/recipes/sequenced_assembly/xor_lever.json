@@ -1,0 +1,63 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "minecraft:lever"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "count": 2,
+      "item": "creatania:xor_lever"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:cutting",
+      "ingredients": [
+        {
+          "item": "creatania:incomplete_xor_lever"
+        }
+      ],
+      "results": [
+        {
+          "item": "creatania:incomplete_xor_lever"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "creatania:incomplete_xor_lever"
+        },
+        {
+          "item": "botania:manasteel_ingot"
+        }
+      ],
+      "results": [
+        {
+          "item": "creatania:incomplete_xor_lever"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "creatania:incomplete_xor_lever"
+        },
+        {
+          "item": "minecraft:redstone"
+        }
+      ],
+      "results": [
+        {
+          "item": "creatania:incomplete_xor_lever"
+        }
+      ]
+    }
+  ],
+  "transitionalItem": {
+    "item": "creatania:incomplete_xor_lever"
+  }
+}

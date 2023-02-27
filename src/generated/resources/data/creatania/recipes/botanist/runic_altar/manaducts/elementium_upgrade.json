@@ -1,0 +1,15 @@
+{
+  "type": "botania:runic_altar",
+  "ingredients": [
+    {
+      "item": "botania:elementium_ingot"
+    },
+    {
+      "item": "creatania:manaducts/terrasteel"
+    }
+  ],
+  "mana": 55555,
+  "output": {
+    "item": "creatania:manaducts/elementium"
+  }
+}

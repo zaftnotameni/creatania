@@ -1,0 +1,5 @@
+// 1.19.2	2023-02-27T21:12:19.9088697	Recipes
+63b7ebca531b645f743fb9fbf24931f8103ff62d data/creatania/advancements/recipes/generic/mana/blocks/corrupt.json
+74d07e89ed431e3555275c1438761b4a294f6ca2 data/creatania/recipes/botania_mana_from_mana_generator.json
+5857a8839ca5790dd981c82ad852c776da7cded2 data/creatania/recipes/corrupted_inert_mana_block_from_mana_condenser.json
+5da3cfd64618f831fe8e8d2533f7da16dd221ab3 data/minecraft/advancements/recipes/generic/air.json

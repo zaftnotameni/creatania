@@ -1,0 +1,11 @@
+{
+  "type": "botania:pure_daisy",
+  "input": {
+    "type": "block",
+    "block": "creatania:molten_zinc"
+  },
+  "output": {
+    "name": "creatania:molten_terrasteel"
+  },
+  "time": 48000
+}

@@ -1,0 +1,30 @@
+{
+  "parent": "creatania:root",
+  "criteria": {
+    "0": {
+      "conditions": {},
+      "trigger": "create:debuff_from_corrupt_blocks_builtin"
+    }
+  },
+  "display": {
+    "announce_to_chat": true,
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.creatania.debuff_from_corrupt_blocks.desc"
+    },
+    "frame": "goal",
+    "hidden": true,
+    "icon": {
+      "item": "creatania:mana/blocks/corrupt"
+    },
+    "show_toast": true,
+    "title": {
+      "translate": "advancement.creatania.debuff_from_corrupt_blocks"
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ]
+}
