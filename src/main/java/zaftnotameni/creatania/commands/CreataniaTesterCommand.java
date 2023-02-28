@@ -3,7 +3,6 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.blocks.BlockStateArgument;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
@@ -11,13 +10,13 @@ import net.minecraft.server.level.ServerPlayer;
 import java.util.UUID;
 public class CreataniaTesterCommand {
   public CreataniaTesterCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
-    dispatcher.register(
-      Commands.literal("creatania").then(
-        Commands.literal("checkerboardfloor").then(
-          Commands.argument("range", IntegerArgumentType.integer(1, 300)).then(
-            Commands.argument("block1", BlockStateArgument.block()).then(
-              Commands.argument("block2", BlockStateArgument.block())
-                .executes(CreataniaTesterCommand::checkerboardfloor))))));
+//    dispatcher.register(
+//      Commands.literal("creatania").then(
+//        Commands.literal("checkerboardfloor").then(
+//          Commands.argument("range", IntegerArgumentType.integer(1, 300)).then(
+//            Commands.argument("block1", BlockStateArgument.block()).then(
+//              Commands.argument("block2", BlockStateArgument.block())
+//                .executes(CreataniaTesterCommand::checkerboardfloor))))));
   }
 
   public static int checkerboardfloor(CommandContext<CommandSourceStack> command) {

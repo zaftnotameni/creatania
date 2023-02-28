@@ -2,9 +2,11 @@
 
 ## changelog
 
-### 1.18.2-0.1.8-alpha
+### 1.18.2-0.2.0-alpha
 
+#### New (potentially BREAKING!)
 
+- Dependency on kubejs
 
 ### 1.18.2-0.1.7-alpha
 

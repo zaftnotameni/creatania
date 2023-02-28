@@ -67,3 +67,15 @@ Connecting the world of Botania and Create
     versionRange="[9.5.2.136,)"
     ordering="NONE"
     side="BOTH"
+[[dependencies.creatania]]
+    modId="kubejs"
+    mandatory=true
+    versionRange="[1802,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.creatania]]
+    modId="rhino"
+    mandatory=true
+    versionRange="[1802,)"
+    ordering="NONE"
+    side="BOTH"
