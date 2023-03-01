@@ -1,4 +1,6 @@
 {
+  "kubejs.ponder.tag.getting_started": "Getting started.",
+  "kubejs.ponder.tag.getting_started.description": "We ponder now!",
   "kubejs.ponder.corrupt_mana_scene.header": "Liquefy Corrupt Mana",
   "kubejs.ponder.corrupt_mana_scene.text_1": "Throw some mana blocks into the mix",
   "kubejs.ponder.corrupt_mana_scene.text_2": "Superheat your Blaze Burner",
@@ -6,10 +8,10 @@
   "kubejs.ponder.mana_condenser.header": "Sucking Mana from Thin Air",
   "kubejs.ponder.mana_condenser.text_1": "Providing rotational force to Mana Condensers produces Corrupt Inert Mana Blocks",
   "kubejs.ponder.mana_condenser.text_2": "Place Mana Condenser over any inventory with space to collect mana blocks",
-  "kubejs.ponder.mana_condenser_2.header": "Automating Mana Condensing",
-  "kubejs.ponder.mana_condenser_2.text_1": "Mana Condensers can also be placed over Mechanical Belts",
   "kubejs.ponder.mana_condenser_belt.header": "Automating Mana Condensing",
   "kubejs.ponder.mana_condenser_belt.text_1": "Mana Condensers can also be placed over Mechanical Belts",
+  "kubejs.ponder.our_first_scene.header": "First example scene",
+  "kubejs.ponder.our_first_scene.text_1": "Example text",
   "kubejs.ponder.pure_mana_scene.header": "Liquefy Pure Mana",
   "kubejs.ponder.pure_mana_scene.text_1": "Throw some mana blocks into the mix",
   "kubejs.ponder.pure_mana_scene.text_2": "Superheat your Blaze Burner",
@@ -19,5 +21,9 @@
   "creatania.ponder.tag.mana_manipulation": "Mana Manipulation",
   "creatania.ponder.tag.mana_manipulation.description": "Handling tangible mana",
   "creatania.ponder.tag.mana_blocks": "Learning About Mana",
-  "creatania.ponder.tag.mana_blocks.description": "All sorts of fancy pretty blocks!"
+  "creatania.ponder.tag.mana_blocks.description": "All sorts of fancy pretty blocks!",
+  "creatania.ponder.mana_mana/blocks/corrupt_to_flowing_corrupt_mana.header": "Making Mana Fluid",
+  "creatania.ponder.mana_mana/blocks/corrupt_to_flowing_corrupt_mana.text_1": "Throw some mana blocks into the mix",
+  "creatania.ponder.mana_mana/blocks/corrupt_to_flowing_corrupt_mana.text_2": "Superheat your blaze burner",
+  "creatania.ponder.mana_mana/blocks/corrupt_to_flowing_corrupt_mana.text_3": "Generates fluid mana"
 }
