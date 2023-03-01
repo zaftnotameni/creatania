@@ -2,7 +2,21 @@
 
 ## changelog
 
+### 1.18.2-0.2.1-alpha
+
+#### New
+
+- Temporary models for buckets
+
+#### Fixes
+
+- Removed edge cases where some cobblegen interactions would generate blocks without mana
+
 ### 1.18.2-0.2.0-alpha
+
+#### New
+
+- Ponder scenes for mana blocks
 
 #### New (potentially BREAKING!)
 
@@ -333,7 +347,7 @@
 ### 1.18.2-0.0.10-alpha
 
 #### Fixes
- 
+
 - Mana Generator fluid connection in the model matches the actual functionality
 
 #### New
@@ -396,7 +410,7 @@
 
 #### New
 
-- Mana Machine Component, created via assembly line, used to craft mana machines 
+- Mana Machine Component, created via assembly line, used to craft mana machines
 - Recipes for Mana Motor/Generator/Condenser using the botania runic altar
 
 #### Fixes
@@ -437,7 +451,7 @@
 ### 1.18.2-0.0.2-alpha
 
 - Initial version of mana generator
- 
+
 ### 1.18.2-0.0.1-alpha
 
 - Initial version of mana motor
