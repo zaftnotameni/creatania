@@ -1,7 +1,10 @@
 package zaftnotameni.creatania.ponder;
+
 import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock;
 import com.simibubi.create.foundation.ponder.SceneBuilder;
 import com.simibubi.create.foundation.ponder.SceneBuildingUtil;
+import java.util.function.Consumer;
+import java.util.function.UnaryOperator;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -13,9 +16,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.registries.ForgeRegistries;
-
-import java.util.function.Consumer;
-import java.util.function.UnaryOperator;
 public class CreataniaPonderUtils {
   public Vec3 gentleFall() { return util.vector.of(0.0, -0.1, 0.0); }
 
@@ -94,8 +94,8 @@ public class CreataniaPonderUtils {
       var tanks = new ListTag();
       var tank1 = new CompoundTag();
       var tank2 = new CompoundTag();
-      emptyTankContentFn().accept(tank1);
-      emptyTankContentFn().accept(tank2);
+      emptyTankFn().accept(tank1);
+      emptyTankFn().accept(tank2);
       tanks.add(tank1);
       tanks.add(tank2);
       nbt.put(tankPropertyName, tanks);
@@ -107,7 +107,7 @@ public class CreataniaPonderUtils {
       var tank1 = new CompoundTag();
       var tank2 = new CompoundTag();
       tankWithAmountFn(fluidId, amount).accept(tank1);
-      emptyTankContentFn().accept(tank2);
+      emptyTankFn().accept(tank2);
       tanks.add(tank1);
       tanks.add(tank2);
       nbt.put(tankPropertyName, tanks);
@@ -136,4 +136,3 @@ public class CreataniaPonderUtils {
   }
   public static CreataniaPonderUtils of(SceneBuilder scene, SceneBuildingUtil util) { return new CreataniaPonderUtils(scene, util); }
 }
-
