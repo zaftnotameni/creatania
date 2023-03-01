@@ -51,12 +51,13 @@
     
     // the 60 represents the number of ticks the message is displayed
     scene.text(60, "Throw some mana blocks into the mix", util.vector.topOf(basin));
-    scene.idle(70);
+    scene.idle(60);
     
     // scene.world.modifyBlock(blaze, blockstate => blockstate.with("blaze", "kindled"), false); // yellow
-    scene.world.modifyBlock(blaze, blockstate => blockstate.with("blaze", "seething"), false); // blue
     scene.text(60, "Superheat your Blaze Burner", offsetCenterOf(util)(blaze));
-
+    scene.showControls(60, [2, 1, 2], "down").rightClick().withItem("create:blaze_cake")
+    scene.world.modifyBlock(blaze, blockstate => blockstate.with("blaze", "seething"), false); // blue
+    
     // this shows each block dropped one at a time with 20 tick delay
     dropBlocksOnto(scene, util)(basin, blockId, 4, () => scene.idle(20));
   
