@@ -1,23 +1,5 @@
 // Ponder scene for creatania:mana/blocks/corrupt
 
-// for 1.18 pls use: onEvent("ponder.tag")
-// Ponder.tags((event) => {
-  onEvent("ponder.tag", event => {
-    /**
-     * "kubejs:getting_started" -> the tag name
-     * "minecraft:paper"        -> the icon
-     * "Getting Started"        -> the title
-     * "This is a description"  -> the description
-     * [...items]               -> default items
-     */
-    event.createTag("creatania:mana_blocks", "creatania:mana/blocks/real", "Learning About Mana", "All sorts of fancy pretty blocks!", [
-      "creatania:mana/blocks/corrupt",
-      "creatania:mana/blocks/pure",
-      "creatania:mana/blocks/real", // does not have ponder scene
-      "create:basin",
-      "create:mechanical_mixer",
-    ]);
-  });
 /*   
   // helper functions, recommend SKIPPING over them on first read, the names should be self explanatory, you can come back and check the specifics afterwards
   const gentleFall = (util) => util.vector.of(0.0, -0.1, 0.0);

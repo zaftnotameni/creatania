@@ -1,22 +1,5 @@
 // Ponder scene for creatania:mana_condenser
 
-// for 1.18 pls use: onEvent("ponder.tag")
-// Ponder.tags((event) => {
-onEvent("ponder.tag", event => {
-  /**
-   * "kubejs:getting_started" -> the tag name
-   * "minecraft:paper"        -> the icon
-   * "Getting Started"        -> the title
-   * "This is a description"  -> the description
-   * [...items]               -> default items
-   */
-  event.createTag("creatania:mana_machines", "creatania:mana_condenser", "Machines that Interact with Mana", "Can we pull mana from thin air?", [
-    "creatania:mana_condenser",
-    "creatania:mana_generator",
-    "creatania:mana_motor"
-  ]);
-});
-
 const displayManaCondenserFromBlocksScene = (params) => (scene, util) => {
 
   // const blockId = params.blockId;
