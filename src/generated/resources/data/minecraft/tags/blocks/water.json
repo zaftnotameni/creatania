@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "creatania:molten_gold",
+    "creatania:molten_iron",
+    "creatania:molten_copper",
+    "creatania:molten_zinc",
+    "creatania:molten_brass",
+    "creatania:molten_andesite",
+    "creatania:molten_manasteel",
+    "creatania:molten_terrasteel",
+    "creatania:molten_elementium",
+    "creatania:molten_gaia",
+    "creatania:pure_mana",
+    "creatania:corrupt_mana",
+    "creatania:real_mana"
+  ]
+}

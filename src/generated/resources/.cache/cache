@@ -350,7 +350,8 @@ b21439783680ae8736f9b566b452d7d0f956c6aa data/create/tags/blocks/safe_nbt.json
 bd5f14f106988cf292eb7eeb75769a600563e60a data/forge/tags/blocks/storage_blocks/lapis.json
 fe7d769021c7e744b9706874afbf591d7cb43c7c data/minecraft/tags/blocks/mineable/axe.json
 b57977c915c7a986c1e05770523db5012252c458 data/minecraft/tags/blocks/mineable/pickaxe.json
-a8f7064d368c2cde41c8b8cc4032c5e32642c049 data/minecraft/tags/fluids/water.json
+e9cd4796831561a2e5f69d1255943d15c98e419b data/minecraft/tags/blocks/water.json
+4d08d2f7bdeb36d44eeb939bd4d0275a32a33d6e data/minecraft/tags/fluids/water.json
 74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/minecraft/tags/items/acacia_logs.json
 74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/minecraft/tags/items/anvil.json
 6d9d3308fa859516e349df3eb65fbace667a84d0 data/minecraft/tags/items/arrows.json
@@ -414,6 +415,7 @@ f2e49925518da2a6f134206a41ece82fa6f16df3 data/minecraft/tags/items/piglin_loved.
 74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/minecraft/tags/items/trapdoors.json
 74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/minecraft/tags/items/walls.json
 74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/minecraft/tags/items/warped_stems.json
+298ef6796ed61accafb75a19c37920194dde4888 data/minecraft/tags/items/water.json
 74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/minecraft/tags/items/wooden_buttons.json
 74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/minecraft/tags/items/wooden_doors.json
 74700d556ca80c7a1db5fd4efb09c3ddb26cad66 data/minecraft/tags/items/wooden_fences.json

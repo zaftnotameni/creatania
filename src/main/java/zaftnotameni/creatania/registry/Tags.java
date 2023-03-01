@@ -32,6 +32,7 @@ public class Tags {
     public static TagKey<Block> tag(String name) { return BlockTags.create(new ResourceLocation(Constants.MODID, name));  }
     public static TagKey<Block> forgeTag(String name) { return BlockTags.create(new ResourceLocation("forge", name)); }
     public static TagKey<Block> botaniaTag(String name) { return BlockTags.create(new ResourceLocation("botania", name)); }
+    public static TagKey<Block> minecraftTag(String name) { return BlockTags.create(new ResourceLocation("minecraft", name)); }
   }
   public static class Fluids {
     public static final TagKey<Fluid> PURE_MANA = tag("fluid/mana/pure");
@@ -41,6 +42,7 @@ public class Tags {
     public static final TagKey<Fluid> MOLTEN = tag("fluid/molten");
     public static TagKey<Fluid> tag(String name) { return FluidTags.create(new ResourceLocation(Constants.MODID, name)); }
     public static TagKey<Fluid> forgeTag(String name) { return FluidTags.create(new ResourceLocation("forge", name)); }
+    public static TagKey<Fluid> minecraftTag(String name) { return FluidTags.create(new ResourceLocation("minecraft", name)); }
   }
   public static class Items {
     public static final TagKey<Item> BOTANIA_DOUBLE_MYSTICAL_FLOWERS = botaniaTag("double_mystical_flowers");
