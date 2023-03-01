@@ -4,6 +4,10 @@
 
 ### 1.18.2-0.2.0-alpha
 
+#### New
+
+- Ponder scenes for mana blocks
+
 #### New (potentially BREAKING!)
 
 - Dependency on kubejs
