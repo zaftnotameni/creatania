@@ -2,10 +2,6 @@ package zaftnotameni.creatania.ponder;
 
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
-import com.simibubi.create.content.contraptions.components.mixer.MechanicalMixerTileEntity;
-import com.simibubi.create.content.contraptions.fluids.actors.ItemDrainTileEntity;
-import com.simibubi.create.content.contraptions.processing.BasinBlock;
-import com.simibubi.create.content.contraptions.processing.BasinTileEntity;
 import com.simibubi.create.foundation.ponder.SceneBuilder;
 import com.simibubi.create.foundation.ponder.SceneBuildingUtil;
 import com.simibubi.create.foundation.ponder.element.InputWindowElement;
@@ -86,26 +82,26 @@ public class ManaManipulationScenes {
       .idleAfter(1, drain.appearTo(EAST))
       .get();
     x
-      .idleAfter(1, basin.modifyBlock(x.facing(BasinBlock.FACING, WEST)))
+      .idleAfter(1, basin.setFacing(WEST))
       .get();
     x
-      .idleAfter(1, basin.modifyNbt(BasinTileEntity.class, x.emptyTanksFn("OutputTanks")))
+      .idleAfter(1, basin.modifyNbt(x.emptyTanksFn("OutputTanks")))
       .get();
     x
-      .idleAfter(1, drain.modifyNbt(ItemDrainTileEntity.class, x.fillTanksFn("Tanks", fluidId, 1000)))
+      .idleAfter(1, drain.modifyNbt(x.fillTanksFn("Tanks", fluidId, 1000)))
       .get();
   }
 
   private static void processManaBlocks(CreataniaPonderUtils x, ResourceLocation fluidId, XYZ basin, XYZ mixer) {
     mixer
-      .modifyNbt(MechanicalMixerTileEntity.class, x.startProcessingFn())
+      .modifyNbt(x.startProcessingFn())
       .run();
     basin
-      .modifyNbt(BasinTileEntity.class, x.fillTanksFn("OutputTanks", fluidId, 1000))
+      .modifyNbt(x.fillTanksFn("OutputTanks", fluidId, 1000))
       .run();
     x.scene.idle(10);
     basin
-      .modifyNbt(BasinTileEntity.class, x.emptyInputItemsFn())
+      .modifyNbt(x.emptyInputItemsFn())
       .run();
     x.scene.idle(100);
   }

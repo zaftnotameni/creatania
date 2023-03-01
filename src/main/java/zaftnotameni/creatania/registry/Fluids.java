@@ -34,6 +34,12 @@ public class Fluids {
   public static final ResourceLocation LAVA_FLOWING_RL = new ResourceLocation("block/lava_flow");
   public static final ResourceLocation LAVA_OVERLAY_RL = new ResourceLocation("block/water_overlay");
 
+  public static final ResourceLocation MOLTEN_STILL_RL = Index.resource("fluid/molten_still");
+  public static final ResourceLocation MOLTEN_FLOWING_RL = Index.resource("fluid/molten_flow");
+
+  public static final ResourceLocation MANA_STILL_RL = Index.resource("fluid/mana_still");
+  public static final ResourceLocation MANA_FLOWING_RL = Index.resource("fluid/mana_flow");
+
 
   // molten vanilla
   public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_GOLD = registerMoltenFluid("gold", 0xffffff00);
@@ -84,8 +90,8 @@ public class Fluids {
       .tag(Tags.Fluids.ALL_MANA, tag)
       .source(CreataniaFlowingFluidSource::new)
       .bucket()
-      .model((ctx, prov) -> prov.generated(ctx::getEntry, new ResourceLocation("minecraft", "item/lava_bucket")))
-      .tag(Tags.Items.tag("buckets/molten/" + name))
+      .model((ctx, prov) -> prov.generated(ctx::getEntry, Index.resource("fluid/mana_bucket")))
+      .tag(Tags.Items.tag("buckets/mana/" + name))
       .build()
       .block()
       .build()
@@ -103,17 +109,13 @@ public class Fluids {
       .tag(Tags.Fluids.MOLTEN)
       .source(CreataniaFlowingFluidSource::new)
       .bucket()
-      .model((ctx, prov) -> prov.generated(ctx::getEntry, new ResourceLocation("minecraft", "item/lava_bucket")))
+      .model((ctx, prov) -> prov.generated(ctx::getEntry, Index.resource("fluid/molten_bucket")))
       .tag(Tags.Items.tag("buckets/molten/" + name))
       .build()
       .block()
       .build()
       .register();
   }
-
-
-
-
 
   public static class Colored extends FluidAttributes {
     public Colored(Builder builder, Fluid fluid) { super(builder, fluid); }

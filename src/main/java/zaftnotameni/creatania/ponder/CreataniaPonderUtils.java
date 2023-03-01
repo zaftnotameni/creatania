@@ -1,9 +1,8 @@
 package zaftnotameni.creatania.ponder;
 
 import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock;
-import com.simibubi.create.foundation.ponder.SceneBuilder;
-import com.simibubi.create.foundation.ponder.SceneBuildingUtil;
-import com.simibubi.create.foundation.ponder.Selection;
+import com.simibubi.create.foundation.block.ITE;
+import com.simibubi.create.foundation.ponder.*;
 import com.simibubi.create.foundation.ponder.element.InputWindowElement;
 import com.simibubi.create.foundation.utility.Pointing;
 import java.util.function.Consumer;
@@ -26,6 +25,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 
 import static java.util.function.Function.identity;
+import static zaftnotameni.creatania.ponder.ExtremelyPainfulWorkaroundBecauseJavaIsTerrible.getBlockStateFacingType;
 
 public class CreataniaPonderUtils {
 
@@ -211,16 +211,19 @@ public class CreataniaPonderUtils {
   public XYZ at(int x, int y, int z) { return new XYZ(this, x, y, z); }
 
   public Runnable showInputItem(ResourceLocation blockId, Pointing pointing, Vec3 target, int duration) {
-    var item = ForgeRegistries.BLOCKS.getValue(blockId).asItem();
+    var item = ForgeRegistries.BLOCKS
+      .getValue(blockId)
+      .asItem();
     return showInputItem(item, pointing, target, duration, identity());
   }
+
   public Runnable showInputItem(ItemLike item, Pointing pointing, Vec3 target, int duration) {
     return showInputItem(item, pointing, target, duration, identity());
   }
+
   public Runnable showInputItem(ItemLike item, Pointing pointing, Vec3 target, int duration, Function<InputWindowElement, InputWindowElement> fn) {
     return () -> {
-      var popover = new InputWindowElement(target, pointing)
-        .withItem(new ItemStack(item, 1));
+      var popover = new InputWindowElement(target, pointing).withItem(new ItemStack(item, 1));
       fn.apply(popover);
       scene.overlay.showControls(popover, duration);
     };
@@ -245,8 +248,64 @@ public class CreataniaPonderUtils {
     public Runnable appearFrom(Direction direction) { return appearTo(direction.getOpposite()); }
 
     public Runnable setBlock(BlockState blockState) { return () -> u.scene.world.setBlock(asBlockPos(), blockState, false); }
+
     public Runnable modifyBlock(UnaryOperator<BlockState> blockstateFunc) { return () -> u.scene.world.modifyBlock(asBlockPos(), blockstateFunc, false); }
+
     public Runnable modifyNbt(Class<? extends BlockEntity> type, Consumer<CompoundTag> nbtFn) { return () -> u.scene.world.modifyTileNBT(asSelection(), type, nbtFn, true); }
+
+    public Runnable modifyNbt(Consumer<CompoundTag> nbtFn) {
+      return modifyNbt(getSmartTileEntityType().get(), nbtFn);
+    }
+
+    public Supplier<PonderWorld> zawarudo() {
+      return () -> {
+        if (ponderWorld != null) return ponderWorld;
+        return ExtremelyPainfulWorkaroundBecauseJavaIsTerrible
+          .zawarudo(this)
+          .get();
+      };
+    }
+
+    public Runnable resolve() {
+      return () -> {
+        if (zawarudo().get() == null) return;
+        this.resolvedBlockState = zawarudo()
+          .get()
+          .getBlockState(asBlockPos());
+        this.resolvedBlockEntity = zawarudo()
+          .get()
+          .getBlockEntity(asBlockPos());
+      };
+    }
+
+    public Supplier<BlockEntity> getBlockEntity() {
+      return () -> {
+        if (this.resolvedBlockEntity == null) resolve().run();
+        return this.resolvedBlockEntity;
+      };
+    }
+
+    public Supplier<BlockState> getBlockState() {
+      return () -> {
+        if (this.resolvedBlockState == null) resolve().run();
+        return this.resolvedBlockState;
+      };
+    }
+
+    public Runnable setFacing(Direction direction) {
+      return () -> {
+        var type = getBlockStateFacingType(this).get();
+        if (type == null) return;
+        u.scene.world.modifyBlock(asBlockPos(), bs -> bs.setValue(type, direction), false);
+      };
+    }
+
+    public Supplier<Class<? extends BlockEntity>> getSmartTileEntityType() {
+      return () -> {
+        if (!(getBlockState().get() instanceof ITE ite)) return BlockEntity.class;
+        return ite.getTileEntityClass();
+      };
+    }
 
     public Selection asSelection() { return u.util.select.position(x, y, z); }
 
@@ -254,6 +313,10 @@ public class CreataniaPonderUtils {
     public int x;
     public int y;
     public int z;
+    public BlockState resolvedBlockState;
+    public BlockEntity resolvedBlockEntity;
+    public PonderWorld ponderWorld;
+    public PonderScene ponderScene;
 
     public XYZ(CreataniaPonderUtils u, int x, int y, int z) {
       this.u = u;
