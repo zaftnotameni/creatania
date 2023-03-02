@@ -1,29 +1,31 @@
 buildscript {
-    repositories {
-        // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
-        maven { url = 'https://maven.minecraftforge.net' }
-        maven { url = 'https://maven.parchmentmc.org' }
-        maven {
-            url = 'https://repo.spongepowered.org/repository/maven-public/'
-            content { includeGroup "org.spongepowered" }
-        }
-        mavenCentral()
+  repositories {
+    // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
+    maven { url = 'https://maven.minecraftforge.net' }
+    maven { url = 'https://maven.parchmentmc.org' }
+    maven {
+      url = 'https://repo.spongepowered.org/repository/maven-public/'
+      content { includeGroup "org.spongepowered" }
     }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath 'org.parchmentmc:librarian:1.+'
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
-    }
+    mavenCentral()
+    gradlePluginPortal()
+  }
+  dependencies {
+    classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+    classpath 'org.parchmentmc:librarian:1.+'
+    classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+  }
 }
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 plugins {
-    id 'eclipse'
-    id 'maven-publish'
+  id 'eclipse'
+  id 'org.jetbrains.kotlin.jvm' version "${kotlin_lang_version}"
+  id 'org.jetbrains.kotlin.plugin.serialization' version "${kotlin_lang_version}"
+  id 'maven-publish'
 }
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'org.spongepowered.mixin'
-
 
 
 version = "${creatania_currentversion}"
@@ -35,222 +37,228 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
-    // mappings channel: 'official', version: '1.18.2'
-    mappings channel: 'parchment', version: '2022.11.06-1.18.2'
-    // Default run configurations.
-    // These can be tweaked, removed, or duplicated as needed.
-    runs {
-        client {
-            workingDirectory project.file('run')
+  // mappings channel: 'official', version: '1.18.2'
+  mappings channel: 'parchment', version: '2022.11.06-1.18.2'
+  // Default run configurations.
+  // These can be tweaked, removed, or duplicated as needed.
+  runs {
+    client {
+      workingDirectory project.file('run')
 
-            // Recommended logging data for a userdev environment
-            // The markers can be added/remove as needed separated by commas.
-            // "SCAN": For mods scan.
-            // "REGISTRIES": For firing of registry events.
-            // "REGISTRYDUMP": For getting the contents of all registries.
-            property 'forge.logging.markers', 'REGISTRIES'
+      // Recommended logging data for a userdev environment
+      // The markers can be added/remove as needed separated by commas.
+      // "SCAN": For mods scan.
+      // "REGISTRIES": For firing of registry events.
+      // "REGISTRYDUMP": For getting the contents of all registries.
+      property 'forge.logging.markers', 'REGISTRIES'
 
-            // Recommended logging level for the console
-            // You can set various levels here.
-            // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
-            property 'forge.logging.console.level', 'debug'
+      // Recommended logging level for the console
+      // You can set various levels here.
+      // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
+      property 'forge.logging.console.level', 'debug'
 
-            // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
-            property 'forge.enabledGameTestNamespaces', 'creatania'
+      // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
+      property 'forge.enabledGameTestNamespaces', 'creatania'
 
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+      property 'mixin.env.remapRefMap', 'true'
+      property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
-            mods {
-                creatania {
-                    source sourceSets.main
-                }
-            }
+      mods {
+        creatania {
+          source sourceSets.main
         }
-
-        server {
-            workingDirectory project.file('run')
-
-            property 'forge.logging.markers', 'REGISTRIES'
-
-            property 'forge.logging.console.level', 'debug'
-
-            // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
-            property 'forge.enabledGameTestNamespaces', 'creatania'
-
-            mods {
-                creatania {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        // This run config launches GameTestServer and runs all registered gametests, then exits.
-        // By default, the server will crash when no gametests are provided.
-        // The gametest system is also enabled by default for other run configs under the /test command.
-        gameTestServer {
-            workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
-            // The markers can be added/remove as needed separated by commas.
-            // "SCAN": For mods scan.
-            // "REGISTRIES": For firing of registry events.
-            // "REGISTRYDUMP": For getting the contents of all registries.
-            property 'forge.logging.markers', 'REGISTRIES'
-
-            // Recommended logging level for the console
-            // You can set various levels here.
-            // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
-            property 'forge.logging.console.level', 'debug'
-
-            // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
-            property 'forge.enabledGameTestNamespaces', 'creatania'
-
-            mods {
-                creatania {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        data {
-            workingDirectory project.file('run')
-
-            property 'forge.logging.markers', 'REGISTRIES'
-
-            property 'forge.logging.console.level', 'debug'
-
-            // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args '--mod', 'creatania', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-
-            property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-
-            mods {
-                creatania {
-                    source sourceSets.main
-                }
-            }
-        }
+      }
     }
+
+    server {
+      workingDirectory project.file('run')
+
+      property 'forge.logging.markers', 'REGISTRIES'
+
+      property 'forge.logging.console.level', 'debug'
+
+      // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
+      property 'forge.enabledGameTestNamespaces', 'creatania'
+
+      mods {
+        creatania {
+          source sourceSets.main
+        }
+      }
+    }
+
+    // This run config launches GameTestServer and runs all registered gametests, then exits.
+    // By default, the server will crash when no gametests are provided.
+    // The gametest system is also enabled by default for other run configs under the /test command.
+    gameTestServer {
+      workingDirectory project.file('run')
+
+      // Recommended logging data for a userdev environment
+      // The markers can be added/remove as needed separated by commas.
+      // "SCAN": For mods scan.
+      // "REGISTRIES": For firing of registry events.
+      // "REGISTRYDUMP": For getting the contents of all registries.
+      property 'forge.logging.markers', 'REGISTRIES'
+
+      // Recommended logging level for the console
+      // You can set various levels here.
+      // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
+      property 'forge.logging.console.level', 'debug'
+
+      // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
+      property 'forge.enabledGameTestNamespaces', 'creatania'
+
+      mods {
+        creatania {
+          source sourceSets.main
+        }
+      }
+    }
+
+    data {
+      workingDirectory project.file('run')
+
+      property 'forge.logging.markers', 'REGISTRIES'
+
+      property 'forge.logging.console.level', 'debug'
+
+      // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
+      args '--mod', 'creatania', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+
+      property 'mixin.env.remapRefMap', 'true'
+      property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
+      mods {
+        creatania {
+          source sourceSets.main
+        }
+      }
+    }
+  }
 }
 
 // Include resources generated by data generators.
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-    exclusiveContent {
-        forRepository {
-            maven {
-                name = "Modrinth"
-                url = "https://api.modrinth.com/maven"
-            }
-        }
-        filter {
-            includeGroup "maven.modrinth"
-        }
+  exclusiveContent {
+    forRepository {
+      maven {
+        name = "Modrinth"
+        url = "https://api.modrinth.com/maven"
+      }
     }
-    // Put repositories for dependencies here
-    // ForgeGradle automatically adds the Forge maven and Maven Central for you
+    filter {
+      includeGroup "maven.modrinth"
+    }
+  }
+  // Put repositories for dependencies here
+  // ForgeGradle automatically adds the Forge maven and Maven Central for you
+  // Add KFF Maven repository
+  maven {
+    name = 'Kotlin for Forge'
+    url = 'https://thedarkcolour.github.io/KotlinForForge/'
+  }
+  // If you have mod jar dependencies in ./libs, you can declare them as a repository like so:
+  // flatDir {
+  //     dir 'libs'
+  // }
+  flatDir {
+    dirs 'libs'
+  }
+  maven {
+    url "file://${project.projectDir}/libs"
+    name "test"
+  }
+  maven {
+    // Shedaniel's maven (Architectury API)
+    url = "https://maven.architectury.dev"
+    content {
+      includeGroup "dev.architectury"
+    }
+  }
 
-    // If you have mod jar dependencies in ./libs, you can declare them as a repository like so:
-    // flatDir {
-    //     dir 'libs'
-    // }
-    flatDir {
-        dirs 'libs'
+  maven {
+    // saps.dev Maven (KubeJS and Rhino)
+    url = "https://maven.saps.dev/minecraft"
+    content {
+      includeGroup "dev.latvian.mods"
     }
-    maven {
-        url "file://${project.projectDir}/libs"
-        name "test"
-    }
-    maven {
-        // Shedaniel's maven (Architectury API)
-        url = "https://maven.architectury.dev"
-        content {
-            includeGroup "dev.architectury"
-        }
-    }
-
-    maven {
-        // saps.dev Maven (KubeJS and Rhino)
-        url = "https://maven.saps.dev/minecraft"
-        content {
-            includeGroup "dev.latvian.mods"
-        }
-    }
-    maven {
-        // location of the maven that hosts JEI files
-        name = "Progwml6 maven"
-        url = "https://dvs1.progwml6.com/files/maven/"
-    }
-    maven {
-        // location of a maven mirror for JEI files, as a fallback
-        name = "ModMaven"
-        url = "https://modmaven.dev"
-    }
-    maven { url 'https://maven.blamejared.com' }
-    maven {
-        name = 'tterrag maven'
-        url = 'https://maven.tterrag.com/'
-    }
-    maven {
-        name = 'Sponge Snapshots'
-        url = 'https://repo.spongepowered.org/repository/maven-public/'
-    }
+  }
+  maven {
+    // location of the maven that hosts JEI files
+    name = "Progwml6 maven"
+    url = "https://dvs1.progwml6.com/files/maven/"
+  }
+  maven {
+    // location of a maven mirror for JEI files, as a fallback
+    name = "ModMaven"
+    url = "https://modmaven.dev"
+  }
+  maven { url 'https://maven.blamejared.com' }
+  maven {
+    name = 'tterrag maven'
+    url = 'https://maven.tterrag.com/'
+  }
+  maven {
+    name = 'Sponge Snapshots'
+    url = 'https://repo.spongepowered.org/repository/maven-public/'
+  }
 
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.2-40.2.1'
+  minecraft 'net.minecraftforge:forge:1.18.2-40.2.1'
 
-    compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
-    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
+  compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
+  runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
 
-    compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.2-5.0.6.3:api")
-    runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.2-5.0.6.3")
+  compileOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.2-5.0.6.3:api")
+  runtimeOnly fg.deobf("top.theillusivec4.curios:curios-forge:1.18.2-5.0.6.3")
 
-    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-67:api")
-    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-67")
+  compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-67:api")
+  runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.2-67")
 
-    compileOnly fg.deobf("vazkii.botania:Botania:${botania_version}:api")
-    runtimeOnly fg.deobf("vazkii.botania:Botania:${botania_version}")
+  compileOnly fg.deobf("vazkii.botania:Botania:${botania_version}:api")
+  runtimeOnly fg.deobf("vazkii.botania:Botania:${botania_version}")
 
-    implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}:slim") { transitive = false }
-    implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
-    implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
+  implementation fg.deobf("com.simibubi.create:create-${create_minecraft_version}:${create_version}:slim") { transitive = false }
+  implementation fg.deobf("com.jozufozu.flywheel:flywheel-forge-${flywheel_minecraft_version}:${flywheel_version}")
+  implementation fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
 
-    // ForgeGradle
-    implementation fg.deobf("dev.latvian.mods:kubejs-forge:${kubejs_version}")
+  // ForgeGradle
+  implementation fg.deobf("dev.latvian.mods:kubejs-forge:${kubejs_version}")
 
 // these two are unfortunately needed since fg.deobf doesn't respect transitive dependencies yet
-    implementation fg.deobf("dev.latvian.mods:rhino-forge:${rhino_version}")
-    implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
+  implementation fg.deobf("dev.latvian.mods:rhino-forge:${rhino_version}")
+  implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
 
-    //runtimeOnly deobfJar(file("libs/ponderjs-1.18.2-1.1.8.jar"))
-    //runtimeOnly fg.deobf("maven.modrinth:deobfJar.jar")
-    runtimeOnly fg.deobf("blank:ponderjs-1.18.2:1.1.8")
+  implementation "thedarkcolour:kotlinforforge:${kotlin_version}"
+
+  //runtimeOnly deobfJar(file("libs/ponderjs-1.18.2-1.1.8.jar"))
+  //runtimeOnly fg.deobf("maven.modrinth:deobfJar.jar")
+  runtimeOnly fg.deobf("blank:ponderjs-1.18.2:1.1.8")
 }
 
 
 task deobfJar(type: Jar) {
-    from sourceSets.main.output
-    classifier 'deobf'
+  from sourceSets.main.output
+  classifier 'deobf'
 }
 
 // Example for how to get properties into the manifest for reading at runtime.
 jar {
-    manifest {
-        attributes([
-                "Specification-Title"     : "creatania",
-                "Specification-Vendor"    : "zaftnotameni",
-                "Specification-Version"   : "${creatania_currentversion}", // We are version 1 of ourselves
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "zaftnotameni",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
-    }
+  manifest {
+    attributes([
+      "Specification-Title"     : "creatania",
+      "Specification-Vendor"    : "zaftnotameni",
+      "Specification-Version"   : "${creatania_currentversion}", // We are version 1 of ourselves
+      "Implementation-Title"    : project.name,
+      "Implementation-Version"  : project.jar.archiveVersion,
+      "Implementation-Vendor"   : "zaftnotameni",
+      "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+    ])
+  }
 }
 
 // Example configuration to allow publishing using the maven-publish plugin
@@ -260,18 +268,18 @@ jar.finalizedBy('reobfJar')
 // publish.dependsOn('reobfJar')
 
 publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact jar
-        }
+  publications {
+    mavenJava(MavenPublication) {
+      artifact jar
     }
-    repositories {
-        maven {
-            url "file://${project.projectDir}/mcmodsrepo"
-        }
+  }
+  repositories {
+    maven {
+      url "file://${project.projectDir}/mcmodsrepo"
     }
+  }
 }
 
 tasks.withType(JavaCompile).configureEach {
-    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+  options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
