@@ -64,7 +64,7 @@ const displayManaCondenserFromBlocksScene2 = (params) => (scene, util) => {
   scene.idle(20);
 
   // removed mana block from belt
-  scene.world.modifyTileNBT(belt_shaft2, emptyInputItems());
+  scene.world.removeItemsFromBelt(belt_shaft2);
   scene.idle(20);
 
 };
