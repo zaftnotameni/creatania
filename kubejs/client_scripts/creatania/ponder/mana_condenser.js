@@ -73,7 +73,7 @@ onEvent("ponder.registry", event => {
   event
     .create("creatania:mana_condenser") // full block id
     .scene(
-      "mana_condenser", // unique scene identifier
+      "mana_condenser_scene", // unique scene identifier
       "Sucking Mana from Thin Air", // scene title
       "creatania:mana_condenser/mana_condenser",
       displayManaCondenserFromBlocksScene({ blockId: "creatania:mana_condenser" })
@@ -82,7 +82,7 @@ onEvent("ponder.registry", event => {
   event
     .create("creatania:mana_condenser") // full block id
     .scene(
-      "mana_condenser_belt", // unique scene identifier
+      "mana_condenser_belt_scene", // unique scene identifier
       "Automating Mana Condensing", // scene title
       "creatania:mana_condenser/mana_condenser_belt",
       displayManaCondenserFromBlocksScene2({ blockId: "creatania:mana_condenser" })
