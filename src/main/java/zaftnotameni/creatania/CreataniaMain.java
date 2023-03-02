@@ -22,6 +22,8 @@ public class CreataniaMain {
     zaftnotameni.creatania.config.Index.register();
     Blocks.Partials.init();
     forgeEventBusListeners();
+    var x = new Testing();
+    x.doSomething();
   }
 
   public static void forgeEventBusListeners() {

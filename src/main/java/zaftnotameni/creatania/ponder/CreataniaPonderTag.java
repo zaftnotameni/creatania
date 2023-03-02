@@ -1,16 +1,17 @@
 package zaftnotameni.creatania.ponder;
+
+import com.simibubi.create.content.palettes.AllPaletteStoneTypes;
 import com.simibubi.create.foundation.ponder.PonderLocalization;
 import com.simibubi.create.foundation.ponder.PonderRegistrationHelper;
 import com.simibubi.create.foundation.ponder.PonderRegistry;
 import com.simibubi.create.foundation.ponder.PonderTag;
+import java.lang.reflect.Field;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Index;
-
-import java.lang.reflect.Field;
 public class CreataniaPonderTag extends PonderTag {
   public static final PonderRegistrationHelper INDEX = new PonderRegistrationHelper(Constants.MODID);
 
@@ -18,6 +19,10 @@ public class CreataniaPonderTag extends PonderTag {
     MANA_MANIPULATION = create("mana_manipulation")
       .item(Blocks.PURE_MANA_BLOCK.get(), true, true)
       .defaultLang("Mana Manipulation", "Handling tangible mana")
+      .addToIndex(),
+    COBBLEGEN = create("cobblegen")
+      .item(AllPaletteStoneTypes.CRIMSITE.baseBlock.get(), true, false)
+      .defaultLang("Cobblegen", "Sticks and stones might break your bones")
       .addToIndex(),
     end = null;
   public CreataniaPonderTag(ResourceLocation id) {
@@ -64,7 +69,7 @@ public class CreataniaPonderTag extends PonderTag {
       set("mainItem", new ItemStack(item));
     return this;
   }
-  
+
   public CreataniaPonderTag item(ItemLike item) {
     return this.item(item, true, true);
   }
