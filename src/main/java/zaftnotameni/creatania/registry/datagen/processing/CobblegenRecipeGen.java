@@ -1,10 +1,16 @@
 package zaftnotameni.creatania.registry.datagen.processing;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.simibubi.create.content.contraptions.processing.ProcessingRecipe;
+import com.simibubi.create.content.contraptions.processing.ProcessingRecipeBuilder;
 import com.simibubi.create.content.palettes.AllPaletteStoneTypes;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.utility.recipe.IRecipeTypeInfo;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import com.tterrag.registrate.util.nullness.NonNullSupplier;
+import java.util.HashMap;
+import java.util.function.UnaryOperator;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -16,6 +22,7 @@ import static com.simibubi.create.content.palettes.AllPaletteStoneTypes.*;
 import static zaftnotameni.creatania.registry.Fluids.*;
 
 public class CobblegenRecipeGen extends ForgeCreateProcessingRecipeProvider {
+  public static HashMap<String, JsonObject> ALL = new HashMap<>();
 
 	public void setupRecipes() {
 		mffb(MOLTEN_COPPER, GRANITE);
@@ -58,7 +65,16 @@ public class CobblegenRecipeGen extends ForgeCreateProcessingRecipeProvider {
 			.output(1f, c.get(), ri));
 	}
 
-	public CobblegenRecipeGen(DataGenerator gen) {
+  @Override <T extends ProcessingRecipe<?>> GeneratedRecipe create(String name, UnaryOperator<ProcessingRecipeBuilder<T>> transform) {
+    var r = super.create(name, transform);
+    var j = JsonParser
+      .parseString("{}").getAsJsonObject();
+    r.register(f -> f.serializeRecipeData(j));
+    ALL.putIfAbsent(name, j);
+    return r;
+  }
+
+  public CobblegenRecipeGen(DataGenerator gen) {
 		super(gen); setupRecipes();
 	}
 

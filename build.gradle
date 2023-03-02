@@ -14,6 +14,7 @@ buildscript {
     classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
     classpath 'org.parchmentmc:librarian:1.+'
     classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+    classpath "org.jetbrains.kotlin:kotlin-serialization:${kotlin_lang_version}"
   }
 }
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
@@ -234,6 +235,8 @@ dependencies {
   implementation fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
 
   implementation "thedarkcolour:kotlinforforge:${kotlin_version}"
+  // implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:${kotlin_lang_version}"
+  implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.0")
 
   //runtimeOnly deobfJar(file("libs/ponderjs-1.18.2-1.1.8.jar"))
   //runtimeOnly fg.deobf("maven.modrinth:deobfJar.jar")

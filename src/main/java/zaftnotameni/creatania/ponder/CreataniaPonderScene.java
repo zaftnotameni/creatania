@@ -4,16 +4,17 @@ import com.simibubi.create.foundation.ponder.PonderRegistrationHelper;
 import com.simibubi.create.foundation.ponder.PonderScene;
 import com.simibubi.create.foundation.ponder.PonderTag;
 import com.simibubi.create.foundation.ponder.PonderWorld;
-import com.tterrag.registrate.util.entry.BlockEntry;
+import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Collection;
-import net.minecraft.client.Minecraft;
+import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.fml.loading.FMLPaths;
 import zaftnotameni.creatania.Constants;
+import zaftnotameni.creatania.recipes.cobblegen.CobblegenRecipe;
 import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Index;
-
-import static zaftnotameni.creatania.recipes.cobblegen.AllCobblegenRecipes.getCobblegenRecipes;
+import zaftnotameni.creatania.registry.datagen.processing.CobblegenRecipeGen;
 
 public class CreataniaPonderScene extends PonderScene {
   public static final PonderRegistrationHelper INDEX = new PonderRegistrationHelper(Constants.MODID);
@@ -29,16 +30,17 @@ public class CreataniaPonderScene extends PonderScene {
     INDEX
       .forComponents(Blocks.CORRUPT_MANA_BLOCK)
       .addStoryBoard("mana_superheated_mixer", ManaManipulationScenes::makeLiquidCorruptMana, CreataniaPonderTag.MANA_MANIPULATION);
+
+    deferredRegister();
   }
 
   public static void deferredRegister() {
-    for (var recipe : getCobblegenRecipes(Minecraft.getInstance().level)) {
+    new CobblegenRecipeGen(new DataGenerator(FMLPaths.MODSDIR.get(), new ArrayList<Path>())).setupRecipes();
+    for (var j : CobblegenRecipeGen.ALL.values()) {
+      var recipe = CobblegenRecipe.TYPE.getSerializer().fromJson(Index.resource("none"), j);
       var id = recipe.getResultItem().getItem().getRegistryName();
-      var path = id.getPath().toString();
-      var component = Index.all().get(path, ForgeRegistries.BLOCKS.getRegistryKey());
-      var scene = new CobblegenScenes(recipe);
-      INDEX.forComponents(BlockEntry.cast(component))
-        .addStoryBoard("mana_superhexated_mixer_" + path.toString(), scene::makeCobblegenScene, CreataniaPonderTag.COBBLEGEN);
+      var scene = new CobblegenScenes((CobblegenRecipe) recipe);
+      INDEX.addStoryBoard(id, "mana_superheated_mixer", scene::makeCobblegenScene, CreataniaPonderTag.COBBLEGEN);
     }
   }
 }
