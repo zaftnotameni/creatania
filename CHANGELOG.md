@@ -2,15 +2,21 @@
 
 ## changelog
 
+### 1.18.2-0.2.2-alpha
+
+
+
 ### 1.18.2-0.2.1-alpha
 
 #### New
 
 - Temporary models for buckets
+- Ponder scenes for cobblegen mechanics
 
 #### Fixes
 
 - Removed edge cases where some cobblegen interactions would generate blocks without mana
+- Adds missing icons for creatania ponder categories
 
 ### 1.18.2-0.2.0-alpha
 

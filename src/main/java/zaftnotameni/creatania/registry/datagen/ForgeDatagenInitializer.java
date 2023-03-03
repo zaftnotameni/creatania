@@ -1,4 +1,5 @@
 package zaftnotameni.creatania.registry.datagen;
+
 import com.simibubi.create.foundation.data.LangMerger;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -21,7 +22,6 @@ public class ForgeDatagenInitializer {
     if (evt.includeServer()) {
       serverDataGen(generator, helper);
     }
-
   }
   public static void serverDataGen(DataGenerator generator, ExistingFileHelper helper) {
     var blockTagProvider = new ForgeBlockTagProvider(generator, helper);
