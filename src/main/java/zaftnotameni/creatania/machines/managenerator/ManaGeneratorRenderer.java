@@ -1,16 +1,20 @@
 package zaftnotameni.creatania.machines.managenerator;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.AllBlockPartials;
 import com.simibubi.create.content.contraptions.base.KineticTileEntity;
 import com.simibubi.create.content.contraptions.base.KineticTileEntityRenderer;
+import com.simibubi.create.foundation.fluid.FluidRenderer;
 import com.simibubi.create.foundation.render.CachedBufferer;
 import com.simibubi.create.foundation.render.SuperByteBuffer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.fluids.FluidStack;
 import zaftnotameni.creatania.config.ClientConfig;
 import zaftnotameni.creatania.machines.manamachine.IAmParticleEmittingMachine;
+import zaftnotameni.creatania.registry.Fluids;
 import zaftnotameni.creatania.registry.Particles;
 public class ManaGeneratorRenderer extends KineticTileEntityRenderer {
   public ManaGeneratorRenderer(BlockEntityRendererProvider.Context context) {
@@ -26,6 +30,41 @@ public class ManaGeneratorRenderer extends KineticTileEntityRenderer {
     super.renderSafe(te, partialTicks, ms, buffer, light, overlay);
     if (!(te instanceof ManaGeneratorBlockEntity generator)) return;
     if (generator.activeStateSynchronizerBehavior.active && !generator.activeStateSynchronizerBehavior.duct) this.spawnManaParticles(te, partialTicks);
+    renderFluids(te, partialTicks, ms, buffer, light, overlay);
+  }
+
+  public static float getYMaxForFluidLevel(KineticTileEntity te){
+    if (!(te instanceof  ManaGeneratorBlockEntity generator)) return 0f;
+    var topPadding = ClientConfig.MANA_MOTOR_MANA_FILL_TOP_PADDING.get();
+    var bottomPadding = ClientConfig.MANA_MOTOR_MANA_FILL_BOTTOM_PADDING.get();
+    var topWithPadding = 1.0f - topPadding;
+    var toFill = 1.0f - bottomPadding;
+    var percentageFull = generator.manaGeneratorFluidHandler.getManaFluidAvailable() /
+      generator.manaGeneratorFluidHandler.getManaTankCapacity();
+    return Math.min(topWithPadding, bottomPadding + (toFill * percentageFull));
+
+  }
+  public static float getYMinForFluidLevel() {
+    var bottomPadding = ClientConfig.MANA_MOTOR_MANA_FILL_BOTTOM_PADDING.get();
+    return 0.0f + bottomPadding;
+  }
+  public static float getHorizontalMinForFluidLevel() {
+    var horizontalPadding = ClientConfig.MANA_MOTOR_MANA_FILL_HORIZONTAL_PADDING.get();
+    return 0.0f + horizontalPadding;
+  }
+  public static float getHorizontalMaxForFluidLevel() {
+    var horizontalPadding = ClientConfig.MANA_MOTOR_MANA_FILL_HORIZONTAL_PADDING.get();
+    return 1.0f - horizontalPadding;
+  }
+  public static void renderFluids(KineticTileEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
+    var renderedFluid = new FluidStack(Fluids.PURE_MANA.get(), 1000);
+    float ymin = getYMinForFluidLevel();
+    float ymax = getYMaxForFluidLevel(te);
+    float xmin = getHorizontalMinForFluidLevel();
+    float xmax = getHorizontalMaxForFluidLevel();
+    float zmin = getHorizontalMinForFluidLevel();
+    float zmax = getHorizontalMaxForFluidLevel();
+    FluidRenderer.renderFluidBox(renderedFluid, xmin, ymin, zmin, xmax, ymax, zmax, buffer, ms, light, true);
   }
 
   public float tickCounter = 0f;

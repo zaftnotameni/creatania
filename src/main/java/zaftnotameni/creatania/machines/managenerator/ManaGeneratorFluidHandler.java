@@ -66,7 +66,7 @@ public class ManaGeneratorFluidHandler {
   }
 
   public float getManaTankCapacity(){
-    return CommonConfig.MANA_GENERATOR_MAX_MANA_FLUID_STORAGE.get() *
+    return Math.min(8f, CommonConfig.MANA_GENERATOR_MAX_MANA_FLUID_STORAGE.get()) *
       AllConfigs.SERVER.kinetics.maxMotorSpeed.get();
   }
 

@@ -70,7 +70,7 @@ public class CommonConfig {
     MANA_GENERATOR_MINIMUM_RPM = BUILDER.define("minimum_rpm", 1);
     MANA_GENERATOR_MAXIMUM_RPM = BUILDER.define("maximum_rpm", 256);
     MANA_GENERATOR_MANA_CONVERSION_RATE = BUILDER.define("mana_conversion_rate", 4);
-    MANA_GENERATOR_MAX_MANA_FLUID_STORAGE = BUILDER.define("mana_fluid_storage", 2000);
+    MANA_GENERATOR_MAX_MANA_FLUID_STORAGE = BUILDER.define("mana_fluid_storage", 4);
     MANA_GENERATOR_LAZY_TICK_RATE = BUILDER.define("lazy_tick_rate", 20);
     BUILDER.pop();
 

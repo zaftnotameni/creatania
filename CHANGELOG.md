@@ -2,6 +2,13 @@
 
 ## changelog
 
+### 1.18.2-0.3.3-alpha
+
+#### Changes
+
+- Mana Generator now renders fluid inside representing the amount of mana
+- Mana Condenser now show fluid inside while extracting mana from the air
+
 ### 1.18.2-0.3.2-alpha
 
 #### Changes
