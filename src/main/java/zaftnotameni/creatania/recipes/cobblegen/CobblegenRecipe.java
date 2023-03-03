@@ -5,6 +5,7 @@ import com.simibubi.create.content.contraptions.processing.ProcessingRecipeBuild
 import com.simibubi.create.content.contraptions.processing.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import com.simibubi.create.foundation.utility.recipe.IRecipeTypeInfo;
+import java.util.List;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -45,7 +46,22 @@ public class CobblegenRecipe extends ProcessingRecipe<Container> implements Reci
 
   public static void init() { }
 
-  ;
+  public boolean hasSource() {
+    return getInputFluidStacks().stream().anyMatch(f -> f.getRequiredAmount() > 900);
+  }
+
+  public boolean isValid() {
+    return getInputFluidStacks().size() == 2 &&
+      !getResultItem().isEmpty();
+  }
+
+  public List<FluidIngredient.FluidStackIngredient> getSources() {
+    return getInputFluidStacks().stream().filter(f -> f.getRequiredAmount() >= 900).toList();
+  }
+
+  public List<FluidIngredient.FluidStackIngredient> getFlowings() {
+    return getInputFluidStacks().stream().filter(f -> f.getRequiredAmount() < 900).toList();
+  }
 
   public NonNullList<FluidIngredient.FluidStackIngredient> getInputFluidStacks() {
     NonNullList<FluidIngredient.FluidStackIngredient> result = NonNullList.create();

@@ -10,6 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.BlockAndTintGetter;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
@@ -23,6 +24,7 @@ import zaftnotameni.creatania.util.Log;
 
 import static net.minecraft.sounds.SoundEvents.HONEY_BLOCK_PLACE;
 import static net.minecraft.sounds.SoundEvents.HONEY_DRINK;
+import static zaftnotameni.creatania.util.Fluids.specialCobblegenCanSpread;
 import static zaftnotameni.creatania.util.Fluids.specialCobblegenSpread;
 import static zaftnotameni.creatania.util.Humanity.keyResource;
 import static zaftnotameni.creatania.util.Humanity.lang;
@@ -164,6 +166,30 @@ public class Fluids {
     public CreataniaFlowingFluidFlowing(Properties properties) { super(properties); }
 
     @Override
+    protected boolean canSpreadTo(
+      BlockGetter pLevel,
+      BlockPos pFromPos,
+      BlockState pFromBlockState,
+      Direction pDirection,
+      BlockPos pToPos,
+      BlockState pToBlockState,
+      FluidState pToFluidState,
+      Fluid pFluid
+    ) {
+      return specialCobblegenCanSpread(
+         pLevel,
+         pFromPos,
+         pFromBlockState,
+         pDirection,
+         pToPos,
+         pToBlockState,
+         pToFluidState,
+         pFluid,
+         this
+      ) && super.canSpreadTo(pLevel, pFromPos, pFromBlockState, pDirection, pToPos, pToBlockState, pToFluidState, pFluid);
+    }
+
+    @Override
     protected void spreadTo(LevelAccessor pLevel, BlockPos pPos, BlockState pBlockState, Direction pDirection, FluidState pFluidState) {
       if (!specialCobblegenSpread(pLevel, pPos, pBlockState, pDirection, pFluidState, this)) { super.spreadTo(pLevel, pPos, pBlockState, pDirection, pFluidState); }
     }
@@ -171,6 +197,30 @@ public class Fluids {
   }
 
   public static class CreataniaFlowingFluidSource extends ForgeFlowingFluid.Source {
+
+    @Override
+    protected boolean canSpreadTo(
+      BlockGetter pLevel,
+      BlockPos pFromPos,
+      BlockState pFromBlockState,
+      Direction pDirection,
+      BlockPos pToPos,
+      BlockState pToBlockState,
+      FluidState pToFluidState,
+      Fluid pFluid
+    ) {
+      return specialCobblegenCanSpread(
+        pLevel,
+        pFromPos,
+        pFromBlockState,
+        pDirection,
+        pToPos,
+        pToBlockState,
+        pToFluidState,
+        pFluid,
+        this
+      ) && super.canSpreadTo(pLevel, pFromPos, pFromBlockState, pDirection, pToPos, pToBlockState, pToFluidState, pFluid);
+    }
 
     @Override
     protected void spreadTo(LevelAccessor pLevel, BlockPos pPos, BlockState pBlockState, Direction pDirection, FluidState pFluidState) {

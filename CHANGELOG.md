@@ -4,6 +4,9 @@
 
 ### 1.18.2-0.3.2-alpha
 
+#### Changes
+
+- Cobblegen mechanics for source blocks match vanilla
 
 ### 1.18.2-0.3.1-alpha
 
