@@ -3,11 +3,12 @@ package zaftnotameni.creatania.recipes.cobblegen;
 import com.simibubi.create.content.contraptions.processing.ProcessingRecipe;
 import com.simibubi.create.content.contraptions.processing.ProcessingRecipeBuilder;
 import com.simibubi.create.content.contraptions.processing.ProcessingRecipeSerializer;
-import com.simibubi.create.foundation.fluid.FluidIngredient;
+import com.simibubi.create.foundation.fluid.FluidIngredient.FluidStackIngredient;
 import com.simibubi.create.foundation.utility.recipe.IRecipeTypeInfo;
 import java.util.List;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Tuple;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -55,17 +56,30 @@ public class CobblegenRecipe extends ProcessingRecipe<Container> implements Reci
       !getResultItem().isEmpty();
   }
 
-  public List<FluidIngredient.FluidStackIngredient> getSources() {
-    return getInputFluidStacks().stream().filter(f -> f.getRequiredAmount() >= 900).toList();
+  List<FluidStackIngredient> sources;
+  public List<FluidStackIngredient> getSources() {
+    if (sources == null) sources = getInputFluidStacks().stream().filter(f -> f.getRequiredAmount() >= 900).toList();
+    return sources;
   }
 
-  public List<FluidIngredient.FluidStackIngredient> getFlowings() {
-    return getInputFluidStacks().stream().filter(f -> f.getRequiredAmount() < 900).toList();
+  List<FluidStackIngredient> flowings;
+  public List<FluidStackIngredient> getFlowings() {
+    if (flowings == null) flowings = getInputFluidStacks().stream().filter(f -> f.getRequiredAmount() < 900).toList();
+    return flowings;
   }
 
-  public NonNullList<FluidIngredient.FluidStackIngredient> getInputFluidStacks() {
-    NonNullList<FluidIngredient.FluidStackIngredient> result = NonNullList.create();
-    for (var fi : fluidIngredients) if (fi instanceof FluidIngredient.FluidStackIngredient fsi) result.add(fsi);
+  public Tuple<FluidStackIngredient, FluidStackIngredient> asFlowingFlowing() {
+    if (getFlowings().size() != 2 || getFlowings().isEmpty()) return null;
+    return new Tuple<>(getFlowings().get(0), getFlowings().get(1));
+  }
+  public Tuple<FluidStackIngredient, FluidStackIngredient> asFlowingSource() {
+    if (getFlowings().size() != 1 || getSources().size() != 1) return null;
+    return new Tuple<>(getFlowings().get(0), getSources().get(0));
+  }
+
+  public NonNullList<FluidStackIngredient> getInputFluidStacks() {
+    NonNullList<FluidStackIngredient> result = NonNullList.create();
+    for (var fi : fluidIngredients) if (fi instanceof FluidStackIngredient fsi) result.add(fsi);
     return result;
   }
 

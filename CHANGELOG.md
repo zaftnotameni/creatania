@@ -6,7 +6,8 @@
 
 #### Changes
 
-- Cobblegen mechanics for source blocks match vanilla
+- Cobblegen mechanics for source blocks slightly more like vanilla
+- Ponder scenes for cobblegen show the names of the items involved
 
 ### 1.18.2-0.3.1-alpha
 
