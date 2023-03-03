@@ -1,7 +1,10 @@
 package zaftnotameni.creatania.machines.managenerator;
+
+import com.simibubi.create.foundation.config.AllConfigs;
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
 import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
 import com.simibubi.create.foundation.tileEntity.behaviour.fluid.SmartFluidTankBehaviour;
+import java.util.List;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraftforge.common.capabilities.Capability;
@@ -11,8 +14,6 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.registry.Fluids;
-
-import java.util.List;
 public class ManaGeneratorFluidHandler {
   public boolean contentsChanged;
   public SmartFluidTankBehaviour inputTankBehavior;
@@ -29,7 +30,8 @@ public class ManaGeneratorFluidHandler {
       SmartFluidTankBehaviour.INPUT,
       this.manaGenerator,
       1,
-      CommonConfig.MANA_GENERATOR_MAX_MANA_FLUID_STORAGE.get(),
+      CommonConfig.MANA_GENERATOR_MAX_MANA_FLUID_STORAGE.get() *
+        AllConfigs.SERVER.kinetics.maxMotorSpeed.get(),
       false)
       .whenFluidUpdates(() -> this.contentsChanged = true);
 
@@ -49,10 +51,12 @@ public class ManaGeneratorFluidHandler {
   public int drainManaFluidFromTank(int amount) {
     var fluidCapability = this.inputTankBehavior.getCapability().orElse(null);
     if (fluidCapability == null) return 0;
-    var manaFluidToBeConsumed = new FluidStack(Fluids.PURE_MANA.get(), amount);
-    var manaFluidDrained = fluidCapability.drain(manaFluidToBeConsumed, IFluidHandler.FluidAction.EXECUTE);
+    var sourceMana = new FluidStack(Fluids.PURE_MANA.get().getSource(), amount);
+    var flowingMana = new FluidStack(Fluids.PURE_MANA.get().getFlowing(), amount);
+    var sourceDrained = fluidCapability.drain(sourceMana, IFluidHandler.FluidAction.EXECUTE);
+    var flowingDrained = fluidCapability.drain(flowingMana, IFluidHandler.FluidAction.EXECUTE);
     this.getPrimaryTank().onFluidStackChanged();
-    return manaFluidDrained.getAmount();
+    return sourceDrained.getAmount() + flowingDrained.getAmount();
   }
 
   public float getManaFluidAvailable(){
@@ -62,7 +66,8 @@ public class ManaGeneratorFluidHandler {
   }
 
   public float getManaTankCapacity(){
-    return CommonConfig.MANA_GENERATOR_MAX_MANA_FLUID_STORAGE.get();
+    return CommonConfig.MANA_GENERATOR_MAX_MANA_FLUID_STORAGE.get() *
+      AllConfigs.SERVER.kinetics.maxMotorSpeed.get();
   }
 
   public void read(CompoundTag compound, boolean clientPacket) {

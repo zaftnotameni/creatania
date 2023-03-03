@@ -55,6 +55,6 @@ Connecting the world of Botania and Create
 [[dependencies.creatania]]
   modId = "ponderjs"
   mandatory = true
-  versionRange = "[1.18.2,)"
+  versionRange = "[1.1.8,)"
   ordering = "NONE"
   side = "BOTH"

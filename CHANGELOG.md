@@ -8,6 +8,11 @@
 
 - Added dependency on ponderjs (likely will be removed in the future)
 
+#### Bugfixes
+
+- Mana Generator now correctly fills a mana pool above
+- Mana Generator pure mana internal buffer size is now adjusted to make sure it can always have enough storage to match the configured values
+
 ### 1.18.2-0.2.1-alpha
 
 #### New
