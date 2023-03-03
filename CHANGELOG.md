@@ -2,9 +2,11 @@
 
 ## changelog
 
-### 1.18.2-0.2.2-alpha
+### 1.18.2-0.3.0-alpha
 
+#### New (potentially BREAKING!)
 
+- Added dependency on ponderjs (likely will be removed in the future)
 
 ### 1.18.2-0.2.1-alpha
 

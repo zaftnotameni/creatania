@@ -240,7 +240,7 @@ dependencies {
 
   //runtimeOnly deobfJar(file("libs/ponderjs-1.18.2-1.1.8.jar"))
   //runtimeOnly fg.deobf("maven.modrinth:deobfJar.jar")
-  runtimeOnly fg.deobf("blank:ponderjs-1.18.2:1.1.8")
+  implementation fg.deobf("blank:ponderjs-1.18.2:1.1.8")
 }
 
 
