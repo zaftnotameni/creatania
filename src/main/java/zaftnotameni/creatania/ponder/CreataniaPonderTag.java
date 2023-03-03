@@ -3,15 +3,14 @@ package zaftnotameni.creatania.ponder;
 import com.simibubi.create.content.palettes.AllPaletteStoneTypes;
 import com.simibubi.create.foundation.ponder.PonderTag;
 import net.minecraft.resources.ResourceLocation;
-import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Index;
 
 public class CreataniaPonderTag extends PonderTag {
   public static final PonderTag start = null,
-    MANA_MANIPULATION = create("mana_manipulation")
-      .item(Blocks.PURE_MANA_BLOCK.get().asItem(), true, true)
-      .defaultLang("Mana Manipulation", "Handling tangible mana")
-      .addToIndex(),
+//    MANA_MANIPULATION = create("mana_manipulation")
+//      .item(Blocks.PURE_MANA_BLOCK.get().asItem(), true, true)
+//      .defaultLang("Mana Manipulation", "Handling tangible mana")
+//      .addToIndex(),
     COBBLEGEN = create("cobblegen")
       .item(AllPaletteStoneTypes.CRIMSITE.baseBlock.get().asItem(), true, true)
       .defaultLang("Cobblegen", "Sticks and stones might break your bones")

@@ -8,11 +8,8 @@ import zaftnotameni.creatania.recipes.cobblegen.CobblegenRecipe;
 import zaftnotameni.creatania.registry.Index;
 import zaftnotameni.creatania.registry.datagen.processing.CobblegenRecipeGen;
 
-import static com.simibubi.create.AllBlocks.*;
 import static com.simibubi.create.foundation.ponder.PonderRegistry.TAGS;
 import static zaftnotameni.creatania.ponder.CreataniaPonderTag.COBBLEGEN;
-import static zaftnotameni.creatania.ponder.CreataniaPonderTag.MANA_MANIPULATION;
-import static zaftnotameni.creatania.registry.Blocks.*;
 
 public class CreataniaTagMap {
   public static void associate() {
@@ -24,12 +21,12 @@ public class CreataniaTagMap {
       cobblegenBuilder = cobblegenBuilder.add(id);
     }
 
-    TAGS.forTag(MANA_MANIPULATION)
-      .add(MECHANICAL_MIXER)
-      .add(BASIN)
-      .add(BLAZE_BURNER)
-      .add(REAL_MANA_BLOCK)
-      .add(CORRUPT_MANA_BLOCK)
-      .add(PURE_MANA_BLOCK);
+//    TAGS.forTag(MANA_MANIPULATION)
+//      .add(MECHANICAL_MIXER)
+//      .add(BASIN)
+//      .add(BLAZE_BURNER)
+//      .add(REAL_MANA_BLOCK)
+//      .add(CORRUPT_MANA_BLOCK)
+//      .add(PURE_MANA_BLOCK);
   }
 }

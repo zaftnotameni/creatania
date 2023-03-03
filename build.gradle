@@ -212,10 +212,10 @@ shadowJar {
   configurations = [project.configurations.shade]
 }
 tasks.jarJar.configure {
-  classifier ''
+  classifier 'jarjar'
 }
 jar {
-  classifier 'slim'
+  classifier ''
 }
 jarJar.enable()
 reobf { jarJar { } }

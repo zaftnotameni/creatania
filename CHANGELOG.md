@@ -2,12 +2,22 @@
 
 ## changelog
 
+### 1.18.2-0.3.2-alpha
+
+
 ### 1.18.2-0.3.1-alpha
+
+#### New
+
+- Dependency on forge kotlin loader for scripting
+
+#### Changes
+
+- Disables in-mod ponder scenes (except cobblegen)
 
 #### Bugfixes
 
 - Fixes loading error introduced in 0.3.0
-
 
 ### 1.18.2-0.3.0-alpha
 

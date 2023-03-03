@@ -12,7 +12,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.fml.loading.FMLPaths;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.recipes.cobblegen.CobblegenRecipe;
-import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Index;
 import zaftnotameni.creatania.registry.datagen.processing.CobblegenRecipeGen;
 
@@ -23,13 +22,13 @@ public class CreataniaPonderScene extends PonderScene {
     super(world, namespace, component, tags);
   }
   public static void register() {
-    INDEX
-      .forComponents(Blocks.PURE_MANA_BLOCK)
-      .addStoryBoard("mana_superheated_mixer", ManaManipulationScenes::makeLiquidPureMana, CreataniaPonderTag.MANA_MANIPULATION);
-
-    INDEX
-      .forComponents(Blocks.CORRUPT_MANA_BLOCK)
-      .addStoryBoard("mana_superheated_mixer", ManaManipulationScenes::makeLiquidCorruptMana, CreataniaPonderTag.MANA_MANIPULATION);
+//    INDEX
+//      .forComponents(Blocks.PURE_MANA_BLOCK)
+//      .addStoryBoard("mana_superheated_mixer", ManaManipulationScenes::makeLiquidPureMana, CreataniaPonderTag.MANA_MANIPULATION);
+//
+//    INDEX
+//      .forComponents(Blocks.CORRUPT_MANA_BLOCK)
+//      .addStoryBoard("mana_superheated_mixer", ManaManipulationScenes::makeLiquidCorruptMana, CreataniaPonderTag.MANA_MANIPULATION);
 
     deferredRegister();
   }
