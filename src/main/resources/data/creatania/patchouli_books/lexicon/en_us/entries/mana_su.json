@@ -1,0 +1,72 @@
+{
+    "name": "Generating Mana with SU",
+    "icon": "creatania:mana_condenser",
+    "category": "patchouli:machines",
+    "pages": [
+        {
+            "type": "text",
+            "text": "Mana Generation is not a simple process, especially when trying to accomplish it with machinery instead of flowers. We have machinery capable of blowing and sucking air using fans, maybe if we aggregate enough air some of the magical nature present in it can be extracted, even if at a very low yield. Sadly after all our efforts, the best we could manage is to generate a fake version of it."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "It looks like it is inert and somewhat corrupted, and to make matters worse it is... solid? What am I even supposed to do with that? Further experimentation is required, but we should be careful, these things look nasty and dangerous."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "creatania:mana_condenser",
+            "title": "Step 1: Mana Condenser",
+            "text": "After several failed attempts, we managed to create a $(c:/create ponder creatania:mana_condenser @a)Mana Condenser$(/c), which \"condenses\" mana from the air using only SU - unfortunately, the mana is corrupt. The corrupted mana blocks are inserted directly into an inventory or on a belt, with available space, below the machine."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "botania:pure_daisy",
+            "title": "Step 2: Purifying",
+            "text": "We then thought, what if we placed the corrupted blocks around a $(c:/create ponder botania:pure_daisy @a)Pure Daisy$(/c)? It turns out flowers were the answer! After all, the Pure Daisy seems to have removed all semblance of corruption from these blocks. These blocks are purified but seem to be still inert.$(br2)This thrilling discovery was"
+        },
+        {
+            "type": "patchouli:text",
+            "text": "dampened when we found that leaving Inert Mana Blocks placed around a Pure Daisy causes them to turn into corrupted blocks again."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "creatania:mana/blocks/pure",
+            "title": "Step 3: Inert Liquid Mana",
+            "text": "We now had a \"Mana\" block that was safe to handle. However, we were still a long way from having usable mana that we could use to make Botania tools, weapons, and other magical items. To the touch, the blocks felt like gelatin. We knew if you heat gelatin, it liquefies. Would the same apply to Inert Mana Blocks?"
+        },
+        {
+            "type": "patchouli:text",
+            "text": "To liquify $(c:/create ponder creatania:mana/blocks/pure @a)Inert Mana Blocks$(/c) we placed them in a superheated Mixer and Basin producing Inert Liquid Mana. Now, we had lots of Inert Liquid Mana, but we still had no clue how to put this liquid into a Mana Pool. We needed to discover the secret of Botania Mana! Transforming Inert Liquid Mana to Botania Mana happened by accident. The details of this secret are guarded under heavy security."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "creatania:pure_mana_bucket",
+            "title": "Inert Liquid Mana cont...",
+            "text": "We had lots of Inert Liquid Mana, but we still had no clue how to put this liquid into a Mana Pool. We needed to discover the secret of Botania Mana! Transforming Inert Liquid Mana to Botania Mana happened by accident. We guard the details of this secret are guarded under heavy security."
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "creatania:mana_generator",
+            "title": "Step 4: Mana Generator",
+            "text": "Just kidding! No. Seriously, I am not revealing how the $(c:/create ponder creatania:mana_generator @a)Mana Generator$(/c) operates. When provided with rotational force, this machine somehow manages to convert the inert mana fluid we've been handling into real mana, percolating it into a mana pool above it. This conversion process is inexplicably magical but it "
+        },
+        {
+            "type": "patchouli:text",
+            "text": "seems to be woefully inefficient, only a fraction of the liquid that goes in is successfully transformed into real mana. Regardless, after much trial and error, we finally discovered the secret to “real” Botania Mana."
+        },
+        {
+            "type": "patchouli:text",
+            "title": "Better Manufacturing",
+            "text": "To improve the manufacturing process, modify steps 2 and 3.$(br2)$(l)Step 2: Liquify Inert Corrupted Mana$()$(br)Placing Inert Corrupted Mana Blocks around a Pure Daisy, then mining them when purified became very tedious! What if we could liquefy the Inert Corrupted Mana Blocks as we did to the purified blocks? "
+        },
+        {
+            "type": "patchouli:spotlight",
+            "item": "creatania:mana/blocks/corrupt",
+            "title": "Corrupted Mana Blocks",
+            "text": "Thankfully, Inert Corrupted Mana Blocks can also be liquified in a superheated Mixer and Basin to produce $(c:/create ponder creatania:mana/blocks/corrupt @a) Corrupted Inert Liquid Mana$(/c) - no more manually handling those corrupted blocks."
+        },
+        {
+            "type": "patchouli:text",
+            "text": "$(l)Step 3: Purify Corrupted Fluid Mana$()$(br2)The Pure Daisy is a miracle flower! We found the Corrupted Fluid Mana is also purified via Pure Daisy to produce Inert Fluid Mana. We can easily place four liquid mana around a Pure Daisy, although, I wonder if there is a way to have eight?"
+        }
+    ]
+}
