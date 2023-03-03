@@ -4,6 +4,9 @@
 
 ### 1.18.2-0.3.1-alpha
 
+#### Bugfixes
+
+- Fixes loading error introduced in 0.3.0
 
 
 ### 1.18.2-0.3.0-alpha

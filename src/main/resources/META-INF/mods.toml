@@ -1,5 +1,7 @@
 modLoader = "javafml" #mandatory
 loaderVersion = "[40,)" #mandatory This is typically bumped every Minecraft version by Forge. See our download page for lists of versions.
+#modLoader = "kotlinforforge" #mandatory
+#loaderVersion = "[3.9,)"
 license = "GPLv3"
 [[mods]]
   modId = "creatania"
@@ -56,5 +58,11 @@ Connecting the world of Botania and Create
   modId = "ponderjs"
   mandatory = true
   versionRange = "[1.1.8,)"
+  ordering = "NONE"
+  side = "BOTH"
+[[dependencies.creatania]]
+  modId = "kotlinforforge"
+  mandatory = true
+  versionRange = "[3.10,)"
   ordering = "NONE"
   side = "BOTH"
