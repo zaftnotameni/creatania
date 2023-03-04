@@ -15,7 +15,7 @@ object CreataniaPonderIndex {
   }
 
   fun registerTags() {
-    CreataniaPonderTag.register()
+    CreataniaPonderTag.registerPonderTags()
   }
 
   fun registerScenes() {

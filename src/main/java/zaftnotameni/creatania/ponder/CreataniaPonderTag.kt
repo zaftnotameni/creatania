@@ -69,6 +69,6 @@ class CreataniaPonderTag(id : ResourceLocation?) : PonderTag(id) {
     //    return this.item(item, true, true);
     //  }
     @JvmStatic
-    fun register() {}
+    fun registerPonderTags() {}
   }
 }
