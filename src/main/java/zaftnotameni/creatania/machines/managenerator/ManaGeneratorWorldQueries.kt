@@ -10,9 +10,7 @@ import vazkii.botania.api.mana.IManaReceiver
 import zaftnotameni.creatania.mana.manaduct.BaseManaductBlock
 
 fun getTargetManaReceiver(initial : BlockPos, level : Level) : ManaReceiverMatch? {
-  if (level == null) return null
   if (level.isClientSide) return null
-  if (initial == null) return null
   for (y in 1..2) {
     val match = computeManaReceiverMatchAt(initial, level, 0, y, 0)
     if (match?.isManaDuct == true) return match
@@ -27,9 +25,7 @@ fun getTargetManaReceiver(initial : BlockPos, level : Level) : ManaReceiverMatch
 }
 
 fun computeManaReceiverMatchAt(initial : BlockPos, level : Level, x : Int, y : Int, z : Int) : ManaReceiverMatch? {
-  if (level == null) return null
   if (level.isClientSide) return null
-  if (initial == null) return null
   val position = initial.offset(x, y, z)
   val entity = level.getBlockEntity(position) as? IManaReceiver
   val blockstate = level.getBlockState(position)
@@ -39,7 +35,7 @@ fun computeManaReceiverMatchAt(initial : BlockPos, level : Level, x : Int, y : I
 
 fun specialHandlingViaManaduct(manaAmount : Int, manaDuctBlockState : BlockState, generator : ManaGeneratorBlockEntity) : Int {
   if (manaDuctBlockState.block !is BaseManaductBlock) return 0
-  val manaDuctBlock = manaDuctBlockState as BaseManaductBlock
+  val manaDuctBlock = manaDuctBlockState.block as BaseManaductBlock
   val maybeAggloPlateBlockState = BaseManaductBlock.getMouthPointedAtBlockState(generator.level, manaDuctBlockState, generator.blockPos.above())
   if (maybeAggloPlateBlockState == null || !maybeAggloPlateBlockState.hasBlockEntity()) return 0
   val maybeAggloPlateBlockEntity = BaseManaductBlock.getMouthPointedAtBlockEntity(generator.level, manaDuctBlockState, generator.blockPos.above())

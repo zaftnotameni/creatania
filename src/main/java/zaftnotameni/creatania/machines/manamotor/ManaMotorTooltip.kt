@@ -4,8 +4,6 @@ import com.simibubi.create.foundation.config.AllConfigs
 import net.minecraft.network.chat.Component
 import zaftnotameni.creatania.util.Text
 
-val manaLabel = arrayOf("ALMOST NOTHING", "EXTREMELY LOW", "VERY LOW", "LOW")
-
 fun gogglesTooltip(tooltip : MutableList<Component>, crouching : Boolean, motor : ManaMotorBlockEntity) {
   if (!crouching) return
 

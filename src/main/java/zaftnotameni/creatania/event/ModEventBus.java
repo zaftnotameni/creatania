@@ -75,21 +75,13 @@ public class ModEventBus {
     }
     return array;
   }
-  public static void registerBlockColors(BlockColor blockColor, Supplier<? extends Block>... blocks) {
+  @SafeVarargs public static void registerBlockColors(BlockColor blockColor, Supplier<? extends Block>... blocks) {
     Objects.requireNonNull(blockColor, "color is null!");
-    if (Minecraft.getInstance().getBlockColors() == null) {
-      BLOCK_COLORS.add(Pair.of(blockColor, blocks));
-    } else {
-      Minecraft.getInstance().getBlockColors().register(blockColor, unpackBlocks(blocks));
-    }
+    Minecraft.getInstance().getBlockColors().register(blockColor, unpackBlocks(blocks));
   }
-  public static void registerItemColors(ItemColor itemColor, Supplier<? extends ItemLike>... items) {
+  @SafeVarargs public static void registerItemColors(ItemColor itemColor, Supplier<? extends ItemLike>... items) {
     Objects.requireNonNull(itemColor, "color is null!");
-    if (Minecraft.getInstance().getItemColors() == null) {
-      ITEM_COLORS.add(Pair.of(itemColor, items));
-    } else {
-      Minecraft.getInstance().getItemColors().register(itemColor, unpackItems(items));
-    }
+    Minecraft.getInstance().getItemColors().register(itemColor, unpackItems(items));
   }
   public static void initBlockColors() {
     if (!BLOCK_COLORS.isEmpty()) return;
@@ -106,9 +98,9 @@ public class ModEventBus {
     var terra = colorOfBlock(MaterialColor.COLOR_GREEN);
     var elem = colorOfBlock(MaterialColor.COLOR_PINK);
     var gaia = colorOfBlock(MaterialColor.COLOR_LIGHT_GRAY);
-    registerBlockColors(purple, () -> Blocks.CORRUPT_MANA_BLOCK.get());
-    registerBlockColors(cyan, () -> Blocks.PURE_MANA_BLOCK.get());
-    registerBlockColors(wart, () -> Blocks.REAL_MANA_BLOCK.get());
+    registerBlockColors(purple, Blocks.CORRUPT_MANA_BLOCK::get);
+    registerBlockColors(cyan, Blocks.PURE_MANA_BLOCK::get);
+    registerBlockColors(wart, Blocks.REAL_MANA_BLOCK::get);
     registerBlockColors(gold, () -> blockFrom(Fluids.MOLTEN_GOLD));
     registerBlockColors(iron, () -> blockFrom(Fluids.MOLTEN_IRON));
     registerBlockColors(copper, () -> blockFrom(Fluids.MOLTEN_COPPER));

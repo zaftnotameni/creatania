@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.NotNull;
 import zaftnotameni.creatania.recipes.base.CreataniaRecipeCategory;
 import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Index;
@@ -20,19 +21,19 @@ public class ManaCondenserRecipeCategory extends CreataniaRecipeCategory<ManaCon
     super(helper, helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(Blocks.MANA_GENERATOR.get())));
   }
   @Override
-  public Component getTitle() {
+  public @NotNull Component getTitle() {
     return new TextComponent("Mana Condenser");
   }
   @Override
-  public ResourceLocation getUid() {
+  public @NotNull ResourceLocation getUid() {
     return UID;
   }
   @Override
-  public Class<? extends ManaCondenserRecipe> getRecipeClass() {
+  public @NotNull Class<? extends ManaCondenserRecipe> getRecipeClass() {
     return ManaCondenserRecipe.class;
   }
   @Override
-  public void setRecipe(IRecipeLayoutBuilder builder, ManaCondenserRecipe recipe, IFocusGroup focuses) {
+  public void setRecipe(IRecipeLayoutBuilder builder, ManaCondenserRecipe recipe, @NotNull IFocusGroup focuses) {
     builder.addSlot(RecipeIngredientRole.OUTPUT, 30, 50).addIngredients(Ingredient.of(ForgeRegistries.ITEMS.getValue(new ResourceLocation("minecraft:chest")).asItem()))
       .addTooltipCallback((recipeSlotView, tooltip) -> tooltip.add(new TextComponent("Any Inventory placed below the machine will serve as output")));
     builder.addSlot(RecipeIngredientRole.OUTPUT, 30, 30).addIngredients(Ingredient.of(recipe.outputs.items.get(0).getItem()))
@@ -42,4 +43,3 @@ public class ManaCondenserRecipeCategory extends CreataniaRecipeCategory<ManaCon
     super.setRecipe(builder, recipe, focuses);
   }
 }
-

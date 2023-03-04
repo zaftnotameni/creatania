@@ -15,6 +15,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.registries.RegistryObject;
+import org.jetbrains.annotations.NotNull;
 import zaftnotameni.creatania.registry.Index;
 import zaftnotameni.creatania.registry.Recipes;
 
@@ -37,7 +38,7 @@ public class CobblegenRecipe extends ProcessingRecipe<Container> implements Reci
   }
 
   @Override
-  public boolean matches(Container pContainer, Level pLevel) {
+  public boolean matches(@NotNull Container pContainer, @NotNull Level pLevel) {
     return false;
   }
 

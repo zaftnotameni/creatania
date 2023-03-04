@@ -1,6 +1,9 @@
 package zaftnotameni.creatania.stress.xorlever;
+
 import com.mojang.math.Vector3f;
 import com.simibubi.create.foundation.block.ITE;
+import java.util.Random;
+import java.util.function.Function;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.DustParticleOptions;
@@ -25,17 +28,15 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.registry.BlockEntities;
-
-import java.util.Random;
-import java.util.function.Function;
 public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implements ITE<XorLeverBlockEntity> {
   public XorLeverBlock(Properties pProperties) {
     super(pProperties);
   }
   @Override
-  public InteractionResult use(BlockState state, Level worldIn, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
+  public @NotNull InteractionResult use(@NotNull BlockState state, Level worldIn, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand handIn, @NotNull BlockHitResult hit) {
     if (worldIn.isClientSide) return useOnClient(state, worldIn, pos);
     return useOnServer(worldIn, pos, player);
   }
@@ -52,7 +53,7 @@ public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implem
     });
   }
   @Override
-  public int getSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side) {
+  public int getSignal(@NotNull BlockState blockState, @NotNull BlockGetter blockAccess, @NotNull BlockPos pos, @NotNull Direction side) {
     return getTileEntityOptional(blockAccess, pos).map(computeStateSignal(blockState, side)).orElse(0);
   }
 
@@ -62,13 +63,13 @@ public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implem
   }
 
   @Override
-  public boolean isSignalSource(BlockState state) { return true; }
+  public boolean isSignalSource(@NotNull BlockState state) { return true; }
   @Override
-  public int getDirectSignal(BlockState blockState, BlockGetter blockAccess, BlockPos pos, Direction side) { return getConnectedDirection(blockState) == side ? getSignal(blockState, blockAccess, pos, side) : 0; }
+  public int getDirectSignal(@NotNull BlockState blockState, @NotNull BlockGetter blockAccess, @NotNull BlockPos pos, @NotNull Direction side) { return getConnectedDirection(blockState) == side ? getSignal(blockState, blockAccess, pos, side) : 0; }
 
   @Override
   @OnlyIn(Dist.CLIENT)
-  public void animateTick(BlockState stateIn, Level worldIn, BlockPos pos, Random rand) {
+  public void animateTick(@NotNull BlockState stateIn, @NotNull Level worldIn, @NotNull BlockPos pos, @NotNull Random rand) {
     withTileEntityDo(worldIn, pos, te -> {
       if (rand.nextFloat() < 0.5F) {
         var delta = (getSignalDirection(te, stateIn) == getTrueFacing(stateIn)) ? -0.5f : 0.5f;
@@ -78,7 +79,7 @@ public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implem
   }
 
   @Override
-  public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+  public void onRemove(@NotNull BlockState state, @NotNull Level worldIn, @NotNull BlockPos pos, @NotNull BlockState newState, boolean isMoving) {
     if (isMoving || state.getBlock() == newState.getBlock())
       return;
     withTileEntityDo(worldIn, pos, te -> {
@@ -109,7 +110,7 @@ public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implem
 
   @SuppressWarnings("deprecation")
   @Override
-  public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
+  public @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter worldIn, @NotNull BlockPos pos, @NotNull CollisionContext context) {
     return Blocks.DIAMOND_BLOCK.getShape(state, worldIn, pos, context);
   }
 
@@ -129,7 +130,7 @@ public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implem
   }
 
   @Override
-  public boolean isPathfindable(BlockState state, BlockGetter reader, BlockPos pos, PathComputationType type) {
+  public boolean isPathfindable(@NotNull BlockState state, @NotNull BlockGetter reader, @NotNull BlockPos pos, @NotNull PathComputationType type) {
     return false;
   }
   public static Direction.Axis getTrueFaceAxis(BlockState bs) {
@@ -148,12 +149,7 @@ public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implem
     var facing = bs.getValue(FACING);
     var face = bs.getValue(FACE);
     if (face == AttachFace.CEILING) facing = facing.getOpposite();
-    if (face == AttachFace.WALL) {
-      facing = facing == Direction.NORTH ? Direction.UP : Direction.DOWN;
-      facing = facing == Direction.SOUTH ? Direction.UP : Direction.DOWN;
-      facing = facing == Direction.EAST ? Direction.UP : Direction.DOWN;
-      facing = facing == Direction.WEST ? Direction.UP : Direction.DOWN;
-    }
+    if (face == AttachFace.WALL) facing = facing == Direction.NORTH ? Direction.UP : Direction.DOWN;
     return facing;
   }
 }

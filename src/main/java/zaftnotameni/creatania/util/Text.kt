@@ -1,3 +1,7 @@
+@file:Suppress("unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused",
+  "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused", "unused"
+)
+
 package zaftnotameni.creatania.util
 
 import com.simibubi.create.foundation.utility.Lang
@@ -18,7 +22,7 @@ object Text {
     return colored(text, ChatFormatting.GRAY)
   }
 
-  fun green(text : String?) : LangBuilder {
+  @Suppress("unused") fun green(text : String?) : LangBuilder {
     return colored(text, ChatFormatting.DARK_GREEN)
   }
 

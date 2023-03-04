@@ -18,7 +18,6 @@ class CreataniaPonderTag(id : ResourceLocation?) : PonderTag(id) {
       .item(AllPaletteStoneTypes.CRIMSITE.baseBlock.get().asItem(), true, true)
       .defaultLang("Cobblegen", "Sticks and stones might break your bones")
       .addToIndex()
-    val end : PonderTag? = null
     fun create(id : String?) : PonderTag {
       return PonderTag(Index.resource(id))
     }

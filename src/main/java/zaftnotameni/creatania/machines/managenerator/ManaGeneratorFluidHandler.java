@@ -47,7 +47,6 @@ public class ManaGeneratorFluidHandler {
 
   public int drainManaFluidFromTank(int amount) {
     var fluidCapability = this.inputTankBehavior.getCapability().orElse(null);
-    if (fluidCapability == null) return 0;
     var sourceMana = new FluidStack(Fluids.PURE_MANA.get().getSource(), amount);
     var flowingMana = new FluidStack(Fluids.PURE_MANA.get().getFlowing(), amount);
     var sourceDrained = fluidCapability.drain(sourceMana, IFluidHandler.FluidAction.EXECUTE);

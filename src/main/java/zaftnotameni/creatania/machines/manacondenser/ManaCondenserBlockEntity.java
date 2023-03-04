@@ -18,7 +18,6 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.CapabilityItemHandler;
 import vazkii.botania.api.BotaniaForgeCapabilities;
 import vazkii.botania.api.mana.IManaReceiver;
 import zaftnotameni.creatania.config.CommonConfig;
@@ -28,6 +27,8 @@ import zaftnotameni.creatania.machines.manamachine.IAmParticleEmittingMachine;
 import zaftnotameni.creatania.machines.manamachine.KineticManaMachine;
 import zaftnotameni.creatania.registry.Blocks;
 
+import static net.minecraft.core.Direction.UP;
+import static net.minecraftforge.items.CapabilityItemHandler.ITEM_HANDLER_CAPABILITY;
 import static zaftnotameni.creatania.machines.manacondenser.ManaCondenserTooltipKt.gogglesTooltip;
 
 /**
@@ -99,12 +100,14 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
     this.active = true;
   }
   public boolean doesNotMeetRequirementsToCondenseMana(int rpm, int requiredMana) {
-    return this.isOverStressed() || (rpm <= 0) || (this.getBlockPos() == null) || !this.isSpeedRequirementFulfilled() || (this.mana < requiredMana);
+    if (this.isOverStressed() || (rpm <= 0)) return true;
+    return !this.isSpeedRequirementFulfilled() || this.mana < requiredMana;
   }
   public void insertCorruptedManaBlockBelow() {
-    BlockEntity entityBelow = this.level.getBlockEntity(this.worldPosition.below());
+    if (level == null) return;
+    BlockEntity entityBelow = level.getBlockEntity(worldPosition.below());
     if (entityBelow == null) return;
-    entityBelow.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.UP).ifPresent((inventoryBelow) -> {
+    entityBelow.getCapability(ITEM_HANDLER_CAPABILITY, UP).ifPresent((inventoryBelow) -> {
       ItemStack stack = new ItemStack(Blocks.CORRUPT_MANA_BLOCK.get().asItem());
       for (int i = 0; i < inventoryBelow.getSlots(); i++) {
         if (!inventoryBelow.isItemValid(i, stack)) continue;

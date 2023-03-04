@@ -1,6 +1,9 @@
 package zaftnotameni.creatania.mana.flowers;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.tileEntity.SmartTileEntity;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,8 +25,9 @@ import vazkii.botania.api.mana.IManaCollector;
 import vazkii.botania.api.mana.IManaPool;
 import zaftnotameni.creatania.machines.manamachine.KineticManaMachine;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import static net.minecraftforge.common.util.LazyOptional.empty;
+import static net.minecraftforge.common.util.LazyOptional.of;
+
 public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerInterfaces> implements BotaniaFlowerInterfaces {
   public static final ResourceLocation MANA_POOL = new ResourceLocation("botania", "mana_pool");
   public static final ResourceLocation MANA_SPREADER = new ResourceLocation("botania", "mana_spreader");
@@ -59,13 +63,12 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
   public FunctionalFlowerHandler withTickRate(int x) { this.tickRate = x; return this; }
   public FunctionalFlowerHandler withRequiredManaPerOperation(int x) { this.manaPerOperation = x; return this; }
   public FunctionalFlowerHandler withBindRange(int x) { this.bindRange = x; return this; }
-  public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-    if (cap == BotaniaForgeCapabilities.WANDABLE) {
-      return LazyOptional.of(() -> self).cast();
-    } else {
+  public <C> LazyOptional<C> getCapability(@Nonnull Capability<C> cap, @Nullable Direction side) {
+    if (cap == BotaniaForgeCapabilities.WANDABLE) return of(() -> self).cast();
+    else {
       return DistExecutor.unsafeRunForDist(
-        () -> () -> cap == BotaniaForgeClientCapabilities.WAND_HUD ? LazyOptional.of(() -> this).cast() : LazyOptional.empty(),
-        () -> () -> LazyOptional.empty()
+        () -> () -> cap == BotaniaForgeClientCapabilities.WAND_HUD ? of(() -> this).cast() : empty(),
+        () -> LazyOptional::empty
       );
     }
   }

@@ -2,11 +2,8 @@ package zaftnotameni.creatania.util
 
 import com.tterrag.registrate.providers.ProviderType
 import com.tterrag.registrate.providers.RegistrateLangProvider
-import com.tterrag.registrate.util.entry.RegistryEntry
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.item.Item
-import net.minecraft.world.level.block.Block
-import net.minecraft.world.level.material.Fluid
 import net.minecraftforge.common.util.Lazy
 import net.minecraftforge.registries.RegistryObject
 import org.apache.commons.lang3.StringUtils
@@ -34,10 +31,6 @@ object Humanity {
     return digestString(`in`.path)
   }
 
-  fun digestBlock(`in` : Block) : String {
-    return digestString(`in`.descriptionId.toString())
-  }
-
   @JvmStatic
   fun digestItem(`in` : Item) : String {
     return digestString(`in`.descriptionId.toString())
@@ -45,14 +38,6 @@ object Humanity {
 
   @JvmStatic
   fun digestItem(entry : RegistryObject<Item?>) : String {
-    return digestString(entry.id.path)
-  }
-
-  fun digestBlock(entry : RegistryObject<Block?>) : String {
-    return digestString(entry.id.path)
-  }
-
-  fun digestFluid(entry : RegistryObject<Fluid?>) : String {
     return digestString(entry.id.path)
   }
 
@@ -65,49 +50,9 @@ object Humanity {
     return keyString(`in`.toString())
   }
 
-  fun keyBlock(`in` : Block) : String {
-    return "item." + keyString(`in`.descriptionId.toString())
-  }
-
-  fun keyItem(`in` : Item) : String {
-    return "block." + keyString(`in`.descriptionId.toString())
-  }
-
   @JvmStatic
   fun keyItem(entry : RegistryObject<Item?>) : String {
     return "item." + keyString(entry.id.toString())
-  }
-
-  fun keyBlock(entry : RegistryObject<Block?>) : String {
-    return "block." + keyString(entry.id.toString())
-  }
-
-  fun keyFluid(entry : RegistryObject<Fluid?>) : String {
-    return "fluid." + keyString(entry.id.toString())
-  }
-
-  fun keyBlock(entry : RegistryEntry<Block?>) : String {
-    return "block." + keyString(entry.id.toString())
-  }
-
-  fun keyItem(entry : RegistryEntry<Item?>) : String {
-    return "block." + keyString(entry.id.toString())
-  }
-
-  fun keyFluid(entry : RegistryEntry<Fluid?>) : String {
-    return "block." + keyString(entry.id.toString())
-  }
-
-  fun digestBlock(entry : RegistryEntry<Block>) : String {
-    return digestString(entry.get().name.string)
-  }
-
-  fun digestItem(entry : RegistryEntry<Item>) : String {
-    return digestString(entry.get().description.string)
-  }
-
-  fun digestFluid(entry : RegistryEntry<Fluid>) : String {
-    return digestString(entry.get().registryType.name)
   }
 
   @JvmStatic

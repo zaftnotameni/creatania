@@ -12,6 +12,7 @@
 #### Fixes
 
 - Bucket tint now matches the fluid associated with it
+- Mana Blocks models are smaller, so they fit better in belts/basin
 
 ### 1.18.2-0.3.2-alpha
 

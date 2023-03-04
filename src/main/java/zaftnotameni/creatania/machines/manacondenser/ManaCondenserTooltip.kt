@@ -6,8 +6,6 @@ import zaftnotameni.creatania.util.Text
 import kotlin.math.abs
 import kotlin.math.ceil
 
-val manaLabel = arrayOf("ALMOST NOTHING", "EXTREMELY LOW", "VERY LOW", "LOW")
-
 fun gogglesTooltip(tooltip : MutableList<Component>, crouching : Boolean, condenser : ManaCondenserBlockEntity) {
   if (!crouching) return
   emptyLine(tooltip)

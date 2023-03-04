@@ -6,6 +6,7 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 import zaftnotameni.creatania.registry.Index;
 public abstract class CreataniaRecipeCategory<T extends CreataniaRecipe> implements IRecipeCategory<T> {
   public final IDrawableStatic background;
@@ -16,15 +17,15 @@ public abstract class CreataniaRecipeCategory<T extends CreataniaRecipe> impleme
     this.background = helper.createDrawable(TEXTURE, 0, 0, 60, 85);
   }
   @Override
-  public IDrawable getBackground() {
+  public @NotNull IDrawable getBackground() {
     return this.background;
   }
   @Override
-  public IDrawable getIcon() {
+  public @NotNull IDrawable getIcon() {
     return this.icon;
   }
   @Override
-  public void setRecipe(IRecipeLayoutBuilder builder, T recipe, IFocusGroup focuses) {
+  public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull T recipe, @NotNull IFocusGroup focuses) {
     IRecipeCategory.super.setRecipe(builder, recipe, focuses);
   }
 }

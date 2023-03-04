@@ -20,7 +20,7 @@ import static zaftnotameni.creatania.util.Humanity.lang;
 public class Items {
   public static final DeferredRegister<Item> INDEX = DeferredRegister.create(ForgeRegistries.ITEMS, Constants.MODID);
 
-  public static final RegistryObject<ManaGelItem> MANA_GEL = INDEX.register(Constants.MANA_GEL_ITEM_NAME, () -> new ManaGelItem());
+  public static final RegistryObject<ManaGelItem> MANA_GEL = INDEX.register(Constants.MANA_GEL_ITEM_NAME, ManaGelItem::new);
 
   public static final ItemEntry<SequencedAssemblyItem> INCOMPLETE_MANA_MACHINE_COMPONENT = sequencedIngredient(Constants.INCOMPLETE_MANA_MACHINE_COMPONENT);
 

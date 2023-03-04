@@ -4,6 +4,7 @@ import com.simibubi.create.foundation.ponder.PonderScene;
 import com.simibubi.create.foundation.ponder.PonderWorld;
 import com.simibubi.create.foundation.ponder.SceneBuilder;
 import java.lang.reflect.Field;
+import java.util.Optional;
 import java.util.function.Supplier;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.properties.Property;
@@ -29,15 +30,8 @@ public class ExtremelyPainfulWorkaroundBecauseJavaIsTerrible {
     return () -> {
       self.getBlockState();
       if (self.resolvedBlockState == null) return null;
-      return (Property<Direction>) self.resolvedBlockState
-        .getValues()
-        .keySet()
-        .stream()
-        .filter(k -> k
-          .getName()
-          .equalsIgnoreCase("facing"))
-        .findFirst()
-        .get();
+      Optional<Property<?>> maybeFacing = self.resolvedBlockState.getValues().keySet().stream().filter(k -> k.getName().equalsIgnoreCase("facing")).findFirst();
+      return maybeFacing.isEmpty() ? null : (Property<Direction>) maybeFacing.get();
     };
   }
 

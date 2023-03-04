@@ -1,14 +1,14 @@
 package zaftnotameni.creatania.stress.xorlever;
+
 import com.simibubi.create.foundation.tileEntity.SmartTileEntity;
 import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
 import com.simibubi.create.foundation.utility.animation.LerpedFloat;
+import java.util.List;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-
-import java.util.List;
 public class XorLeverBlockEntity extends SmartTileEntity {
   public int state = 0;
   public int lastChange;
@@ -39,7 +39,7 @@ public class XorLeverBlockEntity extends SmartTileEntity {
       lastChange--;
       if (lastChange == 0) updateOutput();
     }
-    if (level.isClientSide) clientState.tickChaser();
+    if (level != null && level.isClientSide) clientState.tickChaser();
   }
 
   @Override
@@ -47,7 +47,11 @@ public class XorLeverBlockEntity extends SmartTileEntity {
     super.initialize();
   }
 
-  private void updateOutput() { XorLeverBlock.updateNeighbors(getBlockState(), level, worldPosition); }
+  private void updateOutput() {
+    if (level != null) {
+      XorLeverBlock.updateNeighbors(getBlockState(), level, worldPosition);
+    }
+  }
 
   @Override
   public void addBehaviours(List<TileEntityBehaviour> behaviours) {}

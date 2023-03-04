@@ -7,6 +7,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.effects.VanillaEffectConfiguration;
@@ -44,12 +45,12 @@ public class CorruptManaBlock extends BaseManaBlock {
   }
 
   @Override
-  public void setPlacedBy(Level pLevel, BlockPos pPos, BlockState pState, @Nullable LivingEntity pPlacer, ItemStack pStack) {
+  public void setPlacedBy(@NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull BlockState pState, @Nullable LivingEntity pPlacer, @NotNull ItemStack pStack) {
     super.setPlacedBy(pLevel, pPos, pState, pPlacer, pStack);
   }
   @Override
-  public void stepOn(Level pLevel, BlockPos pPos, BlockState pState, Entity pEntity) {
-    if (pLevel == null || pPos == null || pState == null || pEntity == null || !(pEntity instanceof LivingEntity livingEntity)) {
+  public void stepOn(@NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull BlockState pState, @NotNull Entity pEntity) {
+    if (!(pEntity instanceof LivingEntity livingEntity)) {
       super.stepOn(pLevel, pPos, pState, pEntity);
       return;
     }

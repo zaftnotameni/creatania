@@ -1,9 +1,12 @@
 package zaftnotameni.creatania.advancements;
+
 import com.google.gson.JsonObject;
 import com.simibubi.create.Create;
-import com.simibubi.create.foundation.advancement.*;
+import com.simibubi.create.foundation.advancement.SimpleCreateTrigger;
 import com.simibubi.create.foundation.utility.Components;
 import com.tterrag.registrate.util.entry.ItemProviderEntry;
+import java.util.function.Consumer;
+import java.util.function.UnaryOperator;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.FrameType;
@@ -20,10 +23,6 @@ import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.registry.Advancements;
 import zaftnotameni.creatania.registry.Index;
 import zaftnotameni.creatania.registry.Triggers;
-import zaftnotameni.creatania.registry.datagen.ForgeAdvancementsProvider;
-
-import java.util.function.Consumer;
-import java.util.function.UnaryOperator;
 
 public class CreataniaAdvancement {
 

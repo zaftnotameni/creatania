@@ -6,6 +6,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.NotNull;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.effects.VanillaEffectConfiguration;
 import zaftnotameni.creatania.registry.Advancements;
@@ -38,8 +39,8 @@ public class PureManaBlock extends BaseManaBlock {
   }
 
   @Override
-  public void stepOn(Level pLevel, BlockPos pPos, BlockState pState, Entity pEntity) {
-    if (pLevel == null || pPos == null || pState == null || pEntity == null || !(pEntity instanceof LivingEntity livingEntity)) {
+  public void stepOn(@NotNull Level pLevel, @NotNull BlockPos pPos, @NotNull BlockState pState, @NotNull Entity pEntity) {
+    if (!(pEntity instanceof LivingEntity livingEntity)) {
       super.stepOn(pLevel, pPos, pState, pEntity);
       return;
     }

@@ -35,8 +35,8 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   public boolean active;
   public boolean duct;
   public int mana;
-  public ActiveStateSynchronizerBehavior activeStateSynchronizerBehavior;
-  public KineticManaMachine manaMachine;
+  public ActiveStateSynchronizerBehavior<ManaGeneratorBlockEntity> activeStateSynchronizerBehavior;
+  public KineticManaMachine<ManaGeneratorBlockEntity> manaMachine;
   public ManaGeneratorFluidHandler manaGeneratorFluidHandler;
 
   public ManaGeneratorBlockEntity(BlockEntityType<? extends ManaGeneratorBlockEntity> type, BlockPos pos, BlockState state) {
@@ -51,10 +51,11 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
 
   public KineticManaMachine<ManaGeneratorBlockEntity> getManaMachine() {
     if (this.manaMachine == null) {
-      this.manaMachine = new KineticManaMachine<>(this).withManaCap(1000)
+      var manaMachine = new KineticManaMachine<>(this).withManaCap(1000)
                                                        .withManaPerRpmPerTick(CommonConfig.MANA_GENERATOR_MANA_PER_RPM_PER_TICK.get())
                                                        .withStressUnitsPerRpm(CommonConfig.MANA_GENERATOR_SU_PER_RPM.get())
                                                        .withBaseRpm(32);
+      if (manaMachine != null) { this.manaMachine = manaMachine; }
     }
     return this.manaMachine;
   }
@@ -94,12 +95,12 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   }
 
   @Nonnull @Override public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, Direction side) {
-    var result = KineticManaMachine.handleBotaniaManaHudCapability(cap, side, this);
+    var result = KineticManaMachine.handleBotaniaManaHudCapability(cap, this);
     if (result.isPresent()) return result.cast();
 
     if (side == null) {
       Log.throttled(100).log(l -> l.info("no side provided when checking for capability {}", cap.getName()));
-      return super.getCapability(cap, side);
+      return super.getCapability(cap, null);
     }
     var block = this.getBlockState().getBlock();
     if (!(block instanceof ManaGeneratorBlock)) {
@@ -129,6 +130,7 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   }
 
   public int addManaToPool(int manaAmount) {
+    if (this.level == null) return 0;
     var targetReceiver = getTargetManaReceiver(this.worldPosition, this.level);
     if (targetReceiver == null) { return 0; }
     if (targetReceiver.isManaDuct()) {
@@ -138,17 +140,9 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   }
 
   public boolean shouldAbortServerTick() {
-    var isInInvalidState = this.isOverStressed() || this.getNormalizedRPM() == 0 || this.worldPosition == null || this.level == null;
-    if (isInInvalidState) {
-      Log.RateLimited.of(this, 20 * 30).log((logger) -> logger.debug("server tick aborted because RPM is 0 or is overstressed"));
-      return true;
-    }
-    var notEnoughSpeed = Math.abs(this.getSpeed()) <= 0 || !this.isSpeedRequirementFulfilled();
-    if (notEnoughSpeed) {
-      Log.RateLimited.of(this, 20 * 30).log((logger) -> logger.debug("server tick aborted because RPM {} does not satisfy minimum requirement", this.getSpeed()));
-      return true;
-    }
-    return false;
+    var isInInvalidState = this.isOverStressed() || this.getNormalizedRPM() == 0 || this.level == null;
+    if (isInInvalidState) return true;
+    return Math.abs(this.getSpeed()) <= 0 || !this.isSpeedRequirementFulfilled();
   }
 
   public int getManaConversionRate() { return Math.max(Math.abs(CommonConfig.MANA_GENERATOR_MANA_CONVERSION_RATE.get()), 1); }
@@ -165,6 +159,7 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
 
   public void serverTick() {
     this.active = false;
+    if (this.level == null) return;
     if (this.ductCheckTickCount++ > CommonConfig.MANA_GENERATOR_LAZY_TICK_RATE.get()) {
       this.ductCheckTickCount = 0;
       var match = computeManaReceiverMatchAt(this.worldPosition, this.level, 0, 1, 0);
@@ -189,7 +184,7 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   @Override public void tick() {
     super.tick();
     isFirstTick = false;
-    if (this.level == null || this.worldPosition == null) return;
+    if (this.level == null) return;
     if (level.isClientSide()) this.clientTick();
     if (!level.isClientSide()) this.serverTick();
   }

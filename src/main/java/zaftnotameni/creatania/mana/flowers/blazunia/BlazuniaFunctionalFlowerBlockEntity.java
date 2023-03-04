@@ -1,7 +1,12 @@
 package zaftnotameni.creatania.mana.flowers.blazunia;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.tileEntity.SmartTileEntity;
 import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
+import java.util.List;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import javax.annotation.Nonnull;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -24,11 +29,6 @@ import vazkii.botania.api.block.IWandHUD;
 import zaftnotameni.creatania.mana.flowers.BotaniaFlowerInterfaces;
 import zaftnotameni.creatania.mana.flowers.FunctionalFlowerHandler;
 
-import javax.annotation.Nonnull;
-import java.util.List;
-import java.util.function.Function;
-import java.util.function.Supplier;
-
 import static zaftnotameni.creatania.mana.flowers.blazunia.BlazeBurnerInteraction.*;
 
 @OnlyIn(value = Dist.CLIENT, _interface = IWandHUD.class)
@@ -42,7 +42,7 @@ public class BlazuniaFunctionalFlowerBlockEntity extends SmartTileEntity impleme
   public BlazuniaFunctionalFlowerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState state) {
     super(type, pos, state);
   }
-  public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @javax.annotation.Nullable Direction side) {
+  public <T> @NotNull LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @javax.annotation.Nullable Direction side) {
     return evalFlowerHandler(f -> f.getCapability(cap, side),() -> super.getCapability(cap, side));
   }
   @Override
@@ -52,7 +52,7 @@ public class BlazuniaFunctionalFlowerBlockEntity extends SmartTileEntity impleme
   }
 
   @Override
-  public CompoundTag getUpdateTag() {
+  public @NotNull CompoundTag getUpdateTag() {
     var tag = super.getUpdateTag();
     return evalFlowerHandler(
       f -> f.getUpdateTag(tag),
@@ -60,7 +60,7 @@ public class BlazuniaFunctionalFlowerBlockEntity extends SmartTileEntity impleme
     );
   }
   @Override
-  public void handleUpdateTag(CompoundTag tag) {
+  public void handleUpdateTag(@NotNull CompoundTag tag) {
     this.lazyFlowerHandler.resolve().ifPresent(f -> f.handleUpdateTag(tag));
     super.handleUpdateTag(tag);
   }
@@ -83,13 +83,13 @@ public class BlazuniaFunctionalFlowerBlockEntity extends SmartTileEntity impleme
     var pos = getBlockPos();
     NonNullList<Integer> consumedMana = NonNullList.create();
     scanRangeForBlazeBurners(8,serverLevel, pos, (bb) -> {
-      if (!evalFlowerHandler(f -> f.hasEnoughManaForOneOperation(), () -> false)) return;
+      if (!evalFlowerHandler(FunctionalFlowerHandler::hasEnoughManaForOneOperation, () -> false)) return;
       var bbs = bb.getBlockState();
       var bpos = bb.getBlockPos();
       var block = bbs.getBlock();
       var hit = makeBlockHitResult(bpos);
       useFuelOnBlazeBurner(fakePlayer, serverLevel, bbs, bpos, block, hit);
-      consumedMana.add(evalFlowerHandler(f -> f.getManaPerOperation(), () -> 0));
+      consumedMana.add(evalFlowerHandler(FunctionalFlowerHandler::getManaPerOperation, () -> 0));
     });
     return consumedMana.stream().mapToInt(Integer::intValue).sum();
   }
@@ -104,7 +104,7 @@ public class BlazuniaFunctionalFlowerBlockEntity extends SmartTileEntity impleme
   @Override
   public void tick() {
     super.tick();
-    this.lazyFlowerHandler.resolve().ifPresent(f -> f.doTick());
+    this.lazyFlowerHandler.resolve().ifPresent(FunctionalFlowerHandler::doTick);
   }
   @Override
   public boolean canSelect(Player player, ItemStack wand, BlockPos pos, Direction side) {
@@ -122,7 +122,7 @@ public class BlazuniaFunctionalFlowerBlockEntity extends SmartTileEntity impleme
   }
   @Nullable
   @Override
-  public BlockPos getBinding() { return evalFlowerHandler(x -> x.getBinding(),() -> null);  }
+  public BlockPos getBinding() { return evalFlowerHandler(FunctionalFlowerHandler::getBinding,() -> null);  }
   @Override
   public void renderHUD(PoseStack ms, Minecraft mc) { lazyFlowerHandler.resolve().ifPresent(x -> x.renderHUD(ms, mc)); }
   @Override

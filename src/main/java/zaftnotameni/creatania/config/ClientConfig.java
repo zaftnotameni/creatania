@@ -1,6 +1,6 @@
 package zaftnotameni.creatania.config;
 import net.minecraftforge.common.ForgeConfigSpec;
-import org.openjdk.nashorn.api.linker.NashornLinkerExporter;
+
 public class ClientConfig {
   public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
   public static final ForgeConfigSpec.ConfigValue<Float> TICKS_PER_PARTICLE;

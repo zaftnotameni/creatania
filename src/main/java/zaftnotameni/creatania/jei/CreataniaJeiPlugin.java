@@ -8,6 +8,7 @@ import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeManager;
+import org.jetbrains.annotations.NotNull;
 import zaftnotameni.creatania.recipes.cobblegen.AllCobblegenRecipes;
 import zaftnotameni.creatania.recipes.cobblegen.CobblegenRecipeCategory;
 import zaftnotameni.creatania.recipes.condenser.ManaCondenserRecipe;
@@ -18,7 +19,7 @@ import zaftnotameni.creatania.registry.Index;
 @JeiPlugin
 public class CreataniaJeiPlugin implements IModPlugin {
   @Override
-  public ResourceLocation getPluginUid() {
+  public @NotNull ResourceLocation getPluginUid() {
     return Index.resource("jei_plugin");
   }
   @Override
@@ -29,7 +30,7 @@ public class CreataniaJeiPlugin implements IModPlugin {
     IModPlugin.super.registerCategories(registration);
   }
   @Override
-  public void registerRecipes(IRecipeRegistration registration) {
+  public void registerRecipes(@NotNull IRecipeRegistration registration) {
     var level = Minecraft.getInstance().level;
     var manager = level.getRecipeManager();
     registerManaGeneratorRecipes(registration, manager);

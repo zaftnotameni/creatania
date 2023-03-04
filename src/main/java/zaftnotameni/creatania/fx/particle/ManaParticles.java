@@ -4,6 +4,7 @@ import net.minecraft.client.particle.*;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 
 public class ManaParticles extends TextureSheetParticle {
 
@@ -39,7 +40,8 @@ public class ManaParticles extends TextureSheetParticle {
       this.sprites = spriteSet;
     }
 
-    public Particle createParticle(SimpleParticleType particleType, ClientLevel level,
+    public Particle createParticle(
+      @NotNull SimpleParticleType particleType, @NotNull ClientLevel level,
                                    double x, double y, double z,
                                    double dx, double dy, double dz) {
       return new ManaParticles(level, this.sprites, x, y, z, dx, dy, dz);
@@ -47,7 +49,7 @@ public class ManaParticles extends TextureSheetParticle {
   }
 
   @Override
-  public ParticleRenderType getRenderType() {
+  public @NotNull ParticleRenderType getRenderType() {
     return ParticleRenderType.PARTICLE_SHEET_TRANSLUCENT;
   }
 

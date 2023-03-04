@@ -1,22 +1,23 @@
 package zaftnotameni.creatania.registry.datagen;
+
 import com.google.common.collect.Sets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.mojang.logging.LogUtils;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.Set;
+import java.util.function.Consumer;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
 import net.minecraft.resources.ResourceLocation;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import zaftnotameni.creatania.advancements.CreataniaAdvancement;
 import zaftnotameni.creatania.registry.Advancements;
-
-import java.io.IOException;
-import java.nio.file.Path;
-import java.util.Set;
-import java.util.function.Consumer;
 
 public class ForgeAdvancementsProvider implements DataProvider {
   // Datagen
@@ -27,7 +28,7 @@ public class ForgeAdvancementsProvider implements DataProvider {
     this.generator = generatorIn;
   }
   @Override
-  public void run(HashCache cache) {
+  public void run(@NotNull HashCache cache) {
     Path path = this.generator.getOutputFolder();
     Set<ResourceLocation> set = Sets.newHashSet();
     Consumer<Advancement> consumer = (advancement) -> {
@@ -51,7 +52,7 @@ public class ForgeAdvancementsProvider implements DataProvider {
         + advancementIn.getId().getPath() + ".json");
   }
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return "Creatania's Advancements";
   }
   public static JsonObject provideLangEntries() {
@@ -60,4 +61,3 @@ public class ForgeAdvancementsProvider implements DataProvider {
     return object;
   }
 }
-

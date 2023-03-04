@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.PushReaction;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import zaftnotameni.creatania.registry.BlockEntities;
 public class OmniboxBlock extends RotatedPillarKineticBlock implements ITE<OmniboxBlockEntity> {
@@ -20,13 +21,12 @@ public class OmniboxBlock extends RotatedPillarKineticBlock implements ITE<Omnib
     super(properties);
   }
   @Override
-  public PushReaction getPistonPushReaction(BlockState state) {
+  public @NotNull PushReaction getPistonPushReaction(@NotNull BlockState state) {
     return PushReaction.PUSH_ONLY;
   }
   @Nullable
   @Override
   public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-    if (pContext == null) return super.getStateForPlacement(pContext);
     var horizontalDirection = pContext.getHorizontalDirection();
     Direction facing;
     if (pContext.getPlayer() != null && pContext.getPlayer().isShiftKeyDown()) facing = horizontalDirection;

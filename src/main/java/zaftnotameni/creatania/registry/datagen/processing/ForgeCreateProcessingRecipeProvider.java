@@ -6,6 +6,11 @@ import com.simibubi.create.content.contraptions.processing.ProcessingRecipeSeria
 import com.simibubi.create.foundation.data.recipe.CreateRecipeProvider;
 import com.simibubi.create.foundation.utility.RegisteredObjects;
 import com.simibubi.create.foundation.utility.recipe.IRecipeTypeInfo;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
@@ -13,14 +18,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.fluids.FluidAttributes;
+import org.jetbrains.annotations.NotNull;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.registry.Index;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Supplier;
-import java.util.function.UnaryOperator;
 
 public abstract class ForgeCreateProcessingRecipeProvider extends CreateRecipeProvider {
 
@@ -46,12 +46,12 @@ public abstract class ForgeCreateProcessingRecipeProvider extends CreateRecipePr
 		gen.addProvider(new DataProvider() {
 
 			@Override
-			public String getName() {
+			public @NotNull String getName() {
 				return "Creatania's Processing Recipes";
 			}
 
 			@Override
-			public void run(HashCache dc) throws IOException {
+			public void run(@NotNull HashCache dc) throws IOException {
 				GENERATORS.forEach(g -> {
 					try {
 						g.run(dc);
@@ -138,7 +138,7 @@ public abstract class ForgeCreateProcessingRecipeProvider extends CreateRecipePr
 	}
 
 	@Override
-	public String getName() {
+	public @NotNull String getName() {
 		return "Creatania's Processing Recipes: " + getRecipeType().getId()
 			.getPath();
 	}

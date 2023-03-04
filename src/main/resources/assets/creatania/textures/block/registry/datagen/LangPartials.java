@@ -31,7 +31,7 @@ public enum LangPartials implements LangPartial {
 
   private LangPartials(String displayName, Supplier<JsonElement> provider) {
     this.displayName = displayName;
-    this.provider = provider;
+    this.provider = provider::get;
   }
 
   @Override
@@ -52,4 +52,3 @@ public enum LangPartials implements LangPartial {
   }
 
 }
-

@@ -1,6 +1,7 @@
 package zaftnotameni.creatania.event;
 
 import com.simibubi.create.AllItems;
+import java.util.Collection;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,8 +26,6 @@ import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.registry.Advancements;
 import zaftnotameni.creatania.registry.Tags;
 import zaftnotameni.creatania.util.ScanArea;
-
-import java.util.Collection;
 
 import static zaftnotameni.creatania.util.Actions.killSlimeProduceManagelGrantAchievement;
 import static zaftnotameni.creatania.util.Queries.isOnTopOrInsideManaFluid;
@@ -80,7 +79,7 @@ public class ForgeEventBus {
       evt.setTargetY(previous.y);
       evt.setTargetZ(previous.z);
       ScanArea.forEachPlayerInTheArea(level, pos, 128, p -> true, Advancements.PREVENT_ENDER_ENTITY_FROM_TELEPORTING::awardTo);
-    } catch (RuntimeException e) {} catch (Exception e) {}
+    } catch (Exception e) {}
   }
   @SubscribeEvent
   public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock evt) {
@@ -112,7 +111,7 @@ public class ForgeEventBus {
       addItemToPlayer(player, stack);
       level.destroyBlock(hit.getBlockPos(), false);
       evt.setCanceled(true);
-    } catch (RuntimeException e) {} catch (Exception e) {}
+    } catch (Exception e) {}
   }
   private static void addItemToPlayer(Player player, ItemStack stack) {
     if (!player.getInventory().add(stack)) { player.drop(stack, false); }
@@ -126,14 +125,14 @@ public class ForgeEventBus {
     var namespace = resource.getNamespace();
     var path = resource.getPath();
     var blacklisted = StringUtils.containsIgnoreCase(CommonConfig.BLACKLISTED_WRENCH_BLOCKS.get(), path);
-    var notQuite = blacklisted || item == null || resource == null || namespace == null || !namespace.equalsIgnoreCase("botania");
+    var notQuite = blacklisted || !namespace.equalsIgnoreCase("botania");
     if (notQuite) { return null; }
     else { return item; }
   }
   private static boolean isNotServerOrNotMainHandOrHitAirOrHandIsEmpty(PlayerInteractEvent.RightClickBlock evt, Player player, Level level, BlockHitResult hit) {
     var itemStack = evt.getItemStack();
     var hand = evt.getHand();
-    var isWrench = itemStack != null && !itemStack.isEmpty() && itemStack.is(AllItems.WRENCH.get());
+    var isWrench = !itemStack.isEmpty() && itemStack.is(AllItems.WRENCH.get());
     var isCrouching = player != null && player.isCrouching();
     var isServer = !level.isClientSide();
     var isMainHand = InteractionHand.MAIN_HAND.equals(hand);

@@ -1,14 +1,15 @@
 package zaftnotameni.creatania.registry.datagen.botania;
+
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
+import java.io.IOException;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import org.jetbrains.annotations.NotNull;
 import zaftnotameni.creatania.registry.Blocks;
-
-import java.io.IOException;
 
 import static zaftnotameni.creatania.util.NamedItems.*;
 public class RuneAltarRecipeGen extends BotaniaBaseRecipeGen implements DataProvider {
@@ -16,7 +17,7 @@ public class RuneAltarRecipeGen extends BotaniaBaseRecipeGen implements DataProv
     super(gen, "botania:runic_altar", "output");
   }
   @Override
-  public void run(HashCache pCache) throws IOException {
+  public void run(@NotNull HashCache pCache) throws IOException {
     start()
       .ingredient(Ingredient.of(Blocks.MANA_CASING.get().asItem()))
       .ingredient(Ingredient.of(itemLike("botania", "mana_powder")))
@@ -85,7 +86,7 @@ public class RuneAltarRecipeGen extends BotaniaBaseRecipeGen implements DataProv
       .saveAs(Blocks.GAIA_MANADUCT_BLOCK.getId(),"_upgrade", pCache);
   }
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return "Creatania Rune Altar Recipes";
   }
 }

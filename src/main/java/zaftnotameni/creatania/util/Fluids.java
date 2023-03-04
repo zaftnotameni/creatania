@@ -104,7 +104,7 @@ public class Fluids {
       if (a.get() == b.get()) return false;
       return true;
     }).findAny();
-    if (!maybeRecipe.isPresent()) return null;
+    if (maybeRecipe.isEmpty()) return null;
     var recipe = maybeRecipe.get();
     var block = ForgeRegistries.BLOCKS.getValue(recipe.getResultItem().getItem().getRegistryName());
     if (block == null || block.defaultBlockState().isAir()) return null;

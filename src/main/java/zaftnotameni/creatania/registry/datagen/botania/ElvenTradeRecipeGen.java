@@ -1,16 +1,17 @@
 package zaftnotameni.creatania.registry.datagen.botania;
+
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
+import java.io.IOException;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import org.jetbrains.annotations.NotNull;
 import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Fluids;
 import zaftnotameni.creatania.registry.Index;
-
-import java.io.IOException;
 
 import static zaftnotameni.creatania.util.NamedItems.*;
 public class ElvenTradeRecipeGen extends BotaniaBaseRecipeGen implements DataProvider {
@@ -18,7 +19,7 @@ public class ElvenTradeRecipeGen extends BotaniaBaseRecipeGen implements DataPro
     super(gen, "botania:elven_trade");
   }
   @Override
-  public void run(HashCache pCache) throws IOException {
+  public void run(@NotNull HashCache pCache) throws IOException {
     start()
       .ingredient(Ingredient.of(Items.REDSTONE))
       .ingredient(Ingredient.of(Items.QUARTZ))
@@ -118,7 +119,7 @@ public class ElvenTradeRecipeGen extends BotaniaBaseRecipeGen implements DataPro
 
   }
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return "Creatania Elven Trade Recipes";
   }
 }

@@ -19,6 +19,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 import zaftnotameni.creatania.util.Humanity;
 import zaftnotameni.creatania.util.Log;
 
@@ -167,14 +168,14 @@ public class Fluids {
 
     @Override
     protected boolean canSpreadTo(
-      BlockGetter pLevel,
-      BlockPos pFromPos,
-      BlockState pFromBlockState,
-      Direction pDirection,
-      BlockPos pToPos,
-      BlockState pToBlockState,
-      FluidState pToFluidState,
-      Fluid pFluid
+      @NotNull BlockGetter pLevel,
+      @NotNull BlockPos pFromPos,
+      @NotNull BlockState pFromBlockState,
+      @NotNull Direction pDirection,
+      @NotNull BlockPos pToPos,
+      @NotNull BlockState pToBlockState,
+      @NotNull FluidState pToFluidState,
+      @NotNull Fluid pFluid
     ) {
       return specialCobblegenCanSpread(
          pLevel,
@@ -190,7 +191,7 @@ public class Fluids {
     }
 
     @Override
-    protected void spreadTo(LevelAccessor pLevel, BlockPos pPos, BlockState pBlockState, Direction pDirection, FluidState pFluidState) {
+    protected void spreadTo(@NotNull LevelAccessor pLevel, @NotNull BlockPos pPos, @NotNull BlockState pBlockState, @NotNull Direction pDirection, @NotNull FluidState pFluidState) {
       if (!specialCobblegenSpread(pLevel, pPos, pBlockState, pDirection, pFluidState, this)) { super.spreadTo(pLevel, pPos, pBlockState, pDirection, pFluidState); }
     }
 
@@ -200,14 +201,14 @@ public class Fluids {
 
     @Override
     protected boolean canSpreadTo(
-      BlockGetter pLevel,
-      BlockPos pFromPos,
-      BlockState pFromBlockState,
-      Direction pDirection,
-      BlockPos pToPos,
-      BlockState pToBlockState,
-      FluidState pToFluidState,
-      Fluid pFluid
+      @NotNull BlockGetter pLevel,
+      @NotNull BlockPos pFromPos,
+      @NotNull BlockState pFromBlockState,
+      @NotNull Direction pDirection,
+      @NotNull BlockPos pToPos,
+      @NotNull BlockState pToBlockState,
+      @NotNull FluidState pToFluidState,
+      @NotNull Fluid pFluid
     ) {
       return specialCobblegenCanSpread(
         pLevel,
@@ -223,7 +224,7 @@ public class Fluids {
     }
 
     @Override
-    protected void spreadTo(LevelAccessor pLevel, BlockPos pPos, BlockState pBlockState, Direction pDirection, FluidState pFluidState) {
+    protected void spreadTo(@NotNull LevelAccessor pLevel, @NotNull BlockPos pPos, @NotNull BlockState pBlockState, @NotNull Direction pDirection, @NotNull FluidState pFluidState) {
       if (!specialCobblegenSpread(pLevel, pPos, pBlockState, pDirection, pFluidState, this)) { super.spreadTo(pLevel, pPos, pBlockState, pDirection, pFluidState); }
     }
 

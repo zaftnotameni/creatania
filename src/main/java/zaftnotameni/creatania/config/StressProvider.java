@@ -1,14 +1,14 @@
 package zaftnotameni.creatania.config;
+
 import com.simibubi.create.foundation.block.BlockStressDefaults;
 import com.simibubi.create.foundation.config.AllConfigs;
 import com.simibubi.create.foundation.config.CStress;
 import com.simibubi.create.foundation.utility.Couple;
+import java.lang.reflect.Field;
+import java.util.Map;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.ForgeConfigSpec;
-
-import java.lang.reflect.Field;
-import java.util.Map;
 public class StressProvider {
   public static class CreataniaStressProvider extends CStress {
     Field c;
@@ -23,7 +23,7 @@ public class StressProvider {
         i = AllConfigs.SERVER.kinetics.stressValues.getClass().getField("impacts");
         c.setAccessible(true);
         i.setAccessible(true);
-      } catch (RuntimeException e) {} catch (Exception e) {}
+      } catch (Exception e) {}
     }
     @Override
     public Couple<Integer> getGeneratedRPM(Block block) {

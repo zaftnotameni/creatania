@@ -1,8 +1,10 @@
 package zaftnotameni.creatania.mana.manaduct;
+
 import com.google.common.collect.ImmutableMap;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import com.tterrag.registrate.util.nullness.NonNullFunction;
+import java.util.function.Function;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.TagKey;
@@ -20,12 +22,11 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import zaftnotameni.creatania.registry.Index;
 import zaftnotameni.creatania.registry.Tags;
 import zaftnotameni.creatania.util.Voxel;
-
-import java.util.function.Function;
 
 import static com.simibubi.create.foundation.data.TagGen.pickaxeOnly;
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.ATTACH_FACE;
@@ -56,8 +57,7 @@ public class BaseManaductBlock extends FaceAttachedHorizontalDirectionalBlock {
 
   @Nullable
   @Override
-  public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-    if (pContext == null) return super.getStateForPlacement(pContext);
+  public BlockState getStateForPlacement(@NotNull BlockPlaceContext pContext) {
     var horizontalDirection = pContext.getHorizontalDirection();
     Direction facing;
     if (pContext.getPlayer() != null && pContext.getPlayer().isShiftKeyDown()) facing = horizontalDirection;
@@ -65,19 +65,19 @@ public class BaseManaductBlock extends FaceAttachedHorizontalDirectionalBlock {
     return super.getStateForPlacement(pContext).setValue(FACING, facing);
   }
   @Override
-  public VoxelShape getShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) {
+  public @NotNull VoxelShape getShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
     return Voxel.TINY_BLOCK_VOXEL;
   }
   @Override
-  public VoxelShape getOcclusionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
+  public @NotNull VoxelShape getOcclusionShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos) {
     return Voxel.ALMOST_NONE_VOXEL;
   }
   @Override
-  public int getLightBlock(BlockState pState, BlockGetter pLevel, BlockPos pPos) {
+  public int getLightBlock(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos) {
     return 1;
   }
   @Override
-  protected ImmutableMap<BlockState, VoxelShape> getShapeForEachState(Function<BlockState, VoxelShape> shapeFactory) {
+  protected @NotNull ImmutableMap<BlockState, VoxelShape> getShapeForEachState(@NotNull Function<BlockState, VoxelShape> shapeFactory) {
     return super.getShapeForEachState(x -> Voxel.TINY_BLOCK_VOXEL);
   }
 

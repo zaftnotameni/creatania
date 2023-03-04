@@ -12,6 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 import zaftnotameni.creatania.recipes.base.CreataniaRecipeProcessingCategory;
 import zaftnotameni.creatania.registry.Blocks;
 public class CobblegenRecipeCategory extends CreataniaRecipeProcessingCategory<CobblegenRecipe> {
@@ -23,21 +24,21 @@ public class CobblegenRecipeCategory extends CreataniaRecipeProcessingCategory<C
     registration.addRecipeCategories(new CobblegenRecipeCategory(registration.getJeiHelpers().getGuiHelper()));
   }
   @Override
-  public Component getTitle() {
+  public @NotNull Component getTitle() {
     return new TextComponent("Mysterious Cobblegen");
   }
   @SuppressWarnings("removal")
   @Override
-  public ResourceLocation getUid() {
+  public @NotNull ResourceLocation getUid() {
     return UID;
   }
   @SuppressWarnings("removal")
   @Override
-  public Class<? extends CobblegenRecipe> getRecipeClass() {
+  public @NotNull Class<? extends CobblegenRecipe> getRecipeClass() {
     return CobblegenRecipe.class;
   }
   @Override
-  public void setRecipe(IRecipeLayoutBuilder builder, CobblegenRecipe recipe, IFocusGroup focuses) {
+  public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull CobblegenRecipe recipe, @NotNull IFocusGroup focuses) {
     try {
       NonNullList<FluidIngredient.FluidStackIngredient> ifs = recipe.getInputFluidStacks();
       var f1 = ifs.get(0).getMatchingFluidStacks().get(0);
@@ -59,7 +60,7 @@ public class CobblegenRecipeCategory extends CreataniaRecipeProcessingCategory<C
       builder.addSlot(RecipeIngredientRole.OUTPUT, 25, 30).addItemStack(
         recipe.getResultItem()
       );
-    } catch (RuntimeException e) {} catch (Exception e) {}
+    } catch (Exception e) {}
     super.setRecipe(builder, recipe, focuses);
   }
 }

@@ -13,6 +13,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.NotNull;
 import zaftnotameni.creatania.recipes.base.CreataniaRecipeCategory;
 import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Fluids;
@@ -23,19 +24,19 @@ public class ManaGeneratorRecipeCategory extends CreataniaRecipeCategory<ManaGen
     super(helper, helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(Blocks.MANA_GENERATOR.get())));
   }
   @Override
-  public Component getTitle() {
+  public @NotNull Component getTitle() {
     return new TextComponent("Mana Generator");
   }
   @Override
-  public ResourceLocation getUid() {
+  public @NotNull ResourceLocation getUid() {
     return UID;
   }
   @Override
-  public Class<? extends ManaGeneratorRecipe> getRecipeClass() {
+  public @NotNull Class<? extends ManaGeneratorRecipe> getRecipeClass() {
     return ManaGeneratorRecipe.class;
   }
   @Override
-  public void setRecipe(IRecipeLayoutBuilder builder, ManaGeneratorRecipe recipe, IFocusGroup focuses) {
+  public void setRecipe(IRecipeLayoutBuilder builder, ManaGeneratorRecipe recipe, @NotNull IFocusGroup focuses) {
     builder.addSlot(RecipeIngredientRole.INPUT, 30, 50).addIngredient(ForgeTypes.FLUID_STACK, new FluidStack(Fluids.PURE_MANA.get(), 1000))
       .addTooltipCallback((recipeSlotView, tooltip) -> tooltip.add(new TextComponent("Purified inert mana fluid can be converted into real mana from botania")));;
     builder.addSlot(RecipeIngredientRole.OUTPUT, 10, 10).addIngredient(ForgeTypes.FLUID_STACK, recipe.outputs.fluids.get(0))
@@ -47,4 +48,3 @@ public class ManaGeneratorRecipeCategory extends CreataniaRecipeCategory<ManaGen
     super.setRecipe(builder, recipe, focuses);
   }
 }
-

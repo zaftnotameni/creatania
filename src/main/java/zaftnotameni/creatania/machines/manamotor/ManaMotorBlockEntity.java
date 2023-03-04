@@ -69,10 +69,10 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
     if (cap == BotaniaForgeCapabilities.WANDABLE) return lazyWandable.cast();
     if (cap == BotaniaForgeCapabilities.SPARK_ATTACHABLE) return lazySparkAttachable.cast();
 
-    var result = KineticManaMachine.handleBotaniaManaHudCapability(cap, side, this);
+    var result = KineticManaMachine.handleBotaniaManaHudCapability(cap, this);
     if (result.isPresent()) return result.cast();
 
-    if (side == null) return super.getCapability(cap, side);
+    if (side == null) return super.getCapability(cap, null);
     var sameAxisAsShaft =
       motorBlock.hasShaftTowards(this.level, this.worldPosition, this.getBlockState(), side.getOpposite()) ||
       motorBlock.hasShaftTowards(this.level, this.worldPosition, this.getBlockState(), side);

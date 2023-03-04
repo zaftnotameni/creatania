@@ -10,6 +10,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import zaftnotameni.creatania.recipes.ItemFluidRecipeSerializer;
 import zaftnotameni.creatania.recipes.base.CreataniaRecipe;
@@ -23,7 +24,7 @@ public class ManaCondenserRecipe extends CreataniaRecipe {
   }
 
   @Override
-  public boolean matches(SimpleContainer pContainer, Level pLevel) {
+  public boolean matches(@NotNull SimpleContainer pContainer, Level pLevel) {
     if (pLevel.isClientSide()) { return false; }
     if (this.inputs.items.isEmpty()) { return pContainer.isEmpty(); }
     if (pContainer.isEmpty()) { return false; }
@@ -31,12 +32,12 @@ public class ManaCondenserRecipe extends CreataniaRecipe {
   }
 
   @Override
-  public NonNullList<Ingredient> getIngredients() {
+  public @NotNull NonNullList<Ingredient> getIngredients() {
     return this.inputs.items;
   }
 
   @Override
-  public ItemStack assemble(SimpleContainer pContainer) {
+  public @NotNull ItemStack assemble(@NotNull SimpleContainer pContainer) {
     if (this.outputs.items.isEmpty()) return new ItemStack(Blocks.AIR.asItem());
     return this.outputs.items.get(0);
   }
@@ -47,23 +48,23 @@ public class ManaCondenserRecipe extends CreataniaRecipe {
   }
 
   @Override
-  public ItemStack getResultItem() {
+  public @NotNull ItemStack getResultItem() {
     if (this.outputs.items.isEmpty()) return new ItemStack(Blocks.AIR.asItem());
     return this.outputs.items.get(0).copy();
   }
 
   @Override
-  public ResourceLocation getId() {
+  public @NotNull ResourceLocation getId() {
     return id;
   }
 
   @Override
-  public RecipeSerializer<?> getSerializer() {
+  public @NotNull RecipeSerializer<?> getSerializer() {
     return Serializer.INSTANCE;
   }
 
   @Override
-  public RecipeType<?> getType() {
+  public @NotNull RecipeType<?> getType() {
     return Type.INSTANCE;
   }
 
@@ -79,17 +80,17 @@ public class ManaCondenserRecipe extends CreataniaRecipe {
     public static ResourceLocation name = Index.resource(ManaCondenserRecipe.Type.ID);
 
     @Override
-    public ManaCondenserRecipe fromJson(ResourceLocation id, JsonObject json) {
+    public @NotNull ManaCondenserRecipe fromJson(@NotNull ResourceLocation id, @NotNull JsonObject json) {
       return ItemFluidRecipeSerializer.fromJson(id, json, ManaCondenserRecipe::new);
     }
 
     @Override
-    public ManaCondenserRecipe fromNetwork(ResourceLocation id, FriendlyByteBuf buf) {
+    public ManaCondenserRecipe fromNetwork(@NotNull ResourceLocation id, @NotNull FriendlyByteBuf buf) {
       return ItemFluidRecipeSerializer.fromNetwork(id, buf, ManaCondenserRecipe::new);
     }
 
     @Override
-    public void toNetwork(FriendlyByteBuf buf, ManaCondenserRecipe recipe) {
+    public void toNetwork(@NotNull FriendlyByteBuf buf, @NotNull ManaCondenserRecipe recipe) {
       ItemFluidRecipeSerializer.toNetwork(buf, recipe);
     }
 
@@ -114,4 +115,3 @@ public class ManaCondenserRecipe extends CreataniaRecipe {
     }
   }
 }
-

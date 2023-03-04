@@ -14,6 +14,7 @@ import net.minecraftforge.common.Tags
 import net.minecraftforge.registries.ForgeRegistries
 import org.apache.commons.lang3.StringUtils
 
+@SuppressWarnings("unused")
 object NamedItems {
   fun namespaceOf(id : String) : String {
     return id.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]

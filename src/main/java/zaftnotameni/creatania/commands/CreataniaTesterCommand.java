@@ -1,13 +1,13 @@
 package zaftnotameni.creatania.commands;
+
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
+import java.util.UUID;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.arguments.blocks.BlockStateArgument;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.server.level.ServerPlayer;
-
-import java.util.UUID;
 public class CreataniaTesterCommand {
   public CreataniaTesterCommand(CommandDispatcher<CommandSourceStack> dispatcher) {
 //    dispatcher.register(
@@ -26,7 +26,7 @@ public class CreataniaTesterCommand {
     var b2 = BlockStateArgument.getBlock(command, "block2").getState();
     var player = source.getEntity();
     var level = source.getLevel();
-    if (level == null || level.isClientSide || player == null || !(player instanceof ServerPlayer p)) return 0;
+    if (level.isClientSide || !(player instanceof ServerPlayer p)) return 0;
     var pos = player.getOnPos();
     player.sendMessage(new TextComponent("checkerboard started"), UUID.randomUUID());
     for (var x = -range; x <= range; x++) for (var z = -range; z <= range; z++) {

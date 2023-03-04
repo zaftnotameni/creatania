@@ -1,5 +1,7 @@
 package zaftnotameni.creatania.registry.datagen;
+
 import com.simibubi.create.foundation.fluid.FluidIngredient;
+import java.util.function.Consumer;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
 import net.minecraft.advancements.critereon.ItemPredicate;
 import net.minecraft.data.DataGenerator;
@@ -7,19 +9,18 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+import org.jetbrains.annotations.NotNull;
 import zaftnotameni.creatania.recipes.base.Inputs;
 import zaftnotameni.creatania.recipes.base.Outputs;
 import zaftnotameni.creatania.recipes.condenser.ManaCondenserRecipeBuilder;
 import zaftnotameni.creatania.recipes.generator.ManaGeneratorRecipeBuilder;
 import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Fluids;
-
-import java.util.function.Consumer;
 public class ForgeRecipeProvider extends RecipeProvider {
   public ForgeRecipeProvider(DataGenerator generator) { super(generator); }
 
   @Override
-  protected void buildCraftingRecipes(Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
+  protected void buildCraftingRecipes(@NotNull Consumer<FinishedRecipe> pFinishedRecipeConsumer) {
     InventoryChangeTrigger.TriggerInstance trigger = inventoryTrigger(
       ItemPredicate.Builder.item().of(Blocks.MANA_CASING.get().asItem()).build()
     );

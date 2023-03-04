@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.NotNull;
 import zaftnotameni.creatania.machines.manamachine.KineticManaMachine;
 import zaftnotameni.creatania.registry.BlockEntities;
 
@@ -30,17 +31,17 @@ public class ManaGeneratorBlock extends DirectionalAxisKineticBlock implements I
   @Override
   protected Direction getFacingForPlacement(BlockPlaceContext context) { return KineticManaMachine.getFacingForPlacement(context); }
   @Override
-  public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) { return ALMOST_FULL_BLOCK_VOXEL; }
+  public @NotNull VoxelShape getShape(@NotNull BlockState state, @NotNull BlockGetter worldIn, @NotNull BlockPos pos, @NotNull CollisionContext context) { return ALMOST_FULL_BLOCK_VOXEL; }
   @Override
-  public VoxelShape getCollisionShape(BlockState pState, BlockGetter pLevel, BlockPos pPos, CollisionContext pContext) { return FULL_BLOCK_VOXEL; }
+  public @NotNull VoxelShape getCollisionShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) { return FULL_BLOCK_VOXEL; }
   @Override
   public Axis getRotationAxis(BlockState state) {
     return state.getValue(FACING).getAxis();
   }
   @Override
-  public BlockState getRotatedBlockState(BlockState originalState, Direction targetedFace) { return KineticManaMachine.rotate(originalState, targetedFace); }
+  public BlockState getRotatedBlockState(BlockState originalState, Direction targetedFace) { return KineticManaMachine.rotate(originalState); }
   @Override
-  public BlockState rotate(BlockState pState, Rotation pRotation) { return KineticManaMachine.rotate(pState, pRotation); }
+  public BlockState rotate(BlockState pState, Rotation pRotation) { return KineticManaMachine.rotate(pState); }
   @Override
   public BlockEntityType<? extends ManaGeneratorBlockEntity> getTileEntityType() { return BlockEntities.MANA_GENERATOR_BLOCK_ENTITY.get(); }
   @Override
@@ -54,4 +55,3 @@ public class ManaGeneratorBlock extends DirectionalAxisKineticBlock implements I
     return SpeedLevel.NONE;
   }
 }
-

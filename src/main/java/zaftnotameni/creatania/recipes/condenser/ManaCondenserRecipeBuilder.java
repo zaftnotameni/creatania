@@ -1,5 +1,7 @@
 package zaftnotameni.creatania.recipes.condenser;
+
 import com.google.gson.JsonObject;
+import java.util.function.Consumer;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.CriterionTriggerInstance;
@@ -17,8 +19,6 @@ import zaftnotameni.creatania.recipes.ItemFluidRecipeSerializer;
 import zaftnotameni.creatania.recipes.base.Inputs;
 import zaftnotameni.creatania.recipes.base.Outputs;
 import zaftnotameni.creatania.registry.Index;
-
-import java.util.function.Consumer;
 public class ManaCondenserRecipeBuilder implements RecipeBuilder {
   public final Inputs inputs;
   public final Outputs outputs;
@@ -31,21 +31,21 @@ public class ManaCondenserRecipeBuilder implements RecipeBuilder {
     this.recipeIdPrefix = pRecipeIdPrefix;
   }
   @Override
-  public RecipeBuilder unlockedBy(String pCriterionName, CriterionTriggerInstance pCriterionTrigger) {
+  public @NotNull RecipeBuilder unlockedBy(@NotNull String pCriterionName, @NotNull CriterionTriggerInstance pCriterionTrigger) {
     this.advancement.addCriterion(pCriterionName, pCriterionTrigger);
     return this;
   }
   @Override
-  public RecipeBuilder group(@Nullable String pGroupName) {
+  public @NotNull RecipeBuilder group(@Nullable String pGroupName) {
     return this;
   }
   @Override
-  public Item getResult() {
-    if (this.outputs.items.isEmpty() || this.outputs.items.size() <= 0) return Items.AIR.asItem();
+  public @NotNull Item getResult() {
+    if (this.outputs.items.isEmpty()) return Items.AIR.asItem();
     return this.outputs.items.get(0).getItem();
   }
   @Override
-  public void save(Consumer<FinishedRecipe> pFinishedRecipeConsumer, ResourceLocation pRecipeId) {
+  public void save(Consumer<FinishedRecipe> pFinishedRecipeConsumer, @NotNull ResourceLocation pRecipeId) {
     this.advancement.parent(new ResourceLocation("recipes/root"))
       .addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(pRecipeId))
       .rewards(AdvancementRewards.Builder.recipe(pRecipeId)).requirements(RequirementsStrategy.OR);
@@ -77,12 +77,12 @@ public class ManaCondenserRecipeBuilder implements RecipeBuilder {
     }
 
     @Override
-    public void serializeRecipeData(JsonObject pJson) {
+    public void serializeRecipeData(@NotNull JsonObject pJson) {
       ItemFluidRecipeSerializer.serializeRecipeData(pJson, this.inputs, this.outputs);
     }
 
     @Override
-    public ResourceLocation getId() {
+    public @NotNull ResourceLocation getId() {
       return Index.resource(this.getRecipeIdPrefix() + "_from_mana_condenser");
     }
 
@@ -92,7 +92,7 @@ public class ManaCondenserRecipeBuilder implements RecipeBuilder {
     }
 
     @Override
-    public RecipeSerializer<?> getType() {
+    public @NotNull RecipeSerializer<?> getType() {
       return ManaCondenserRecipe.Serializer.INSTANCE;
     }
 

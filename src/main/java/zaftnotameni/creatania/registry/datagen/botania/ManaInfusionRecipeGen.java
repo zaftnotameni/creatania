@@ -1,21 +1,22 @@
 package zaftnotameni.creatania.registry.datagen.botania;
+
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.AllItems;
+import java.io.IOException;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import org.jetbrains.annotations.NotNull;
 import zaftnotameni.creatania.registry.Blocks;
-
-import java.io.IOException;
 
 import static zaftnotameni.creatania.mana.ManaPoolValues.*;
 public class ManaInfusionRecipeGen extends BotaniaBaseRecipeGen implements DataProvider {
   public ManaInfusionRecipeGen(DataGenerator gen) { super(gen, "botania:mana_infusion", "output", "item"); }
   @Override
-  public void run(HashCache pCache) throws IOException {
+  public void run(@NotNull HashCache pCache) throws IOException {
     start()
       .inputItem(Ingredient.of(AllItems.ROSE_QUARTZ.get()))
       .mana(hundreth())
@@ -46,7 +47,7 @@ public class ManaInfusionRecipeGen extends BotaniaBaseRecipeGen implements DataP
       .saveAs(zaftnotameni.creatania.registry.Items.MANA_GEL.getId(), pCache);
   }
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return "Creatania Mana Infusion Recipes";
   }
 }

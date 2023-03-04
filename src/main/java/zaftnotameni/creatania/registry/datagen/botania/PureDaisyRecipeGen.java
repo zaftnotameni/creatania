@@ -1,20 +1,21 @@
 package zaftnotameni.creatania.registry.datagen.botania;
+
+import java.io.IOException;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+import org.jetbrains.annotations.NotNull;
 import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Fluids;
 import zaftnotameni.creatania.registry.Index;
-
-import java.io.IOException;
 public class PureDaisyRecipeGen extends BotaniaBaseRecipeGen implements DataProvider {
   public PureDaisyRecipeGen(DataGenerator gen) {
     super(gen, "botania:pure_daisy", "output", "name");
   }
   @Override
-  public void run(HashCache pCache) throws IOException {
+  public void run(@NotNull HashCache pCache) throws IOException {
     start()
       .inputTypeBlock(Fluids.CORRUPT_MANA.get().getSource().getRegistryName().toString())
       .time(1 * 10)
@@ -67,7 +68,7 @@ public class PureDaisyRecipeGen extends BotaniaBaseRecipeGen implements DataProv
       .saveAs(Index.resource("brass_to_elementium"), pCache);
   }
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return "Creatania Mana Infusion Recipes";
   }
 }

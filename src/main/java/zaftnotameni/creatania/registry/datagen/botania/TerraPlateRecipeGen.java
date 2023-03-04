@@ -1,13 +1,14 @@
 package zaftnotameni.creatania.registry.datagen.botania;
+
 import com.simibubi.create.AllBlocks;
+import java.io.IOException;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.HashCache;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import org.jetbrains.annotations.NotNull;
 import zaftnotameni.creatania.registry.Blocks;
-
-import java.io.IOException;
 
 import static zaftnotameni.creatania.util.NamedItems.*;
 public class TerraPlateRecipeGen extends BotaniaBaseRecipeGen implements DataProvider {
@@ -15,7 +16,7 @@ public class TerraPlateRecipeGen extends BotaniaBaseRecipeGen implements DataPro
     super(gen, "botania:terra_plate");
   }
   @Override
-  public void run(HashCache pCache) throws IOException {
+  public void run(@NotNull HashCache pCache) throws IOException {
     start()
       .ingredient(Ingredient.of(Blocks.PURE_MANA_BLOCK.get().asItem()))
       .mana(99999)
@@ -92,7 +93,7 @@ public class TerraPlateRecipeGen extends BotaniaBaseRecipeGen implements DataPro
 //    }
   }
   @Override
-  public String getName() {
+  public @NotNull String getName() {
     return "Creatania Terra Plate Recipes";
   }
 }
