@@ -2,7 +2,9 @@ package zaftnotameni.creatania.event;
 
 import com.tterrag.registrate.util.entry.FluidEntry;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Supplier;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.particle.GlowParticle;
@@ -81,15 +83,21 @@ public class ModEventBus {
     }
     return array;
   }
-  @SafeVarargs public static void registerBlockColors(BlockColor blockColor, Supplier<? extends Block>... blocks) {
-    requireNonNull(blockColor, "color is null!");
-    var x = getInstance().getBlockColors();
-    if (x != null) x.register(blockColor, unpackBlocks(blocks));
+  public static void registerBlockColors(BlockColor blockColor, Supplier<? extends Block>... blocks) {
+    Objects.requireNonNull(blockColor, "color is null!");
+    if (Minecraft.getInstance().getBlockColors() == null) {
+      BLOCK_COLORS.add(Pair.of(blockColor, blocks));
+    } else {
+      Minecraft.getInstance().getBlockColors().register(blockColor, unpackBlocks(blocks));
+    }
   }
-  @SafeVarargs public static void registerItemColors(ItemColor itemColor, Supplier<? extends ItemLike>... items) {
-    requireNonNull(itemColor, "color is null!");
-    var x = getInstance().getItemColors();
-    if (x != null) x.register(itemColor, unpackItems(items));
+  public static void registerItemColors(ItemColor itemColor, Supplier<? extends ItemLike>... items) {
+    Objects.requireNonNull(itemColor, "color is null!");
+    if (Minecraft.getInstance().getItemColors() == null) {
+      ITEM_COLORS.add(Pair.of(itemColor, items));
+    } else {
+      Minecraft.getInstance().getItemColors().register(itemColor, unpackItems(items));
+    }
   }
   public static void initBlockColors() {
     if (!BLOCK_COLORS.isEmpty()) return;
