@@ -1,0 +1,31 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:blue_orchid"
+    },
+    {
+      "fluid": "creatania:pure_mana",
+      "nbt": {},
+      "amount": 125
+    }
+  ],
+  "results": [
+    {
+      "item": "botania:black_mystical_flower",
+      "chance": 0.25
+    },
+    {
+      "item": "botania:blue_mystical_flower",
+      "chance": 0.25
+    },
+    {
+      "item": "botania:brown_mystical_flower",
+      "chance": 0.25
+    },
+    {
+      "item": "botania:cyan_mystical_flower",
+      "chance": 0.25
+    }
+  ]
+}

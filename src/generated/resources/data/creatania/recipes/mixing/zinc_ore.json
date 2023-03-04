@@ -5,7 +5,7 @@
       "item": "minecraft:stone"
     },
     {
-      "fluid": "creatania:molten_terrasteel",
+      "fluid": "creatania:molten_manasteel",
       "nbt": {},
       "amount": 125
     },

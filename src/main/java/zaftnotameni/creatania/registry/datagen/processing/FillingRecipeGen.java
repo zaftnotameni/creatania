@@ -1,6 +1,7 @@
 package zaftnotameni.creatania.registry.datagen.processing;
 
 import com.simibubi.create.AllRecipeTypes;
+import com.simibubi.create.foundation.fluid.FluidIngredient;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.item.Items;
 import org.apache.commons.lang3.StringUtils;
@@ -11,19 +12,12 @@ import static zaftnotameni.creatania.util.NamedItems.itemLike;
 
 public class FillingRecipeGen extends ForgeCreateProcessingRecipeProvider {
 	public void setupRecipes() {
+		slimeConversionWithMoltenManaMetals();
+		pylonUpgradesByFilling();
+		botaniaFlowerCultivation();
+	}
 
-		create("terra_pylon_from_mana_pylon", b -> b.require(Fluids.MOLTEN_TERRASTEEL.get(), 500)
-			.require(itemLike("botania", "mana_pylon"))
-			.output(itemLike("botania", "natura_pylon")));
-
-		create("ender_pearl_from_manasteel", b -> b.require(Fluids.MOLTEN_MANASTEEL.get(), 125)
-			.require(Items.SLIME_BALL)
-			.output(Items.ENDER_PEARL));
-
-		create("chorus_from_elementium", b -> b.require(Fluids.MOLTEN_ELEMENTIUM.get(), 125)
-			.require(Items.SLIME_BALL)
-			.output(Items.CHORUS_FRUIT));
-
+	private void botaniaFlowerCultivation() {
 		for (var tall : NamedItems.BOTANIA_TALL_FLOWERS) {
 			var namespace = tall.split(":")[0];
 			var tallPath = tall.split(":")[1];
@@ -36,11 +30,34 @@ public class FillingRecipeGen extends ForgeCreateProcessingRecipeProvider {
 			create(tallPath + "_from_" + mysticalPath, b -> b.require(net.minecraft.world.level.material.Fluids.WATER, 250)
 				.require(itemLike(namespace, mysticalPath))
 				.output(itemLike(namespace, tallPath)));
-			create(tallPath + "_from_" + petalPath, b -> b.require(Fluids.REAL_MANA.get(), 1000)
+			create(tallPath + "_from_" + petalPath, b -> b.require(Fluids.REAL_MANA.get(), 500)
 				.require(itemLike(namespace, petalPath))
 				.output(itemLike(namespace, tallPath)));
 		}
 	}
+
+	private void slimeConversionWithMoltenManaMetals() {
+		create("ender_pearl_from_manasteel", b -> b.require(Fluids.MOLTEN_MANASTEEL.get(), 125)
+			.require(Items.SLIME_BALL)
+			.output(Items.ENDER_PEARL));
+
+		create("chorus_from_elementium", b -> b.require(Fluids.MOLTEN_ELEMENTIUM.get(), 125)
+			.require(Items.SLIME_BALL)
+			.output(Items.CHORUS_FRUIT));
+	}
+
+	private void pylonUpgradesByFilling() {
+		create("natura_pylon", b -> b
+			.require(FluidIngredient.fromFluid(Fluids.MOLTEN_TERRASTEEL.get(), 500))
+			.require(itemLike("botania", "mana_pylon"))
+			.output(itemLike("botania", "natura_pylon")));
+
+		create("gaia_pylon", b -> b
+			.require(FluidIngredient.fromFluid(Fluids.MOLTEN_TERRASTEEL.get(), 500))
+			.require(itemLike("botania", "natura_pylon"))
+			.output(itemLike("botania", "gaia_pylon")));
+	}
+
 	public FillingRecipeGen(DataGenerator p_i48262_1_) {
 		super(p_i48262_1_);
 		setupRecipes();

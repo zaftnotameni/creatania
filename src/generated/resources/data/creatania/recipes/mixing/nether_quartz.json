@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:netherrack"
+    },
+    {
+      "fluid": "creatania:molten_elementium",
+      "nbt": {},
+      "amount": 125
+    },
+    {
+      "fluid": "creatania:molten_zinc",
+      "nbt": {},
+      "amount": 125
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:nether_quartz_ore"
+    }
+  ]
+}

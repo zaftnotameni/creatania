@@ -16,44 +16,46 @@ import org.apache.commons.lang3.StringUtils
 
 @SuppressWarnings("unused")
 object NamedItems {
-  fun namespaceOf(id : String) : String {
-    return id.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
-  }
+  fun namespaceOf(id : String) : String = id.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
 
   @JvmStatic
-  fun pathOf(id : String) : String {
-    return id.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
-  }
-
-  fun resourceOf(id : String) : ResourceLocation {
-    return ResourceLocation(namespaceOf(id), pathOf(id))
-  }
+  fun pathOf(id : String) : String = id.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
 
   @JvmStatic
-  fun itemLikeOf(id : String) : ItemLike? {
-    return itemLike(namespaceOf(id), pathOf(id))
-  }
+  fun pathOfItem(item : Item) : String = pathOf(item.registryName.toString())
 
-  fun idToTallFlower(id : String) : String {
-    return id.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
-  }
+  fun resourceOf(id : String) : ResourceLocation = ResourceLocation(namespaceOf(id), pathOf(id))
 
-  fun tallToMysticFlower(tallPath : String?) : String {
-    return StringUtils.replace(tallPath, "double", "mystical")
-  }
+  @JvmStatic
+  fun itemLikeOf(id : String) : ItemLike? = itemLike(namespaceOf(id), pathOf(id))
 
-  fun tallToFlowerPetal(tallPath : String?) : String {
-    return StringUtils.replace(tallPath, "double_flower", "petal")
-  }
+  fun idToTallFlower(id : String) : String = id.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
+
+  fun tallToMysticFlower(tallPath : String?) : String = StringUtils.replace(tallPath, "double", "mystical")
+
+  fun tallToFlowerPetal(tallPath : String?) : String = StringUtils.replace(tallPath, "double_flower", "petal")
 
   @JvmField
   val MINECRAFT_SHORT_FLOWERS = arrayOf(
-    "minecraft:poppy",
-    "minecraft:dandelion"
+    Items.POPPY,
+    Items.DANDELION,
+    Items.BLUE_ORCHID,
+    Items.ALLIUM,
+    Items.AZURE_BLUET,
+    Items.PINK_TULIP,
+    Items.ORANGE_TULIP,
+    Items.RED_TULIP,
+    Items.WHITE_TULIP,
+    Items.OXEYE_DAISY,
+    Items.CORNFLOWER,
+    Items.LILY_OF_THE_VALLEY
   )
   @JvmField
   val MINECRAFT_TALL_FLOWERS = arrayOf(
-    "minecraft:rose_bush"
+    Items.LILAC,
+    Items.ROSE_BUSH,
+    Items.SUNFLOWER,
+    Items.PEONY
   )
   @JvmField
   val BOTANIA_TALL_FLOWERS = arrayOf(

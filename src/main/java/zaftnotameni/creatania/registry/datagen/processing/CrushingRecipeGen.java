@@ -8,6 +8,8 @@ import com.simibubi.create.content.contraptions.processing.ProcessingRecipeBuild
 import com.simibubi.create.content.palettes.AllPaletteStoneTypes;
 import com.simibubi.create.foundation.data.recipe.CompatMetals;
 import com.simibubi.create.foundation.utility.Lang;
+import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.ItemLike;
@@ -16,9 +18,6 @@ import net.minecraftforge.common.crafting.conditions.NotCondition;
 import net.minecraftforge.common.crafting.conditions.TagEmptyCondition;
 import org.apache.commons.lang3.StringUtils;
 import zaftnotameni.creatania.util.NamedItems;
-
-import java.util.function.Supplier;
-import java.util.function.UnaryOperator;
 
 import static zaftnotameni.creatania.util.NamedItems.itemLike;
 
@@ -35,19 +34,12 @@ public class CrushingRecipeGen extends ForgeCreateProcessingRecipeProvider {
 				.output(1f, itemLike(namespace, mysticalPath), 4)
 				.output(0.1f, itemLike(namespace, mysticalPath), 1)
 				.output(0.1f, itemLike(namespace, mysticalPath), 1));
-			create("botania_flower_crushing_tall_to_petal",
-				() -> itemLike(namespace, tallPath),
-				b -> b.duration(150)
-					.output(1f, itemLike(namespace, petalPath), 6)
-					.output(0.1f, itemLike(namespace, petalPath), 1)
-					.output(0.1f, itemLike(namespace, petalPath), 1)
-					.output(0.1f, itemLike(namespace, petalPath), 1));
 			create("botania_flower_crushing_mystical_to_petal",
 				() -> itemLike(namespace, mysticalPath),
 				b -> b.duration(150)
-					.output(1f, itemLike(namespace, petalPath), 4)
-					.output(0.1f, itemLike(namespace, petalPath), 1)
-					.output(0.1f, itemLike(namespace, petalPath), 1));
+					.output(1f, itemLike(namespace, petalPath), 6)
+					.output(0.1f, itemLike(namespace, petalPath), 2)
+					.output(0.1f, itemLike(namespace, petalPath), 2));
 		}
 	}
 	protected GeneratedRecipe stoneOre(Supplier<ItemLike> ore, Supplier<ItemLike> raw, float expectedAmount,

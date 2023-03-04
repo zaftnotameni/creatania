@@ -4,6 +4,18 @@
 
 ### 1.18.2-0.3.4-alpha
 
+#### New
+
+- A couple of new recipes for the mana based ore reconstruction mechanic
+
+#### Changes
+
+- Vanilla to Botania flower mixer transformation is split into multiple recipes
+
+#### Bugfixes
+
+- Generating mana with SU entry in patchouli now shows correctly, it had an incorrect identifier before
+- Remove conflicting crushing recipe tall to petal
 
 ### 1.18.2-0.3.3-alpha
 
