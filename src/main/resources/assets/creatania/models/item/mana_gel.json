@@ -2,6 +2,7 @@
 	"credit": "Made with Blockbench",
 	"parent": "item/generated",
 	"textures": {
+		"particle": "creatania:item/mana_gel",
 		"layer0": "creatania:item/mana_gel"
 	}
 }
