@@ -4,7 +4,9 @@
 
 ### 1.18.2-0.3.6-alpha
 
+#### Changes
 
+- Higher res managel texture
 
 ### 1.18.2-0.3.5-alpha
 
