@@ -2,6 +2,9 @@ package zaftnotameni.creatania.event;
 
 import com.google.common.collect.Lists;
 import com.tterrag.registrate.util.entry.FluidEntry;
+import java.util.List;
+import java.util.Objects;
+import java.util.function.Supplier;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
@@ -24,10 +27,6 @@ import zaftnotameni.creatania.recipes.generator.ManaGeneratorRecipe;
 import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Fluids;
 import zaftnotameni.creatania.registry.Particles;
-
-import java.util.List;
-import java.util.Objects;
-import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = Constants.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEventBus {
@@ -126,25 +125,25 @@ public class ModEventBus {
     return ForgeRegistries.BLOCKS.getValue(f.get().getSource().getRegistryName());
   }
 
-  public static ItemColor colorOf(MaterialColor c) {
-    return (pStack, pTintIndex) -> c.calculateRGBColor(MaterialColor.Brightness.HIGH);
+  public static ItemColor colorOf(int rgbNotA) {
+    return (pStack, pTintIndex) -> rgbNotA;
   }
   public static BlockColor colorOfBlock(MaterialColor c) { return (pState, pLevel, pPos, pTintIndex) -> c.calculateRGBColor(MaterialColor.Brightness.HIGH); }
   public static void initItemColors() {
     if (!ITEM_COLORS.isEmpty()) return;
-    var purple = colorOf(MaterialColor.COLOR_PURPLE);
-    var cyan = colorOf(MaterialColor.COLOR_CYAN);
-    var wart = colorOf(MaterialColor.WARPED_WART_BLOCK);
-    var iron = colorOf(MaterialColor.TERRACOTTA_RED);
-    var copper = colorOf(MaterialColor.COLOR_ORANGE);
-    var gold = colorOf(MaterialColor.GOLD);
-    var zinc = colorOf(MaterialColor.COLOR_GRAY);
-    var andesite = colorOf(MaterialColor.COLOR_GRAY);
-    var brass = colorOf(MaterialColor.COLOR_YELLOW);
-    var mana = colorOf(MaterialColor.COLOR_BLUE);
-    var terra = colorOf(MaterialColor.COLOR_GREEN);
-    var elem = colorOf(MaterialColor.COLOR_PINK);
-    var gaia = colorOf(MaterialColor.COLOR_LIGHT_GRAY);
+    var purple = colorOf(0x440044);
+    var cyan = colorOf(0x11aaff);
+    var wart = colorOf(0x44ffff);
+    var iron = colorOf(0xdd0000);
+    var copper = colorOf(0x666600);
+    var gold = colorOf(0xffff00);
+    var zinc = colorOf(0x999999);
+    var andesite = colorOf(0x666666);
+    var brass = colorOf(0xdddd33);
+    var mana = colorOf(0x000088);
+    var terra = colorOf(0x008822);
+    var elem = colorOf(0xffaaaa);
+    var gaia = colorOf(0xffffff);
     registerItemColors(purple, () -> Fluids.CORRUPT_MANA.get().getBucket());
     registerItemColors(cyan, () -> Fluids.PURE_MANA.get().getBucket());
     registerItemColors(wart, () -> Fluids.REAL_MANA.get().getBucket());
