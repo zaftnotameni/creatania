@@ -65,28 +65,12 @@ public class Fluids {
 
   public static JsonElement provideLangEntries() {
     var json = new JsonObject();
-    Index
-      .all()
-      .getAll(Fluid.class)
-      .forEach(
-        entry -> json.addProperty(
-          "fluid." + keyResource(entry.getId()),
-          Humanity.slashes(lang
-                             .get()
-                             .getAutomaticName(entry))
-        ));
+    Index.all().getAll(Fluid.class).forEach(entry -> json.addProperty("fluid." + keyResource(entry.getId()), Humanity.slashes(lang.get().getAutomaticName(entry))));
     return json;
   }
 
   public static FluidAttributes.Builder defaultMolten(FluidAttributes.Builder in, int color) {
-    return in
-      .density(15)
-      .luminosity(15)
-      .viscosity(10)
-      .temperature(9000)
-      .sound(SoundEvents.BUCKET_FILL_LAVA, SoundEvents.BUCKET_EMPTY_LAVA)
-      .overlay(LAVA_OVERLAY_RL)
-      .color(color);
+    return in.density(15).luminosity(15).viscosity(10).temperature(9000).sound(SoundEvents.BUCKET_FILL_LAVA, SoundEvents.BUCKET_EMPTY_LAVA).overlay(LAVA_OVERLAY_RL).color(color);
   }
 
   public static void register(IEventBus bus) {
@@ -94,16 +78,11 @@ public class Fluids {
   }
 
   public static FluidEntry<ForgeFlowingFluid.Flowing> registerManaFluid(String name, int color, TagKey<Fluid> tag) {
-    return Index
-      .all()
+    return Index.all()
       .waterLikeFluid(name, Colored.from(color))
       .lang("Liquid " + StringUtils.capitalize(name))
       .attributes(b -> defaultMolten(b, color).sound(HONEY_DRINK, HONEY_BLOCK_PLACE))
-      .properties(p -> p
-        .tickRate(1 * 20)
-        .levelDecreasePerBlock(2)
-        .slopeFindDistance(2)
-        .explosionResistance(100f))
+      .properties(p -> p.tickRate(1 * 20).levelDecreasePerBlock(2).slopeFindDistance(2).explosionResistance(100f))
       .tag(Tags.Fluids.ALL_MANA, tag, Tags.Fluids.minecraftTag("water"))
       .source(CreataniaFlowingFluidSource::new)
       .tag(Tags.Fluids.minecraftTag("water"))
@@ -118,13 +97,11 @@ public class Fluids {
   }
 
   public static FluidEntry<ForgeFlowingFluid.Flowing> registerMoltenFluid(String name, int color) {
-    return Index
-      .all()
+    return Index.all()
       .lavaLikeFluid("molten_" + name, Colored.from(color))
       .lang("Molten " + StringUtils.capitalize(name))
       .attributes(b -> defaultMolten(b, color))
-      .properties(p -> p
-        .tickRate(5 * 20)
+      .properties(p -> p.tickRate(5 * 20)
         .levelDecreasePerBlock(3)
         .slopeFindDistance(2)
         .explosionResistance(100f))
@@ -155,8 +132,7 @@ public class Fluids {
       };
     }
 
-    @Override
-    public int getColor(BlockAndTintGetter world, BlockPos pos) {
+    @Override public int getColor(BlockAndTintGetter world, BlockPos pos) {
       return color;
     }
 
@@ -166,8 +142,7 @@ public class Fluids {
 
     public CreataniaFlowingFluidFlowing(Properties properties) { super(properties); }
 
-    @Override
-    protected boolean canSpreadTo(
+    @Override protected boolean canSpreadTo(
       @NotNull BlockGetter pLevel,
       @NotNull BlockPos pFromPos,
       @NotNull BlockState pFromBlockState,
@@ -177,40 +152,7 @@ public class Fluids {
       @NotNull FluidState pToFluidState,
       @NotNull Fluid pFluid
     ) {
-      return specialCobblegenCanSpread(
-         pLevel,
-         pFromPos,
-         pFromBlockState,
-         pDirection,
-         pToPos,
-         pToBlockState,
-         pToFluidState,
-         pFluid,
-         this
-      ) && super.canSpreadTo(pLevel, pFromPos, pFromBlockState, pDirection, pToPos, pToBlockState, pToFluidState, pFluid);
-    }
-
-    @Override
-    protected void spreadTo(@NotNull LevelAccessor pLevel, @NotNull BlockPos pPos, @NotNull BlockState pBlockState, @NotNull Direction pDirection, @NotNull FluidState pFluidState) {
-      if (!specialCobblegenSpread(pLevel, pPos, pBlockState, pDirection, pFluidState, this)) { super.spreadTo(pLevel, pPos, pBlockState, pDirection, pFluidState); }
-    }
-
-  }
-
-  public static class CreataniaFlowingFluidSource extends ForgeFlowingFluid.Source {
-
-    @Override
-    protected boolean canSpreadTo(
-      @NotNull BlockGetter pLevel,
-      @NotNull BlockPos pFromPos,
-      @NotNull BlockState pFromBlockState,
-      @NotNull Direction pDirection,
-      @NotNull BlockPos pToPos,
-      @NotNull BlockState pToBlockState,
-      @NotNull FluidState pToFluidState,
-      @NotNull Fluid pFluid
-    ) {
-      return specialCobblegenCanSpread(
+      return specialCobblegenCanSpread(pLevel, pFromPos, pFromBlockState, pDirection, pToPos, pToBlockState, pToFluidState, pFluid, this) && super.canSpreadTo(
         pLevel,
         pFromPos,
         pFromBlockState,
@@ -218,13 +160,41 @@ public class Fluids {
         pToPos,
         pToBlockState,
         pToFluidState,
-        pFluid,
-        this
-      ) && super.canSpreadTo(pLevel, pFromPos, pFromBlockState, pDirection, pToPos, pToBlockState, pToFluidState, pFluid);
+        pFluid
+      );
     }
 
-    @Override
-    protected void spreadTo(@NotNull LevelAccessor pLevel, @NotNull BlockPos pPos, @NotNull BlockState pBlockState, @NotNull Direction pDirection, @NotNull FluidState pFluidState) {
+    @Override protected void spreadTo(@NotNull LevelAccessor pLevel, @NotNull BlockPos pPos, @NotNull BlockState pBlockState, @NotNull Direction pDirection, @NotNull FluidState pFluidState) {
+      if (!specialCobblegenSpread(pLevel, pPos, pBlockState, pDirection, pFluidState, this)) { super.spreadTo(pLevel, pPos, pBlockState, pDirection, pFluidState); }
+    }
+
+  }
+
+  public static class CreataniaFlowingFluidSource extends ForgeFlowingFluid.Source {
+
+    @Override protected boolean canSpreadTo(
+      @NotNull BlockGetter pLevel,
+      @NotNull BlockPos pFromPos,
+      @NotNull BlockState pFromBlockState,
+      @NotNull Direction pDirection,
+      @NotNull BlockPos pToPos,
+      @NotNull BlockState pToBlockState,
+      @NotNull FluidState pToFluidState,
+      @NotNull Fluid pFluid
+    ) {
+      return specialCobblegenCanSpread(pLevel, pFromPos, pFromBlockState, pDirection, pToPos, pToBlockState, pToFluidState, pFluid, this) && super.canSpreadTo(
+        pLevel,
+        pFromPos,
+        pFromBlockState,
+        pDirection,
+        pToPos,
+        pToBlockState,
+        pToFluidState,
+        pFluid
+      );
+    }
+
+    @Override protected void spreadTo(@NotNull LevelAccessor pLevel, @NotNull BlockPos pPos, @NotNull BlockState pBlockState, @NotNull Direction pDirection, @NotNull FluidState pFluidState) {
       if (!specialCobblegenSpread(pLevel, pPos, pBlockState, pDirection, pFluidState, this)) { super.spreadTo(pLevel, pPos, pBlockState, pDirection, pFluidState); }
     }
 
