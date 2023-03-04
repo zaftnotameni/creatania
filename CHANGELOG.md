@@ -13,6 +13,7 @@
 
 - Bucket tint now matches the fluid associated with it
 - Mana Blocks models are smaller, so they fit better in belts/basin
+- Added guards preventing some cases where placing a manaduct could result in a crash
 
 ### 1.18.2-0.3.2-alpha
 

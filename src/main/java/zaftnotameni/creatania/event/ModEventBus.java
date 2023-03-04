@@ -1,11 +1,8 @@
 package zaftnotameni.creatania.event;
 
-import com.google.common.collect.Lists;
 import com.tterrag.registrate.util.entry.FluidEntry;
 import java.util.List;
-import java.util.Objects;
 import java.util.function.Supplier;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.block.BlockColor;
 import net.minecraft.client.color.item.ItemColor;
 import net.minecraft.client.particle.GlowParticle;
@@ -23,10 +20,16 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.apache.commons.lang3.tuple.Pair;
 import zaftnotameni.creatania.Constants;
+import zaftnotameni.creatania.recipes.condenser.ManaCondenserRecipe;
 import zaftnotameni.creatania.recipes.generator.ManaGeneratorRecipe;
 import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Fluids;
 import zaftnotameni.creatania.registry.Particles;
+
+import static com.google.common.collect.Lists.newArrayList;
+import static java.util.Objects.requireNonNull;
+import static net.minecraft.client.Minecraft.getInstance;
+import static net.minecraft.core.Registry.register;
 
 @Mod.EventBusSubscriber(modid = Constants.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEventBus {
@@ -34,17 +37,20 @@ public class ModEventBus {
 
   @SubscribeEvent
   public static void registerRecipeTypes(final RegistryEvent.Register<RecipeSerializer<?>> evt) {
-    Registry.register(
+    register(
       Registry.RECIPE_TYPE, ManaGeneratorRecipe.Type.ID, ManaGeneratorRecipe.Type.INSTANCE
+    );
+    register(
+      Registry.RECIPE_TYPE, ManaCondenserRecipe.Type.ID, ManaCondenserRecipe.Type.INSTANCE
     );
   }
   @SubscribeEvent
   public static void registerParticleFactories(final ParticleFactoryRegisterEvent evt) {
-    Minecraft.getInstance().particleEngine.register(Particles.MANA_PARTICLES.get(), GlowParticle.ElectricSparkProvider::new);
+    getInstance().particleEngine.register(Particles.MANA_PARTICLES.get(), GlowParticle.ElectricSparkProvider::new);
   }
 
-  public static final List<Pair<ItemColor, Supplier<? extends ItemLike>[]>> ITEM_COLORS = Lists.newArrayList();
-  public static final List<Pair<BlockColor, Supplier<? extends Block>[]>> BLOCK_COLORS = Lists.newArrayList();
+  public static final List<Pair<ItemColor, Supplier<? extends ItemLike>[]>> ITEM_COLORS = newArrayList();
+  public static final List<Pair<BlockColor, Supplier<? extends Block>[]>> BLOCK_COLORS = newArrayList();
   @SubscribeEvent
   public static void onItemColorEvent(ColorHandlerEvent.Item event) {
     initItemColors();
@@ -64,24 +70,26 @@ public class ModEventBus {
   private static Block[] unpackBlocks(Supplier<? extends Block>[] blocks) {
     var array = new Block[blocks.length];
     for (int i = 0; i < blocks.length; i++) {
-      array[i] = Objects.requireNonNull(blocks[i].get());
+      array[i] = requireNonNull(blocks[i].get());
     }
     return array;
   }
   private static ItemLike[] unpackItems(Supplier<? extends ItemLike>[] items) {
     ItemLike[] array = new ItemLike[items.length];
     for (int i = 0; i < items.length; i++) {
-      array[i] = Objects.requireNonNull(items[i].get());
+      array[i] = requireNonNull(items[i].get());
     }
     return array;
   }
   @SafeVarargs public static void registerBlockColors(BlockColor blockColor, Supplier<? extends Block>... blocks) {
-    Objects.requireNonNull(blockColor, "color is null!");
-    Minecraft.getInstance().getBlockColors().register(blockColor, unpackBlocks(blocks));
+    requireNonNull(blockColor, "color is null!");
+    var x = getInstance().getBlockColors();
+    if (x != null) x.register(blockColor, unpackBlocks(blocks));
   }
   @SafeVarargs public static void registerItemColors(ItemColor itemColor, Supplier<? extends ItemLike>... items) {
-    Objects.requireNonNull(itemColor, "color is null!");
-    Minecraft.getInstance().getItemColors().register(itemColor, unpackItems(items));
+    requireNonNull(itemColor, "color is null!");
+    var x = getInstance().getItemColors();
+    if (x != null) x.register(itemColor, unpackItems(items));
   }
   public static void initBlockColors() {
     if (!BLOCK_COLORS.isEmpty()) return;
