@@ -7,7 +7,8 @@ import kotlin.math.roundToInt
 
 val manaLabel = arrayOf("ALMOST NOTHING", "EXTREMELY LOW", "VERY LOW", "LOW")
 
-fun gogglesTooltip(tooltip : MutableList<Component>, generator : ManaGeneratorBlockEntity) {
+fun gogglesTooltip(tooltip : MutableList<Component>, crouching : Boolean, generator : ManaGeneratorBlockEntity) {
+  if (!crouching) return
   emptyLine(tooltip)
 
   Text.muted("Pure Mana Consumed at current speed:").space()

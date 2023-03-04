@@ -3,6 +3,9 @@ package zaftnotameni.creatania.machines.manacondenser;
 import com.simibubi.create.content.contraptions.base.KineticTileEntity;
 import com.simibubi.create.foundation.config.AllConfigs;
 import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
+import java.util.List;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -25,11 +28,7 @@ import zaftnotameni.creatania.machines.manamachine.IAmParticleEmittingMachine;
 import zaftnotameni.creatania.machines.manamachine.KineticManaMachine;
 import zaftnotameni.creatania.registry.Blocks;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.List;
-
-import static zaftnotameni.creatania.util.Text.*;
+import static zaftnotameni.creatania.machines.manacondenser.ManaCondenserTooltipKt.gogglesTooltip;
 
 /**
  * Consumes SU and adds Corrupted Inert Mana blocks in the inventory below
@@ -59,26 +58,7 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
   @Override
   public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
     super.addToGoggleTooltip(tooltip, isPlayerSneaking);
-
-    purple("").forGoggles(tooltip);
-
-    purple("Corrupt Mana Production:").forGoggles(tooltip);
-    if (Math.abs(this.getSpeed()) > 0)
-      muted("At current speed: every").space()
-        .add(purple(String.valueOf(getEveryTicks()))).space()
-        .add(muted("ticks")).forGoggles(tooltip);
-    else
-      muted("At current speed:").space()
-        .add(red("Never")).forGoggles(tooltip);
-
-    purple("").forGoggles(tooltip);
-
-    var correctionFactor = (float) (Math.max(1, CommonConfig.MANA_CONDENSER_THROTTLE_PER_RPM_BELOW_MAX.get())) *
-      (float) Math.max(1, CommonConfig.MANA_CONDENSER_THROTTLE_MINIMUM_TICKS_PER_BLOCK.get());
-    muted("At max speed: every").space()
-      .add(purple(String.valueOf((int) Math.ceil(correctionFactor)))).space()
-      .add(muted("ticks")).forGoggles(tooltip);
-
+    gogglesTooltip(tooltip, isPlayerSneaking, this);
     return true;
   }
   @Override
@@ -209,5 +189,3 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
     super.write(compound, clientPacket);
   }
 }
-
-

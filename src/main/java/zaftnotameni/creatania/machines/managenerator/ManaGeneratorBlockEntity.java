@@ -66,7 +66,7 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
 
   @Override public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
     super.addToGoggleTooltip(tooltip, isPlayerSneaking);
-    gogglesTooltip(tooltip, this);
+    gogglesTooltip(tooltip, isPlayerSneaking,this);
     return true;
   }
 

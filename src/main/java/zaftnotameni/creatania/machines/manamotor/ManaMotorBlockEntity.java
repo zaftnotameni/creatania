@@ -2,9 +2,11 @@ package zaftnotameni.creatania.machines.manamotor;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.content.contraptions.base.GeneratingKineticTileEntity;
-import com.simibubi.create.foundation.config.AllConfigs;
 import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
 import com.simibubi.create.foundation.tileEntity.behaviour.scrollvalue.ScrollValueBehaviour;
+import java.util.List;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -32,11 +34,7 @@ import zaftnotameni.creatania.machines.manamachine.IAmManaMachine;
 import zaftnotameni.creatania.machines.manamachine.KineticManaMachine;
 import zaftnotameni.creatania.util.Log;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.List;
-
-import static zaftnotameni.creatania.util.Text.*;
+import static zaftnotameni.creatania.machines.manamotor.ManaMotorTooltipKt.gogglesTooltip;
 
 /**
  * Generates SU (from Create) when provided Mana (from Botania).
@@ -102,20 +100,7 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
   @Override
   public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
     super.addToGoggleTooltip(tooltip, isPlayerSneaking);
-
-    purple("").forGoggles(tooltip);
-
-    muted("Maximum SU Produced:").space()
-      .add(gray(String.valueOf(this.getManaMachine().getMaximumSUPossible()))).space()
-      .add(muted("at")).space()
-      .add(gray(String.valueOf(AllConfigs.SERVER.kinetics.maxMotorSpeed.get()))).space()
-      .add(gray("RPM")).forGoggles(tooltip);
-
-    purple("").forGoggles(tooltip);
-
-    muted("Mana consumed per RPM:").space()
-      .add(red("HIGH")).forGoggles(tooltip);
-
+    gogglesTooltip(tooltip, isPlayerSneaking, this);
     return true;
   }
   @Override
