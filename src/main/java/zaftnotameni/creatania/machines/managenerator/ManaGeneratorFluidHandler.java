@@ -14,7 +14,9 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.registry.Fluids;
+
 public class ManaGeneratorFluidHandler {
+
   public boolean contentsChanged;
   public SmartFluidTankBehaviour inputTankBehavior;
   public LazyOptional<IFluidHandler> fluidCapability;
@@ -26,14 +28,9 @@ public class ManaGeneratorFluidHandler {
   }
 
   public void addBehaviours(List<TileEntityBehaviour> behaviours) {
-    this.inputTankBehavior = new SmartFluidTankBehaviour(
-      SmartFluidTankBehaviour.INPUT,
-      this.manaGenerator,
-      1,
-      CommonConfig.MANA_GENERATOR_MAX_MANA_FLUID_STORAGE.get() *
-        AllConfigs.SERVER.kinetics.maxMotorSpeed.get(),
-      false)
-      .whenFluidUpdates(() -> this.contentsChanged = true);
+    this.inputTankBehavior = new SmartFluidTankBehaviour(SmartFluidTankBehaviour.INPUT, this.manaGenerator, 1, (int) this.getManaTankCapacity(), false).whenFluidUpdates(() ->
+      this.contentsChanged =
+        true);
 
     behaviours.add(inputTankBehavior);
 
@@ -59,15 +56,14 @@ public class ManaGeneratorFluidHandler {
     return sourceDrained.getAmount() + flowingDrained.getAmount();
   }
 
-  public float getManaFluidAvailable(){
+  public float getManaFluidAvailable() {
     var primaryTank = this.getPrimaryTank();
     if (primaryTank == null) return 0f;
     return primaryTank.getFluidLevel().getValue() * 1000;
   }
 
-  public float getManaTankCapacity(){
-    return Math.min(8f, CommonConfig.MANA_GENERATOR_MAX_MANA_FLUID_STORAGE.get()) *
-      AllConfigs.SERVER.kinetics.maxMotorSpeed.get();
+  public float getManaTankCapacity() {
+    return Math.min(6f, CommonConfig.MANA_GENERATOR_MAX_MANA_FLUID_STORAGE.get()) * AllConfigs.SERVER.kinetics.maxMotorSpeed.get();
   }
 
   public void read(CompoundTag compound, boolean clientPacket) {
@@ -77,17 +73,20 @@ public class ManaGeneratorFluidHandler {
   public void write(CompoundTag compound, boolean clientPacket) {
 
   }
+
   public void invalidate() {
     this.fluidCapability.invalidate();
   }
+
   public <T> LazyOptional<T> getCapability(Capability<T> cap, Direction side) {
-    if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
-      return fluidCapability.cast();
+    if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) return fluidCapability.cast();
     return null;
   }
+
   public boolean serverTick() {
     if (!this.contentsChanged) return false;
     this.contentsChanged = false;
     return true;
   }
+
 }

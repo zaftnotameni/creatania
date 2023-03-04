@@ -11,27 +11,22 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.Mth;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.LazyOptional;
 import vazkii.botania.api.block.IWandHUD;
-import vazkii.botania.api.block.IWandable;
-import vazkii.botania.api.mana.IManaReceiver;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.machines.manamachine.ActiveStateSynchronizerBehavior;
 import zaftnotameni.creatania.machines.manamachine.IAmManaMachine;
 import zaftnotameni.creatania.machines.manamachine.IAmParticleEmittingMachine;
 import zaftnotameni.creatania.machines.manamachine.KineticManaMachine;
-import zaftnotameni.creatania.mana.manaduct.BaseManaductBlock;
 import zaftnotameni.creatania.util.Log;
 
 import static zaftnotameni.creatania.machines.managenerator.ManaGeneratorMathKt.pureManaAtRpm;
 import static zaftnotameni.creatania.machines.managenerator.ManaGeneratorMathKt.realManaAtRpmWhileConsuming;
 import static zaftnotameni.creatania.machines.managenerator.ManaGeneratorTooltipKt.gogglesTooltip;
-import static zaftnotameni.creatania.machines.managenerator.ManaGeneratorWorldQueriesKt.computeManaReceiverMatchAt;
-import static zaftnotameni.creatania.machines.managenerator.ManaGeneratorWorldQueriesKt.getTargetManaReceiver;
+import static zaftnotameni.creatania.machines.managenerator.ManaGeneratorWorldQueriesKt.*;
 import static zaftnotameni.creatania.machines.manamachine.KineticManaMachine.renderSimpleBotaniaHud;
 
 public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmManaMachine, Log.IHasTickLogger, IAmParticleEmittingMachine, IWandHUD {
@@ -133,34 +128,13 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
     return (int) Math.abs(this.getSpeed());
   }
 
-  public int specialHandlingViaManaduct(int manaAmount, BlockState manaDuctBlockState) {
-    if (!(manaDuctBlockState.getBlock() instanceof BaseManaductBlock manaDuctBlock)) return 0;
-    var maybeAggloPlateBlockState = BaseManaductBlock.getMouthPointedAtBlockState(this.level, manaDuctBlockState, this.worldPosition.above());
-    if (maybeAggloPlateBlockState == null || !maybeAggloPlateBlockState.hasBlockEntity()) return 0;
-    var maybeAggloPlateBlockEntity = BaseManaductBlock.getMouthPointedAtBlockEntity(this.level, manaDuctBlockState, this.worldPosition.above());
-    if (!(maybeAggloPlateBlockEntity instanceof IManaReceiver receiver) || receiver.isFull()) return 0;
-    receiver.receiveMana(manaAmount * manaDuctBlock.manaMultiplier);
-    Log.RateLimited.of(this, 20 * 30).log(logger -> logger.info("handled {} mana via manaduct with multiplier {}", manaAmount, manaDuctBlock.manaMultiplier));
-    this.duct = true;
-    return manaAmount;
-  }
-
-  public int addManaToTargetPool(int manaAmount, IManaReceiver pool) {
-    if (pool == null || pool.isFull()) return 0;
-    pool.receiveMana(manaAmount);
-    if (pool instanceof IWandable wandable) wandable.onUsedByWand(null, ItemStack.EMPTY, Direction.UP);
-    Log.RateLimited.of(this, 20 * 30).log(logger -> logger.info("handled {} mana via direct transfer with mana", manaAmount));
-    this.duct = false;
-    return manaAmount;
-  }
-
   public int addManaToPool(int manaAmount) {
     var targetReceiver = getTargetManaReceiver(this.worldPosition, this.level);
     if (targetReceiver == null) { return 0; }
     if (targetReceiver.isManaDuct()) {
-      return specialHandlingViaManaduct(manaAmount, targetReceiver.getBlockstate());
+      return specialHandlingViaManaduct(manaAmount, targetReceiver.getBlockstate(), this);
     }
-    return addManaToTargetPool(manaAmount, targetReceiver.getReceiver());
+    return addManaToTargetPool(manaAmount, targetReceiver.getReceiver(), this);
   }
 
   public boolean shouldAbortServerTick() {

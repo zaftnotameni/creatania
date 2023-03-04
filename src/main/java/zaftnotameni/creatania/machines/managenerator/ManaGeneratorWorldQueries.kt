@@ -1,8 +1,11 @@
 package zaftnotameni.creatania.machines.managenerator
 
 import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
+import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.Level
 import net.minecraft.world.level.block.state.BlockState
+import vazkii.botania.api.block.IWandable
 import vazkii.botania.api.mana.IManaReceiver
 import zaftnotameni.creatania.mana.manaduct.BaseManaductBlock
 
@@ -23,7 +26,7 @@ fun getTargetManaReceiver(initial : BlockPos, level : Level) : ManaReceiverMatch
   return null
 }
 
-fun computeManaReceiverMatchAt(initial : BlockPos, level : Level, x : Int, y: Int, z : Int) : ManaReceiverMatch? {
+fun computeManaReceiverMatchAt(initial : BlockPos, level : Level, x : Int, y : Int, z : Int) : ManaReceiverMatch? {
   if (level == null) return null
   if (level.isClientSide) return null
   if (initial == null) return null
@@ -32,6 +35,26 @@ fun computeManaReceiverMatchAt(initial : BlockPos, level : Level, x : Int, y: In
   val blockstate = level.getBlockState(position)
   val isManaDuct = blockstate.block is BaseManaductBlock
   return ManaReceiverMatch(receiver = entity, position = position, blockstate = blockstate, isManaDuct = isManaDuct)
+}
+
+fun specialHandlingViaManaduct(manaAmount : Int, manaDuctBlockState : BlockState, generator : ManaGeneratorBlockEntity) : Int {
+  if (manaDuctBlockState.block !is BaseManaductBlock) return 0
+  val manaDuctBlock = manaDuctBlockState as BaseManaductBlock
+  val maybeAggloPlateBlockState = BaseManaductBlock.getMouthPointedAtBlockState(generator.level, manaDuctBlockState, generator.blockPos.above())
+  if (maybeAggloPlateBlockState == null || !maybeAggloPlateBlockState.hasBlockEntity()) return 0
+  val maybeAggloPlateBlockEntity = BaseManaductBlock.getMouthPointedAtBlockEntity(generator.level, manaDuctBlockState, generator.blockPos.above())
+  if (maybeAggloPlateBlockEntity !is IManaReceiver || maybeAggloPlateBlockEntity.isFull) return 0
+  maybeAggloPlateBlockEntity.receiveMana(manaAmount * manaDuctBlock.manaMultiplier)
+  generator.duct = true
+  return manaAmount
+}
+
+fun addManaToTargetPool(manaAmount : Int, pool : IManaReceiver?, generator : ManaGeneratorBlockEntity) : Int {
+  if (pool == null || pool.isFull) return 0
+  pool.receiveMana(manaAmount)
+  if (pool is IWandable) pool.onUsedByWand(null, ItemStack.EMPTY, Direction.UP)
+  generator.duct = false
+  return manaAmount
 }
 
 data class ManaReceiverMatch(val receiver : IManaReceiver?, val position : BlockPos, val blockstate : BlockState, val isManaDuct : Boolean)
