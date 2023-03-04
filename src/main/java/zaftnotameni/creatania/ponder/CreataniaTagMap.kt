@@ -1,24 +1,22 @@
-package zaftnotameni.creatania.ponder;
+package zaftnotameni.creatania.ponder
 
-import java.nio.file.Path;
-import java.util.ArrayList;
-import net.minecraft.data.DataGenerator;
-import net.minecraftforge.fml.loading.FMLPaths;
-import zaftnotameni.creatania.recipes.cobblegen.CobblegenRecipe;
-import zaftnotameni.creatania.registry.Index;
-import zaftnotameni.creatania.registry.datagen.processing.CobblegenRecipeGen;
+import com.simibubi.create.foundation.ponder.PonderRegistry
+import net.minecraft.data.DataGenerator
+import net.minecraft.world.item.crafting.RecipeSerializer
+import net.minecraftforge.fml.loading.FMLPaths
+import zaftnotameni.creatania.recipes.cobblegen.CobblegenRecipe
+import zaftnotameni.creatania.registry.Index
+import zaftnotameni.creatania.registry.datagen.processing.CobblegenRecipeGen
 
-import static com.simibubi.create.foundation.ponder.PonderRegistry.TAGS;
-import static zaftnotameni.creatania.ponder.CreataniaPonderTag.COBBLEGEN;
-
-public class CreataniaTagMap {
-  public static void associate() {
-    new CobblegenRecipeGen(new DataGenerator(FMLPaths.MODSDIR.get(), new ArrayList<Path>())).setupRecipes();
-    var cobblegenBuilder = TAGS.forTag(COBBLEGEN);
-    for (var j : CobblegenRecipeGen.ALL.values()) {
-      var recipe = CobblegenRecipe.TYPE.getSerializer().fromJson(Index.resource("none"), j);
-      var id = recipe.getResultItem().getItem().getRegistryName();
-      cobblegenBuilder = cobblegenBuilder.add(id);
+object CreataniaTagMap {
+  @JvmStatic
+  fun associate() {
+    CobblegenRecipeGen(DataGenerator(FMLPaths.MODSDIR.get(), ArrayList())).setupRecipes()
+    var cobblegenBuilder = PonderRegistry.TAGS.forTag(CreataniaPonderTag.COBBLEGEN)
+    for (j in CobblegenRecipeGen.ALL.values) {
+      val recipe = CobblegenRecipe.TYPE.getSerializer<RecipeSerializer<*>>().fromJson(Index.resource("none"), j)
+      val id = recipe.resultItem.item.registryName
+      cobblegenBuilder = cobblegenBuilder.add(id)
     }
 
 //    TAGS.forTag(MANA_MANIPULATION)

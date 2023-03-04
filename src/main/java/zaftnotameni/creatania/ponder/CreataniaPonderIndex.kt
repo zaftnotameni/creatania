@@ -1,22 +1,24 @@
-package zaftnotameni.creatania.ponder;
+package zaftnotameni.creatania.ponder
 
-public class CreataniaPonderIndex {
+import zaftnotameni.creatania.ponder.CreataniaTagMap.associate
 
-  public static void register() {
-    registerScenes();
-    associateTags();
-    registerTags();
+object CreataniaPonderIndex {
+  @JvmStatic
+  fun register() {
+    registerScenes()
+    associateTags()
+    registerTags()
   }
 
-  public static void associateTags() {
-    CreataniaTagMap.associate();
-  }
-  public static void registerTags() {
-    CreataniaPonderTag.register();
+  fun associateTags() {
+    associate()
   }
 
-  public static void registerScenes() {
-    CreataniaPonderScene.register();
+  fun registerTags() {
+    CreataniaPonderTag.register()
   }
 
+  fun registerScenes() {
+    CreataniaPonderScene.register()
+  }
 }

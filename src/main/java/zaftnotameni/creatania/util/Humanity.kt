@@ -1,62 +1,123 @@
-package zaftnotameni.creatania.util;
-import com.tterrag.registrate.providers.ProviderType;
-import com.tterrag.registrate.providers.RegistrateLangProvider;
-import com.tterrag.registrate.util.entry.RegistryEntry;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.common.util.Lazy;
-import net.minecraftforge.registries.RegistryObject;
-import org.apache.commons.lang3.StringUtils;
-import zaftnotameni.creatania.registry.Index;
+package zaftnotameni.creatania.util
 
-import java.util.Arrays;
+import com.tterrag.registrate.providers.ProviderType
+import com.tterrag.registrate.providers.RegistrateLangProvider
+import com.tterrag.registrate.util.entry.RegistryEntry
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.world.item.Item
+import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.material.Fluid
+import net.minecraftforge.common.util.Lazy
+import net.minecraftforge.registries.RegistryObject
+import org.apache.commons.lang3.StringUtils
+import zaftnotameni.creatania.registry.Index
+import java.util.*
 
-import static com.tterrag.registrate.providers.RegistrateLangProvider.toEnglishName;
-import static org.apache.commons.lang3.StringUtils.*;
-public class Humanity {
-  public static Lazy<RegistrateLangProvider> lang = Lazy.of(() -> Index.all().getDataProvider(ProviderType.LANG).get());
-
-  public static String digestString(String in) {
-    var firstPass = capitalize(join(splitByCharacterTypeCamelCase(in), SPACE));
-    var secondPass = split(firstPass, "_");
-    var thirdPass = Arrays.stream(secondPass).map(StringUtils::trimToEmpty).filter(s -> !s.isBlank()).toArray();
-    var fourthPass = join(thirdPass, SPACE);
-    var fifthPass = replace(fourthPass, "/", ".");
-    var sixthPass = replace(fifthPass, ":", ".");
-    return sixthPass;
+object Humanity {
+  @JvmField
+  var lang : Lazy<RegistrateLangProvider> = Lazy.of { Index.all().getDataProvider(ProviderType.LANG).get() }
+  fun digestString(`in` : String?) : String {
+    val firstPass = StringUtils.capitalize(
+      StringUtils.join(StringUtils.splitByCharacterTypeCamelCase(`in`), StringUtils.SPACE)
+    )
+    val secondPass = StringUtils.split(firstPass, "_")
+    val thirdPass =
+      Arrays.stream(secondPass).map { str : String? -> StringUtils.trimToEmpty(str) }.filter { s : String -> s.isNotBlank() }
+        .toArray()
+    val fourthPass = StringUtils.join(thirdPass, StringUtils.SPACE)
+    val fifthPass = StringUtils.replace(fourthPass, "/", ".")
+    return StringUtils.replace(fifthPass, ":", ".")
   }
-  public static String digestResource(ResourceLocation in) {
-    return digestString(in.getPath());
+
+  @JvmStatic
+  fun digestResource(`in` : ResourceLocation) : String {
+    return digestString(`in`.path)
   }
-  public static String digestBlock(Block in) { return digestString(in.getDescriptionId().toString()); }
-  public static String digestItem(Item in) { return digestString(in.getDescriptionId().toString()); }
-  public static String digestItem(RegistryObject<Item> entry) { return digestString(entry.getId().getPath()); }
-  public static String digestBlock(RegistryObject<Block> entry) { return digestString(entry.getId().getPath()); }
-  public static String digestFluid(RegistryObject<Fluid> entry) { return digestString(entry.getId().getPath()); }
 
-  public static String keyString(String in) { return replace(replace(in, ":", "."), "/", "."); }
-  public static String keyResource(ResourceLocation in) { return keyString(in.toString()); }
-  public static String keyBlock(Block in) { return "item." + keyString(in.getDescriptionId().toString()); }
-  public static String keyItem(Item in) { return "block." + keyString(in.getDescriptionId().toString()); }
-  public static String keyItem(RegistryObject<Item> entry) { return "item." + keyString(entry.getId().toString()); }
-  public static String keyBlock(RegistryObject<Block> entry) { return "block." + keyString(entry.getId().toString()); }
-  public static String keyFluid(RegistryObject<Fluid> entry) { return "fluid." + keyString(entry.getId().toString()); }
+  fun digestBlock(`in` : Block) : String {
+    return digestString(`in`.descriptionId.toString())
+  }
 
-  public static String keyBlock(RegistryEntry<Block> entry) { return "block." + keyString(entry.getId().toString()); }
-  public static String keyItem(RegistryEntry<Item> entry) { return "block." + keyString(entry.getId().toString()); }
-  public static String keyFluid(RegistryEntry<Fluid> entry) { return "block." + keyString(entry.getId().toString()); }
-  public static String digestBlock(RegistryEntry<Block> entry) { return digestString(entry.get().getName().getString()); }
-  public static String digestItem(RegistryEntry<Item> entry) { return digestString(entry.get().getDescription().getString()); }
-  public static String digestFluid(RegistryEntry<Fluid> entry) { return digestString(entry.get().getRegistryType().getName()); }
-  public static String slashes(String slashyname) {
-    if (!containsIgnoreCase(slashyname, "/")) return slashyname;
-    var slashies = split(slashyname, "/");
-    if (slashies.length <= 1) return slashyname;
-    var last = slashies[slashies.length - 1];
-    var ss = last;
-    for (var s : slashies) if (!equalsIgnoreCase(last, s)) ss += " " + s;
-    return toEnglishName(removeEnd(ss, "s"));
+  @JvmStatic
+  fun digestItem(`in` : Item) : String {
+    return digestString(`in`.descriptionId.toString())
+  }
+
+  @JvmStatic
+  fun digestItem(entry : RegistryObject<Item?>) : String {
+    return digestString(entry.id.path)
+  }
+
+  fun digestBlock(entry : RegistryObject<Block?>) : String {
+    return digestString(entry.id.path)
+  }
+
+  fun digestFluid(entry : RegistryObject<Fluid?>) : String {
+    return digestString(entry.id.path)
+  }
+
+  fun keyString(`in` : String?) : String {
+    return StringUtils.replace(StringUtils.replace(`in`, ":", "."), "/", ".")
+  }
+
+  @JvmStatic
+  fun keyResource(`in` : ResourceLocation) : String {
+    return keyString(`in`.toString())
+  }
+
+  fun keyBlock(`in` : Block) : String {
+    return "item." + keyString(`in`.descriptionId.toString())
+  }
+
+  fun keyItem(`in` : Item) : String {
+    return "block." + keyString(`in`.descriptionId.toString())
+  }
+
+  @JvmStatic
+  fun keyItem(entry : RegistryObject<Item?>) : String {
+    return "item." + keyString(entry.id.toString())
+  }
+
+  fun keyBlock(entry : RegistryObject<Block?>) : String {
+    return "block." + keyString(entry.id.toString())
+  }
+
+  fun keyFluid(entry : RegistryObject<Fluid?>) : String {
+    return "fluid." + keyString(entry.id.toString())
+  }
+
+  fun keyBlock(entry : RegistryEntry<Block?>) : String {
+    return "block." + keyString(entry.id.toString())
+  }
+
+  fun keyItem(entry : RegistryEntry<Item?>) : String {
+    return "block." + keyString(entry.id.toString())
+  }
+
+  fun keyFluid(entry : RegistryEntry<Fluid?>) : String {
+    return "block." + keyString(entry.id.toString())
+  }
+
+  fun digestBlock(entry : RegistryEntry<Block>) : String {
+    return digestString(entry.get().name.string)
+  }
+
+  fun digestItem(entry : RegistryEntry<Item>) : String {
+    return digestString(entry.get().description.string)
+  }
+
+  fun digestFluid(entry : RegistryEntry<Fluid>) : String {
+    return digestString(entry.get().registryType.name)
+  }
+
+  @JvmStatic
+  fun slashes(slashyname : String) : String {
+    if (!StringUtils.containsIgnoreCase(slashyname, "/")) return slashyname
+    val slashies = StringUtils.split(slashyname, "/")
+    if (slashies.size <= 1) return slashyname
+    val last = slashies[slashies.size - 1]
+    var ss = last
+    for (s in slashies) if (!StringUtils.equalsIgnoreCase(last, s)) ss += " $s"
+    return RegistrateLangProvider.toEnglishName(StringUtils.removeEnd(ss, "s"))
   }
 }

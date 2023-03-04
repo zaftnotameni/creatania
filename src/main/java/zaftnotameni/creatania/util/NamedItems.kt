@@ -1,33 +1,61 @@
-package zaftnotameni.creatania.util;
-import com.simibubi.create.AllBlocks;
-import com.simibubi.create.AllItems;
-import com.simibubi.create.AllTags;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.common.Tags;
-import net.minecraftforge.registries.ForgeRegistries;
-import org.apache.commons.lang3.StringUtils;
-public class NamedItems {
-  public static String namespaceOf(String id) { return id.split(":")[0]; }
-  public static String pathOf(String id) { return id.split(":")[1]; }
-  public static ResourceLocation resourceOf(String id) { return new ResourceLocation(namespaceOf(id), pathOf(id)); }
-  public static ItemLike itemLikeOf(String id) { return itemLike(namespaceOf(id), pathOf(id)); }
-  public static String idToTallFlower(String id) { return id.split(":")[1]; }
-  public static String tallToMysticFlower(String tallPath) { return StringUtils.replace(tallPath, "double", "mystical"); }
-  public static String tallToFlowerPetal(String tallPath) { return StringUtils.replace(tallPath, "double_flower", "petal"); }
-  public static final String[] MINECRAFT_SHORT_FLOWERS = {
+package zaftnotameni.creatania.util
+
+import com.simibubi.create.AllBlocks
+import com.simibubi.create.AllItems
+import com.simibubi.create.AllTags
+import net.minecraft.resources.ResourceLocation
+import net.minecraft.tags.ItemTags
+import net.minecraft.tags.TagKey
+import net.minecraft.world.item.Item
+import net.minecraft.world.item.Items
+import net.minecraft.world.item.crafting.Ingredient
+import net.minecraft.world.level.ItemLike
+import net.minecraftforge.common.Tags
+import net.minecraftforge.registries.ForgeRegistries
+import org.apache.commons.lang3.StringUtils
+
+object NamedItems {
+  fun namespaceOf(id : String) : String {
+    return id.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[0]
+  }
+
+  @JvmStatic
+  fun pathOf(id : String) : String {
+    return id.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
+  }
+
+  fun resourceOf(id : String) : ResourceLocation {
+    return ResourceLocation(namespaceOf(id), pathOf(id))
+  }
+
+  @JvmStatic
+  fun itemLikeOf(id : String) : ItemLike? {
+    return itemLike(namespaceOf(id), pathOf(id))
+  }
+
+  fun idToTallFlower(id : String) : String {
+    return id.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[1]
+  }
+
+  fun tallToMysticFlower(tallPath : String?) : String {
+    return StringUtils.replace(tallPath, "double", "mystical")
+  }
+
+  fun tallToFlowerPetal(tallPath : String?) : String {
+    return StringUtils.replace(tallPath, "double_flower", "petal")
+  }
+
+  @JvmField
+  val MINECRAFT_SHORT_FLOWERS = arrayOf(
     "minecraft:poppy",
     "minecraft:dandelion"
-  };
-  public static final String[] MINECRAFT_TALL_FLOWERS = {
+  )
+  @JvmField
+  val MINECRAFT_TALL_FLOWERS = arrayOf(
     "minecraft:rose_bush"
-  };
-  public static final String[] BOTANIA_TALL_FLOWERS = {
+  )
+  @JvmField
+  val BOTANIA_TALL_FLOWERS = arrayOf(
     "botania:black_double_flower",
     "botania:blue_double_flower",
     "botania:brown_double_flower",
@@ -44,8 +72,9 @@ public class NamedItems {
     "botania:red_double_flower",
     "botania:white_double_flower",
     "botania:yellow_double_flower"
-  };
-  public static String[] BOTANIA_MYSTICAL_FLOWERS = {
+  )
+  @JvmField
+  var BOTANIA_MYSTICAL_FLOWERS = arrayOf(
     "botania:black_mystical_flower",
     "botania:blue_mystical_flower",
     "botania:brown_mystical_flower",
@@ -62,162 +91,173 @@ public class NamedItems {
     "botania:red_mystical_flower",
     "botania:white_mystical_flower",
     "botania:yellow_mystical_flower"
-  };
+  )
 
-  public static ItemLike itemLike(String namespace, String path) { return ForgeRegistries.ITEMS.getValue(new ResourceLocation(namespace, path)); }
-
-  public static Ingredient livingrock() {
-    return Ingredient.of(itemLike("botania", "livingrock"));
+  @JvmStatic
+  fun itemLike(namespace : String?, path : String?) : ItemLike? {
+    return ForgeRegistries.ITEMS.getValue(ResourceLocation(namespace, path))
   }
-  public static Ingredient terrasteelingot() {
-    return Ingredient.of(itemLike("botania", "terrasteel_ingot"));
+
+  @JvmStatic
+  fun livingrock() : Ingredient {
+    return Ingredient.of(itemLike("botania", "livingrock"))
   }
-  public static Ingredient manasteelingot() {
-    return Ingredient.of(itemLike("botania", "manasteel_ingot"));
+
+  @JvmStatic
+  fun terrasteelingot() : Ingredient {
+    return Ingredient.of(itemLike("botania", "terrasteel_ingot"))
   }
-  public static Ingredient elementiumingot() {
-    return Ingredient.of(itemLike("botania", "elementium_ingot"));
+
+  @JvmStatic
+  fun manasteelingot() : Ingredient {
+    return Ingredient.of(itemLike("botania", "manasteel_ingot"))
   }
-  public static Ingredient gaiaingot() {
-    return Ingredient.of(itemLike("botania", "gaia_ingot"));
+
+  @JvmStatic
+  fun elementiumingot() : Ingredient {
+    return Ingredient.of(itemLike("botania", "elementium_ingot"))
   }
-  public static class I {
 
-  public static TagKey<Item> redstone() {
-      return Tags.Items.DUSTS_REDSTONE;
+  @JvmStatic
+  fun gaiaingot() : Ingredient {
+    return Ingredient.of(itemLike("botania", "gaia_ingot"))
+  }
+
+  object I {
+    fun redstone() : TagKey<Item> {
+      return Tags.Items.DUSTS_REDSTONE
     }
 
-  public static TagKey<Item> planks() {
-      return ItemTags.PLANKS;
+    fun planks() : TagKey<Item> {
+      return ItemTags.PLANKS
     }
 
-  public static TagKey<Item> woodSlab() {
-      return ItemTags.WOODEN_SLABS;
+    fun woodSlab() : TagKey<Item> {
+      return ItemTags.WOODEN_SLABS
     }
 
-  public static TagKey<Item> gold() {
-      return AllTags.forgeItemTag("ingots/gold");
+    fun gold() : TagKey<Item> {
+      return AllTags.forgeItemTag("ingots/gold")
     }
 
-  public static TagKey<Item> goldSheet() {
-      return AllTags.forgeItemTag("plates/gold");
+    fun goldSheet() : TagKey<Item> {
+      return AllTags.forgeItemTag("plates/gold")
     }
 
-  public static TagKey<Item> stone() {
-      return Tags.Items.STONE;
+    fun stone() : TagKey<Item> {
+      return Tags.Items.STONE
     }
 
-  public static ItemLike andesite() {
-      return AllItems.ANDESITE_ALLOY.get();
+    fun andesite() : ItemLike {
+      return AllItems.ANDESITE_ALLOY.get()
     }
 
-  public static ItemLike shaft() {
-      return AllBlocks.SHAFT.get();
+    fun shaft() : ItemLike {
+      return AllBlocks.SHAFT.get()
     }
 
-  public static ItemLike cog() {
-      return AllBlocks.COGWHEEL.get();
+    fun cog() : ItemLike {
+      return AllBlocks.COGWHEEL.get()
     }
 
-  public static ItemLike largeCog() {
-      return AllBlocks.LARGE_COGWHEEL.get();
+    fun largeCog() : ItemLike {
+      return AllBlocks.LARGE_COGWHEEL.get()
     }
 
-  public static ItemLike andesiteCasing() {
-      return AllBlocks.ANDESITE_CASING.get();
+    fun andesiteCasing() : ItemLike {
+      return AllBlocks.ANDESITE_CASING.get()
     }
 
-  public static TagKey<Item> brass() {
-      return AllTags.forgeItemTag("ingots/brass");
+    fun brass() : TagKey<Item> {
+      return AllTags.forgeItemTag("ingots/brass")
     }
 
-  public static TagKey<Item> brassSheet() {
-      return AllTags.forgeItemTag("plates/brass");
+    fun brassSheet() : TagKey<Item> {
+      return AllTags.forgeItemTag("plates/brass")
     }
 
-  public static TagKey<Item> iron() {
-      return Tags.Items.INGOTS_IRON;
+    fun iron() : TagKey<Item> {
+      return Tags.Items.INGOTS_IRON
     }
 
-  public static TagKey<Item> ironNugget() {
-      return AllTags.forgeItemTag("nuggets/iron");
+    fun ironNugget() : TagKey<Item> {
+      return AllTags.forgeItemTag("nuggets/iron")
     }
 
-  public static TagKey<Item> zinc() {
-      return AllTags.forgeItemTag("ingots/zinc");
+    fun zinc() : TagKey<Item> {
+      return AllTags.forgeItemTag("ingots/zinc")
     }
 
-  public static TagKey<Item> ironSheet() {
-      return AllTags.forgeItemTag("plates/iron");
+    fun ironSheet() : TagKey<Item> {
+      return AllTags.forgeItemTag("plates/iron")
     }
 
-  public static TagKey<Item> sturdySheet() {
-      return AllTags.forgeItemTag("plates/obsidian");
+    fun sturdySheet() : TagKey<Item> {
+      return AllTags.forgeItemTag("plates/obsidian")
     }
 
-  public static ItemLike brassCasing() {
-      return AllBlocks.BRASS_CASING.get();
+    fun brassCasing() : ItemLike {
+      return AllBlocks.BRASS_CASING.get()
     }
 
-  public static ItemLike railwayCasing() {
-      return AllBlocks.RAILWAY_CASING.get();
+    fun railwayCasing() : ItemLike {
+      return AllBlocks.RAILWAY_CASING.get()
     }
 
-  public static ItemLike electronTube() {
-      return AllItems.ELECTRON_TUBE.get();
+    fun electronTube() : ItemLike {
+      return AllItems.ELECTRON_TUBE.get()
     }
 
-  public static ItemLike precisionMechanism() {
-      return AllItems.PRECISION_MECHANISM.get();
+    fun precisionMechanism() : ItemLike {
+      return AllItems.PRECISION_MECHANISM.get()
     }
 
-  public static ItemLike copperBlock() {
-      return Items.COPPER_BLOCK;
+    fun copperBlock() : ItemLike {
+      return Items.COPPER_BLOCK
     }
 
-  public static TagKey<Item> brassBlock() {
-      return AllTags.forgeItemTag("storage_blocks/brass");
+    fun brassBlock() : TagKey<Item> {
+      return AllTags.forgeItemTag("storage_blocks/brass")
     }
 
-  public static TagKey<Item> zincBlock() {
-      return AllTags.forgeItemTag("storage_blocks/zinc");
+    fun zincBlock() : TagKey<Item> {
+      return AllTags.forgeItemTag("storage_blocks/zinc")
     }
 
-  public static TagKey<Item> wheatFlour() {
-      return AllTags.forgeItemTag("flour/wheat");
+    fun wheatFlour() : TagKey<Item> {
+      return AllTags.forgeItemTag("flour/wheat")
     }
 
-  public static ItemLike copper() {
-      return Items.COPPER_INGOT;
+    fun copper() : ItemLike {
+      return Items.COPPER_INGOT
     }
 
-  public static TagKey<Item> copperSheet() {
-      return AllTags.forgeItemTag("plates/copper");
+    fun copperSheet() : TagKey<Item> {
+      return AllTags.forgeItemTag("plates/copper")
     }
 
-  public static TagKey<Item> copperNugget() {
-      return AllTags.forgeItemTag("nuggets/copper");
+    fun copperNugget() : TagKey<Item> {
+      return AllTags.forgeItemTag("nuggets/copper")
     }
 
-  public static TagKey<Item> brassNugget() {
-      return AllTags.forgeItemTag("nuggets/brass");
+    fun brassNugget() : TagKey<Item> {
+      return AllTags.forgeItemTag("nuggets/brass")
     }
 
-  public static TagKey<Item> zincNugget() {
-      return AllTags.forgeItemTag("nuggets/zinc");
+    fun zincNugget() : TagKey<Item> {
+      return AllTags.forgeItemTag("nuggets/zinc")
     }
 
-  public static ItemLike copperCasing() {
-      return AllBlocks.COPPER_CASING.get();
+    fun copperCasing() : ItemLike {
+      return AllBlocks.COPPER_CASING.get()
     }
 
-  public static ItemLike refinedRadiance() {
-      return AllItems.REFINED_RADIANCE.get();
+    fun refinedRadiance() : ItemLike {
+      return AllItems.REFINED_RADIANCE.get()
     }
 
-  public static ItemLike shadowSteel() {
-      return AllItems.SHADOW_STEEL.get();
+    fun shadowSteel() : ItemLike {
+      return AllItems.SHADOW_STEEL.get()
     }
-
   }
 }

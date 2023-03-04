@@ -1,36 +1,37 @@
-package zaftnotameni.creatania.util;
+package zaftnotameni.creatania.util
 
-import com.mojang.logging.LogUtils;
-import org.slf4j.Logger;
+import com.mojang.logging.LogUtils
+import org.slf4j.Logger
+import java.util.function.Consumer
 
-import java.util.function.Consumer;
-
-public class Log {
-  public static final Logger LOGGER = LogUtils.getLogger();
-
-  public static RateLimited throttled(int rate) {
-    return new RateLimited(rate);
+object Log {
+  @JvmField
+  val LOGGER = LogUtils.getLogger()
+  @JvmStatic
+  fun throttled(rate : Int) : RateLimited {
+    return RateLimited(rate)
   }
 
-  public interface IHasTickLogger {
-    RateLimited getLogger();
-    void setLogger(RateLimited logSampler);
+  interface IHasTickLogger {
+    fun getLogger() : RateLimited?
+    fun setLogger(logSampler : RateLimited?)
   }
-  public static class RateLimited {
-    public int rate;
-    public int counter;
-    public RateLimited(int pRate) {
-      this.rate = pRate;
+
+  class RateLimited(var rate : Int) {
+    var counter = 0
+    fun log(doLog : Consumer<Logger?>) {
+      counter++
+      if (counter % rate != 0) return
+      counter = 0
+      doLog.accept(LOGGER)
     }
-    public static RateLimited of(IHasTickLogger hasLogger, int rate) {
-      if (hasLogger.getLogger() == null) hasLogger.setLogger(new RateLimited(rate));
-      return hasLogger.getLogger();
-    }
-    public void log(Consumer<Logger> doLog) {
-      counter++;
-      if (counter % rate != 0) return;
-      counter = 0;
-      doLog.accept(LOGGER);
+
+    companion object {
+      @JvmStatic
+      fun of(hasLogger : IHasTickLogger, rate : Int) : RateLimited? {
+        if (hasLogger.getLogger() == null) hasLogger.setLogger(RateLimited(rate))
+        return hasLogger.getLogger()
+      }
     }
   }
 }

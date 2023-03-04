@@ -1,157 +1,150 @@
-package zaftnotameni.creatania.recipes.cobblegen;
+package zaftnotameni.creatania.recipes.cobblegen
 
-import com.simibubi.create.foundation.fluid.FluidIngredient;
-import java.util.ArrayList;
-import java.util.List;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.ForgeFlowingFluid;
-import net.minecraftforge.registries.ForgeRegistries;
-import zaftnotameni.creatania.registry.Fluids;
+import com.simibubi.create.foundation.fluid.FluidIngredient.FluidStackIngredient
+import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
+import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.item.crafting.Ingredient
+import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.material.FluidState
+import net.minecraftforge.fluids.FluidStack
+import net.minecraftforge.fluids.ForgeFlowingFluid
+import net.minecraftforge.registries.ForgeRegistries
+import zaftnotameni.creatania.recipes.cobblegen.AllCobblegenRecipes.getCobblegenRecipes
+import zaftnotameni.creatania.registry.Fluids.CreataniaFlowingFluidSource
 
-import static zaftnotameni.creatania.recipes.cobblegen.AllCobblegenRecipes.getCobblegenRecipes;
+class CobblegenRecipeMatch {
+  var fluidsRequireSource : MutableList<FluidStackIngredient?> = ArrayList()
+  var sourcesToBeErased : MutableList<BlockPos> = ArrayList()
+  var matchingA : MutableList<BlockPos> = ArrayList()
+  var matchingB : MutableList<BlockPos> = ArrayList()
+  var fluidA : FluidStackIngredient? = null
+  var fluidARequiresSource = false
+  var fluidB : FluidStackIngredient? = null
+  var fluidBRequiresSource = false
+  var requiredCatalyst : Ingredient? = null
+  var output : Block? = null
+  var originator : ForgeFlowingFluid? = null
+  var target : FluidStackIngredient? = null
+  var targetRequiresSource = false
 
-public class CobblegenRecipeMatch {
+  companion object {
+    fun fromRecipe(`in` : CobblegenRecipe) : CobblegenRecipeMatch? {
+      val fluidIngredients = `in`.fluidIngredients
+      val ingredients = `in`.ingredients
+      val result = `in`.resultItem
+      if (fluidIngredients == null || fluidIngredients.size < 2) return null
+      if (result == null || result.isEmpty) return null
+      val out = CobblegenRecipeMatch()
+      if (fluidIngredients[0] is FluidStackIngredient) out.fluidA = fluidIngredients[0] as FluidStackIngredient
+      if (fluidIngredients[1] is FluidStackIngredient) out.fluidB = fluidIngredients[1] as FluidStackIngredient
+      if (out.fluidA == null || out.fluidB == null) return null
+      out.fluidARequiresSource = out.fluidA!!.requiredAmount > 999
+      out.fluidBRequiresSource = out.fluidB!!.requiredAmount > 999
+      out.output = ForgeRegistries.BLOCKS.getValue(
+        result.item.registryName
+      )
+      out.requiredCatalyst = if (ingredients == null || ingredients.isEmpty()) null else ingredients[0]
+      return out
+    }
 
-  public List<FluidIngredient.FluidStackIngredient> fluidsRequireSource = new ArrayList<>();
-  public List<BlockPos> sourcesToBeErased = new ArrayList<>();
-  public List<BlockPos> matchingA = new ArrayList<>();
-  public List<BlockPos> matchingB = new ArrayList<>();
-  public FluidIngredient.FluidStackIngredient fluidA;
-  public boolean fluidARequiresSource;
-  public FluidIngredient.FluidStackIngredient fluidB;
-  public boolean fluidBRequiresSource;
-  public Ingredient requiredCatalyst;
-  public Block output;
-  public ForgeFlowingFluid originator;
-  public FluidIngredient.FluidStackIngredient target;
-  public boolean targetRequiresSource;
-
-  public CobblegenRecipeMatch() { }
-
-  public static CobblegenRecipeMatch fromRecipe(CobblegenRecipe in) {
-    var fluidIngredients = in.getFluidIngredients();
-    var ingredients = in.getIngredients();
-    var result = in.getResultItem();
-    if (fluidIngredients == null || fluidIngredients.size() < 2) return null;
-    if (result == null || result.isEmpty()) return null;
-    var out = new CobblegenRecipeMatch();
-    if (fluidIngredients.get(0) instanceof FluidIngredient.FluidStackIngredient fsa) out.fluidA = fsa;
-    if (fluidIngredients.get(1) instanceof FluidIngredient.FluidStackIngredient fsb) out.fluidB = fsb;
-    if (out.fluidA == null || out.fluidB == null) return null;
-    out.fluidARequiresSource = out.fluidA.getRequiredAmount() > 999;
-    out.fluidBRequiresSource = out.fluidB.getRequiredAmount() > 999;
-    out.output = ForgeRegistries.BLOCKS.getValue(result
-                                                   .getItem()
-                                                   .getRegistryName());
-    out.requiredCatalyst = (ingredients == null || ingredients.isEmpty()) ? null : ingredients.get(0);
-    return out;
-  }
-
-  public static CobblegenRecipeMatch getCobbleGenRecipeMatchingTarget(
-    LevelAccessor level, List<CobblegenRecipeMatch> recipes, BlockPos pPos, BlockState pBlockState, Direction pDirection, FluidState pFluidState
-  ) {
-    if (!(level instanceof ServerLevel serverLevel)) return null;
-    if (!pBlockState.isAir()) return null;
-    var fs = level.getFluidState(pPos);
-    for (var r : recipes) {
-      for (var f : r.fluidsRequireSource) addSourceToBeErased(pPos, fs, r, f);
-      if (fs
-        .getType()
-        .isSame(r.fluidA
-                  .getMatchingFluidStacks()
-                  .get(0)
-                  .getFluid())) { r.matchingA.add(pPos); }
-      if (fs
-        .getType()
-        .isSame(r.fluidB
-                  .getMatchingFluidStacks()
-                  .get(0)
-                  .getFluid())) { r.matchingB.add(pPos); }
-
-      for (var d : Direction.values()) {
-        var pos = pPos.relative(d);
-        var neighbor = serverLevel.getFluidState(pos);
-        if (neighbor
-          .getType()
-          .isSame(r.fluidA
-                    .getMatchingFluidStacks()
-                    .get(0)
-                    .getFluid())) { r.matchingA.add(pos); }
-        if (neighbor
-          .getType()
-          .isSame(r.fluidB
-                    .getMatchingFluidStacks()
-                    .get(0)
-                    .getFluid())) { r.matchingB.add(pos); }
-        for (var f : r.fluidsRequireSource) {
-          addSourceToBeErased(pPos, fs, r, f);
-          addSourceToBeErased(pos, neighbor, r, f);
-          addSourceToBeErased(pos, r, f);
+    fun getCobbleGenRecipeMatchingTarget(
+      level : LevelAccessor, recipes : List<CobblegenRecipeMatch>, pPos : BlockPos, pBlockState : BlockState, pDirection : Direction?, pFluidState : FluidState?
+    ) : CobblegenRecipeMatch? {
+      if (level !is ServerLevel) return null
+      if (!pBlockState.isAir) return null
+      val fs = level.getFluidState(pPos)
+      for (r in recipes) {
+        for (f in r.fluidsRequireSource) addSourceToBeErased(pPos, fs, r, f)
+        if (fs.type.isSame(
+            r.fluidA?.getMatchingFluidStacks()?.first()?.fluid
+          )
+        ) {
+          r.matchingA.add(pPos)
         }
-        if (isComplete(r)) { return r; }
+        if (fs.type.isSame(
+            r.fluidB?.getMatchingFluidStacks()?.first()?.fluid
+          )
+        ) {
+          r.matchingB.add(pPos)
+        }
+        for (d in Direction.values()) {
+          val pos = pPos.relative(d)
+          val neighbor = level.getFluidState(pos)
+          if (neighbor.type.isSame(
+              r.fluidA?.getMatchingFluidStacks()?.first()?.fluid
+            )
+          ) {
+            r.matchingA.add(pos)
+          }
+          if (neighbor.type.isSame(
+              r.fluidB?.getMatchingFluidStacks()?.first()?.fluid
+            )
+          ) {
+            r.matchingB.add(pos)
+          }
+          for (f in r.fluidsRequireSource) {
+            addSourceToBeErased(pPos, fs, r, f)
+            addSourceToBeErased(pos, neighbor, r, f)
+            addSourceToBeErased(pos, r, f)
+          }
+          if (isComplete(r)) {
+            return r
+          }
+        }
+      }
+      return null
+    }
+
+    private fun isComplete(r : CobblegenRecipeMatch) : Boolean {
+      return r.matchingA.size > 0 && r.matchingB.size > 0 && r.sourcesToBeErased.size == r.fluidsRequireSource.size
+    }
+
+    private fun matchesEitherOriginatorOrTarget(fs : FluidState, neighbor : FluidState, r : CobblegenRecipeMatch) : Boolean {
+      return r.target!!.test(FluidStack(neighbor.type, 1)) || r.target!!.test(FluidStack(fs.type, 1)) || r.originator!!.isSame(fs.type) || r.originator!!.isSame(neighbor.type)
+    }
+
+    private fun addSourceToBeErased(pos : BlockPos, neighbor : FluidState, r : CobblegenRecipeMatch, f : FluidStackIngredient?) {
+      if (r.sourcesToBeErased.contains(pos)) return
+      if (f!!.test(FluidStack(neighbor.type, 1)) && neighbor.isSource) {
+        r.sourcesToBeErased.add(pos)
       }
     }
-    return null;
-  }
 
-  private static boolean isComplete(CobblegenRecipeMatch r) {
-    return r.matchingA.size() > 0 && r.matchingB.size() > 0 && r.sourcesToBeErased.size() == r.fluidsRequireSource.size();
-  }
+    private fun addSourceToBeErased(pos : BlockPos, r : CobblegenRecipeMatch, f : FluidStackIngredient?) {
+      if (r.sourcesToBeErased.contains(pos)) return
+      if (f!!.test(FluidStack(r.originator, 1)) && r.originator is CreataniaFlowingFluidSource) {
+        r.sourcesToBeErased.add(pos)
+      }
+    }
 
-  private static boolean matchesEitherOriginatorOrTarget(FluidState fs, FluidState neighbor, CobblegenRecipeMatch r) {
-    return r.target.test(new FluidStack(neighbor.getType(), 1)) || r.target.test(new FluidStack(fs.getType(), 1)) || r.originator.isSame(fs.getType()) || r.originator.isSame(neighbor.getType());
-  }
-
-  private static void addSourceToBeErased(BlockPos pos, FluidState neighbor, CobblegenRecipeMatch r, FluidIngredient.FluidStackIngredient f) {
-    if (r.sourcesToBeErased.contains(pos)) return;
-    if (f.test(new FluidStack(neighbor.getType(), 1)) && neighbor.isSource()) {
-      r.sourcesToBeErased.add(pos);
+    fun getCobbleGenRecipesMatchingOriginator(level : LevelAccessor?, originator : ForgeFlowingFluid?) : List<CobblegenRecipeMatch> {
+      val matchingRecipes = ArrayList<CobblegenRecipeMatch>()
+      val recipes = getCobblegenRecipes(level)
+      recipes?.stream()?.forEach { r : CobblegenRecipe ->
+        val m = fromRecipe(r) ?: return@forEach
+        if (m.fluidA!!.test(FluidStack(originator, 1))) {
+          m.originator = originator
+          m.target = m.fluidB
+        }
+        if (m.fluidB!!.test(FluidStack(originator, 1))) {
+          m.originator = originator
+          m.target = m.fluidA
+        }
+        if (m.fluidARequiresSource) m.fluidsRequireSource.add(m.fluidA)
+        if (m.fluidBRequiresSource) m.fluidsRequireSource.add(m.fluidB)
+        m.targetRequiresSource = m.fluidARequiresSource || m.fluidBRequiresSource
+        if (m.target == null) return@forEach
+        matchingRecipes.add(m)
+      }
+      matchingRecipes.sortWith { a : CobblegenRecipeMatch, b : CobblegenRecipeMatch ->
+        if (a.targetRequiresSource) return@sortWith -1
+        if (b.targetRequiresSource) return@sortWith 1
+        0
+      }
+      return matchingRecipes
     }
   }
-
-  private static void addSourceToBeErased(BlockPos pos, CobblegenRecipeMatch r, FluidIngredient.FluidStackIngredient f) {
-    if (r.sourcesToBeErased.contains(pos)) return;
-    if (f.test(new FluidStack(r.originator, 1)) && (r.originator instanceof Fluids.CreataniaFlowingFluidSource)) {
-      r.sourcesToBeErased.add(pos);
-    }
-  }
-
-  public static List<CobblegenRecipeMatch> getCobbleGenRecipesMatchingOriginator(LevelAccessor level, ForgeFlowingFluid originator) {
-    var matchingRecipes = new ArrayList<CobblegenRecipeMatch>();
-    var recipes = getCobblegenRecipes(level);
-    recipes
-      .stream()
-      .forEach(r -> {
-        var m = fromRecipe(r);
-        if (m == null) return;
-        if (m.fluidA.test(new FluidStack(originator, 1))) {
-          m.originator = originator;
-          m.target = m.fluidB;
-        }
-        if (m.fluidB.test(new FluidStack(originator, 1))) {
-          m.originator = originator;
-          m.target = m.fluidA;
-        }
-        if (m.fluidARequiresSource) m.fluidsRequireSource.add(m.fluidA);
-        if (m.fluidBRequiresSource) m.fluidsRequireSource.add(m.fluidB);
-        m.targetRequiresSource = m.fluidARequiresSource || m.fluidBRequiresSource;
-        if (m.target == null) return;
-        matchingRecipes.add(m);
-      });
-    matchingRecipes.sort((a, b) -> {
-      if (a.targetRequiresSource) return -1;
-      if (b.targetRequiresSource) return 1;
-      return 0;
-    });
-    return matchingRecipes;
-  }
-
 }

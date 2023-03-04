@@ -1,20 +1,36 @@
-package zaftnotameni.creatania.util;
-import com.simibubi.create.foundation.utility.Lang;
-import com.simibubi.create.foundation.utility.LangBuilder;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.TextComponent;
-public class Text {
-  public static LangBuilder colored(String text, ChatFormatting color) {
-    return Lang.builder().add(new TextComponent(text)).style(color);
+package zaftnotameni.creatania.util
+
+import com.simibubi.create.foundation.utility.Lang
+import com.simibubi.create.foundation.utility.LangBuilder
+import net.minecraft.ChatFormatting
+import net.minecraft.network.chat.TextComponent
+
+object Text {
+  fun colored(text : String?, color : ChatFormatting?) : LangBuilder {
+    return Lang.builder().add(TextComponent(text)).style(color)
   }
-  public static LangBuilder muted(String text) { return colored(text, ChatFormatting.DARK_GRAY); }
-  public static LangBuilder gray(String text) { return colored(text, ChatFormatting.GRAY); }
-  public static LangBuilder green(String text) { return colored(text, ChatFormatting.DARK_GREEN); }
-  public static LangBuilder aqua(String text) {
-    return colored(text, ChatFormatting.AQUA);
+
+  fun muted(text : String?) : LangBuilder {
+    return colored(text, ChatFormatting.DARK_GRAY)
   }
-  public static LangBuilder red(String text) {
-    return colored(text, ChatFormatting.RED);
+
+  fun gray(text : String?) : LangBuilder {
+    return colored(text, ChatFormatting.GRAY)
   }
-  public static LangBuilder purple(String text) { return colored(text, ChatFormatting.LIGHT_PURPLE); }
+
+  fun green(text : String?) : LangBuilder {
+    return colored(text, ChatFormatting.DARK_GREEN)
+  }
+
+  fun aqua(text : String?) : LangBuilder {
+    return colored(text, ChatFormatting.AQUA)
+  }
+
+  fun red(text : String?) : LangBuilder {
+    return colored(text, ChatFormatting.RED)
+  }
+
+  fun purple(text : String?) : LangBuilder {
+    return colored(text, ChatFormatting.LIGHT_PURPLE)
+  }
 }
