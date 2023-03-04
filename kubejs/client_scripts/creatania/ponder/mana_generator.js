@@ -48,6 +48,24 @@ const displayManaGeneratorFromBlocksScene = (params) => (scene, util) => {
     scene.world.showSection(shaft2, Facing.WEST);
     scene.idle(90);
 
+    // /setblock -19 -58 -19 botania:mana_pool[waterlogged=false]{ForgeCaps:{},canAccept:1b,canSpare:1b,color:0,inputKey:"",mana:53760,manaCap:1000000,outputKey:"",outputting:1b}
+
+ 
+    scene.world.modifyTileNBT(manapool, (nbt) => {
+
+                nbt.ForgeCaps = {};
+                nbt.canAccept = true;
+                nbt.canSpare = true;
+                nbt.color = 0;
+                nbt.inputKey = "";
+                nbt.mana = 53760;
+                nbt.manaCap = 1000000;
+                nbt.outputKey = "";
+                nbt.outputting = true 
+
+    });
+    
+
     scene.text(100, "The mana pool will slowly fill. You now have real mana!", offsetCenterOf(util)(manapool));
 
 };
