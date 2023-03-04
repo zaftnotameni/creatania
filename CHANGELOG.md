@@ -7,6 +7,7 @@
 #### Changes
 
 - Higher res managel texture
+- Animated buckets
 
 ### 1.18.2-0.3.5-alpha
 
