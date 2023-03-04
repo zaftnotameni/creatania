@@ -49,10 +49,12 @@
     scene.idle(20);
     // by doing it like this, even more importantly than animating each piece, we could have extra blocks _already in the NBT template_ that we only show later
     
+    scene.addKeyframe();
     // the 60 represents the number of ticks the message is displayed
     scene.text(60, "Throw some mana blocks into the mix", util.vector.topOf(basin));
     scene.idle(60);
     
+    scene.addKeyframe();
     // scene.world.modifyBlock(blaze, blockstate => blockstate.with("blaze", "kindled"), false); // yellow
     scene.text(60, "Superheat your Blaze Burner", offsetCenterOf(util)(blaze));
     scene.showControls(60, [2, 1, 2], "down").rightClick().withItem("create:blaze_cake")
