@@ -2,6 +2,12 @@
 
 ## changelog
 
+### 1.18.2-0.3.5-alpha
+
+#### Bugfixes
+
+- Fluid animations now render correctly
+
 ### 1.18.2-0.3.4-alpha
 
 #### New
