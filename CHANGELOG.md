@@ -4,7 +4,9 @@
 
 ### 1.18.2-0.3.7-alpha
 
+#### Changes
 
+- Squishier managel texture
 
 ### 1.18.2-0.3.6-alpha
 
