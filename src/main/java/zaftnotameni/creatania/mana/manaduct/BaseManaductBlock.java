@@ -62,7 +62,9 @@ public class BaseManaductBlock extends FaceAttachedHorizontalDirectionalBlock {
     Direction facing;
     if (pContext.getPlayer() != null && pContext.getPlayer().isShiftKeyDown()) facing = horizontalDirection;
     else facing = horizontalDirection.getOpposite();
-    return super.getStateForPlacement(pContext).setValue(FACING, facing);
+    var parentState = super.getStateForPlacement(pContext);
+    if (parentState == null) return null;
+    return parentState.setValue(FACING, facing);
   }
   @Override
   public @NotNull VoxelShape getShape(@NotNull BlockState pState, @NotNull BlockGetter pLevel, @NotNull BlockPos pPos, @NotNull CollisionContext pContext) {
