@@ -29,6 +29,7 @@ import static net.minecraftforge.common.util.LazyOptional.empty;
 import static net.minecraftforge.common.util.LazyOptional.of;
 
 public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerInterfaces> implements BotaniaFlowerInterfaces {
+
   public static final ResourceLocation MANA_POOL = new ResourceLocation("botania", "mana_pool");
   public static final ResourceLocation MANA_SPREADER = new ResourceLocation("botania", "mana_spreader");
   public BlockPos poolPosition;
@@ -49,29 +50,80 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
   public boolean didWork;
   public int tickCounter = 0;
   public int tickRate = 20;
+
   public FunctionalFlowerHandler(T self) { this.self = self; }
-  public FunctionalFlowerHandler withColor(int color) { this.color = color; return this; }
-  public FunctionalFlowerHandler withMana(int x) { this.mana = x; return this; }
-  public FunctionalFlowerHandler withMaxMana(int x) { this.maxMana = x; return this; }
-  public FunctionalFlowerHandler withMaxTransfer(int x) { this.maxTransfer = x; return this; }
-  public FunctionalFlowerHandler withPool(IManaPool x) { this.pool = x; return this; }
-  public FunctionalFlowerHandler withSpreader(IManaCollector x) { this.spreader = x; return this; }
-  public FunctionalFlowerHandler withSelf(T x) { this.self = x; return this; }
-  public FunctionalFlowerHandler withIsGenerating(boolean x) { this.isGenerating = x; return this; }
-  public FunctionalFlowerHandler withIsFloating(boolean x) { this.isFloating = x; return this; }
-  public FunctionalFlowerHandler withTickCounter(int x) { this.tickCounter = x; return this; }
-  public FunctionalFlowerHandler withTickRate(int x) { this.tickRate = x; return this; }
-  public FunctionalFlowerHandler withRequiredManaPerOperation(int x) { this.manaPerOperation = x; return this; }
-  public FunctionalFlowerHandler withBindRange(int x) { this.bindRange = x; return this; }
+
+  public FunctionalFlowerHandler withColor(int color) {
+    this.color = color;
+    return this;
+  }
+
+  public FunctionalFlowerHandler withMana(int x) {
+    this.mana = x;
+    return this;
+  }
+
+  public FunctionalFlowerHandler withMaxMana(int x) {
+    this.maxMana = x;
+    return this;
+  }
+
+  public FunctionalFlowerHandler withMaxTransfer(int x) {
+    this.maxTransfer = x;
+    return this;
+  }
+
+  public FunctionalFlowerHandler withPool(IManaPool x) {
+    this.pool = x;
+    return this;
+  }
+
+  public FunctionalFlowerHandler withSpreader(IManaCollector x) {
+    this.spreader = x;
+    return this;
+  }
+
+  public FunctionalFlowerHandler withSelf(T x) {
+    this.self = x;
+    return this;
+  }
+
+  public FunctionalFlowerHandler withIsGenerating(boolean x) {
+    this.isGenerating = x;
+    return this;
+  }
+
+  public FunctionalFlowerHandler withIsFloating(boolean x) {
+    this.isFloating = x;
+    return this;
+  }
+
+  public FunctionalFlowerHandler withTickCounter(int x) {
+    this.tickCounter = x;
+    return this;
+  }
+
+  public FunctionalFlowerHandler withTickRate(int x) {
+    this.tickRate = x;
+    return this;
+  }
+
+  public FunctionalFlowerHandler withRequiredManaPerOperation(int x) {
+    this.manaPerOperation = x;
+    return this;
+  }
+
+  public FunctionalFlowerHandler withBindRange(int x) {
+    this.bindRange = x;
+    return this;
+  }
+
   public <C> LazyOptional<C> getCapability(@Nonnull Capability<C> cap, @Nullable Direction side) {
-    if (cap == BotaniaForgeCapabilities.WANDABLE) return of(() -> self).cast();
-    else {
-      return DistExecutor.unsafeRunForDist(
-        () -> () -> cap == BotaniaForgeClientCapabilities.WAND_HUD ? of(() -> this).cast() : empty(),
-        () -> LazyOptional::empty
-      );
+    if (cap == BotaniaForgeCapabilities.WANDABLE) { return of(() -> self).cast(); } else {
+      return DistExecutor.unsafeRunForDist(() -> () -> cap == BotaniaForgeClientCapabilities.WAND_HUD ? of(() -> this).cast() : empty(), () -> LazyOptional::empty);
     }
   }
+
   public void linkPool() {
     Object theTileObj = this.isGenerating ? this.spreader : this.pool;
     BlockEntity theTile;
@@ -81,7 +133,9 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
       theTile = (BlockEntity) theTileObj;
     }
     //noinspection ConstantConditions
-    if ((this.poolPosition != null && theTile == null) || this.poolPosition != null && !this.poolPosition.equals(theTile.getBlockPos()) || (this.poolPosition != null && this.self.getLevel().getBlockEntity(this.poolPosition) != theTile)) {
+    if ((this.poolPosition != null && theTile == null) ||
+      this.poolPosition != null && !this.poolPosition.equals(theTile.getBlockPos()) ||
+      (this.poolPosition != null && this.self.getLevel().getBlockEntity(this.poolPosition) != theTile)) {
       // tile is outdated. Update it
       //noinspection ConstantConditions
       BlockEntity te = this.self.getLevel().getBlockEntity(this.poolPosition);
@@ -134,9 +188,13 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
 
     this.self.setChanged();
   }
-  public void markPoolOrSpreaderAsDirty() { if (this.pool instanceof BlockEntity p) p.setChanged(); if (this.spreader instanceof BlockEntity s) s.setChanged(); }
-  @Override
-  public int doTick() {
+
+  public void markPoolOrSpreaderAsDirty() {
+    if (this.pool instanceof BlockEntity p) p.setChanged();
+    if (this.spreader instanceof BlockEntity s) s.setChanged();
+  }
+
+  @Override public int doTick() {
     if (tickCounter++ < tickRate) return 0;
     tickCounter = 0;
 
@@ -183,21 +241,30 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
     }
 
     if (this.self.getLevel().isClientSide) {
-      if (this.didWork)
-        particleChance = 3 * particleChance;
+      if (this.didWork) particleChance = 3 * particleChance;
       float red = (float) (this.color >> 16 & 0xFF) / 255.0f;
       float green = (float) (this.color >> 8 & 0xFF) / 255.0f;
       float blue = (float) (this.color & 255) / 255.0f;
       if (Math.random() > particleChance) {
-        BotaniaAPI.instance().sparkleFX(this.self.getLevel(), (double) this.self.getBlockPos().getX() + 0.3D + Math.random() * 0.5D, (double) this.self.getBlockPos().getY() + 0.5D + Math.random() * 0.5D, (double) this.self.getBlockPos().getZ() + 0.3D + Math.random() * 0.5D, red, green, blue, (float) Math.random(), 5);
+        BotaniaAPI.instance().sparkleFX(
+          this.self.getLevel(),
+          (double) this.self.getBlockPos().getX() + 0.3D + Math.random() * 0.5D,
+          (double) this.self.getBlockPos().getY() + 0.5D + Math.random() * 0.5D,
+          (double) this.self.getBlockPos().getZ() + 0.3D + Math.random() * 0.5D,
+          red,
+          green,
+          blue,
+          (float) Math.random(),
+          5
+        );
       }
     }
     return manaConsumed;
   }
-  @Override
-  public boolean canSelect(Player player, ItemStack wand, BlockPos pos, Direction side) { return true; }
-  @Override
-  public boolean bindTo(Player player, ItemStack wand, BlockPos pos, Direction side) {
+
+  @Override public boolean canSelect(Player player, ItemStack wand, BlockPos pos, Direction side) { return true; }
+
+  @Override public boolean bindTo(Player player, ItemStack wand, BlockPos pos, Direction side) {
     var squaredRange = this.bindRange * this.bindRange;
     double dist = pos.distSqr(this.self.getBlockPos());
     if ((double) squaredRange >= dist) {
@@ -218,16 +285,19 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
     }
     return false;
   }
-  @org.jetbrains.annotations.Nullable
-  @Override
-  public BlockPos getBinding() { return this.poolPosition; }
-  @Override
-  public void renderHUD(PoseStack ms, Minecraft mc) { KineticManaMachine.renderSimpleBotaniaHud(this.self.getLevel(), this.self.getBlockState(), ms, this.color, this.mana, this.maxMana); }
-  @Override
-  public boolean onUsedByWand(@org.jetbrains.annotations.Nullable Player player, ItemStack stack, Direction side) { return false; }
+
+  @org.jetbrains.annotations.Nullable @Override public BlockPos getBinding() { return this.poolPosition; }
+
+  @Override public void renderHUD(PoseStack ms, Minecraft mc) {
+    KineticManaMachine.renderSimpleBotaniaHud(this.self.getLevel(), this.self.getBlockState(), ms, this.color, this.mana, this.maxMana, this.pool);
+  }
+
+  @Override public boolean onUsedByWand(@org.jetbrains.annotations.Nullable Player player, ItemStack stack, Direction side) { return false; }
 
   public Integer getCurrentMana() { return this.mana; }
+
   public Integer getManaPerOperation() { return this.manaPerOperation; }
+
   public Boolean hasEnoughManaForOneOperation() { return this.mana > this.manaPerOperation; }
 
   public void load(@Nonnull CompoundTag nbt) {
@@ -286,12 +356,13 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
       this.isFloating = nbt.getBoolean("floating");
     }
   }
+
   public boolean isValidBinding() {
     Object theTileObj = this.isGenerating ? this.spreader : this.pool;
-    if (!(theTileObj instanceof BlockEntity theTile))
-      return false;
+    if (!(theTileObj instanceof BlockEntity theTile)) return false;
     // noinspection ConstantConditions,deprecation,deprecation
-    return this.poolPosition != null && theTile != null && theTile.hasLevel() && !theTile.isRemoved()
-      && this.self.getLevel().hasChunkAt(theTile.getBlockPos()) && this.self.getLevel().getBlockEntity(this.poolPosition) == theTile;
+    return this.poolPosition != null && theTile != null && theTile.hasLevel() && !theTile.isRemoved() && this.self.getLevel().hasChunkAt(theTile.getBlockPos()) && this.self.getLevel().getBlockEntity(
+      this.poolPosition) == theTile;
   }
+
 }

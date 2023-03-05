@@ -9,6 +9,7 @@
 - Squishier managel texture
 - Blazunia model/texture
 - Updated bucket animations
+- Blazunia scans vertically for blaze burners
 
 #### Bugfixes
 

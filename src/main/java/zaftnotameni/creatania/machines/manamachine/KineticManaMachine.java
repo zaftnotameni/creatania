@@ -26,6 +26,7 @@ import net.minecraftforge.fml.DistExecutor;
 import vazkii.botania.api.BotaniaAPIClient;
 import vazkii.botania.api.BotaniaForgeClientCapabilities;
 import vazkii.botania.api.block.IWandHUD;
+import vazkii.botania.api.mana.IManaPool;
 import vazkii.botania.api.mana.spark.IManaSpark;
 
 import static com.simibubi.create.content.contraptions.base.KineticTileEntity.convertToDirection;
@@ -100,10 +101,17 @@ public class KineticManaMachine<T extends SmartTileEntity & IAmManaMachine> {
   public static BlockState rotate(BlockState state) {
     return state.setValue(DirectionalKineticBlock.FACING, state.getValue(DirectionalKineticBlock.FACING).getClockWise(Direction.Axis.Y));
   }
-  public static void renderSimpleBotaniaHud(Level level, BlockState bs, PoseStack ps, int color, int current, int max) {
+  public static void renderSimpleBotaniaHud(Level level, BlockState bs, PoseStack ps, int color, int current, int max, IManaPool pool) {
     if (level == null || !level.isClientSide()) return;
     String name = I18n.get(bs.getBlock().getDescriptionId());
-    BotaniaAPIClient.instance().drawSimpleManaHUD(ps, color, current,max, name);
+    if (pool == null) {
+      BotaniaAPIClient.instance().drawSimpleManaHUD(ps, color, current, max, name);
+    } else {
+      BotaniaAPIClient.instance().drawSimpleManaHUD(ps, color, pool.getCurrentMana(), max, name);
+    }
+  }
+  public static void renderSimpleBotaniaHud(Level level, BlockState bs, PoseStack ps, int color, int current, int max) {
+    renderSimpleBotaniaHud(level,bs,ps,color,current,max,null);
   }
   public static <T> LazyOptional<T>  handleBotaniaManaHudCapability(@Nonnull Capability<T> cap, IWandHUD self) {
     return DistExecutor.unsafeRunForDist(
