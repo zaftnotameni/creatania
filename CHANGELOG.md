@@ -2,12 +2,19 @@
 
 ## changelog
 
+### 1.18.2-0.3.8-alpha
+
+
 ### 1.18.2-0.3.7-alpha
+
+#### New
+ 
+- Blazunia model/texture
+- Mana Generator internal turbine
 
 #### Changes
 
 - Squishier managel texture
-- Blazunia model/texture
 - Updated bucket animations
 - Blazunia scans vertically for blaze burners
 

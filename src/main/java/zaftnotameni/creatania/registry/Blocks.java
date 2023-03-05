@@ -128,7 +128,7 @@ public class Blocks {
   public static final BlockEntry<ManaCasing> MANA_CASING = ManaCasing.registerSelf();
 
   public static final BlockEntry<BlazuniaFunctionalFlowerBlock> BLAZUNIA_BLOCK = Index.all()
-    .block("minecraft:block/cross", "blazunia", p -> new BlazuniaFunctionalFlowerBlock())
+    .block("blazunia", p -> new BlazuniaFunctionalFlowerBlock())
     .lang("Blazunia")
     .transform(axeOrPickaxe())
     .blockstate((c, b) -> b.simpleBlock(c.get(), AssetLookup.standardModel(c, b)))
@@ -150,6 +150,7 @@ public class Blocks {
 
   public static class Partials {
     public static final PartialModel MANA_MOTOR_FAN = block("mana_motor/mana_motor_fan");
+    public static final PartialModel MANA_GENERATOR_TURBINE = block("mana_generator/copper_turbine");
     private static PartialModel block(String path) {
       return new PartialModel(new ResourceLocation(Constants.MODID + ":block/" + path));
     }

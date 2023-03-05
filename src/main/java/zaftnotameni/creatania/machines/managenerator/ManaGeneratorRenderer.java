@@ -1,21 +1,30 @@
 package zaftnotameni.creatania.machines.managenerator;
 
 import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.simibubi.create.AllBlockPartials;
+import com.simibubi.create.content.contraptions.base.IRotate;
 import com.simibubi.create.content.contraptions.base.KineticTileEntity;
 import com.simibubi.create.content.contraptions.base.KineticTileEntityRenderer;
 import com.simibubi.create.foundation.fluid.FluidRenderer;
 import com.simibubi.create.foundation.render.CachedBufferer;
 import com.simibubi.create.foundation.render.SuperByteBuffer;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
 import zaftnotameni.creatania.config.ClientConfig;
 import zaftnotameni.creatania.machines.manamachine.IAmParticleEmittingMachine;
+import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Fluids;
 import zaftnotameni.creatania.registry.Particles;
+
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
+
 public class ManaGeneratorRenderer extends KineticTileEntityRenderer {
   public ManaGeneratorRenderer(BlockEntityRendererProvider.Context context) {
     super(context);
@@ -30,7 +39,22 @@ public class ManaGeneratorRenderer extends KineticTileEntityRenderer {
     super.renderSafe(te, partialTicks, ms, buffer, light, overlay);
     if (!(te instanceof ManaGeneratorBlockEntity generator)) return;
     if (generator.activeStateSynchronizerBehavior.active && !generator.activeStateSynchronizerBehavior.duct) this.spawnManaParticles(te, partialTicks);
+    renderTurbine(te, ms, buffer);
     renderFluids(te, partialTicks, ms, buffer, light, overlay);
+  }
+
+  public static void renderTurbine(KineticTileEntity te, PoseStack ms, MultiBufferSource buffer) {
+    Direction direction = te.getBlockState().getValue(FACING);
+    VertexConsumer vb = buffer.getBuffer(RenderType.cutoutMipped());
+
+    int lightInFront = LevelRenderer.getLightColor(te.getLevel(), te.getBlockPos().relative(direction));
+
+    SuperByteBuffer fanInner1 = CachedBufferer.partialFacing(Blocks.Partials.MANA_GENERATOR_TURBINE, te.getBlockState(), direction.getOpposite());
+
+    Direction.Axis axis = ((IRotate) te.getBlockState().getBlock()).getRotationAxis(te.getBlockState());
+    var angle = getAngleForTe(te, te.getBlockPos(), axis);
+
+    kineticRotationTransform(fanInner1, te, direction.getAxis(), angle, lightInFront).renderInto(ms, vb);
   }
 
   public static float getYMaxForFluidLevel(KineticTileEntity te){
