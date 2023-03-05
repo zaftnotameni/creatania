@@ -1,8 +1,0 @@
-{
-	"credit": "Made with Blockbench",
-	"parent": "minecraft:item/generated",
-	"textures": {
-		"particle": "creatania:block/blazetunia",
-		"layer0": "creatania:block/blazetunia"
-	}
-}

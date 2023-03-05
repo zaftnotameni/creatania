@@ -13,6 +13,7 @@ import static zaftnotameni.creatania.registry.Fluids.*;
 public class FMLClientSetup {
   public static void run(final FMLClientSetupEvent event) {
     Log.LOGGER.info("creatania client setup started");
+    setRenderLayer(BLAZUNIA_BLOCK.get(), cutoutMipped());
     setRenderLayer(MANASTEEL_MANADUCT_BLOCK.get(), cutoutMipped());
     setRenderLayer(TERRASTEEL_MANADUCT_BLOCK.get(), cutoutMipped());
     setRenderLayer(GAIA_MANADUCT_BLOCK.get(), cutoutMipped());

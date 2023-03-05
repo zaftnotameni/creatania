@@ -7,6 +7,12 @@
 #### Changes
 
 - Squishier managel texture
+- Blazunia model/texture
+- Updated bucket animations
+
+#### Bugfixes
+
+- Crashes should no longer happen when placing manaducts on top of each other
 
 ### 1.18.2-0.3.6-alpha
 

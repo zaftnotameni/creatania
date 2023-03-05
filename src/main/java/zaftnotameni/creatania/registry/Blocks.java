@@ -128,10 +128,10 @@ public class Blocks {
   public static final BlockEntry<ManaCasing> MANA_CASING = ManaCasing.registerSelf();
 
   public static final BlockEntry<BlazuniaFunctionalFlowerBlock> BLAZUNIA_BLOCK = Index.all()
-    .block("blazunia", BlazuniaFunctionalFlowerBlock::new)
+    .block("minecraft:block/cross", "blazunia", p -> new BlazuniaFunctionalFlowerBlock())
     .lang("Blazunia")
     .transform(axeOrPickaxe())
-    .defaultBlockstate()
+    .blockstate((c, b) -> b.simpleBlock(c.get(), AssetLookup.standardModel(c, b)))
     .simpleItem()
     .simpleBlockEntity(BlazuniaFunctionalFlowerBlockEntity::new)
     .register();
