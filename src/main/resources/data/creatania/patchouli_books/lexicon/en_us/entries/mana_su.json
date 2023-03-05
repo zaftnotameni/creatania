@@ -66,7 +66,7 @@
         },
         {
             "type": "patchouli:text",
-            "text": "$(l)Step 3: Purify Corrupted Fluid Mana$()$(br2)The Pure Daisy is a miracle flower! We found the Corrupted Fluid Mana is also purified via Pure Daisy to produce Inert Fluid Mana. We can easily place four liquid mana around a Pure Daisy, although, I wonder if there is a way to have eight?"
+            "text": "$(l)Step 3: Purify Corrupted Fluid Mana$()$(br2)The Pure Daisy is a miracle flower! We found the $(c:/create ponder creatania:corrupt_mana_bucket @a)Corrupted Fluid Mana$(/c) is also purified via Pure Daisy to produce Inert Fluid Mana. We can easily place four liquid mana around a Pure Daisy, although, I wonder if there is a way to have eight?"
         }
     ]
 }
