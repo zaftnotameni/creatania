@@ -3,7 +3,9 @@ package zaftnotameni.creatania.mana.flowers.blazunia;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.tileEntity.SmartTileEntity;
 import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
+import com.simibubi.create.foundation.utility.VecHelper;
 import java.util.List;
+import java.util.Random;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import javax.annotation.Nonnull;
@@ -11,6 +13,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.player.Player;
@@ -33,6 +36,8 @@ import static zaftnotameni.creatania.mana.flowers.blazunia.BlazeBurnerInteractio
 import static zaftnotameni.creatania.mana.flowers.blazunia.BlazeBurnerInteraction.scanRangeForBlazeBurners;
 import static zaftnotameni.creatania.mana.flowers.blazunia.BlazeBurnerInteraction.stackOfOakPlanks;
 import static zaftnotameni.creatania.mana.flowers.blazunia.BlazeBurnerInteraction.useFuelOnBlazeBurner;
+import static zaftnotameni.creatania.mana.flowers.blazunia.BlazuniaBlockStates.HAS_MANA_SOURCE;
+import static zaftnotameni.creatania.mana.flowers.blazunia.BlazuniaBlockStates.IS_SUPERHOT;
 
 @OnlyIn(value = Dist.CLIENT, _interface = IWandHUD.class) public class BlazuniaFunctionalFlowerBlockEntity extends SmartTileEntity implements BotaniaFlowerInterfaces {
 
@@ -75,8 +80,21 @@ import static zaftnotameni.creatania.mana.flowers.blazunia.BlazeBurnerInteractio
     this.lazyFlowerHandler.resolve().ifPresent(f -> f.load(tag));
   }
 
+  public void setHasManaSource(Boolean hasManaSource) {
+    var hadManaSource = getBlockState().getOptionalValue(HAS_MANA_SOURCE).orElse(false);
+    if (hadManaSource == hasManaSource) return;
+    level.setBlockAndUpdate(worldPosition, getBlockState().setValue(HAS_MANA_SOURCE, hasManaSource));
+    notifyUpdate();
+  }
+
+  @Override public void doAnimationTick() {
+    if (level == null) return;
+    if (!level.isClientSide()) return;
+    doClientSideAnimation();
+  }
+
   @Override public int doTick() {
-    if (level == null || level.isClientSide()) return 0;
+    if (level == null) return 0;
     if (!(level instanceof ServerLevel serverLevel)) return 0;
     var fakePlayer = makeFakePlayer(serverLevel);
     fakePlayer.getInventory().add(stackOfOakPlanks());
@@ -92,6 +110,49 @@ import static zaftnotameni.creatania.mana.flowers.blazunia.BlazeBurnerInteractio
       consumedMana.add(evalFlowerHandler(FunctionalFlowerHandler::getManaPerOperation, () -> 0));
     });
     return consumedMana.stream().mapToInt(Integer::intValue).sum();
+  }
+
+  public int doClientSideAnimation() {
+    spawnParticles(getBlockState().getOptionalValue(HAS_MANA_SOURCE).orElse(false),
+      getBlockState().getOptionalValue(IS_SUPERHOT).orElse(false),
+      1);
+    return 0;
+  }
+
+  public void spawnParticles(Boolean hasManaSource, Boolean superhot, double burstMult) {
+    if (level == null)
+      return;
+
+    if (!hasManaSource) return;
+
+    Random r = level.getRandom();
+
+    if (r.nextInt(3) != 0)
+      return;
+
+    Vec3 c = VecHelper.getCenterOf(worldPosition);
+    Vec3 v = c.add(VecHelper.offsetRandomly(Vec3.ZERO, r, .125f)
+      .multiply(1, 0, 1));
+
+    boolean empty = level.getBlockState(worldPosition.above())
+      .getCollisionShape(level, worldPosition.above())
+      .isEmpty();
+
+//    if (empty || r.nextInt(8) == 0)
+//      level.addParticle(ParticleTypes.LARGE_SMOKE, v.x, v.y, v.z, 0, 0, 0);
+
+    double yMotion = empty ? .0625f : r.nextDouble() * .0125f;
+    Vec3 v2 = c.add(VecHelper.offsetRandomly(Vec3.ZERO, r, .5f)
+        .multiply(1, .25f, 1)
+        .normalize()
+        .scale((empty ? .25f : .5) + r.nextDouble() * .125f))
+      .add(0, .5, 0);
+
+    if (superhot) {
+      level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, v2.x, v2.y, v2.z, 0, yMotion, 0);
+    } else {
+      level.addParticle(ParticleTypes.FLAME, v2.x, v2.y, v2.z, 0, yMotion, 0);
+    }
   }
 
   @NotNull private static BlockHitResult makeBlockHitResult(BlockPos bpos) {

@@ -4,6 +4,9 @@
 
 ### 1.18.2-0.3.8-alpha
 
+#### New
+
+- Blazunia particle effects
 
 ### 1.18.2-0.3.7-alpha
 

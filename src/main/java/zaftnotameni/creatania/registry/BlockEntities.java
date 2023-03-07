@@ -10,6 +10,7 @@ import zaftnotameni.creatania.machines.managenerator.ManaGeneratorRenderer;
 import zaftnotameni.creatania.machines.manamotor.ManaMotorBlockEntity;
 import zaftnotameni.creatania.machines.manamotor.ManaMotorRenderer;
 import zaftnotameni.creatania.mana.flowers.blazunia.BlazuniaFunctionalFlowerBlockEntity;
+import zaftnotameni.creatania.mana.flowers.blazunia.BlazuniaRenderer;
 import zaftnotameni.creatania.stress.omnibox.OmniboxBlockEntity;
 import zaftnotameni.creatania.stress.omnibox.OmniboxRenderer;
 import zaftnotameni.creatania.stress.xorlever.XorLeverBlockEntity;
@@ -18,7 +19,7 @@ import zaftnotameni.creatania.stress.xorlever.XorLeverRenderer;
 import zaftnotameni.creatania.util.Log;
 
 public class BlockEntities {
-  
+
   public static final BlockEntityEntry<ManaMotorBlockEntity> MANA_MOTOR_BLOCK_ENTITY = Index.all()
     .tileEntity("mana_motor_block_entity", ManaMotorBlockEntity::new)
     .instance(() -> HalfShaftInstance::new)
@@ -57,6 +58,7 @@ public class BlockEntities {
   public static final BlockEntityEntry<BlazuniaFunctionalFlowerBlockEntity> BLAZUNIA_BLOCK_ENTITY = Index.all()
     .tileEntity("blazunia_block_entity", BlazuniaFunctionalFlowerBlockEntity::new)
     .validBlocks(Blocks.BLAZUNIA_BLOCK)
+    .renderer(() -> BlazuniaRenderer::new)
     .register();
 
   public static void register(IEventBus eventBus) {

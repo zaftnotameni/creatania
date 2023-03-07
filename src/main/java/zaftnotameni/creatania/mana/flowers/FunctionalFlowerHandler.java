@@ -186,7 +186,12 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
       }
     }
 
+    this.setHasManaSource(this.pool != null);
     this.self.setChanged();
+  }
+
+  @Override public void setHasManaSource(Boolean hasManaSource) {
+    this.self.setHasManaSource(hasManaSource);
   }
 
   public void markPoolOrSpreaderAsDirty() {
@@ -194,7 +199,18 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
     if (this.spreader instanceof BlockEntity s) s.setChanged();
   }
 
+  @Override public void doAnimationTick() {
+    this.self.doAnimationTick();
+  }
+
+  public int animationTickRate = 4;
+  public int animationTickCounter = 0;
+
   @Override public int doTick() {
+    if (animationTickCounter++ >= animationTickRate) {
+      animationTickRate = 0;
+      this.doAnimationTick();
+    }
     if (tickCounter++ < tickRate) return 0;
     tickCounter = 0;
 
