@@ -1,7 +1,7 @@
 {
     "name": "Generating Mana with SU",
     "icon": "creatania:mana_condenser",
-    "category": "creatania:machines",
+    "category": "patchouli:creatania",
     "pages": [
         {
             "type": "text",
