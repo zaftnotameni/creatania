@@ -331,10 +331,12 @@ tasks.withType(JavaCompile).configureEach {
   options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
 }
 
+def f = "${project.rootDir}/kubejs"
+def t = "${project.rootDir}/run/kubejs"
 tasks.register('ck', Copy) {
-  println("copying kubejs")
-  from "${project.file('run')}../kubejs"
-  into "${project.file('run')}/kubejs"
+  println("copying kubejs from ${f} to ${t}")
+  from f
+  into t
   println("copied kubejs")
 }
 

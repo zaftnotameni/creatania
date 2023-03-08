@@ -1,7 +1,7 @@
 {
     "name": "Creatania Blocks",
     "icon": "creatania:mana/machines/casing",
-    "category": "patchouli:creatania",
+    "category": "creatania:creatania",
     "pages": [
         {
             "type": "text",

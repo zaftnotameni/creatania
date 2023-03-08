@@ -324,7 +324,10 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
     }
     if (nbt.contains("pool")) {
       CompoundTag poolTag = nbt.getCompound("pool");
-      this.poolPosition = new BlockPos(poolTag.getInt("x"), poolTag.getInt("y"), poolTag.getInt("z"));
+      if (poolTag.contains("x") && poolTag.contains("y") && poolTag.contains("z"))
+        this.poolPosition = new BlockPos(poolTag.getInt("x"), poolTag.getInt("y"), poolTag.getInt("z"));
+      else
+        this.poolPosition = null;
     } else {
       this.poolPosition = null;
     }
