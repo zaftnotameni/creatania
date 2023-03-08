@@ -2,6 +2,12 @@
 
 ## changelog
 
+### 1.18.2-0.3.10-alpha
+
+#### Fixes
+
+- Shafts should no longer be missing when pondering about omnibox
+
 ### 1.18.2-0.3.9-alpha
 
 #### New

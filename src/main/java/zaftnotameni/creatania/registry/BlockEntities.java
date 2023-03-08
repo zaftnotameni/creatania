@@ -12,6 +12,7 @@ import zaftnotameni.creatania.machines.manamotor.ManaMotorRenderer;
 import zaftnotameni.creatania.mana.flowers.blazunia.BlazuniaFunctionalFlowerBlockEntity;
 import zaftnotameni.creatania.mana.flowers.blazunia.BlazuniaRenderer;
 import zaftnotameni.creatania.stress.omnibox.OmniboxBlockEntity;
+import zaftnotameni.creatania.stress.omnibox.OmniboxInstance;
 import zaftnotameni.creatania.stress.omnibox.OmniboxRenderer;
 import zaftnotameni.creatania.stress.xorlever.XorLeverBlockEntity;
 import zaftnotameni.creatania.stress.xorlever.XorLeverInstance;
@@ -43,7 +44,7 @@ public class BlockEntities {
 
   public static final BlockEntityEntry<OmniboxBlockEntity> OMNIBOX_BLOCK_ENTITY = Index.all()
     .tileEntity("omnibox_block_entity", OmniboxBlockEntity::new)
-    .instance(() -> HalfShaftInstance::new)
+    .instance(() -> OmniboxInstance::new)
     .validBlocks(Blocks.OMNIBOX)
     .renderer(() -> OmniboxRenderer::new)
     .register();

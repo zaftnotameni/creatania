@@ -27,12 +27,7 @@ public class OmniboxBlock extends RotatedPillarKineticBlock implements ITE<Omnib
   @Nullable
   @Override
   public BlockState getStateForPlacement(BlockPlaceContext pContext) {
-    var horizontalDirection = pContext.getHorizontalDirection();
-    Direction facing;
-    if (pContext.getPlayer() != null && pContext.getPlayer().isShiftKeyDown()) facing = horizontalDirection;
-    else facing = horizontalDirection.getOpposite();
-
-    return super.getStateForPlacement(pContext).setValue(FACING, facing).setValue(AXIS, facing.getAxis());
+    return super.getStateForPlacement(pContext).setValue(FACING, Direction.SOUTH).setValue(AXIS, Direction.Axis.Z);
   }
   @Override
   public boolean hasShaftTowards(LevelReader world, BlockPos pos, BlockState state, Direction face) {

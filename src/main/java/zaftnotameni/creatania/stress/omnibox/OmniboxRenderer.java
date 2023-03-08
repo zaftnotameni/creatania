@@ -12,6 +12,8 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+
 public class OmniboxRenderer extends KineticTileEntityRenderer {
   public OmniboxRenderer(BlockEntityRendererProvider.Context context) {
     super(context);
@@ -23,9 +25,14 @@ public class OmniboxRenderer extends KineticTileEntityRenderer {
     super.renderSafe(te, partialTicks, ms, buffer, light, overlay);
     final BlockPos pos = te.getBlockPos();
     float time = AnimationTickHolder.getRenderTime(te.getLevel());
+    final Direction.Axis boxAxis = te.getBlockState().getValue(BlockStateProperties.AXIS);
 
     for (Direction direction : Iterate.directions) {
       final Direction.Axis axis = direction.getAxis();
+//      if (boxAxis == axis)
+//        continue;
+
+
       SuperByteBuffer shaft = CachedBufferer.partialFacing(AllBlockPartials.SHAFT_HALF, te.getBlockState(), direction);
       float offset = getRotationOffsetForPosition(te, pos, axis);
       float angle = (time * te.getSpeed() * 3f / 10) % 360;
