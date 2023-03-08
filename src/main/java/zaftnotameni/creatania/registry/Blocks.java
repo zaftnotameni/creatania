@@ -34,7 +34,6 @@ import zaftnotameni.creatania.mana.manaduct.TerrasteelManaductBlock;
 import zaftnotameni.creatania.stress.omnibox.OmniboxBlock;
 import zaftnotameni.creatania.stress.xorlever.XorLeverBlock;
 import zaftnotameni.creatania.util.Humanity;
-import zaftnotameni.creatania.util.Log;
 
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
@@ -42,6 +41,7 @@ import static zaftnotameni.creatania.mana.manablock.BaseManaBlock.registerManabl
 import static zaftnotameni.creatania.mana.manaduct.BaseManaductBlock.registerManaduct;
 import static zaftnotameni.creatania.util.Humanity.keyResource;
 import static zaftnotameni.creatania.util.Humanity.lang;
+import static zaftnotameni.creatania.util.LogKt.log;
 
 public class Blocks {
   public static final BlockEntry<ManaMotorBlock> MANA_MOTOR = Index.all()
@@ -137,7 +137,7 @@ public class Blocks {
     .register();
 
   public static void register(IEventBus bus) {
-    Log.LOGGER.debug("register blocks");
+    log(l -> l.debug("register blocks"));
   }
 
   public static JsonElement provideLangEntries() {

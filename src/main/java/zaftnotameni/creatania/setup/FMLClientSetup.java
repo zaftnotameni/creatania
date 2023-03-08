@@ -2,17 +2,17 @@ package zaftnotameni.creatania.setup;
 
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import zaftnotameni.creatania.ponder.CreataniaPonderIndex;
-import zaftnotameni.creatania.util.Log;
 
 import static net.minecraft.client.renderer.ItemBlockRenderTypes.setRenderLayer;
 import static net.minecraft.client.renderer.RenderType.cutoutMipped;
 import static net.minecraft.client.renderer.RenderType.translucent;
 import static zaftnotameni.creatania.registry.Blocks.*;
 import static zaftnotameni.creatania.registry.Fluids.*;
+import static zaftnotameni.creatania.util.LogKt.log;
 
 public class FMLClientSetup {
   public static void run(final FMLClientSetupEvent event) {
-    Log.LOGGER.info("creatania client setup started");
+    log(l -> l.info("creatania client setup started"));
     setRenderLayer(BLAZUNIA_BLOCK.get(), cutoutMipped());
     setRenderLayer(MANASTEEL_MANADUCT_BLOCK.get(), cutoutMipped());
     setRenderLayer(TERRASTEEL_MANADUCT_BLOCK.get(), cutoutMipped());
@@ -34,6 +34,6 @@ public class FMLClientSetup {
     setRenderLayer(MOLTEN_GAIA.get(), translucent());
     setRenderLayer(MOLTEN_ELEMENTIUM.get(), translucent());
     CreataniaPonderIndex.register();
-    Log.LOGGER.info("creatania client setup finished");
+    log(l -> l.info("creatania client setup finished"));
   }
 }

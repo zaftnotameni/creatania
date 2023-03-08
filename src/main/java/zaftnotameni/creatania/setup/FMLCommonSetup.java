@@ -1,4 +1,5 @@
 package zaftnotameni.creatania.setup;
+
 import com.simibubi.create.content.contraptions.fluids.tank.BoilerHeaters;
 import com.simibubi.create.foundation.block.BlockStressValues;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -7,12 +8,13 @@ import zaftnotameni.creatania.network.Networking;
 import zaftnotameni.creatania.registry.Advancements;
 import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Triggers;
-import zaftnotameni.creatania.util.Log;
 
 import static zaftnotameni.creatania.Constants.MODID;
+import static zaftnotameni.creatania.util.LogKt.log;
+
 public class FMLCommonSetup {
   public static void run(final FMLCommonSetupEvent event) {
-    Log.LOGGER.info("creatania setup started");
+    log(l -> l.info("creatania setup started"));
     // BlockStressValues.registerProvider(MODID, AllConfigs.SERVER.kinetics.stressValues);
     BlockStressValues.registerProvider(MODID, CommonConfig.stressProvider);
     BoilerHeaters.registerHeater(Blocks.REAL_MANA_BLOCK.get(), (level, pos, state) -> 4);
@@ -23,6 +25,6 @@ public class FMLCommonSetup {
       Triggers.register();
       CommonConfig.stressProvider.registerAll();
     });
-    Log.LOGGER.info("creatania setup finished");
+    log(l -> l.info("creatania setup finished"));
   }
 }

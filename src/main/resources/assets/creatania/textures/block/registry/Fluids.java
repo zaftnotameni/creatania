@@ -1,4 +1,5 @@
 package zaftnotameni.creatania.registry;
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.datafixers.util.Pair;
@@ -6,6 +7,9 @@ import com.tterrag.registrate.util.entry.FluidEntry;
 import com.tterrag.registrate.util.nullness.NonNullBiFunction;
 import it.unimi.dsi.fastutil.shorts.Short2BooleanMap;
 import it.unimi.dsi.fastutil.shorts.Short2ObjectMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Random;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleOptions;
@@ -28,10 +32,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import zaftnotameni.creatania.util.Log;
-
-import java.util.Map;
-import java.util.Optional;
-import java.util.Random;
 
 import static net.minecraft.sounds.SoundEvents.HONEY_BLOCK_PLACE;
 import static net.minecraft.sounds.SoundEvents.HONEY_DRINK;
@@ -80,7 +80,7 @@ public class Fluids {
       .color(color);
   }
   public static void register(IEventBus bus) {
-    Log.LOGGER.debug("register fluids");
+    log(l -> l.debug("register fluids");
   }
 
   public static FluidEntry<ForgeFlowingFluid.Flowing> registerManaFluid(String name, int color, TagKey<Fluid> tag) {

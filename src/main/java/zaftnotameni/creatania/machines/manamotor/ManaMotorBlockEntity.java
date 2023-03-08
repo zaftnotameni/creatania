@@ -32,9 +32,9 @@ import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.machines.manamachine.ActiveStateSynchronizerBehavior;
 import zaftnotameni.creatania.machines.manamachine.IAmManaMachine;
 import zaftnotameni.creatania.machines.manamachine.KineticManaMachine;
-import zaftnotameni.creatania.util.Log;
 
 import static zaftnotameni.creatania.machines.manamotor.ManaMotorTooltipKt.gogglesTooltip;
+import static zaftnotameni.creatania.util.LogKt.log;
 
 /**
  * Generates SU (from Create) when provided Mana (from Botania).
@@ -122,7 +122,6 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
     var newManaPerTick = this.getManaMachine().getMinimumManaPerTick();
     this.manaPerTick = newManaPerTick;
     if (previousManaPerTick != newManaPerTick) {
-      Log.LOGGER.debug("Mana per tick changed from {} to {}", previousManaPerTick, newManaPerTick);
       this.setChanged();
     }
   }
@@ -131,7 +130,6 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
     var newActiveState = this.mana > this.manaPerTick;
     this.active = newActiveState;
     if (previousActiveState != newActiveState) {
-      Log.LOGGER.debug("Active state changed from {} to {}", previousActiveState, newActiveState);
       this.updateGeneratedRotation();
     }
   }
@@ -166,7 +164,6 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
     if (this.level == null || this.level.isClientSide()) return;
     if (UPDATE_MANA_ON_LAZY_TICK) {
       var newMana = Math.max(0, this.mana - (this.manaPerTick * this.lazyTickRate));
-      Log.LOGGER.debug("Mana changing on lazy tick from {} to {}", this.mana, newMana);
       this.updateMana(newMana);
     }
   }
@@ -191,7 +188,7 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
   public void onSpeedChanged(float previousSpeed) {
     super.onSpeedChanged(previousSpeed);
     this.recomputeManaPerTick();
-    Log.LOGGER.debug("Speed changed from {} to {}", previousSpeed, this.scrollValueBehaviour.getValue());
+    log(l -> l.debug("Speed changed from {} to {}", previousSpeed, this.scrollValueBehaviour.getValue()));
   }
   @Override
   public float calculateStressApplied() { return 0f; }

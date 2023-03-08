@@ -16,7 +16,6 @@ import zaftnotameni.creatania.stress.omnibox.OmniboxRenderer;
 import zaftnotameni.creatania.stress.xorlever.XorLeverBlockEntity;
 import zaftnotameni.creatania.stress.xorlever.XorLeverInstance;
 import zaftnotameni.creatania.stress.xorlever.XorLeverRenderer;
-import zaftnotameni.creatania.util.Log;
 
 public class BlockEntities {
   public static final CreateRegistrate CREATE_REGISTRATE = Index.getCreateRegistrate()
@@ -63,6 +62,6 @@ public class BlockEntities {
     .register();
 
   public static void register(IEventBus eventBus) {
-      Log.LOGGER.debug("register block entities");
+      log(l -> l.debug("register block entities");
     }
 }

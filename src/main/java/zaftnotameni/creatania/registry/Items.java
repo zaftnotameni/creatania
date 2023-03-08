@@ -12,10 +12,10 @@ import net.minecraftforge.registries.RegistryObject;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.food.ManaGelItem;
 import zaftnotameni.creatania.util.Humanity;
-import zaftnotameni.creatania.util.Log;
 
 import static zaftnotameni.creatania.util.Humanity.keyResource;
 import static zaftnotameni.creatania.util.Humanity.lang;
+import static zaftnotameni.creatania.util.LogKt.log;
 
 public class Items {
   public static final DeferredRegister<Item> INDEX = DeferredRegister.create(ForgeRegistries.ITEMS, Constants.MODID);
@@ -27,7 +27,7 @@ public class Items {
   public static final ItemEntry<SequencedAssemblyItem> INCOMPLETE_XOR_LEVER = sequencedIngredient(Constants.INCOMPLETE_XOR_LEVER);
 
   public static void register(IEventBus bus) {
-    Log.LOGGER.debug("register items");
+    log(l -> l.debug("register items"));
     INDEX.register(bus);
   }
   private static ItemEntry<SequencedAssemblyItem> sequencedIngredient(String name) {

@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.state.BlockState
 import vazkii.botania.api.block.IWandable
 import vazkii.botania.api.mana.IManaReceiver
 import zaftnotameni.creatania.mana.manaduct.BaseManaductBlock
+import zaftnotameni.creatania.util.tlog
 
 fun getTargetManaReceiver(initial : BlockPos, level : Level) : ManaReceiverMatch? {
   if (level.isClientSide) return null
@@ -40,8 +41,10 @@ fun specialHandlingViaManaduct(manaAmount : Int, manaDuctBlockState : BlockState
   if (maybeAggloPlateBlockState == null || !maybeAggloPlateBlockState.hasBlockEntity()) return 0
   val maybeAggloPlateBlockEntity = BaseManaductBlock.getMouthPointedAtBlockEntity(generator.level, manaDuctBlockState, generator.blockPos.above())
   if (maybeAggloPlateBlockEntity !is IManaReceiver || maybeAggloPlateBlockEntity.isFull) return 0
-  maybeAggloPlateBlockEntity.receiveMana(manaAmount * manaDuctBlock.manaMultiplier)
+  val realMana = manaAmount * manaDuctBlock.manaMultiplier
+  maybeAggloPlateBlockEntity.receiveMana(realMana)
   generator.duct = true
+  tlog { l -> l.debug("$manaAmount was converted to $realMana via mana duct") }
   return manaAmount
 }
 
@@ -50,6 +53,7 @@ fun addManaToTargetPool(manaAmount : Int, pool : IManaReceiver?, generator : Man
   pool.receiveMana(manaAmount)
   if (pool is IWandable) pool.onUsedByWand(null, ItemStack.EMPTY, Direction.UP)
   generator.duct = false
+  tlog { l -> l.debug("$manaAmount was added to the mana pool") }
   return manaAmount
 }
 

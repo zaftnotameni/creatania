@@ -21,15 +21,17 @@ import zaftnotameni.creatania.machines.manamachine.ActiveStateSynchronizerBehavi
 import zaftnotameni.creatania.machines.manamachine.IAmManaMachine;
 import zaftnotameni.creatania.machines.manamachine.IAmParticleEmittingMachine;
 import zaftnotameni.creatania.machines.manamachine.KineticManaMachine;
-import zaftnotameni.creatania.util.Log;
 
 import static zaftnotameni.creatania.machines.managenerator.ManaGeneratorMathKt.pureManaAtRpm;
 import static zaftnotameni.creatania.machines.managenerator.ManaGeneratorMathKt.realManaAtRpmWhileConsuming;
 import static zaftnotameni.creatania.machines.managenerator.ManaGeneratorTooltipKt.gogglesTooltip;
-import static zaftnotameni.creatania.machines.managenerator.ManaGeneratorWorldQueriesKt.*;
+import static zaftnotameni.creatania.machines.managenerator.ManaGeneratorWorldQueriesKt.addManaToTargetPool;
+import static zaftnotameni.creatania.machines.managenerator.ManaGeneratorWorldQueriesKt.computeManaReceiverMatchAt;
+import static zaftnotameni.creatania.machines.managenerator.ManaGeneratorWorldQueriesKt.getTargetManaReceiver;
+import static zaftnotameni.creatania.machines.managenerator.ManaGeneratorWorldQueriesKt.specialHandlingViaManaduct;
 import static zaftnotameni.creatania.machines.manamachine.KineticManaMachine.renderSimpleBotaniaHud;
 
-public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmManaMachine, Log.IHasTickLogger, IAmParticleEmittingMachine, IWandHUD {
+public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmManaMachine, IAmParticleEmittingMachine, IWandHUD {
 
   public boolean isFirstTick = true;
   public boolean active;
@@ -99,21 +101,17 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
     if (result.isPresent()) return result.cast();
 
     if (side == null) {
-      Log.throttled(100).log(l -> l.info("no side provided when checking for capability {}", cap.getName()));
       return super.getCapability(cap, null);
     }
     var block = this.getBlockState().getBlock();
     if (!(block instanceof ManaGeneratorBlock)) {
-      Log.throttled(100).log(l -> l.info("block is not a mana generator block when checking for capability {}", cap.getName()));
       return super.getCapability(cap, side);
     }
     if (!((ManaGeneratorBlock) block).hasShaftTowards(this.level, this.worldPosition, this.getBlockState(), side.getOpposite())) {
-      Log.throttled(100).log(l -> l.info("side is not opposite to the shaft when checking for capability {}", cap.getName()));
       return super.getCapability(cap, side);
     }
     var foundCapability = this.getManaGeneratorFluidHandler().getCapability(cap, side);
     if (foundCapability != null) {
-      Log.throttled(100).log(l -> l.debug("connection could be established when checking for capability {}", cap.getName()));
       return foundCapability;
     }
     return super.getCapability(cap, side);
@@ -146,12 +144,6 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
   }
 
   public int getManaConversionRate() { return Math.max(Math.abs(CommonConfig.MANA_GENERATOR_MANA_CONVERSION_RATE.get()), 1); }
-
-  public Log.RateLimited logger;
-
-  public Log.RateLimited getLogger() { return logger; }
-
-  public void setLogger(Log.RateLimited pLogger) { logger = pLogger; }
 
   @Override public int getManaConsumptionRate() { return pureManaAtRpm(this.getSpeed()); }
 

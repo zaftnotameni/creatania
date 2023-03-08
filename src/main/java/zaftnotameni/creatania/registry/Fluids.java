@@ -21,7 +21,6 @@ import net.minecraftforge.fluids.ForgeFlowingFluid;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import zaftnotameni.creatania.util.Humanity;
-import zaftnotameni.creatania.util.Log;
 
 import static net.minecraft.sounds.SoundEvents.HONEY_BLOCK_PLACE;
 import static net.minecraft.sounds.SoundEvents.HONEY_DRINK;
@@ -29,6 +28,7 @@ import static zaftnotameni.creatania.util.Fluids.specialCobblegenCanSpread;
 import static zaftnotameni.creatania.util.Fluids.specialCobblegenSpread;
 import static zaftnotameni.creatania.util.Humanity.keyResource;
 import static zaftnotameni.creatania.util.Humanity.lang;
+import static zaftnotameni.creatania.util.LogKt.log;
 
 public class Fluids {
 
@@ -74,7 +74,7 @@ public class Fluids {
   }
 
   public static void register(IEventBus bus) {
-    Log.LOGGER.debug("register fluids");
+    log(l -> l.debug("register fluids"));
   }
 
   public static FluidEntry<ForgeFlowingFluid.Flowing> registerManaFluid(String name, int color, TagKey<Fluid> tag) {

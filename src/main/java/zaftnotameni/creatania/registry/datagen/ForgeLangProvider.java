@@ -10,7 +10,9 @@ import net.minecraftforge.common.data.LanguageProvider;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import zaftnotameni.creatania.registry.Index;
-import zaftnotameni.creatania.util.Log;
+
+import static zaftnotameni.creatania.util.LogKt.log;
+
 public class ForgeLangProvider extends RegistrateLangProvider {
   public RegistrateLangProvider rlp;
   public Field f;
@@ -54,7 +56,7 @@ public class ForgeLangProvider extends RegistrateLangProvider {
   public void add(@NotNull String key, @NotNull String value) {
     var oldValue = old(key);
     if (!StringUtils.isAnyBlank(oldValue)){
-      Log.LOGGER.info("duplicated key {} found, using {} instead of {}", key, value, oldValue);
+      log(l -> l.info("duplicated key {} found, using {} instead of {}", key, value, oldValue));
     } else {
       super.add(key, value);
     }

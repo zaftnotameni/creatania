@@ -30,7 +30,7 @@ public class Items {
   public static final ItemEntry<SequencedAssemblyItem> INCOMPLETE_XOR_LEVER = sequencedIngredient(Constants.INCOMPLETE_XOR_LEVER);
 
   public static void register(IEventBus bus) {
-    Log.LOGGER.debug("register items");
+    log(l -> l.debug("register items");
     INDEX.register(bus);
   }
   private static ItemEntry<SequencedAssemblyItem> sequencedIngredient(String name) {

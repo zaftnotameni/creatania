@@ -9,7 +9,8 @@ import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Fluids;
 import zaftnotameni.creatania.registry.Items;
-import zaftnotameni.creatania.util.Log;
+
+import static zaftnotameni.creatania.util.LogKt.log;
 
 public enum LangPartials implements LangPartial {
 
@@ -43,7 +44,7 @@ public enum LangPartials implements LangPartial {
 
   @Override
   public JsonElement provide() {
-    Log.LOGGER.info("provider running for {}", this.displayName);
+    log(l -> l.info("provider running for {}", this.displayName));
     try {
       return provider.get();
     } catch (Exception e) {

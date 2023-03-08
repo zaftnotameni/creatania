@@ -139,7 +139,7 @@ public class Blocks {
     .register();
 
   public static void register(IEventBus bus) {
-    Log.LOGGER.debug("register blocks");
+    log(l -> l.debug("register blocks");
   }
 
   public static JsonElement provideLangEntries() {

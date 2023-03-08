@@ -41,7 +41,7 @@ public enum LangPartials implements LangPartial {
 
   @Override
   public JsonElement provide() {
-    Log.LOGGER.info("provider running for {}", this.displayName);
+    log(l -> l.info("provider running for {}", this.displayName);
     try {
       return provider.get();
     } catch (RuntimeException e) {
