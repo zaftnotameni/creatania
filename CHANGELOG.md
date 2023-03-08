@@ -8,6 +8,11 @@
 
 - Blazunia uses internal APIs instead of creating a fake player to light up blaze burners. There's no _visible_ difference in this, but it should be much better for performance.
 
+#### Balance
+
+- Terrasteel via elven portal is now more expensive, requires real mana blocks
+- Elementium via elven portal is now more expensive, requires real mana blocks
+
 ### 1.18.2-0.3.10-alpha
 
 #### Fixes

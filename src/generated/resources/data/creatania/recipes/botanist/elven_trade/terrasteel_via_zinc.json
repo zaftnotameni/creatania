@@ -6,6 +6,9 @@
     },
     {
       "item": "creatania:mana_gel"
+    },
+    {
+      "item": "creatania:mana/blocks/real"
     }
   ],
   "output": [
