@@ -340,6 +340,16 @@ tasks.register('ck', Copy) {
   println("copied kubejs")
 }
 
+def patchouli_dev = "${project.rootDir}/patchouli_dev/data"
+def patchouli_mod = "${project.rootDir}/src/main/resources/data"
+tasks.register('patchouli', Copy) {
+  println("copying patchouli from ${patchouli_dev} to ${patchouli_mod}")
+  from patchouli_dev
+  into patchouli_mod
+  filter { line -> line.replaceAll("creatania", "test") }
+  println("copied patchouli")
+}
+
 artifacts {
   archives shadowJar
   archives jar
