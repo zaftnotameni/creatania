@@ -26,10 +26,10 @@ import vazkii.botania.api.internal.IManaNetwork;
 import vazkii.botania.api.mana.IManaCollector;
 import vazkii.botania.api.mana.IManaPool;
 import zaftnotameni.creatania.machines.manamachine.KineticManaMachine;
+import zaftnotameni.creatania.mana.flowers.blazunia.BlazuniaFunctionalFlowerBlockEntity;
 
 import static net.minecraftforge.common.util.LazyOptional.empty;
-import static net.minecraftforge.common.util.LazyOptional.of;
-import static zaftnotameni.creatania.mana.flowers.blazunia.BlazuniaBlockStates.IS_SUPERHOT;
+import static zaftnotameni.creatania.util.With.with;
 
 public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerInterfaces> implements BotaniaFlowerInterfaces {
 
@@ -56,74 +56,39 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
 
   public FunctionalFlowerHandler(T self) { this.self = self; }
 
-  public FunctionalFlowerHandler withColor(int color) {
-    this.color = color;
-    return this;
-  }
+  public static <R extends SmartTileEntity & BotaniaFlowerInterfaces> FunctionalFlowerHandler<R> of(R x) { return new FunctionalFlowerHandler<R>(x);}
 
-  public FunctionalFlowerHandler withMana(int x) {
-    this.mana = x;
-    return this;
-  }
+  public FunctionalFlowerHandler withColor(int x) { return with(this, it -> it.color = x); }
 
-  public FunctionalFlowerHandler withMaxMana(int x) {
-    this.maxMana = x;
-    return this;
-  }
+  public FunctionalFlowerHandler withMana(int x) { return with(this, it -> it.mana = x); }
 
-  public FunctionalFlowerHandler withMaxTransfer(int x) {
-    this.maxTransfer = x;
-    return this;
-  }
+  public FunctionalFlowerHandler withMaxMana(int x) { return with(this, it -> it.maxMana = x); }
 
-  public FunctionalFlowerHandler withPool(IManaPool x) {
-    this.pool = x;
-    return this;
-  }
+  public FunctionalFlowerHandler withMaxTransfer(int x) { return with(this, it -> it.maxTransfer = x); }
 
-  public FunctionalFlowerHandler withSpreader(IManaCollector x) {
-    this.spreader = x;
-    return this;
-  }
+  public FunctionalFlowerHandler withPool(IManaPool x) { return with(this, it -> it.pool = x); }
 
-  public FunctionalFlowerHandler withSelf(T x) {
-    this.self = x;
-    return this;
-  }
+  public FunctionalFlowerHandler withSpreader(IManaCollector x) { return with(this, it -> it.spreader = x); }
 
-  public FunctionalFlowerHandler withIsGenerating(boolean x) {
-    this.isGenerating = x;
-    return this;
-  }
+  public FunctionalFlowerHandler withSelf(T x) { return with(this, it -> it.self = x); }
 
-  public FunctionalFlowerHandler withIsFloating(boolean x) {
-    this.isFloating = x;
-    return this;
-  }
+  public FunctionalFlowerHandler withIsFloating(boolean x) { return with(this, it -> it.isFloating = x); }
 
-  public FunctionalFlowerHandler withTickCounter(int x) {
-    this.tickCounter = x;
-    return this;
-  }
+  public FunctionalFlowerHandler withIsGenerating(boolean x) { return with(this, it -> it.isGenerating = x); }
 
-  public FunctionalFlowerHandler withTickRate(int x) {
-    this.tickRate = x;
-    return this;
-  }
+  public FunctionalFlowerHandler withTickRate(int x) { return with(this, it -> it.tickRate = x); }
 
-  public FunctionalFlowerHandler withRequiredManaPerOperation(int x) {
-    this.manaPerOperation = x;
-    return this;
-  }
+  public FunctionalFlowerHandler withAnimationTickRate(int x) { return with(this, it -> it.animationTickRate = x); }
 
-  public FunctionalFlowerHandler withBindRange(int x) {
-    this.bindRange = x;
-    return this;
-  }
+  public FunctionalFlowerHandler withPylonScanTickRate(int x) { return with(this, it -> it.pylonScanTickRate = x); }
+
+  public FunctionalFlowerHandler withBindRange(int x) { return with(this, it -> it.bindRange = x); }
+
+  public FunctionalFlowerHandler withRequiredManaPerOperation(int x) { return with(this, it -> it.manaPerOperation = x); }
 
   public <C> LazyOptional<C> getCapability(@Nonnull Capability<C> cap, @Nullable Direction side) {
-    if (cap == BotaniaForgeCapabilities.WANDABLE) { return of(() -> self).cast(); } else {
-      return DistExecutor.unsafeRunForDist(() -> () -> cap == BotaniaForgeClientCapabilities.WAND_HUD ? of(() -> this).cast() : empty(), () -> LazyOptional::empty);
+    if (cap == BotaniaForgeCapabilities.WANDABLE) { return LazyOptional.of(() -> self).cast(); } else {
+      return DistExecutor.unsafeRunForDist(() -> () -> cap == BotaniaForgeClientCapabilities.WAND_HUD ? LazyOptional.of(() -> this).cast() : empty(), () -> LazyOptional::empty);
     }
   }
 
@@ -145,7 +110,7 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
       return block.getRegistryName().compareTo(gaiapylon) == 0;
     };
     this.hasPylon = isPylon.apply(pos::west) && isPylon.apply(pos::east) && isPylon.apply(pos::north) && isPylon.apply(pos::south);
-    level.setBlockAndUpdate(pos, bs.setValue(IS_SUPERHOT, this.hasPylon));
+    if (self instanceof BlazuniaFunctionalFlowerBlockEntity blazunia) blazunia.setIsSuperhot(this.hasPylon);
   }
 
   public static final ResourceLocation gaiapylon = new ResourceLocation("botania", "gaia_pylon");
@@ -295,7 +260,8 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
       float green = (float) (this.color >> 8 & 0xFF) / 255.0f;
       float blue = (float) (this.color & 255) / 255.0f;
       if (Math.random() > particleChance) {
-        BotaniaAPI.instance().sparkleFX(this.self.getLevel(),
+        BotaniaAPI.instance().sparkleFX(
+          this.self.getLevel(),
           (double) this.self.getBlockPos().getX() + 0.3D + Math.random() * 0.5D,
           (double) this.self.getBlockPos().getY() + 0.5D + Math.random() * 0.5D,
           (double) this.self.getBlockPos().getZ() + 0.3D + Math.random() * 0.5D,

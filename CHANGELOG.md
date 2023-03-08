@@ -2,6 +2,12 @@
 
 ## changelog
 
+### 1.18.2-0.3.11-alpha
+
+#### Changes
+
+- Blazunia uses internal APIs instead of creating a fake player to light up blaze burners. There's no _visible_ difference in this, but it should be much better for performance.
+
 ### 1.18.2-0.3.10-alpha
 
 #### Fixes

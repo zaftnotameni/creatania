@@ -20,7 +20,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -33,14 +32,16 @@ import zaftnotameni.creatania.mana.flowers.BotaniaFlowerInterfaces;
 import zaftnotameni.creatania.mana.flowers.FunctionalFlowerHandler;
 
 import static com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock.HeatLevel.SEETHING;
-import static net.minecraft.world.entity.Entity.RemovalReason.DISCARDED;
-import static zaftnotameni.creatania.mana.flowers.blazunia.BlazeBurnerInteraction.*;
+import static com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock.tryInsert;
+import static zaftnotameni.creatania.mana.flowers.blazunia.BlazeBurnerInteraction.scanRangeForBlazeBurners;
+import static zaftnotameni.creatania.mana.flowers.blazunia.BlazeBurnerInteraction.stackOfBlazeCake;
+import static zaftnotameni.creatania.mana.flowers.blazunia.BlazeBurnerInteraction.stackOfOakPlanks;
 import static zaftnotameni.creatania.mana.flowers.blazunia.BlazuniaBlockStates.HAS_MANA_SOURCE;
 import static zaftnotameni.creatania.mana.flowers.blazunia.BlazuniaBlockStates.IS_SUPERHOT;
 
 @OnlyIn(value = Dist.CLIENT, _interface = IWandHUD.class) public class BlazuniaFunctionalFlowerBlockEntity extends SmartTileEntity implements BotaniaFlowerInterfaces {
 
-  public LazyOptional<FunctionalFlowerHandler> lazyFlowerHandler = LazyOptional.of(() -> new FunctionalFlowerHandler(this).withColor(0xffffff00)
+  public LazyOptional<FunctionalFlowerHandler> lazyFlowerHandler = LazyOptional.of(() -> FunctionalFlowerHandler.of(this).withColor(0xffffff00)
     .withMaxMana(10000)
     .withMaxTransfer(100)
     .withTickRate(40)
@@ -79,10 +80,17 @@ import static zaftnotameni.creatania.mana.flowers.blazunia.BlazuniaBlockStates.I
     this.lazyFlowerHandler.resolve().ifPresent(f -> f.load(tag));
   }
 
-  public void setHasManaSource(Boolean hasManaSource) {
-    var hadManaSource = getBlockState().getOptionalValue(HAS_MANA_SOURCE).orElse(false);
-    if (hadManaSource == hasManaSource) return;
-    level.setBlockAndUpdate(worldPosition, getBlockState().setValue(HAS_MANA_SOURCE, hasManaSource));
+  public void setIsSuperhot(Boolean willBeSuperhot) {
+    var wasSuperhot = isSuperHot();
+    if (wasSuperhot == willBeSuperhot) return;
+    level.setBlockAndUpdate(worldPosition, getBlockState().setValue(IS_SUPERHOT, willBeSuperhot));
+    notifyUpdate();
+  }
+
+  public void setHasManaSource(Boolean willHaveManaSource) {
+    var hadManaSource = hasManaSource();
+    if (hadManaSource == willHaveManaSource) return;
+    level.setBlockAndUpdate(worldPosition, getBlockState().setValue(HAS_MANA_SOURCE, willHaveManaSource));
     notifyUpdate();
   }
 
@@ -95,79 +103,59 @@ import static zaftnotameni.creatania.mana.flowers.blazunia.BlazuniaBlockStates.I
   @Override public int doTick() {
     if (level == null) return 0;
     if (!(level instanceof ServerLevel serverLevel)) return 0;
-    var fakePlayer = makeFakePlayer(serverLevel);
-    fakePlayer.getInventory().clearContent();
-    if (getBlockState().getOptionalValue(IS_SUPERHOT).orElse(false))
-      fakePlayer.getInventory().add(stackOfBlazeCake());
-    else
-      fakePlayer.getInventory().add(stackOfOakPlanks());
-    fakePlayer.remove(DISCARDED);
+    var stack = isSuperHot() ? stackOfBlazeCake() : stackOfOakPlanks();
     var pos = getBlockPos();
     NonNullList<Integer> consumedMana = NonNullList.create();
     scanRangeForBlazeBurners(1, 3, 1, serverLevel, pos, (bb) -> {
       if (!evalFlowerHandler(FunctionalFlowerHandler::hasEnoughManaForOneOperation, () -> false)) return;
       var bbs = bb.getBlockState();
       var bpos = bb.getBlockPos();
-      var block = bbs.getBlock();
-      var hit = makeBlockHitResult(bpos);
       var isUpgrade = bb.getHeatLevelFromBlock() != SEETHING && isSuperHot();
       var littleFuelRemaining = bb.getRemainingBurnTime() < 100;
-      if (isUpgrade || littleFuelRemaining)
-        useFuelOnBlazeBurner(fakePlayer, serverLevel, bbs, bpos, block, hit);
-      consumedMana.add(evalFlowerHandler(FunctionalFlowerHandler::getManaPerOperation, () -> 0));
+      if (isUpgrade || littleFuelRemaining) {
+        tryInsert(bbs, level, bpos, stack, true, false, false);
+        consumedMana.add(evalFlowerHandler(FunctionalFlowerHandler::getManaPerOperation, () -> 0));
+      }
     });
+    if (!hasManaSource()) return evalFlowerHandler(fh -> fh.mana, () -> 999999);
     return consumedMana.stream().mapToInt(Integer::intValue).sum();
   }
 
   public boolean isSuperHot() {
     return getBlockState().getOptionalValue(IS_SUPERHOT).orElse(false);
   }
+
   public int doClientSideAnimation() {
-    spawnParticles(getBlockState().getOptionalValue(HAS_MANA_SOURCE).orElse(false),
-      getBlockState().getOptionalValue(IS_SUPERHOT).orElse(false),
-      1);
+    spawnParticles(hasManaSource(), isSuperHot(), 1);
     return 0;
   }
 
+  @NotNull private Boolean hasManaSource() {
+    return getBlockState().getOptionalValue(HAS_MANA_SOURCE).orElse(false);
+  }
+
   public void spawnParticles(Boolean hasManaSource, Boolean superhot, double burstMult) {
-    if (level == null)
-      return;
+    if (level == null) return;
 
     if (!hasManaSource) return;
 
     Random r = level.getRandom();
 
-    if (r.nextInt(3) != 0)
-      return;
+    if (r.nextInt(3) != 0) return;
 
     Vec3 c = VecHelper.getCenterOf(worldPosition);
-    Vec3 v = c.add(VecHelper.offsetRandomly(Vec3.ZERO, r, .125f)
-      .multiply(1, 0, 1));
+    Vec3 v = c.add(VecHelper.offsetRandomly(Vec3.ZERO, r, .125f).multiply(1, 0, 1));
 
-    boolean empty = level.getBlockState(worldPosition.above())
-      .getCollisionShape(level, worldPosition.above())
-      .isEmpty();
-
-//    if (empty || r.nextInt(8) == 0)
-//      level.addParticle(ParticleTypes.LARGE_SMOKE, v.x, v.y, v.z, 0, 0, 0);
+    boolean empty = level.getBlockState(worldPosition.above()).getCollisionShape(level, worldPosition.above()).isEmpty();
 
     double yMotion = empty ? .0625f : r.nextDouble() * .0125f;
-    Vec3 v2 = c.add(VecHelper.offsetRandomly(Vec3.ZERO, r, .5f)
-        .multiply(1, .25f, 1)
-        .normalize()
-        .scale((empty ? .25f : .5) + r.nextDouble() * .125f))
-      .add(0, .5, 0);
+    Vec3 v2 = c.add(VecHelper.offsetRandomly(Vec3.ZERO, r, .5f).multiply(1, .25f, 1).normalize().scale((empty ? .25f : .5) + r.nextDouble() * .125f)).add(0, .5, 0);
 
     if (superhot) {
       level.addParticle(ParticleTypes.SOUL_FIRE_FLAME, v2.x, v2.y, v2.z, 0, yMotion, 0);
     } else {
       level.addParticle(ParticleTypes.FLAME, v2.x, v2.y, v2.z, 0, yMotion, 0);
     }
-  }
-
-  @NotNull private static BlockHitResult makeBlockHitResult(BlockPos bpos) {
-    var hit = new BlockHitResult(new Vec3(bpos.getX(), bpos.getY(), bpos.getZ()), Direction.NORTH, bpos, false);
-    return hit;
   }
 
   @Override public void addBehaviours(List<TileEntityBehaviour> behaviours) { }
