@@ -3,6 +3,9 @@
   "ingredients": [
     {
       "item": "create:zinc_ingot"
+    },
+    {
+      "item": "creatania:mana_gel"
     }
   ],
   "output": [

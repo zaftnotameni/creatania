@@ -13,7 +13,11 @@ import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Fluids;
 import zaftnotameni.creatania.registry.Index;
 
-import static zaftnotameni.creatania.util.NamedItems.*;
+import static zaftnotameni.creatania.registry.Blocks.REAL_MANA_BLOCK;
+import static zaftnotameni.creatania.registry.Items.MANA_GEL;
+import static zaftnotameni.creatania.util.NamedItems.elementiumingot;
+import static zaftnotameni.creatania.util.NamedItems.manasteelingot;
+import static zaftnotameni.creatania.util.NamedItems.terrasteelingot;
 public class ElvenTradeRecipeGen extends BotaniaBaseRecipeGen implements DataProvider {
   public ElvenTradeRecipeGen(DataGenerator gen) {
     super(gen, "botania:elven_trade");
@@ -71,13 +75,13 @@ public class ElvenTradeRecipeGen extends BotaniaBaseRecipeGen implements DataPro
 
     start()
       .ingredient(Ingredient.of(Items.SLIME_BALL))
-      .ingredientOutput(Ingredient.of(zaftnotameni.creatania.registry.Items.MANA_GEL.get()))
+      .ingredientOutput(Ingredient.of(MANA_GEL.get()))
       .build()
       .saveAs(Index.resource("managel_via_elves_from_slime"), pCache);
 
     start()
       .ingredient(Ingredient.of(Items.MAGMA_CREAM))
-      .ingredientOutput(Ingredient.of(zaftnotameni.creatania.registry.Items.MANA_GEL.get()))
+      .ingredientOutput(Ingredient.of(MANA_GEL.get()))
       .build()
       .saveAs(Index.resource("managel_via_elves_from_magmacream"), pCache);
 
@@ -89,12 +93,16 @@ public class ElvenTradeRecipeGen extends BotaniaBaseRecipeGen implements DataPro
 
     start()
       .ingredient(Ingredient.of(AllItems.ZINC_INGOT.get()))
+      .ingredient(Ingredient.of(MANA_GEL.get()))
+      .ingredient(Ingredient.of(REAL_MANA_BLOCK.get()))
       .ingredientOutput(terrasteelingot())
       .build()
       .saveAs(Index.resource("terrasteel_via_zinc"), pCache);
 
     start()
       .ingredient(Ingredient.of(AllItems.BRASS_INGOT.get()))
+      .ingredient(Ingredient.of(MANA_GEL.get()))
+      .ingredient(Ingredient.of(REAL_MANA_BLOCK.get()))
       .ingredientOutput(elementiumingot())
       .build()
       .saveAs(Index.resource("elementium_via_brass"), pCache);
