@@ -2,6 +2,8 @@ package zaftnotameni.creatania.mana.flowers;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.foundation.tileEntity.SmartTileEntity;
+import java.util.function.Function;
+import java.util.function.Supplier;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
@@ -27,6 +29,7 @@ import zaftnotameni.creatania.machines.manamachine.KineticManaMachine;
 
 import static net.minecraftforge.common.util.LazyOptional.empty;
 import static net.minecraftforge.common.util.LazyOptional.of;
+import static zaftnotameni.creatania.mana.flowers.blazunia.BlazuniaBlockStates.IS_SUPERHOT;
 
 public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerInterfaces> implements BotaniaFlowerInterfaces {
 
@@ -124,7 +127,37 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
     }
   }
 
+  public void linkPylon() {
+    var pos = this.self.getBlockPos();
+    if (pos == null) return;
+    var level = self.getLevel();
+    if (level == null) return;
+    if (level.isClientSide()) return;
+    var bs = level.getBlockState(pos);
+    if (bs == null) return;
+    Function<Supplier<BlockPos>, Boolean> isPylon = (ps) -> {
+      var p = ps.get();
+      if (p == null) return false;
+      var pbs = level.getBlockState(p);
+      if (pbs == null) return false;
+      var block = pbs.getBlock();
+      if (block == null) return false;
+      return block.getRegistryName().compareTo(gaiapylon) == 0;
+    };
+    this.hasPylon = isPylon.apply(pos::west) && isPylon.apply(pos::east) && isPylon.apply(pos::north) && isPylon.apply(pos::south);
+    level.setBlockAndUpdate(pos, bs.setValue(IS_SUPERHOT, this.hasPylon));
+  }
+
+  public static final ResourceLocation gaiapylon = new ResourceLocation("botania", "gaia_pylon");
+  public boolean hasPylon = false;
+  public int pylonScanTicksCounter = 0;
+  public int pylonScanTickRate = 2;
+
   public void linkPool() {
+    if (pylonScanTicksCounter++ >= pylonScanTickRate) {
+      pylonScanTicksCounter = 0;
+      linkPylon();
+    }
     Object theTileObj = this.isGenerating ? this.spreader : this.pool;
     BlockEntity theTile;
     if (!(theTileObj instanceof BlockEntity)) {
@@ -262,8 +295,7 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
       float green = (float) (this.color >> 8 & 0xFF) / 255.0f;
       float blue = (float) (this.color & 255) / 255.0f;
       if (Math.random() > particleChance) {
-        BotaniaAPI.instance().sparkleFX(
-          this.self.getLevel(),
+        BotaniaAPI.instance().sparkleFX(this.self.getLevel(),
           (double) this.self.getBlockPos().getX() + 0.3D + Math.random() * 0.5D,
           (double) this.self.getBlockPos().getY() + 0.5D + Math.random() * 0.5D,
           (double) this.self.getBlockPos().getZ() + 0.3D + Math.random() * 0.5D,
@@ -317,6 +349,9 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
   public Boolean hasEnoughManaForOneOperation() { return this.mana > this.manaPerOperation; }
 
   public void load(@Nonnull CompoundTag nbt) {
+    if (nbt.contains("has_pylons")) {
+      this.hasPylon = nbt.getBoolean("has_pylons");
+    }
     if (nbt.contains("mana", Tag.TAG_INT)) {
       this.mana = Mth.clamp(nbt.getInt("mana"), 0, this.maxMana);
     } else {
@@ -324,10 +359,9 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
     }
     if (nbt.contains("pool")) {
       CompoundTag poolTag = nbt.getCompound("pool");
-      if (poolTag.contains("x") && poolTag.contains("y") && poolTag.contains("z"))
-        this.poolPosition = new BlockPos(poolTag.getInt("x"), poolTag.getInt("y"), poolTag.getInt("z"));
-      else
+      if (poolTag.contains("x") && poolTag.contains("y") && poolTag.contains("z")) { this.poolPosition = new BlockPos(poolTag.getInt("x"), poolTag.getInt("y"), poolTag.getInt("z")); } else {
         this.poolPosition = null;
+      }
     } else {
       this.poolPosition = null;
     }
@@ -336,6 +370,7 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
 
   public void saveAdditional(@Nonnull CompoundTag compound) {
     compound.putInt("mana", Mth.clamp(this.mana, 0, this.maxMana));
+    compound.putBoolean("has_pylons", this.hasPylon);
     if (this.poolPosition != null) {
       CompoundTag poolTag = new CompoundTag();
       poolTag.putInt("x", this.poolPosition.getX());

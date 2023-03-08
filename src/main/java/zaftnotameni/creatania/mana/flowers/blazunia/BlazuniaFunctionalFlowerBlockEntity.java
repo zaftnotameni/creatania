@@ -32,10 +32,9 @@ import vazkii.botania.api.block.IWandHUD;
 import zaftnotameni.creatania.mana.flowers.BotaniaFlowerInterfaces;
 import zaftnotameni.creatania.mana.flowers.FunctionalFlowerHandler;
 
-import static zaftnotameni.creatania.mana.flowers.blazunia.BlazeBurnerInteraction.makeFakePlayer;
-import static zaftnotameni.creatania.mana.flowers.blazunia.BlazeBurnerInteraction.scanRangeForBlazeBurners;
-import static zaftnotameni.creatania.mana.flowers.blazunia.BlazeBurnerInteraction.stackOfOakPlanks;
-import static zaftnotameni.creatania.mana.flowers.blazunia.BlazeBurnerInteraction.useFuelOnBlazeBurner;
+import static com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock.HeatLevel.SEETHING;
+import static net.minecraft.world.entity.Entity.RemovalReason.DISCARDED;
+import static zaftnotameni.creatania.mana.flowers.blazunia.BlazeBurnerInteraction.*;
 import static zaftnotameni.creatania.mana.flowers.blazunia.BlazuniaBlockStates.HAS_MANA_SOURCE;
 import static zaftnotameni.creatania.mana.flowers.blazunia.BlazuniaBlockStates.IS_SUPERHOT;
 
@@ -97,7 +96,12 @@ import static zaftnotameni.creatania.mana.flowers.blazunia.BlazuniaBlockStates.I
     if (level == null) return 0;
     if (!(level instanceof ServerLevel serverLevel)) return 0;
     var fakePlayer = makeFakePlayer(serverLevel);
-    fakePlayer.getInventory().add(stackOfOakPlanks());
+    fakePlayer.getInventory().clearContent();
+    if (getBlockState().getOptionalValue(IS_SUPERHOT).orElse(false))
+      fakePlayer.getInventory().add(stackOfBlazeCake());
+    else
+      fakePlayer.getInventory().add(stackOfOakPlanks());
+    fakePlayer.remove(DISCARDED);
     var pos = getBlockPos();
     NonNullList<Integer> consumedMana = NonNullList.create();
     scanRangeForBlazeBurners(1, 3, 1, serverLevel, pos, (bb) -> {
@@ -106,12 +110,18 @@ import static zaftnotameni.creatania.mana.flowers.blazunia.BlazuniaBlockStates.I
       var bpos = bb.getBlockPos();
       var block = bbs.getBlock();
       var hit = makeBlockHitResult(bpos);
-      useFuelOnBlazeBurner(fakePlayer, serverLevel, bbs, bpos, block, hit);
+      var isUpgrade = bb.getHeatLevelFromBlock() != SEETHING && isSuperHot();
+      var littleFuelRemaining = bb.getRemainingBurnTime() < 100;
+      if (isUpgrade || littleFuelRemaining)
+        useFuelOnBlazeBurner(fakePlayer, serverLevel, bbs, bpos, block, hit);
       consumedMana.add(evalFlowerHandler(FunctionalFlowerHandler::getManaPerOperation, () -> 0));
     });
     return consumedMana.stream().mapToInt(Integer::intValue).sum();
   }
 
+  public boolean isSuperHot() {
+    return getBlockState().getOptionalValue(IS_SUPERHOT).orElse(false);
+  }
   public int doClientSideAnimation() {
     spawnParticles(getBlockState().getOptionalValue(HAS_MANA_SOURCE).orElse(false),
       getBlockState().getOptionalValue(IS_SUPERHOT).orElse(false),

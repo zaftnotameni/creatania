@@ -1,6 +1,7 @@
 package zaftnotameni.creatania.mana.flowers.blazunia;
 
 import com.mojang.authlib.GameProfile;
+import com.simibubi.create.AllItems;
 import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerTileEntity;
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -18,11 +19,14 @@ import org.apache.logging.log4j.util.TriConsumer;
 public class BlazeBurnerInteraction {
 
   public static FakePlayer fakePlayer;
+
   public static FakePlayer makeFakePlayer(ServerLevel level) {
-    if (fakePlayer != null) return fakePlayer;
-    return fakePlayer = new FakePlayer(level, new GameProfile(UUID.randomUUID(), "fake")); }
+    return new FakePlayer(level, new GameProfile(UUID.randomUUID(), "fake"));
+  }
 
   public static ItemStack stackOfOakPlanks() { return new ItemStack(Items.OAK_PLANKS, 64); }
+
+  public static ItemStack stackOfBlazeCake() { return new ItemStack(AllItems.BLAZE_CAKE.get(), 64); }
 
   public static void useFuelOnBlazeBurner(FakePlayer fakePlayer, ServerLevel level, BlockState bbs, BlockPos bpos, Block block, BlockHitResult hit) {
     block.use(bbs, level, bpos, fakePlayer, InteractionHand.MAIN_HAND, hit);

@@ -4,6 +4,18 @@
 
 ### 1.18.2-0.3.9-alpha
 
+#### New
+
+- Blazunia has a superheated mode. By surrounding the blazunia (north/south/east/west) with gaia pylons, it will superheat the blaze burners instead of normal heating.
+
+#### Changes
+
+- Blazunia will only apply fuew to burners if they have less than 5 seconds of burn time remaining.
+
+#### Fixes
+
+- Patchouli entries/categories point to `creatania:` so they display correctly
+
 ### 1.18.2-0.3.8-alpha
 
 #### New
