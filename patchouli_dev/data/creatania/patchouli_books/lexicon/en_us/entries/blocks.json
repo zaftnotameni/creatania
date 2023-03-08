@@ -1,0 +1,21 @@
+{
+    "name": "Creatania Blocks",
+    "icon": "creatania:mana/machines/casing",
+    "category": "creatania:creatania",
+    "pages": [
+        {
+            "type": "text",
+            "text": "$(li)$(l:patchouli:blocks#manacasing)Mana Condenser$(/l)"
+        },{
+            "type": "text",
+            "text": "$(li)$(l:patchouli:blocks#manacasing)Mana Condenser$(/l)"
+        },
+        {
+            "type": "spotlight",
+            "title": "Mana Machine Casing",
+            "item": "creatania:mana/machines/casing",
+            "anchor": "manacasing",
+            "text": "The Mana Machine Casing is a foundational building block for Creatania's machines."
+        }
+    ]
+}
