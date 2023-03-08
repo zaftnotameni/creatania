@@ -15,7 +15,8 @@ onEvent("ponder.tag", event => {
     event.createTag("creatania:mana_machines", "creatania:mana_condenser", "Machines that Interact with Mana", "Can we pull mana from thin air?", [
         "creatania:mana_condenser",
         "creatania:mana_generator",
-        "creatania:mana_motor"
+        "creatania:mana_motor",
+        "creatania:omnibox"
     ]);
 
     event.createTag("creatania:mana_blocks", "creatania:mana/blocks/real", "Learning About Mana", "All sorts of fancy pretty blocks!", [

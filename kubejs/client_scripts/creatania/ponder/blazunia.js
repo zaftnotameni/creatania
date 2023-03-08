@@ -78,7 +78,6 @@ const displayBlazuniaFromBlocksScene = (params) => (scene, util) => {
   //   nbt.burnTimeRemaining = 1000;
   //   nbt.fuelLevel = 1;
   // });
-
 };
 
 onEvent("ponder.registry", event => {

@@ -25,7 +25,7 @@
             "type": "spotlight",
             "anchor": "managenerator",
             "item": "creatania:mana_generator",
-            "text": "The Mana Generator $(l:creatania:mana_su#managenerator)transforms$(/l) (at a great loss) Pure Mana fluid into Real Mana, depositing it in a Mana Pool on top of the machine.$(br2)The Mana Generator can also be used in lieu of lapis blocks in the Terra Agglomeration Plate multiblock structure. When used that way, the generators (you can put up to 4 of them where "
+            "text": "The Mana Generator $(l:patchouli:mana_su#managenerator)transforms$(/l) (at a great loss)$(br)Pure Mana fluid into Real Mana, depositing it in a Mana Pool on top of the machine.$(br2)The Mana Generator can also be used in lieu of lapis blocks in the Terra Agglomeration Plate multiblock structure. When used that way, the generators (you can put up to 4 of them where "
         }
         ,{
             "type": "text",
