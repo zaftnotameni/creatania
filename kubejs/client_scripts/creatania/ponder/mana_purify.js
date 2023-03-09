@@ -59,7 +59,6 @@ onEvent("ponder.registry", event => {
       "mana_purify_block_scene", // unique scene identifier
       "Pure Daisy doing its magic!", // scene title
       "creatania:mana_purify/manablocks_puredaisy", // namespace and path to nbt file inside ponder folder
-      // displayManaPurifyBlockFromBlocksScene({ blockId: "creatania:mana/blocks/corrupt" })
       displayManaPurifyBlockFromBlocksScene({ blockId: "botania:pure_daisy" })
     );
 
