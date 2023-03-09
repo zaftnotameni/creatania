@@ -38,7 +38,6 @@ public class ManaGeneratorBlock extends DirectionalAxisKineticBlock implements I
   @Override protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
     super.createBlockStateDefinition(builder.add(HAS_DUCT, HAS_ENOUGH_MANA, IS_GENERATING));
   }
-
   public static boolean hasEnoughMana(BlockState bs) {
     return bs.getOptionalValue(HAS_ENOUGH_MANA).orElse(false);
   }

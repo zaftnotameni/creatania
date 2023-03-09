@@ -2,6 +2,7 @@ package zaftnotameni.creatania.event;
 
 import com.simibubi.create.AllItems;
 import java.util.Collection;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -24,9 +25,15 @@ import org.apache.commons.lang3.StringUtils;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.config.CommonConfig;
 import zaftnotameni.creatania.registry.Advancements;
+import zaftnotameni.creatania.registry.Blocks;
 import zaftnotameni.creatania.registry.Tags;
 import zaftnotameni.creatania.util.ScanArea;
 
+import static com.simibubi.create.AllItems.BLAZE_CAKE;
+import static net.minecraft.sounds.SoundEvents.BLAZE_AMBIENT;
+import static net.minecraft.sounds.SoundEvents.BLAZE_BURN;
+import static net.minecraft.sounds.SoundEvents.BLAZE_SHOOT;
+import static net.minecraft.sounds.SoundSource.BLOCKS;
 import static zaftnotameni.creatania.util.Actions.killSlimeProduceManagelGrantAchievement;
 import static zaftnotameni.creatania.util.Queries.isOnTopOrInsideManaFluid;
 import static zaftnotameni.creatania.util.Queries.isSlimeEntity;
@@ -87,6 +94,7 @@ public class ForgeEventBus {
       var player = evt.getPlayer();
       var level = evt.getWorld();
       var hit = evt.getHitVec();
+      if (handledAsBlazuniaEvent(evt, player, level, hit)) return;
       if (isNotServerOrNotMainHandOrHitAirOrHandIsEmpty(evt, player, level, hit)) {
         evt.setResult(Event.Result.ALLOW);
         return;
@@ -113,6 +121,32 @@ public class ForgeEventBus {
       evt.setCanceled(true);
     } catch (Exception e) {}
   }
+
+  public static boolean handledAsBlazuniaEvent(PlayerInteractEvent.RightClickBlock evt, Player player, Level level, BlockHitResult hit) {
+    var itemStack = evt.getItemStack();
+    var hand = evt.getHand();
+    var isCake = !itemStack.isEmpty() && itemStack.is(BLAZE_CAKE.get());
+    var isServer = !level.isClientSide();
+    var isMainHand = InteractionHand.MAIN_HAND.equals(hand);
+    var isWrong = !isCake || hit == null || !isServer || !isMainHand;
+    if (isWrong) return false;
+    evt.setCanceled(true);
+    var blockState = level.getBlockState(hit.getBlockPos());
+    var isEndoFlame = blockState.getBlock().getRegistryName().compareTo(new ResourceLocation("botania", "endoflame")) == 0;
+    if (!isEndoFlame) return false;
+    level.setBlockAndUpdate(hit.getBlockPos(), Blocks.BLAZUNIA_BLOCK.getDefaultState());
+    remoteItemFromPlayer(player, itemStack);
+    level.playSound(null, hit.getBlockPos(), BLAZE_BURN, BLOCKS, 1f, 1f);
+    level.playSound(null, hit.getBlockPos(), BLAZE_AMBIENT, BLOCKS, 1f, 1f);
+    level.playSound(null, hit.getBlockPos(), BLAZE_SHOOT, BLOCKS, 1f, 1f);
+    evt.setResult(Event.Result.ALLOW);
+    return true;
+  }
+
+  public static void remoteItemFromPlayer(Player player, ItemStack stack) {
+    stack.shrink(1);
+  }
+
   private static void addItemToPlayer(Player player, ItemStack stack) {
     if (!player.getInventory().add(stack)) { player.drop(stack, false); }
   }

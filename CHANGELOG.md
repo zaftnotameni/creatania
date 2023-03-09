@@ -4,6 +4,15 @@
 
 ### 1.18.2-0.3.12-alpha
 
+#### New
+
+- Blazunia secret recipe
+- Blazunia open recipe
+
+#### Fixes
+
+- Exception because of tooltip initialization in mana motor no longer happens (this had no impact on the player)
+- Mana Motor now updates the mana rendering when receiving/using mana, even via spark.
 
 ### 1.18.2-0.3.11-alpha
 
