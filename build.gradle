@@ -346,7 +346,7 @@ tasks.register('patchouli', Copy) {
   println("copying patchouli from ${patchouli_dev} to ${patchouli_mod}")
   from patchouli_dev
   into patchouli_mod
-  filter { line -> line.replaceAll("(l:patchouli:", "(l:creatania:")
+  filter { line -> line.replaceAll("\\(l:patchouli:", "\\(l:creatania:")
           .replaceAll("\"category\": \"patchouli:", "\"category\": \"creatania:") }
   println("copied patchouli")
 }

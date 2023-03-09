@@ -37,6 +37,7 @@ public class ForgeDatagenInitializer {
 
     ForgeCreateProcessingRecipeProvider.registerAll(generator);
     generator.addProvider(new ElvenTradeRecipeGen(generator));
+    generator.addProvider(new PetalApothecaryRecipeGen(generator));
     generator.addProvider(new ManaInfusionRecipeGen(generator));
     generator.addProvider(new RuneAltarRecipeGen(generator));
     generator.addProvider(new TerraPlateRecipeGen(generator));

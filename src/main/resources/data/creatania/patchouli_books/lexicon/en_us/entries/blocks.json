@@ -5,10 +5,14 @@
     "pages": [
         {
             "type": "text",
-            "text": "$(li)$(l:patchouli:blocks#manacasing)Mana Condenser$(/l)"
-        },{
-            "type": "text",
-            "text": "$(li)$(l:patchouli:blocks#manacasing)Mana Condenser$(/l)"
+            "text": "$(li)$(l:creatania:blocks#corruptmana)Corrupt Mana Block$(/l)$(li)$(l:creatania:blocks#manacasing)Mana Casing$(/l)$(li)$(l:creatania:blocks#puremana)Pure Mana Block$(/l)$(li)$(l:creatania:blocks#realmana)Real Mana Block$(/l)"
+        },
+        {
+            "type": "spotlight",
+            "title": "Corrupt Mana Block",
+            "item": "creatania:mana/blocks/corrupt",
+            "anchor":"corruptmana",
+            "text": "This purplish block consists of condensed Mana, though it seems corrupted and inert. Should be handled with extreme caution."
         },
         {
             "type": "spotlight",
@@ -16,6 +20,20 @@
             "item": "creatania:mana/machines/casing",
             "anchor": "manacasing",
             "text": "The Mana Machine Casing is a foundational building block for Creatania's machines."
+        },
+        {
+            "type": "spotlight",
+            "title": "Pure Mana Block",
+            "item": "creatania:mana/blocks/pure",
+            "anchor":"puremana",
+            "text": "The Pure Mana block is the purified version of the Corrupt Mana block. It too is inert but seems quite safe to handle."
+        },
+        {
+            "type": "spotlight",
+            "title": "Real Mana Block",
+            "item": "creatania:mana/blocks/real",
+            "anchor":"realmana",
+            "text": "The Real Mana block contains all of the magical properties of Botania Mana but in block form. We are finding more and more uses for this block."
         }
     ]
 }
