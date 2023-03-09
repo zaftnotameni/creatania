@@ -22,6 +22,10 @@ const val example = """
 }
 """
 
+val blazecake = JsonParser.parseString("{item: \"${AllItems.BLAZE_CAKE.id}\"}").asJsonObject
+val red = JsonParser.parseString("{tag: \"botania:petals/red\"}").asJsonObject
+val yellow = JsonParser.parseString("{tag: \"botania:petals/yellow\"}").asJsonObject
+val orange = JsonParser.parseString("{tag: \"botania:petals/orange\"}").asJsonObject
 
 class PetalApothecaryRecipeGen(gen : DataGenerator?) : BotaniaBaseRecipeGen(gen, "botania:petal_apothecary"), DataProvider {
   override fun run(pCache : HashCache) {
@@ -30,10 +34,6 @@ class PetalApothecaryRecipeGen(gen : DataGenerator?) : BotaniaBaseRecipeGen(gen,
     val gog = root.getAsJsonObject("gog").asJsonObject
     val base = root.getAsJsonObject("base").asJsonObject
     val ingredients = JsonArray()
-    val blazecake = JsonParser.parseString("{item: \"${AllItems.BLAZE_CAKE.id}\"}").asJsonObject
-    val red = JsonParser.parseString("{tag: \"botania:petals/red\"}").asJsonObject
-    val yellow = JsonParser.parseString("{tag: \"botania:petals/yellow\"}").asJsonObject
-    val orange = JsonParser.parseString("{tag: \"botania:petals/orange\"}").asJsonObject
     with(ingredients) {
       add(red)
       add(yellow)
