@@ -1,6 +1,6 @@
 // Ponder scenes for purifying corrupt mana to pure mana
 
-const displayOmniBoxFromBlocksScene = (params) => (scene, util) => {
+const displayOmniboxFromBlocksScene = (params) => (scene, util) => {
 
   // const blockId = params.blockId;
   // location of each block in the scene
@@ -16,8 +16,9 @@ const displayOmniBoxFromBlocksScene = (params) => (scene, util) => {
   scene.showBasePlate();
   scene.idle(20);
 
+  scene.world.modifyBlock(omnibox, (bs) => bs.with("facing", "south").with("axis", "z"), false);
   scene.world.showSection(omnibox, Facing.NORTH);
-  scene.text(80, "The Omnibox has six synchronized input/output shafts.", offsetCenterOf(util)(omnibox));
+  scene.text(80, "The omnibox has six synchronized input/output shafts.", offsetCenterOf(util)(omnibox));
   scene.idle(90);
   
   scene.text(80, "All opposing shafts rotate in the same direction.", offsetCenterOf(util)(cog_6));
@@ -33,6 +34,7 @@ const displayOmniBoxFromBlocksScene = (params) => (scene, util) => {
   scene.world.showSection(cog_5, Facing.EAST);
   scene.idle(30);
 
+
 };
 
 onEvent("ponder.registry", event => {
@@ -40,9 +42,9 @@ onEvent("ponder.registry", event => {
     .create("creatania:omnibox") // full block id 
     .scene(
       "omnibox_scene", // unique scene identifier
-      "Omnibox", // scene title
+      "omnibox", // scene title
       "creatania:omnibox", // namespace and path to nbt file inside ponder folder
-      displayOmniBoxFromBlocksScene({ blockId: "creatania:omnibox" })
+      displayOmniboxFromBlocksScene({ blockId: "creatania:omnibox" })
     );
 
 });
