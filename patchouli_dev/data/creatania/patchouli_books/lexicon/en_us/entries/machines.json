@@ -5,7 +5,7 @@
     "pages": [
         {
             "type": "text",
-            "text": "Creatania provides integration points with two staples of modded Minecraft: Create and Botania. Creatania harnesses Create SU (Stress Units) and Botania Mana to find new solutions to old problems. $(li)$(l:patchouli:machines#manacondenser)Mana Condenser$(/l)$(li)$(l:patchouli:machines#manaduct)Mana Ducts$(/l)$(li)$(l:patchouli:machines#managenerator)Mana Generator$(/l)$(li)$(l:patchouli:machines#manamotor)Mana Motor$(/l)"
+            "text": "Creatania provides integration points with two staples of modded Minecraft: Create and Botania. Creatania harnesses Create SU (Stress Units) and Botania Mana to find new solutions to old problems. $(li)$(l:patchouli:machines#manacondenser)Mana Condenser$(/l)$(li)$(l:patchouli:machines#manaduct)Mana Ducts$(/l)$(li)$(l:patchouli:machines#managenerator)Mana Generator$(/l)$(li)$(l:patchouli:machines#manamotor)Mana Motor$(/l)$(li)$(l:patchouli:machines#omnibox)Omnibox$(/l)"
         },
         {
             "type": "spotlight",
@@ -18,14 +18,14 @@
             "title": "Mana Ducts",
             "anchor":"manaduct",
             "item": "creatania:manaducts/manasteel",
-            "text": "Mana Ducts help transfer Mana from Mana Generators to the Agglomeration Plate. They are a medium far better than trying to send Mana through the air.$(br2)Enhancing them with botanist metals should make them even more efficient. Maybe those elves can help us make these even better."
+            "text": "$(c:/create ponder creatania:manaducts/manasteel @a)Mana Ducts$(/c) help transfer Mana from Mana Generators to the Agglomeration Plate. They are a medium far better than trying to send Mana through the air.$(br2)Enhancing them with botanist metals should make them even more efficient. Maybe those elves can help us make these even better."
         }
         ,
         {
             "type": "spotlight",
             "anchor": "managenerator",
             "item": "creatania:mana_generator",
-            "text": "The Mana Generator $(l:patchouli:mana_su#managenerator)transforms$(/l) (at a great loss) Pure Mana fluid into Real Mana, depositing it in a Mana Pool on top of the machine.$(br2)The Mana Generator can also be used in lieu of lapis blocks in the Terra Agglomeration Plate multiblock structure. When used that way, the generators (you can put up to 4 of them where "
+            "text": "The Mana Generator $(l:patchouli:mana_su#managenerator)transforms$(/l) (at a great loss)$(br)Pure Mana fluid into Real Mana, depositing it in a Mana Pool on top of the machine.$(br2)The Mana Generator can also be used in lieu of lapis blocks in the Terra Agglomeration Plate multiblock structure. When used that way, the generators (you can put up to 4 of them where "
         }
         ,{
             "type": "text",
@@ -41,6 +41,15 @@
         {
             "type": "text",
             "text": "Since it involves mana, the device is not entirely without mystery, it seems to be able to spin at any speed we require even without any mana (don't ask how that works). However it won't really provide any SU without being properly fed with a mana burst. The motor speed is configurable with a scroller. The multiplier for SU & mana consumption is also configurable in configs."
+        },{
+            "type": "spotlight",
+            "title": "Omnibox",
+            "anchor":"omnibox",
+            "item":"creatania:omnibox",
+            "text": "The $(c:/create ponder creatania:omnibox @a)Omnibox$(/c) has six synchronized input/output shafts. All opposing shafts rotate in the same direction."
+        },{
+            "type": "botania:runic_altar",
+            "recipe":["creatania:botanist/runic_altar/omnibox"]
         }
     ]
 }
