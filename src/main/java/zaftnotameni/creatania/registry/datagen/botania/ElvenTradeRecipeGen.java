@@ -93,7 +93,7 @@ public class ElvenTradeRecipeGen extends BotaniaBaseRecipeGen implements DataPro
 
     start()
       .ingredient(Ingredient.of(AllItems.ZINC_INGOT.get()))
-      .ingredient(Ingredient.of(MANA_GEL.get()))
+      .ingredient(Ingredient.of(REAL_MANA_BLOCK.get()))
       .ingredient(Ingredient.of(REAL_MANA_BLOCK.get()))
       .ingredientOutput(terrasteelingot())
       .build()
@@ -101,7 +101,6 @@ public class ElvenTradeRecipeGen extends BotaniaBaseRecipeGen implements DataPro
 
     start()
       .ingredient(Ingredient.of(AllItems.BRASS_INGOT.get()))
-      .ingredient(Ingredient.of(MANA_GEL.get()))
       .ingredient(Ingredient.of(REAL_MANA_BLOCK.get()))
       .ingredientOutput(elementiumingot())
       .build()

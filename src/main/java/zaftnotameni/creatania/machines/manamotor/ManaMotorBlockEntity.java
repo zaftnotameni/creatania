@@ -10,6 +10,7 @@ import javax.annotation.Nullable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.DyeColor;
@@ -99,10 +100,28 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
   }
   @Override
   public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-    super.addToGoggleTooltip(tooltip, isPlayerSneaking);
+    var parent = super.addToGoggleTooltip(tooltip, isPlayerSneaking);
     gogglesTooltip(tooltip, isPlayerSneaking, this);
-    return true;
+    return parent;
   }
+
+
+  @Override
+  protected void read(CompoundTag nbt, boolean clientPacket) {
+    super.read(nbt, clientPacket);
+    this.mana = nbt.getInt("mana");
+    this.manaPerTick = nbt.getInt("manaPerTick");
+    this.active = nbt.getBoolean("active");
+  }
+
+  @Override
+  protected void write(CompoundTag nbt, boolean clientPacket) {
+    nbt.putInt("mana", this.mana);
+    nbt.putInt("manaPerTick", this.manaPerTick);
+    nbt.putBoolean("active", this.active);
+    super.write(nbt, clientPacket);
+  }
+
   @Override
   public void receiveMana(int pMana) { this.getManaMachine().receiveMana(pMana); }
   public void updateMana(int newManaValue) {
@@ -110,7 +129,11 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
     this.reconsiderIfHasEnoughManaToProduceSU();
   }
   @Override
-  public void setManaMachineMana(int value) { this.mana = value; }
+  public void setManaMachineMana(int value) {
+    var changed = this.mana != value;
+    this.mana = value;
+    if (changed) sendData();
+  }
   @Override
   public int getManaMachineAbsoluteSpeed() {
     return (int) Math.abs(this.getSpeed());

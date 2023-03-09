@@ -22,7 +22,6 @@ public class OmniboxRenderer extends KineticTileEntityRenderer {
   @Override
   protected void renderSafe(KineticTileEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer,
                             int light, int overlay) {
-    super.renderSafe(te, partialTicks, ms, buffer, light, overlay);
     final BlockPos pos = te.getBlockPos();
     float time = AnimationTickHolder.getRenderTime(te.getLevel());
     final Direction.Axis boxAxis = te.getBlockState().getValue(BlockStateProperties.AXIS);
