@@ -1,50 +1,386 @@
 {
   "variants": {
-    "axis_along_first=false,facing=down": {
+    "axis_along_first=false,facing=down,has_duct=false,has_enough_mana=false,is_generating=false": {
       "model": "creatania:block/mana_generator/horizontal",
       "x": 270,
       "y": 90
     },
-    "axis_along_first=true,facing=down": {
+    "axis_along_first=true,facing=down,has_duct=false,has_enough_mana=false,is_generating=false": {
       "model": "creatania:block/mana_generator/horizontal",
       "x": 270
     },
-    "axis_along_first=false,facing=up": {
+    "axis_along_first=false,facing=up,has_duct=false,has_enough_mana=false,is_generating=false": {
       "model": "creatania:block/mana_generator/horizontal",
       "x": 90,
       "y": 90
     },
-    "axis_along_first=true,facing=up": {
+    "axis_along_first=true,facing=up,has_duct=false,has_enough_mana=false,is_generating=false": {
       "model": "creatania:block/mana_generator/horizontal",
       "x": 90
     },
-    "axis_along_first=false,facing=north": {
+    "axis_along_first=false,facing=north,has_duct=false,has_enough_mana=false,is_generating=false": {
       "model": "creatania:block/mana_generator/vertical",
       "y": 180
     },
-    "axis_along_first=true,facing=north": {
+    "axis_along_first=true,facing=north,has_duct=false,has_enough_mana=false,is_generating=false": {
       "model": "creatania:block/mana_generator/horizontal",
       "y": 180
     },
-    "axis_along_first=false,facing=south": {
+    "axis_along_first=false,facing=south,has_duct=false,has_enough_mana=false,is_generating=false": {
       "model": "creatania:block/mana_generator/vertical"
     },
-    "axis_along_first=true,facing=south": {
+    "axis_along_first=true,facing=south,has_duct=false,has_enough_mana=false,is_generating=false": {
       "model": "creatania:block/mana_generator/horizontal"
     },
-    "axis_along_first=false,facing=west": {
+    "axis_along_first=false,facing=west,has_duct=false,has_enough_mana=false,is_generating=false": {
       "model": "creatania:block/mana_generator/horizontal",
       "y": 90
     },
-    "axis_along_first=true,facing=west": {
+    "axis_along_first=true,facing=west,has_duct=false,has_enough_mana=false,is_generating=false": {
       "model": "creatania:block/mana_generator/vertical",
       "y": 90
     },
-    "axis_along_first=false,facing=east": {
+    "axis_along_first=false,facing=east,has_duct=false,has_enough_mana=false,is_generating=false": {
       "model": "creatania:block/mana_generator/horizontal",
       "y": 270
     },
-    "axis_along_first=true,facing=east": {
+    "axis_along_first=true,facing=east,has_duct=false,has_enough_mana=false,is_generating=false": {
+      "model": "creatania:block/mana_generator/vertical",
+      "y": 270
+    },
+    "axis_along_first=false,facing=down,has_duct=true,has_enough_mana=false,is_generating=false": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 270,
+      "y": 90
+    },
+    "axis_along_first=true,facing=down,has_duct=true,has_enough_mana=false,is_generating=false": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 270
+    },
+    "axis_along_first=false,facing=up,has_duct=true,has_enough_mana=false,is_generating=false": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis_along_first=true,facing=up,has_duct=true,has_enough_mana=false,is_generating=false": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 90
+    },
+    "axis_along_first=false,facing=north,has_duct=true,has_enough_mana=false,is_generating=false": {
+      "model": "creatania:block/mana_generator/vertical",
+      "y": 180
+    },
+    "axis_along_first=true,facing=north,has_duct=true,has_enough_mana=false,is_generating=false": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "y": 180
+    },
+    "axis_along_first=false,facing=south,has_duct=true,has_enough_mana=false,is_generating=false": {
+      "model": "creatania:block/mana_generator/vertical"
+    },
+    "axis_along_first=true,facing=south,has_duct=true,has_enough_mana=false,is_generating=false": {
+      "model": "creatania:block/mana_generator/horizontal"
+    },
+    "axis_along_first=false,facing=west,has_duct=true,has_enough_mana=false,is_generating=false": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "y": 90
+    },
+    "axis_along_first=true,facing=west,has_duct=true,has_enough_mana=false,is_generating=false": {
+      "model": "creatania:block/mana_generator/vertical",
+      "y": 90
+    },
+    "axis_along_first=false,facing=east,has_duct=true,has_enough_mana=false,is_generating=false": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "y": 270
+    },
+    "axis_along_first=true,facing=east,has_duct=true,has_enough_mana=false,is_generating=false": {
+      "model": "creatania:block/mana_generator/vertical",
+      "y": 270
+    },
+    "axis_along_first=false,facing=down,has_duct=false,has_enough_mana=true,is_generating=false": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 270,
+      "y": 90
+    },
+    "axis_along_first=true,facing=down,has_duct=false,has_enough_mana=true,is_generating=false": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 270
+    },
+    "axis_along_first=false,facing=up,has_duct=false,has_enough_mana=true,is_generating=false": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis_along_first=true,facing=up,has_duct=false,has_enough_mana=true,is_generating=false": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 90
+    },
+    "axis_along_first=false,facing=north,has_duct=false,has_enough_mana=true,is_generating=false": {
+      "model": "creatania:block/mana_generator/vertical",
+      "y": 180
+    },
+    "axis_along_first=true,facing=north,has_duct=false,has_enough_mana=true,is_generating=false": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "y": 180
+    },
+    "axis_along_first=false,facing=south,has_duct=false,has_enough_mana=true,is_generating=false": {
+      "model": "creatania:block/mana_generator/vertical"
+    },
+    "axis_along_first=true,facing=south,has_duct=false,has_enough_mana=true,is_generating=false": {
+      "model": "creatania:block/mana_generator/horizontal"
+    },
+    "axis_along_first=false,facing=west,has_duct=false,has_enough_mana=true,is_generating=false": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "y": 90
+    },
+    "axis_along_first=true,facing=west,has_duct=false,has_enough_mana=true,is_generating=false": {
+      "model": "creatania:block/mana_generator/vertical",
+      "y": 90
+    },
+    "axis_along_first=false,facing=east,has_duct=false,has_enough_mana=true,is_generating=false": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "y": 270
+    },
+    "axis_along_first=true,facing=east,has_duct=false,has_enough_mana=true,is_generating=false": {
+      "model": "creatania:block/mana_generator/vertical",
+      "y": 270
+    },
+    "axis_along_first=false,facing=down,has_duct=true,has_enough_mana=true,is_generating=false": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 270,
+      "y": 90
+    },
+    "axis_along_first=true,facing=down,has_duct=true,has_enough_mana=true,is_generating=false": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 270
+    },
+    "axis_along_first=false,facing=up,has_duct=true,has_enough_mana=true,is_generating=false": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis_along_first=true,facing=up,has_duct=true,has_enough_mana=true,is_generating=false": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 90
+    },
+    "axis_along_first=false,facing=north,has_duct=true,has_enough_mana=true,is_generating=false": {
+      "model": "creatania:block/mana_generator/vertical",
+      "y": 180
+    },
+    "axis_along_first=true,facing=north,has_duct=true,has_enough_mana=true,is_generating=false": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "y": 180
+    },
+    "axis_along_first=false,facing=south,has_duct=true,has_enough_mana=true,is_generating=false": {
+      "model": "creatania:block/mana_generator/vertical"
+    },
+    "axis_along_first=true,facing=south,has_duct=true,has_enough_mana=true,is_generating=false": {
+      "model": "creatania:block/mana_generator/horizontal"
+    },
+    "axis_along_first=false,facing=west,has_duct=true,has_enough_mana=true,is_generating=false": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "y": 90
+    },
+    "axis_along_first=true,facing=west,has_duct=true,has_enough_mana=true,is_generating=false": {
+      "model": "creatania:block/mana_generator/vertical",
+      "y": 90
+    },
+    "axis_along_first=false,facing=east,has_duct=true,has_enough_mana=true,is_generating=false": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "y": 270
+    },
+    "axis_along_first=true,facing=east,has_duct=true,has_enough_mana=true,is_generating=false": {
+      "model": "creatania:block/mana_generator/vertical",
+      "y": 270
+    },
+    "axis_along_first=false,facing=down,has_duct=false,has_enough_mana=false,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 270,
+      "y": 90
+    },
+    "axis_along_first=true,facing=down,has_duct=false,has_enough_mana=false,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 270
+    },
+    "axis_along_first=false,facing=up,has_duct=false,has_enough_mana=false,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis_along_first=true,facing=up,has_duct=false,has_enough_mana=false,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 90
+    },
+    "axis_along_first=false,facing=north,has_duct=false,has_enough_mana=false,is_generating=true": {
+      "model": "creatania:block/mana_generator/vertical",
+      "y": 180
+    },
+    "axis_along_first=true,facing=north,has_duct=false,has_enough_mana=false,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "y": 180
+    },
+    "axis_along_first=false,facing=south,has_duct=false,has_enough_mana=false,is_generating=true": {
+      "model": "creatania:block/mana_generator/vertical"
+    },
+    "axis_along_first=true,facing=south,has_duct=false,has_enough_mana=false,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal"
+    },
+    "axis_along_first=false,facing=west,has_duct=false,has_enough_mana=false,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "y": 90
+    },
+    "axis_along_first=true,facing=west,has_duct=false,has_enough_mana=false,is_generating=true": {
+      "model": "creatania:block/mana_generator/vertical",
+      "y": 90
+    },
+    "axis_along_first=false,facing=east,has_duct=false,has_enough_mana=false,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "y": 270
+    },
+    "axis_along_first=true,facing=east,has_duct=false,has_enough_mana=false,is_generating=true": {
+      "model": "creatania:block/mana_generator/vertical",
+      "y": 270
+    },
+    "axis_along_first=false,facing=down,has_duct=true,has_enough_mana=false,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 270,
+      "y": 90
+    },
+    "axis_along_first=true,facing=down,has_duct=true,has_enough_mana=false,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 270
+    },
+    "axis_along_first=false,facing=up,has_duct=true,has_enough_mana=false,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis_along_first=true,facing=up,has_duct=true,has_enough_mana=false,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 90
+    },
+    "axis_along_first=false,facing=north,has_duct=true,has_enough_mana=false,is_generating=true": {
+      "model": "creatania:block/mana_generator/vertical",
+      "y": 180
+    },
+    "axis_along_first=true,facing=north,has_duct=true,has_enough_mana=false,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "y": 180
+    },
+    "axis_along_first=false,facing=south,has_duct=true,has_enough_mana=false,is_generating=true": {
+      "model": "creatania:block/mana_generator/vertical"
+    },
+    "axis_along_first=true,facing=south,has_duct=true,has_enough_mana=false,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal"
+    },
+    "axis_along_first=false,facing=west,has_duct=true,has_enough_mana=false,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "y": 90
+    },
+    "axis_along_first=true,facing=west,has_duct=true,has_enough_mana=false,is_generating=true": {
+      "model": "creatania:block/mana_generator/vertical",
+      "y": 90
+    },
+    "axis_along_first=false,facing=east,has_duct=true,has_enough_mana=false,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "y": 270
+    },
+    "axis_along_first=true,facing=east,has_duct=true,has_enough_mana=false,is_generating=true": {
+      "model": "creatania:block/mana_generator/vertical",
+      "y": 270
+    },
+    "axis_along_first=false,facing=down,has_duct=false,has_enough_mana=true,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 270,
+      "y": 90
+    },
+    "axis_along_first=true,facing=down,has_duct=false,has_enough_mana=true,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 270
+    },
+    "axis_along_first=false,facing=up,has_duct=false,has_enough_mana=true,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis_along_first=true,facing=up,has_duct=false,has_enough_mana=true,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 90
+    },
+    "axis_along_first=false,facing=north,has_duct=false,has_enough_mana=true,is_generating=true": {
+      "model": "creatania:block/mana_generator/vertical",
+      "y": 180
+    },
+    "axis_along_first=true,facing=north,has_duct=false,has_enough_mana=true,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "y": 180
+    },
+    "axis_along_first=false,facing=south,has_duct=false,has_enough_mana=true,is_generating=true": {
+      "model": "creatania:block/mana_generator/vertical"
+    },
+    "axis_along_first=true,facing=south,has_duct=false,has_enough_mana=true,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal"
+    },
+    "axis_along_first=false,facing=west,has_duct=false,has_enough_mana=true,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "y": 90
+    },
+    "axis_along_first=true,facing=west,has_duct=false,has_enough_mana=true,is_generating=true": {
+      "model": "creatania:block/mana_generator/vertical",
+      "y": 90
+    },
+    "axis_along_first=false,facing=east,has_duct=false,has_enough_mana=true,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "y": 270
+    },
+    "axis_along_first=true,facing=east,has_duct=false,has_enough_mana=true,is_generating=true": {
+      "model": "creatania:block/mana_generator/vertical",
+      "y": 270
+    },
+    "axis_along_first=false,facing=down,has_duct=true,has_enough_mana=true,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 270,
+      "y": 90
+    },
+    "axis_along_first=true,facing=down,has_duct=true,has_enough_mana=true,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 270
+    },
+    "axis_along_first=false,facing=up,has_duct=true,has_enough_mana=true,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 90,
+      "y": 90
+    },
+    "axis_along_first=true,facing=up,has_duct=true,has_enough_mana=true,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "x": 90
+    },
+    "axis_along_first=false,facing=north,has_duct=true,has_enough_mana=true,is_generating=true": {
+      "model": "creatania:block/mana_generator/vertical",
+      "y": 180
+    },
+    "axis_along_first=true,facing=north,has_duct=true,has_enough_mana=true,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "y": 180
+    },
+    "axis_along_first=false,facing=south,has_duct=true,has_enough_mana=true,is_generating=true": {
+      "model": "creatania:block/mana_generator/vertical"
+    },
+    "axis_along_first=true,facing=south,has_duct=true,has_enough_mana=true,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal"
+    },
+    "axis_along_first=false,facing=west,has_duct=true,has_enough_mana=true,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "y": 90
+    },
+    "axis_along_first=true,facing=west,has_duct=true,has_enough_mana=true,is_generating=true": {
+      "model": "creatania:block/mana_generator/vertical",
+      "y": 90
+    },
+    "axis_along_first=false,facing=east,has_duct=true,has_enough_mana=true,is_generating=true": {
+      "model": "creatania:block/mana_generator/horizontal",
+      "y": 270
+    },
+    "axis_along_first=true,facing=east,has_duct=true,has_enough_mana=true,is_generating=true": {
       "model": "creatania:block/mana_generator/vertical",
       "y": 270
     }

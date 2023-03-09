@@ -55,8 +55,7 @@ public class BlazuniaFunctionalFlowerBlock extends FlowerBlock implements ITE<Bl
     pBuilder.add(IS_SUPERHOT);
   }
 
-
-  @OnlyIn(Dist.CLIENT)
+  @Override @OnlyIn(Dist.CLIENT)
   public void animateTick(BlockState state, Level world, BlockPos pos, Random random) {
     var superhot = state.getOptionalValue(IS_SUPERHOT).orElse(false);
     var hasManaSource = state.getOptionalValue(HAS_MANA_SOURCE).orElse(false);

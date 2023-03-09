@@ -4,14 +4,19 @@
 
 ### 1.18.2-0.3.11-alpha
 
-#### Changes
+#### Fixes
 
-- Blazunia uses internal APIs instead of creating a fake player to light up blaze burners. There's no _visible_ difference in this, but it should be much better for performance.
+- Omnibox should no longer render rotating ghosts in ponder
 
 #### Balance
 
 - Terrasteel via elven portal is now more expensive, requires real mana blocks
 - Elementium via elven portal is now more expensive, requires real mana blocks
+
+#### Internals/Dev
+
+- Blazunia uses internal APIs instead of creating a fake player to light up blaze burners. There's no _visible_ difference in this, but it should be much better for performance.
+- Task to replace content in patchouli books 
 
 ### 1.18.2-0.3.10-alpha
 
