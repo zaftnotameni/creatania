@@ -1,11 +1,11 @@
 {
     "name": "Generating Mana with SU",
     "icon": "creatania:mana_condenser",
-    "category": "creatania:creatania",
+    "category": "patchouli:creatania",
     "pages": [
         {
             "type": "text",
-            "text": "$(li)$(l:creatania:mana_su#manacondenser)Step 1. Mana Condenser$(/l)$(li)$(l:creatania:mana_su#purifying)Step 2. Purifying$(/l)$(li)$(l:creatania:mana_su#liquidmana)Step 3. Inert Liquid Mana$(/l)$(li)$(l:creatania:mana_su#managenerator)Step 4. Mana Generator$(/l)$(li)$(l:creatania:mana_su#bettermanufacturing)Better Manufacturing:$(/l)$(br)   Revised Steps 2-3$(li2)$(l:creatania:mana_su#bettermanufacturing)Liquiy Inert Corrupted Mana$(/l)$(li2)$(l:creatania:mana_su#purifyliquid)Purify Corrupted Fluid Mana$(/l)"
+            "text": "$(li)$(l:patchouli:mana_su#manacondenser)Step 1. Mana Condenser$(/l)$(li)$(l:patchouli:mana_su#purifying)Step 2. Purifying$(/l)$(li)$(l:patchouli:mana_su#liquidmana)Step 3. Inert Liquid Mana$(/l)$(li)$(l:patchouli:mana_su#managenerator)Step 4. Mana Generator$(/l)$(li)$(l:patchouli:mana_su#bettermanufacturing)Better Manufacturing:$(/l)$(br)   Revised Steps 2-3$(li2)$(l:patchouli:mana_su#bettermanufacturing)Liquiy Inert Corrupted Mana$(/l)$(li2)$(l:patchouli:mana_su#purifyliquid)Purify Corrupted Fluid Mana$(/l)"
         },{
             "type": "text",
             "text": "Mana Generation is not a simple process, especially when trying to accomplish it with machinery instead of flowers. We have machinery capable of blowing and sucking air using fans, maybe if we aggregate enough air some of the magical nature present in it can be extracted, even if at a very low yield. Sadly after all our efforts, the best we could manage is to generate a fake version of it."
