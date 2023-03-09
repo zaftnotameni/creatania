@@ -15,8 +15,8 @@ const displayManaDuctsFromBlocksScene = (params) => (scene, util) => {
   const duct_1 = util.grid.at(1, 4, 2);
   const duct_2 = util.grid.at(2, 4, 3);
   const duct_3 = util.grid.at(3, 4, 2);
-  const duct_4 = util.grid.at(2, 4, 1); 
-  
+  const duct_4 = util.grid.at(2, 4, 1);
+
   const tank = util.grid.at(0, 1, 2);
   const pump = util.grid.at(0, 2, 2);
   const pipe_1 = util.grid.at(0, 3, 2);
@@ -54,28 +54,45 @@ const displayManaDuctsFromBlocksScene = (params) => (scene, util) => {
   scene.world.showSection(generator_4, Facing.SOUTH);
   scene.idle(20);
 
-
   scene.world.showSection(tank, Facing.NORTH);
   scene.world.showSection(pump, Facing.NORTH);
-  scene.world.showSection(pipe_1, Facing.NORTH);
-  scene.world.showSection(pipe_2, Facing.NORTH);
-  scene.world.showSection(pipe_3, Facing.NORTH);
+  scene.idle(20);
+
+  scene.world.modifyBlock(pipe_1, (blockstate) => {
+    return blockstate.with("east", true);
+  }, false);
+  scene.world.modifyBlock(pipe_6, (blockstate) => {
+    return blockstate.with("north", true);
+  }, false);
+  scene.world.modifyBlock(pipe_10, (blockstate) => {
+    return blockstate.with("west", true);
+  }, false);
+  scene.world.modifyBlock(pipe_14, (blockstate) => {
+    return blockstate.with("south", true);
+  }, false);
+
+  scene.addKeyframe();
+  scene.world.showSection(pipe_1, Facing.EAST);
+  scene.world.showSection(pipe_2, Facing.EAST);
+  scene.world.showSection(pipe_3, Facing.EAST);
   scene.world.showSection(pipe_4, Facing.NORTH);
   scene.world.showSection(pipe_5, Facing.NORTH);
   scene.world.showSection(pipe_6, Facing.NORTH);
   scene.world.showSection(pipe_7, Facing.NORTH);
   scene.world.showSection(pipe_8, Facing.NORTH);
-  scene.world.showSection(pipe_9, Facing.NORTH);
-  scene.world.showSection(pipe_10, Facing.NORTH);
-  scene.world.showSection(pipe_11, Facing.NORTH);
-  scene.world.showSection(pipe_12, Facing.NORTH);
-  scene.world.showSection(pipe_13, Facing.NORTH);
-  scene.world.showSection(pipe_14, Facing.NORTH);
-  scene.world.showSection(pipe_15, Facing.NORTH);
-  scene.world.showSection(pipe_16, Facing.NORTH);
+  scene.world.showSection(pipe_9, Facing.WEST);
+  scene.world.showSection(pipe_10, Facing.WEST);
+  scene.world.showSection(pipe_11, Facing.WEST);
+  scene.world.showSection(pipe_12, Facing.SOUTH);
+  scene.world.showSection(pipe_13, Facing.SOUTH);
+  scene.world.showSection(pipe_14, Facing.SOUTH);
+  scene.world.showSection(pipe_15, Facing.SOUTH);
+  scene.world.showSection(pipe_16, Facing.SOUTH);
   scene.idle(20);
 
+  scene.addKeyframe();
   scene.world.showSection(plate, Facing.DOWN);
+  scene.idle(20);
   scene.world.showSection(duct_1, Facing.EAST);
   scene.world.showSection(duct_2, Facing.NORTH);
   scene.world.showSection(duct_3, Facing.WEST);
@@ -90,7 +107,6 @@ onEvent("ponder.registry", event => {
       "mana_ducts_scene", // unique scene identifier
       "mana_ducts!", // scene title
       "creatania:mana_ducts", // namespace and path to nbt file inside ponder folder
-      // displayManaDuctsFromBlocksScene({ blockId: "creatania:mana/blocks/corrupt" })
       displayManaDuctsFromBlocksScene({ blockId: "creatania:manaducts/manasteel" })
     );
 
