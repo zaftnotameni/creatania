@@ -56,16 +56,13 @@ const displayBlazuniaFromBlocksScene = (params) => (scene, util) => {
   scene.world.showSection(blazunia, Facing.EAST);
   scene.idle(20);
 
-  /*
-    F3+i Info:
-    /setblock -50 -58 -32 creatania:blazunia[has_mana_source=true,is_superhot=false]{floating:0b,mana:80,pool:{x:-49,y:-58,z:-32}}
-  */
+  scene.world.modifyBlock(blazunia, (blockstate) => {
+    return blockstate.with("has_mana_source", true).with("is_superhot", false);
+  }, false);
   scene.world.modifyTileNBT(blazunia, (nbt) => {
-    nbt.has_mana_source = true;
-    nbt.is_superhot = false;
     nbt.floating = false;
     nbt.mana = 80;
-    nbt.pool = {};
+    nbt.pool = { x: 2, y: 1, z: 1 };
   });
 
   /*
@@ -73,11 +70,33 @@ const displayBlazuniaFromBlocksScene = (params) => (scene, util) => {
     F3+i Info:
   /setblock -50 -56 -31 create:blaze_burner[blaze=kindled,facing=west]{burnTimeRemaining:661,fuelLevel:1}
   */
-  // scene.world.modifyTileNBT(blaze_1, (nbt) => {
-  //   blaze = kindled;
-  //   nbt.burnTimeRemaining = 1000;
-  //   nbt.fuelLevel = 1;
-  // });
+
+  // The blaze burners changed to kindled
+  const blazes_kindled = [1, 2, 3, 4, 7];
+  for (const index in blazes_kindled) {
+    let theburner =  "blaze_" + blazes_kindled[index];
+    console.log(theburner);
+    scene.world.modifyBlock(theburner, (blockstate) => {
+        return blockstate.with("blaze", "kindled").with("facing", "west");
+      }, false);
+  };
+  scene.world.modifyBlock(blaze_1, (blockstate) => {
+    return blockstate.with("blaze", "kindled").with("facing", "west");
+  }, false);
+  scene.world.modifyBlock(blaze_2, (blockstate) => {
+    return blockstate.with("blaze", "kindled").with("facing", "west");
+  }, false);
+  scene.world.modifyBlock(blaze_3, (blockstate) => {
+    return blockstate.with("blaze", "kindled").with("facing", "west");
+  }, false);
+  scene.world.modifyBlock(blaze_4, (blockstate) => {
+    return blockstate.with("blaze", "kindled").with("facing", "west");
+  }, false);
+  scene.world.modifyBlock(blaze_7, (blockstate) => {
+    return blockstate.with("blaze", "kindled").with("facing", "west");
+  }, false);
+
+
 };
 
 onEvent("ponder.registry", event => {
@@ -87,7 +106,6 @@ onEvent("ponder.registry", event => {
       "blazunia_block_scene", // unique scene identifier
       "blazunia!", // scene title
       "creatania:blazunia", // namespace and path to nbt file inside ponder folder
-      // displayBlazuniaFromBlocksScene({ blockId: "creatania:mana/blocks/corrupt" })
       displayBlazuniaFromBlocksScene({ blockId: "creatania:blazunia" })
     );
 

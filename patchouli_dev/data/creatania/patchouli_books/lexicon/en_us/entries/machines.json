@@ -1,17 +1,17 @@
 {
     "name": "Creatania Machines",
     "icon": "creatania:mana_motor",
-    "category": "creatania:creatania",
+    "category": "patchouli:creatania",
     "pages": [
         {
             "type": "text",
-            "text": "Creatania provides integration points with two staples of modded Minecraft: Create and Botania. Creatania harnesses Create SU (Stress Units) and Botania Mana to find new solutions to old problems. $(li)$(l:creatania:machines#manacondenser)Mana Condenser$(/l)$(li)$(l:creatania:machines#manaduct)Mana Ducts$(/l)$(li)$(l:creatania:machines#managenerator)Mana Generator$(/l)$(li)$(l:creatania:machines#manamotor)Mana Motor$(/l)"
+            "text": "Creatania provides integration points with two staples of modded Minecraft: Create and Botania. Creatania harnesses Create SU (Stress Units) and Botania Mana to find new solutions to old problems. $(li)$(l:patchouli:machines#manacondenser)Mana Condenser$(/l)$(li)$(l:patchouli:machines#manaduct)Mana Ducts$(/l)$(li)$(l:patchouli:machines#managenerator)Mana Generator$(/l)$(li)$(l:patchouli:machines#manamotor)Mana Motor$(/l)"
         },
         {
             "type": "spotlight",
             "anchor": "manacondenser",
             "item": "creatania:mana_condenser",
-            "text": "The $(l:creatania:mana_su#manacondenser)Mana Condenser$(/l) extracts mana out of thin air. It comes at a steep SU cost and the process is not particularly efficient."
+            "text": "The $(l:patchouli:mana_su#manacondenser)Mana Condenser$(/l) extracts mana out of thin air. It comes at a steep SU cost and the process is not particularly efficient."
         }
         ,{
             "type": "spotlight",
@@ -25,7 +25,7 @@
             "type": "spotlight",
             "anchor": "managenerator",
             "item": "creatania:mana_generator",
-            "text": "The Mana Generator $(l:creatania:mana_su#managenerator)transforms$(/l) (at a great loss) Pure Mana fluid into Real Mana, depositing it in a Mana Pool on top of the machine.$(br2)The Mana Generator can also be used in lieu of lapis blocks in the Terra Agglomeration Plate multiblock structure. When used that way, the generators (you can put up to 4 of them where "
+            "text": "The Mana Generator $(l:patchouli:mana_su#managenerator)transforms$(/l) (at a great loss) Pure Mana fluid into Real Mana, depositing it in a Mana Pool on top of the machine.$(br2)The Mana Generator can also be used in lieu of lapis blocks in the Terra Agglomeration Plate multiblock structure. When used that way, the generators (you can put up to 4 of them where "
         }
         ,{
             "type": "text",
