@@ -37,27 +37,28 @@ const displayManaDuctsFromBlocksScene = (params) => (scene, util) => {
   const pipe_16 = util.grid.at(1, 3, 1);
 
   scene.showBasePlate();
-  scene.idle(20);
+  scene.text(70, "Mana Ducts efficiently transfer Real Mana from Mana Generators to the Agglomeration Plate.", offsetCenterOf(util)(omnibox));
+  scene.idle(80);
 
   scene.world.showSection(shaft, Facing.UP);
   scene.world.showSection(omnibox, Facing.DOWN);
-  scene.idle(20);
+  scene.text(70, "The Omnibox was designed with Mana Ducts in mind.", offsetCenterOf(util)(omnibox));
+  scene.idle(80);
+  scene.addKeyframe();
 
   scene.world.modifyBlock(generator_1, facing("east"), false);
   scene.world.modifyBlock(generator_2, facing("north"), false);
   scene.world.modifyBlock(generator_3, facing("west"), false);
   scene.world.modifyBlock(generator_4, facing("south"), false);
-
   scene.world.showSection(generator_1, Facing.EAST);
   scene.world.showSection(generator_2, Facing.NORTH);
   scene.world.showSection(generator_3, Facing.WEST);
   scene.world.showSection(generator_4, Facing.SOUTH);
   scene.idle(20);
-
-  scene.world.showSection(tank, Facing.NORTH);
-  scene.world.showSection(pump, Facing.NORTH);
-  scene.idle(20);
-
+  
+  scene.text(60, "Place your Mana Generators around an Omnibox - shaft inward.", offsetCenterOf(util)(omnibox));
+  scene.idle(70);
+  
   scene.world.modifyBlock(pipe_1, (blockstate) => {
     return blockstate.with("east", true);
   }, false);
@@ -70,7 +71,7 @@ const displayManaDuctsFromBlocksScene = (params) => (scene, util) => {
   scene.world.modifyBlock(pipe_14, (blockstate) => {
     return blockstate.with("south", true);
   }, false);
-
+  
   scene.addKeyframe();
   scene.world.showSection(pipe_1, Facing.EAST);
   scene.world.showSection(pipe_2, Facing.EAST);
@@ -88,8 +89,10 @@ const displayManaDuctsFromBlocksScene = (params) => (scene, util) => {
   scene.world.showSection(pipe_14, Facing.SOUTH);
   scene.world.showSection(pipe_15, Facing.SOUTH);
   scene.world.showSection(pipe_16, Facing.SOUTH);
-  scene.idle(20);
 
+  scene.text(70, "Connect Fluid Pipes to the copper fitting on the Mana Generators.", offsetCenterOf(util)(pipe_1));
+  scene.idle(80);
+  
   scene.addKeyframe();
   scene.world.showSection(plate, Facing.DOWN);
   scene.idle(20);
@@ -98,16 +101,25 @@ const displayManaDuctsFromBlocksScene = (params) => (scene, util) => {
   scene.world.showSection(duct_3, Facing.WEST);
   scene.world.showSection(duct_4, Facing.SOUTH);
 
+  scene.text(60, "Add your Agglomeration Place on top of the Omnibox.", offsetCenterOf(util)(plate));
+  scene.idle(70);
+  scene.text(50, "And Mana Ducts on top of the Mana Generators.", offsetCenterOf(util)(duct_1));
+  scene.idle(60);
+
+  scene.addKeyframe();
+    scene.world.showSection(pump, Facing.NORTH);
+    scene.world.showSection(tank, Facing.NORTH);
+  scene.text(80, "Now pump in some Pure Mana and start crafting!", offsetCenterOf(util)(pump)); 
 };
 
 onEvent("ponder.registry", event => {
   event
-    .create("creatania:manaducts/manasteel") // full block id 
-    .scene(
-      "mana_ducts_scene", // unique scene identifier
-      "mana_ducts!", // scene title
-      "creatania:mana_ducts", // namespace and path to nbt file inside ponder folder
-      displayManaDuctsFromBlocksScene({ blockId: "creatania:manaducts/manasteel" })
+  .create("creatania:manaducts/manasteel") // full block id 
+  .scene(
+    "mana_ducts_scene", // unique scene identifier
+    "Mana Ducts don't quack!", // scene title
+    "creatania:mana_ducts", // namespace and path to nbt file inside ponder folder
+    displayManaDuctsFromBlocksScene({ blockId: "creatania:manaducts/manasteel" })
     );
 
 });
