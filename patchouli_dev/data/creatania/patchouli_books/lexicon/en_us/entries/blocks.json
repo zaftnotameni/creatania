@@ -43,7 +43,7 @@
         {
             "type": "spotlight",
             "title": "Real Mana Block",
-            "item": "creatania:mana/blocks/pure",
+            "item": "creatania:mana/blocks/real",
             "anchor":"realmana",
             "text": "The Real Mana block contains all of the magical properties of Botania Mana but in block form. We are finding more and more uses for this block."
         }
