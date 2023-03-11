@@ -18,7 +18,7 @@ const displayOmniboxFromBlocksScene = (params) => (scene, util) => {
 
   scene.world.modifyBlock(omnibox, (bs) => bs.with("facing", "south").with("axis", "z"), false);
   scene.world.showSection(omnibox, Facing.NORTH);
-  scene.text(80, "The omnibox has six synchronized input/output shafts.", offsetCenterOf(util)(omnibox));
+  scene.text(80, "The Omnibox has six synchronized input/output shafts.", offsetCenterOf(util)(omnibox));
   scene.idle(90);
   
   scene.text(80, "All opposing shafts rotate in the same direction.", offsetCenterOf(util)(cog_6));
@@ -42,7 +42,7 @@ onEvent("ponder.registry", event => {
     .create("creatania:omnibox") // full block id 
     .scene(
       "omnibox_scene", // unique scene identifier
-      "omnibox", // scene title
+      "Omnibox", // scene title
       "creatania:omnibox", // namespace and path to nbt file inside ponder folder
       displayOmniboxFromBlocksScene({ blockId: "creatania:omnibox" })
     );
