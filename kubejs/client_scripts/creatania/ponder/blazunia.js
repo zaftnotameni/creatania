@@ -4,29 +4,34 @@ const displayBlazuniaFromBlocksScene = (params) => (scene, util) => {
 
   // const blockId = params.blockId;
   // location of each block in the scene
-  const blazunia = util.grid.at(1, 1, 1);
-  const manapool = util.grid.at(2, 1, 1);
-  const blaze_1 = util.grid.at(0, 3, 0);
-  const blaze_2 = util.grid.at(0, 3, 1);
-  const blaze_3 = util.grid.at(0, 3, 2);
-  const blaze_4 = util.grid.at(1, 3, 0);
-  const blaze_5 = util.grid.at(1, 3, 1);
-  const blaze_6 = util.grid.at(1, 3, 2);
-  const blaze_7 = util.grid.at(2, 3, 0);
-  const blaze_8 = util.grid.at(2, 3, 1);
-  const blaze_9 = util.grid.at(2, 3, 2);
-  const tank_1 = util.grid.at(0, 4, 0);
-  const tank_2 = util.grid.at(0, 4, 1);
-  const tank_3 = util.grid.at(0, 4, 2);
-  const tank_4 = util.grid.at(1, 4, 0);
-  const tank_5 = util.grid.at(1, 4, 1);
-  const tank_6 = util.grid.at(1, 4, 2);
-  const tank_7 = util.grid.at(2, 4, 0);
-  const tank_8 = util.grid.at(2, 4, 1);
-  const tank_9 = util.grid.at(2, 4, 2);
+  const blazunia = util.grid.at(2, 1, 2);
+  const manapool = util.grid.at(4, 1, 2);
+  const pylon_1 = util.grid.at(3, 1, 2);
+  const pylon_2 = util.grid.at(1, 1, 2);
+  const pylon_3 = util.grid.at(2, 1, 1);
+  const pylon_4 = util.grid.at(2, 1, 3);
+  const blaze_1 = util.grid.at(1, 3, 1);
+  const blaze_2 = util.grid.at(1, 3, 2);
+  const blaze_3 = util.grid.at(1, 3, 3);
+  const blaze_4 = util.grid.at(2, 3, 1);
+  const blaze_5 = util.grid.at(2, 3, 2);
+  const blaze_6 = util.grid.at(2, 3, 3);
+  const blaze_7 = util.grid.at(3, 3, 1);
+  const blaze_8 = util.grid.at(3, 3, 2);
+  const blaze_9 = util.grid.at(3, 3, 3);
+  const tank_1 = util.grid.at(1, 4, 1);
+  const tank_2 = util.grid.at(1, 4, 2);
+  const tank_3 = util.grid.at(1, 4, 3);
+  const tank_4 = util.grid.at(2, 4, 1);
+  const tank_5 = util.grid.at(2, 4, 2);
+  const tank_6 = util.grid.at(2, 4, 3);
+  const tank_7 = util.grid.at(3, 4, 1);
+  const tank_8 = util.grid.at(3, 4, 2);
+  const tank_9 = util.grid.at(3, 4, 3);
 
   scene.showBasePlate();
-  scene.idle(20);
+  scene.text(60, "What if a Mana functional flower could power Blaze Burners?");
+  scene.idle(71);
 
   scene.world.showSection(blaze_1, Facing.DOWN);
   scene.world.showSection(blaze_2, Facing.DOWN);
@@ -37,7 +42,7 @@ const displayBlazuniaFromBlocksScene = (params) => (scene, util) => {
   scene.world.showSection(blaze_7, Facing.DOWN);
   scene.world.showSection(blaze_8, Facing.DOWN);
   scene.world.showSection(blaze_9, Facing.DOWN);
-  scene.idle(20);
+  scene.idle(21);
 
   scene.world.showSection(tank_1, Facing.DOWN);
   scene.world.showSection(tank_2, Facing.DOWN);
@@ -48,13 +53,16 @@ const displayBlazuniaFromBlocksScene = (params) => (scene, util) => {
   scene.world.showSection(tank_7, Facing.DOWN);
   scene.world.showSection(tank_8, Facing.DOWN);
   scene.world.showSection(tank_9, Facing.DOWN);
-
-  scene.world.showSection(manapool, Facing.WEST);
-  scene.idle(20);
-
+  scene.idle(21);
+  
+  
+  scene.text(80, "Let's meet the Blaznia. It's a firey one!", offsetCenterOf(util)(blazunia));  
   scene.world.setBlock(blazunia, "creatania:blazunia", false);
   scene.world.showSection(blazunia, Facing.EAST);
-  scene.idle(20);
+  scene.idle(71);
+  
+  scene.world.showSection(manapool, Facing.WEST);
+  scene.idle(21);
 
   scene.world.modifyBlock(blazunia, (blockstate) => {
     return blockstate.with("has_mana_source", true).with("is_superhot", false);
@@ -64,12 +72,6 @@ const displayBlazuniaFromBlocksScene = (params) => (scene, util) => {
     nbt.mana = 80;
     nbt.pool = { x: 2, y: 1, z: 1 };
   });
-
-  /*
-    modify blaze burners 1, 2, 3, 4, 7
-    F3+i Info:
-  /setblock -50 -56 -31 create:blaze_burner[blaze=kindled,facing=west]{burnTimeRemaining:661,fuelLevel:1}
-  */
 
   // The blaze burners changed to kindled
   const blazes_kindled = [1, 2, 3, 4, 7];
@@ -95,6 +97,11 @@ const displayBlazuniaFromBlocksScene = (params) => (scene, util) => {
   scene.world.modifyBlock(blaze_7, (blockstate) => {
     return blockstate.with("blaze", "kindled").with("facing", "west");
   }, false);
+  scene.world.showSection(pylon_1, Facing.EAST);
+  scene.world.showSection(pylon_2, Facing.EAST);
+  scene.world.showSection(pylon_3, Facing.EAST);
+  scene.world.showSection(pylon_4, Facing.EAST);
+  scene.idle(21);
 
 
 };
@@ -104,7 +111,7 @@ onEvent("ponder.registry", event => {
     .create("creatania:blazunia") // full block id
     .scene(
       "blazunia_block_scene", // unique scene identifier
-      "blazunia!", // scene title
+      "Blazunia!", // scene title
       "creatania:blazunia", // namespace and path to nbt file inside ponder folder
       displayBlazuniaFromBlocksScene({ blockId: "creatania:blazunia" })
     );
