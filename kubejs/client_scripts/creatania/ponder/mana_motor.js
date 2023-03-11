@@ -4,10 +4,19 @@ const displayManaMotorFromBlocksScene = (params) => (scene, util) => {
 
   // const blockId = params.blockId;
   // location of each block in the scene
-  const tank = util.grid.at(0, 1, 2);
+  const motor = util.grid.at(3, 1, 1);
+  const manapool = util.grid.at(0, 1, 1);
+  const spark_1 = util.grid.at(3, 2, 1);
+  const spark_2 = util.grid.at(0, 2, 1);
+  // const agument = util.grid.at(3, 2, 1);
 
   scene.showBasePlate();
   scene.idle(20);
+  scene.world.showSection(motor, Facing.NORTH);
+  scene.world.showSection(manapool, Facing.NORTH);
+  scene.world.showSection(spark_1, Facing.NORTH);
+  scene.world.showSection(spark_2, Facing.NORTH);
+  // scene.world.showSection(agument, Facing.NORTH);
   scene.addKeyframe();
   scene.idle(20);
 
