@@ -1,4 +1,4 @@
-// Purify Liquid Corrupt Mana
+// Purify Corrupt Mana Liquid
 
 const purifyManaFluidFromBlocksScene = (params) => (scene, util) => {
 
@@ -68,7 +68,7 @@ onEvent("ponder.registry", event => {
     .create("creatania:corrupt_mana_bucket") // full block id
     .scene(
       "purify_liquid_mana_scene", // unique scene identifier
-      "Purify Liquid Corrupt Mana", // scene title
+      "Purify Corrupt Mana Liquid", // scene title
       // "creatania:mana_purify/test_1", // namespace and path to nbt file
       "creatania:mana_purify/purify_liquid_mana", // namespace and path to nbt file
       // "creatania:mana_generator/mana_generator",
