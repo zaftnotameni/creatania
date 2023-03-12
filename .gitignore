@@ -29,3 +29,4 @@ creatania.code-workspace
 src/main/resources/assets/botania
 src/main/resources/assets/create
 src/main/resources/assets/minecraft
+kubejs/client_scripts/creatania/ponder/reference.js
