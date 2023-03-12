@@ -34,11 +34,12 @@
   "kubejs.ponder.mana_generator_scene.text_3": "Place a Mana Pool on top of the Mana Generator.",
   "kubejs.ponder.mana_generator_scene.text_4": "Provide rotational force (SU) to the Mana Generator.",
   "kubejs.ponder.mana_generator_scene.text_5": "The mana pool will slowly fill. You now have real mana!",
-  "kubejs.ponder.mana_motor_scene.header": "mana_motor!",
+  "kubejs.ponder.mana_motor_scene.header": "Mana Motor, a motor that runs on Mana?",
   "kubejs.ponder.mana_motor_scene.text_1": "The mysterious Mana Motor is a puzzle, but somehow runs on Mana",
   "kubejs.ponder.mana_motor_scene.text_2": "Add a Spark over the Mana Motor - unfortunately sparks are shy and won\u0027t let us show them",
   "kubejs.ponder.mana_motor_scene.text_3": "And a Spark plus a Recessive Augment over the Mana Pool",
   "kubejs.ponder.mana_motor_scene.text_4": "The Mana Motor speed is controlled with your mouse wheel over the center of this panel",
+  "kubejs.ponder.mana_motor_scene.text_5": "Using the scroll input on its side, the conveyed speed can be configured",
   "kubejs.ponder.mana_purify_block_scene.header": "Pure Daisy doing its magic!",
   "kubejs.ponder.mana_purify_block_scene.text_1": "Surround a Pure Daisy with Corrupt Mana Blocks . . .",
   "kubejs.ponder.mana_purify_block_scene.text_2": "and the Corrupt Mana Blocks become Pure!",
@@ -72,5 +73,9 @@
   "creatania.ponder.tag.cobblegen": "Cobblegen",
   "creatania.ponder.tag.cobblegen.description": "Sticks and stones might break your bones",
   "creatania.ponder.tag.mana_blocks": "Learning About Mana",
-  "creatania.ponder.tag.mana_blocks.description": "All sorts of fancy pretty blocks!"
+  "creatania.ponder.tag.mana_blocks.description": "All sorts of fancy pretty blocks!",
+  "creatania.ponder.cobblegen_asurine.header": "Magic Cobblegen",
+  "creatania.ponder.cobblegen_asurine.text_1": "Flowing Pure Mana will not be consumed",
+  "creatania.ponder.cobblegen_asurine.text_2": "Molten Copper Source will be consumed",
+  "creatania.ponder.cobblegen_asurine.text_3": "Asurine will be generated"
 }
