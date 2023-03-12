@@ -39,7 +39,6 @@
   "kubejs.ponder.mana_motor_scene.text_2": "Add a Spark over the Mana Motor - unfortunately sparks are shy and won\u0027t let us show them",
   "kubejs.ponder.mana_motor_scene.text_3": "And a Spark plus a Recessive Augment over the Mana Pool",
   "kubejs.ponder.mana_motor_scene.text_4": "The Mana Motor speed is controlled with your mouse wheel over the center of this panel",
-  "kubejs.ponder.mana_motor_scene.text_5": "Using the scroll input on its side, the conveyed speed can be configured",
   "kubejs.ponder.mana_purify_block_scene.header": "Pure Daisy doing its magic!",
   "kubejs.ponder.mana_purify_block_scene.text_1": "Surround a Pure Daisy with Corrupt Mana Blocks . . .",
   "kubejs.ponder.mana_purify_block_scene.text_2": "and the Corrupt Mana Blocks become Pure!",
@@ -53,7 +52,7 @@
   "kubejs.ponder.pure_mana_scene.text_1": "Throw some mana blocks into the mix",
   "kubejs.ponder.pure_mana_scene.text_2": "Superheat your Blaze Burner",
   "kubejs.ponder.pure_mana_scene.text_3": "Generates fluid mana",
-  "kubejs.ponder.purify_liquid_mana_scene.header": "Purify Liquid Corrupt Mana",
+  "kubejs.ponder.purify_liquid_mana_scene.header": "Purify Corrupt Mana Liquid",
   "kubejs.ponder.purify_liquid_mana_scene.text_1": "Corrupted Mana Fluid is also purified via Pure Daisy",
   "kubejs.ponder.purify_liquid_mana_scene.text_2": "and the Corrupt Mana Blocks become Pure!",
   "kubejs.ponder.purify_liquid_mana_scene.text_3": "Filter the Smart Fluid Pipe for Pure Mana Fluid",
@@ -73,9 +72,5 @@
   "creatania.ponder.tag.cobblegen": "Cobblegen",
   "creatania.ponder.tag.cobblegen.description": "Sticks and stones might break your bones",
   "creatania.ponder.tag.mana_blocks": "Learning About Mana",
-  "creatania.ponder.tag.mana_blocks.description": "All sorts of fancy pretty blocks!",
-  "creatania.ponder.cobblegen_asurine.header": "Magic Cobblegen",
-  "creatania.ponder.cobblegen_asurine.text_1": "Flowing Pure Mana will not be consumed",
-  "creatania.ponder.cobblegen_asurine.text_2": "Molten Copper Source will be consumed",
-  "creatania.ponder.cobblegen_asurine.text_3": "Asurine will be generated"
+  "creatania.ponder.tag.mana_blocks.description": "All sorts of fancy pretty blocks!"
 }
