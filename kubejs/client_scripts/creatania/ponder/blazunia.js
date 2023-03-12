@@ -1,18 +1,7 @@
-// Ponder scenes for purifying corrupt mana to pure mana
-
-/* 
-/setblock -51 -58 -27 create:blaze_burner[blaze=smouldering,facing=east]{burnTimeRemaining:0,fuelLevel:0}
-
-
-/setblock -49 -56 -31 create:blaze_burner[blaze=seething,facing=south]{burnTimeRemaining:2800,fuelLevel:2}
-
-
-
-*/
+// ponder scene for blazunia
 
 const displayBlazuniaFromBlocksScene = (params) => (scene, util) => {
 
-  // const blockId = params.blockId;
   // location of each block in the scene
   const blazunia = util.grid.at(2, 1, 2);
   const manapool = util.grid.at(4, 1, 2);
@@ -38,7 +27,8 @@ const displayBlazuniaFromBlocksScene = (params) => (scene, util) => {
   const tank_7 = util.grid.at(3, 4, 1);
   const tank_8 = util.grid.at(3, 4, 2);
   const tank_9 = util.grid.at(3, 4, 3);
-
+  const arrBLAZE_BURNERS = [blaze_1, blaze_2, blaze_3, blaze_4, blaze_5, blaze_6, blaze_7, blaze_8, blaze_9];
+  
   scene.showBasePlate();
   scene.text(60, "What if a Mana functional flower could power Blaze Burners?");
   scene.idle(70);
@@ -52,15 +42,8 @@ const displayBlazuniaFromBlocksScene = (params) => (scene, util) => {
     scene.world.modifyBlock(block, (blockstate) => {
       return blockstate.with("blaze", state).with("facing", facing);
     }, false);
-    // console.log("Item: " + block);
-    // console.log("State: " + state);
-    // console.log("Facing: " + facing);
   };
 
-  // blazeState(blaze_1, "smouldering", "west");
-
-
-  const arrBLAZE_BURNERS = [blaze_1, blaze_2, blaze_3, blaze_4, blaze_5, blaze_6, blaze_7, blaze_8, blaze_9];
 
   arrBLAZE_BURNERS.forEach(block => {
     blazeState(block, "smouldering", "west");
@@ -88,7 +71,6 @@ const displayBlazuniaFromBlocksScene = (params) => (scene, util) => {
   scene.world.showSection(tank_9, Facing.DOWN);
   scene.idle(20);
 
-
   scene.text(80, "Let's meet the Blaznia. It's a firey one!", offsetCenterOf(util)(blazunia));
   scene.world.setBlock(blazunia, "creatania:blazunia", false);
   scene.world.showSection(blazunia, Facing.EAST);
@@ -98,7 +80,7 @@ const displayBlazuniaFromBlocksScene = (params) => (scene, util) => {
   scene.text(40, "Just add Mana", offsetCenterOf(util)(manapool));
   scene.world.showSection(manapool, Facing.WEST);
   scene.idle(10);
-  
+
   // ignite blazunia
   scene.world.modifyBlock(blazunia, (blockstate) => {
     return blockstate.with("has_mana_source", true).with("is_superhot", false);
@@ -110,7 +92,7 @@ const displayBlazuniaFromBlocksScene = (params) => (scene, util) => {
     nbt.mana = 80;
     nbt.pool = { x: 2, y: 1, z: 1 };
   });
-  
+
   // blaze burners changed to kindled
   arrBLAZE_BURNERS.forEach(block => {
     blazeState(block, "kindled", "west");
@@ -125,7 +107,7 @@ const displayBlazuniaFromBlocksScene = (params) => (scene, util) => {
   scene.world.showSection(pylon_3, Facing.UP);
   scene.world.showSection(pylon_4, Facing.UP);
   scene.idle(10);
-  
+
   // blaze burners changed to seething
   arrBLAZE_BURNERS.forEach(block => {
     blazeState(block, "seething", "west");
@@ -143,5 +125,4 @@ onEvent("ponder.registry", event => {
       "creatania:blazunia", // namespace and path to nbt file inside ponder folder
       displayBlazuniaFromBlocksScene({ blockId: "creatania:blazunia" })
     );
-
 });
