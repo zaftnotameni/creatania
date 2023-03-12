@@ -18,7 +18,7 @@
             "title": "Mana Ducts",
             "anchor": "manaduct",
             "item": "creatania:manaducts/manasteel",
-            "text": "$(c:/create ponder creatania:manaducts/manasteel @a)Mana Ducts$(/c) help transfer Mana from Mana Generators to the Agglomeration Plate. They are a medium far better than trying to send Mana through the air.$(br2)Enhancing them with botanist metals should make them even more efficient. Maybe those elves can help us make these even better."
+            "text": "$(c:/create ponder creatania:manaducts/manasteel @a)Mana Ducts$(/c) help transfer Real Mana fluid from Mana Generators to the Agglomeration Plate. They are a medium far better than trying to send Mana through the air.$(br2)Enhancing them with botanist metals should make them even more efficient. Maybe those elves can help us make these even better."
         },
         {
             "type": "botania:terrasteel",
@@ -28,7 +28,7 @@
             "type": "spotlight",
             "anchor": "managenerator",
             "item": "creatania:mana_generator",
-            "text": "The Mana Generator $(l:patchouli:mana_su#managenerator)transforms$(/l) (at a great loss)$(br)Pure Mana fluid into Real Mana, depositing it in a Mana Pool on top of the machine.$(br2)The Mana Generator can also be used in lieu of lapis blocks in the Terra Agglomeration Plate multiblock structure. When used that way, the generators (you can put up to 4 of them where "
+            "text": "The Mana Generator $(l:patchouli:mana_su#managenerator)transforms$(/l) (at a great loss)$(br)Pure Mana fluid into Real Mana fluid, depositing it in a Mana Pool on top of the machine.$(br2)The Mana Generator can also be used in lieu of lapis blocks in the Terra Agglomeration Plate multiblock structure. When used that way, the generators (you can put up to 4 of them where "
         },
         {
             "type": "text",
