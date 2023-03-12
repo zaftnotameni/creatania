@@ -14,16 +14,17 @@
 onEvent("ponder.tag", event => {
     event.createTag("creatania:mana_machines", "creatania:mana_condenser", "Machines that Interact with Mana", "Can we pull mana from thin air?", [
         "creatania:mana_condenser",
+        "creatania:manaducts/manasteel",
         "creatania:mana_generator",
         "creatania:mana_motor",
         "creatania:omnibox"
     ]);
 
     event.createTag("creatania:mana_blocks", "creatania:mana/blocks/real", "Learning About Mana", "All sorts of fancy pretty blocks!", [
+        "creatania:blazunia",
+        "creatania:mana/machines/casing",
         "creatania:mana/blocks/corrupt",
         "creatania:mana/blocks/pure",
-        "creatania:mana/blocks/real", // does not have ponder scene
-        "create:basin",
-        "create:mechanical_mixer",
+        "creatania:mana/blocks/real" // does not have ponder scene
     ]);
 });
