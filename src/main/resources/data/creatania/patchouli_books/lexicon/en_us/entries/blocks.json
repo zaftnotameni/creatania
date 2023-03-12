@@ -8,9 +8,9 @@
             "text": "$(li)$(l:creatania:blocks#blazunia)Blazunia$(/l)$(li)$(l:creatania:blocks#corruptmana)Corrupt Mana Block$(/l)$(li)$(l:creatania:blocks#manacasing)Mana Casing$(/l)$(li)$(l:creatania:blocks#puremana)Pure Mana Block$(/l)$(li)$(l:creatania:blocks#realmana)Real Mana Block$(/l)"
         },
         {
-            "type": "spotlight",
+            "type": "botania:petal_apothecary",
             "title": "Blazunia",
-            "item": "creatania:blazunia",
+            "recipe": "creatania:botanist/petal_apothecary/blazunia",
             "anchor":"blazunia",
             "text": "The $(c:/create ponder creatania:blazunia @a)Blazunia$(/c) is a powerful magical firey flower."
         },
@@ -19,33 +19,33 @@
             "title": "Corrupt Mana Block",
             "item": "creatania:mana/blocks/corrupt",
             "anchor":"corruptmana",
-            "text": "This purplish block consists of condensed Mana, though it seems corrupted and inert. Should be handled with extreme caution."
+            "text": "This purplish block consists of $(l:creatania:machines#manacondenser)condensed$(/l) Mana, though it seems corrupted and inert. Should be handled with extreme caution."
         },
         {
             "type": "botania:elven_trade",
-            "components": [
-                {
-                    "type": "patchouli:header",
-                    "text": "Mana Casing"
-                }
-            ],
             "recipes": ["creatania:botanist/elven_trade/mana/machines/casing"],
             "anchor": "manacasing",
-            "text": "The Mana Casing is a foundational building block for Creatania's machines."
+            "text": "The Mana Casing is a foundational building block for Creatania's $(l:creatania:machines#manacondenser)machines$(/l)."
         },
         {
             "type": "spotlight",
             "title": "Pure Mana Block",
             "item": "creatania:mana/blocks/pure",
             "anchor":"puremana",
-            "text": "The Pure Mana block is the purified version of the Corrupt Mana block. It too is inert but seems quite safe to handle."
+            "text": "The Pure Mana block is the $(l:creatania:mana_su#purifying)purified$(/l) version of the Corrupt Mana block. It too is inert but seems quite safe to handle."
         },
-        {
+        {            
             "type": "spotlight",
             "title": "Real Mana Block",
-            "item": "creatania:mana/blocks/pure",
+            "item": "creatania:mana/blocks/real",
             "anchor":"realmana",
             "text": "The Real Mana block contains all of the magical properties of Botania Mana but in block form. We are finding more and more uses for this block."
+        },
+        {            
+            "type": "botania:terrasteel",
+            "title": "Real Mana Block",
+            "recipe": "creatania:botanist/terra_plate/mana/blocks/real",
+            "anchor":"realmana"
         }
     ]
 }

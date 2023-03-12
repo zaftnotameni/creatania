@@ -12,26 +12,28 @@
             "anchor": "manacondenser",
             "item": "creatania:mana_condenser",
             "text": "The $(l:creatania:mana_su#manacondenser)Mana Condenser$(/l) extracts mana out of thin air. It comes at a steep SU cost and the process is not particularly efficient."
-        }
-        ,{
+        },
+        {
             "type": "spotlight",
             "title": "Mana Ducts",
-            "anchor":"manaduct",
+            "anchor": "manaduct",
             "item": "creatania:manaducts/manasteel",
-            "text": "$(c:/create ponder creatania:manaducts/manasteel @a)Mana Ducts$(/c) help transfer Mana from Mana Generators to the Agglomeration Plate. They are a medium far better than trying to send Mana through the air.$(br2)Enhancing them with botanist metals should make them even more efficient. Maybe those elves can help us make these even better."
-        }
-        ,
+            "text": "$(c:/create ponder creatania:manaducts/manasteel @a)Mana Ducts$(/c) help transfer Real Mana fluid from Mana Generators to the Agglomeration Plate. They are a medium far better than trying to send Mana through the air.$(br2)Enhancing them with botanist metals should make them even more efficient. Maybe those elves can help us make these even better."
+        },
+        {
+            "type": "botania:terrasteel",
+            "recipe": "creatania:botanist/terra_plate/manaducts/manasteel"
+        },
         {
             "type": "spotlight",
             "anchor": "managenerator",
             "item": "creatania:mana_generator",
-            "text": "The Mana Generator $(l:creatania:mana_su#managenerator)transforms$(/l) (at a great loss)$(br)Pure Mana fluid into Real Mana, depositing it in a Mana Pool on top of the machine.$(br2)The Mana Generator can also be used in lieu of lapis blocks in the Terra Agglomeration Plate multiblock structure. When used that way, the generators (you can put up to 4 of them where "
-        }
-        ,{
+            "text": "The Mana Generator $(l:creatania:mana_su#managenerator)transforms$(/l) (at a great loss)$(br)Pure Mana fluid into Real Mana fluid, depositing it in a Mana Pool on top of the machine.$(br2)The Mana Generator can also be used in lieu of lapis blocks in the Terra Agglomeration Plate multiblock structure. When used that way, the generators (you can put up to 4 of them where "
+        },
+        {
             "type": "text",
             "text": "the lapis blocks would be) will all contribute to sending mana for recipes. Using them that way is terribly wasteful and the mana transfer will incur severe penalties.$(br2)To improve efficiency, we need to find a better way to transfer mana. These stones that are used to make mana pools seem to be very good and keep mana under control, maybe we can use those."
-        }
-        ,
+        },
         {
             "type": "spotlight",
             "item": "creatania:mana_motor",
@@ -41,15 +43,19 @@
         {
             "type": "text",
             "text": "Since it involves mana, the device is not entirely without mystery, it seems to be able to spin at any speed we require even without any mana (don't ask how that works). However it won't really provide any SU without being properly fed with a mana burst. The motor speed is configurable with a scroller. The multiplier for SU & mana consumption is also configurable in configs."
-        },{
+        },
+        {
             "type": "spotlight",
             "title": "Omnibox",
-            "anchor":"omnibox",
-            "item":"creatania:omnibox",
+            "anchor": "omnibox",
+            "item": "creatania:omnibox",
             "text": "The $(c:/create ponder creatania:omnibox @a)Omnibox$(/c) has six synchronized input/output shafts. All opposing shafts rotate in the same direction."
-        },{
+        },
+        {
             "type": "botania:runic_altar",
-            "recipe":["creatania:botanist/runic_altar/omnibox"]
+            "recipe": [
+                "creatania:botanist/runic_altar/omnibox"
+            ]
         }
     ]
 }
