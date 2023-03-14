@@ -19,10 +19,28 @@ import net.minecraftforge.common.crafting.conditions.TagEmptyCondition;
 import org.apache.commons.lang3.StringUtils;
 import zaftnotameni.creatania.util.NamedItems;
 
+import static zaftnotameni.creatania.registry.Blocks.CORRUPT_MANA_BLOCK;
+import static zaftnotameni.creatania.registry.Blocks.PURE_MANA_BLOCK;
+import static zaftnotameni.creatania.registry.Blocks.REAL_MANA_BLOCK;
+import static zaftnotameni.creatania.registry.Items.MANA_GEL;
 import static zaftnotameni.creatania.util.NamedItems.itemLike;
 
 public class CrushingRecipeGen extends ForgeCreateProcessingRecipeProvider {
 	public void setupRecipes() {
+		manablockRecipes();
+		botaniaFlowerRecipes();
+	}
+
+	private void manablockRecipes() {
+		create("managel_from_real_mana",
+			() -> REAL_MANA_BLOCK.get().asItem(),
+			b -> b.duration(20 * 30)
+				.output(1f, MANA_GEL.get(), 2)
+				.output(0.2f, CORRUPT_MANA_BLOCK.get(), 1)
+				.output(0.1f, PURE_MANA_BLOCK.get(), 1));
+	}
+
+	private void botaniaFlowerRecipes() {
 		for (var tall : NamedItems.BOTANIA_TALL_FLOWERS) {
 			var namespace = tall.split(":")[0];
 			var tallPath = tall.split(":")[1];
@@ -42,6 +60,7 @@ public class CrushingRecipeGen extends ForgeCreateProcessingRecipeProvider {
 					.output(0.1f, itemLike(namespace, petalPath), 2));
 		}
 	}
+
 	protected GeneratedRecipe stoneOre(Supplier<ItemLike> ore, Supplier<ItemLike> raw, float expectedAmount,
 		int duration) {
 		return ore(Blocks.COBBLESTONE, ore, raw, expectedAmount, duration);

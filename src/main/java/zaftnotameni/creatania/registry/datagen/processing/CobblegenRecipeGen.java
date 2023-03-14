@@ -36,14 +36,14 @@ public class CobblegenRecipeGen extends ForgeCreateProcessingRecipeProvider {
 		mffb(MOLTEN_GOLD, DEEPSLATE);
 		mffb(MOLTEN_TERRASTEEL, TUFF);
 
-		mfsb(MOLTEN_COPPER, ASURINE);
-		mfsb(MOLTEN_ZINC, NonNullSupplier.of(() -> Blocks.NETHERRACK));
+		mfsb(MOLTEN_COPPER, VERIDIUM);
+		mfsb(MOLTEN_ZINC, ASURINE);
 		mfsb(MOLTEN_ANDESITE, NonNullSupplier.of(() -> Blocks.BLACKSTONE));
 		mfsb(MOLTEN_BRASS, NonNullSupplier.of(() -> Blocks.BASALT));
 		mfsb(MOLTEN_IRON, CRIMSITE);
 		mfsb(MOLTEN_ELEMENTIUM, NonNullSupplier.of(() -> Blocks.WARPED_NYLIUM));
 		mfsb(MOLTEN_GAIA, NonNullSupplier.of(() -> Blocks.ANCIENT_DEBRIS));
-		mfsb(MOLTEN_MANASTEEL, VERIDIUM);
+		mfsb(MOLTEN_MANASTEEL, NonNullSupplier.of(() -> Blocks.NETHERRACK));
 		mfsb(MOLTEN_GOLD, OCHRUM);
 		mfsb(MOLTEN_TERRASTEEL, NonNullSupplier.of(() -> Blocks.CRIMSON_NYLIUM));
 	}

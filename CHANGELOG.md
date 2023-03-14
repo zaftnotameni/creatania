@@ -2,6 +2,24 @@
 
 ## changelog
 
+### 1.18.2-0.3.15-alpha
+
+#### New
+
+- Setup ponderjs based scenes automatically
+
+
+### 1.18.2-0.3.14-alpha
+
+#### Changes
+
+- Cobblegen recipes shuffled around
+  - asurine uses zinc
+  - veridium uses copper
+- Elven trades
+  - Managel can no longer be created via trade with magmacream/slimeball
+  - Manaduct upgrades are much more expensive via elven trade (in terms of materials), to compensate for them not costing mana
+
 ### 1.18.2-0.3.13-alpha
 
 #### New

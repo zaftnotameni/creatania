@@ -1,3 +1,5 @@
+import groovy.json.JsonOutput
+
 buildscript {
   repositories {
     // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
@@ -141,17 +143,7 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 
 repositories {
-  exclusiveContent {
-    forRepository {
-      maven {
-        name = "Modrinth"
-        url = "https://api.modrinth.com/maven"
-      }
-    }
-    filter {
-      includeGroup "maven.modrinth"
-    }
-  }
+
   // Put repositories for dependencies here
   // ForgeGradle automatically adds the Forge maven and Maven Central for you
   // Add KFF Maven repository
@@ -338,6 +330,42 @@ tasks.register('ck', Copy) {
   from f
   into t
   println("copied kubejs")
+}
+
+def kubejs_assets_from = "${project.rootDir}/kubejs/assets/creatania"
+def kubejs_assets_to = "${project.rootDir}/src/main/resources/data/kubejs/assets/creatania"
+tasks.register('copy_kubejs_assets', Copy) {
+  println("copying kubejs assets from root: ${kubejs_assets_from} to data folder: ${kubejs_assets_to}")
+  from kubejs_assets_from
+  into kubejs_assets_to
+  println("copied kubejs to data folder")
+}
+def kubejs_client_from = "${project.rootDir}/kubejs/client_scripts/creatania"
+def kubejs_client_to = "${project.rootDir}/src/main/resources/data/kubejs/client_scripts/creatania"
+tasks.register('copy_kubejs_client_scripts', Copy) {
+  println("copying kubejs assets from root: ${kubejs_client_from} to data folder: ${kubejs_client_to}")
+  from kubejs_client_from
+  into kubejs_client_to
+  println("copied kubejs to data folder")
+}
+
+def starting_point = "${project.rootDir}/src/main/resources/data/kubejs/"
+def destination_json = "${project.rootDir}/src/main/resources/data/creatania/kubejs_metadata.json"
+def dir = new File(starting_point)
+def destination_file = new File(destination_json)
+def file_list = []
+tasks.register('create_kubejs_metadata') {
+  doLast {
+    try {
+      dir.eachFileRecurse (groovy.io.FileType.FILES) { file -> file_list << file  }
+      file_list.each { println it.absolutePath }
+      destination_file.write(JsonOutput.prettyPrint(JsonOutput.toJson([
+        targetResources: file_list.collect {
+          it.absolutePath.replace("\\", "/").split('kubejs/')[1]
+        }
+      ])))
+    } catch (Throwable tw) { println tw }
+  }
 }
 
 def patchouli_dev = "${project.rootDir}/patchouli_dev/data"

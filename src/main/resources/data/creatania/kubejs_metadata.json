@@ -1,0 +1,28 @@
+{
+    "targetResources": [
+        "assets/creatania/ponder/blazunia.nbt",
+        "assets/creatania/ponder/elven_portal.nbt",
+        "assets/creatania/ponder/manablocks_liquefy.nbt",
+        "assets/creatania/ponder/mana_condenser/mana_condenser.nbt",
+        "assets/creatania/ponder/mana_condenser/mana_condenser_belt.nbt",
+        "assets/creatania/ponder/mana_ducts.nbt",
+        "assets/creatania/ponder/mana_generator/mana_generator.nbt",
+        "assets/creatania/ponder/mana_motor.nbt",
+        "assets/creatania/ponder/mana_purify/manablocks_puredaisy.nbt",
+        "assets/creatania/ponder/mana_purify/purify_liquid_mana.nbt",
+        "assets/creatania/ponder/omnibox.nbt",
+        "client_scripts/creatania/ponder/blazunia.js",
+        "client_scripts/creatania/ponder/elven_portal.js",
+        "client_scripts/creatania/ponder/helper_functions.js",
+        "client_scripts/creatania/ponder/manablocks.js",
+        "client_scripts/creatania/ponder/mana_condenser.js",
+        "client_scripts/creatania/ponder/mana_ducts.js",
+        "client_scripts/creatania/ponder/mana_generator.js",
+        "client_scripts/creatania/ponder/mana_motor.js",
+        "client_scripts/creatania/ponder/mana_purify.js",
+        "client_scripts/creatania/ponder/omnibox.js",
+        "client_scripts/creatania/ponder/ponder_tags.js",
+        "client_scripts/creatania/ponder/purify_liquid_mana.js",
+        "client_scripts/creatania/ponder/terra_plate.js"
+    ]
+}

@@ -11,10 +11,12 @@ import zaftnotameni.creatania.registry.datagen.ForgeDatagenInitializer;
 import zaftnotameni.creatania.setup.*;
 
 import static zaftnotameni.creatania.Constants.MODID;
+import static zaftnotameni.creatania.util.KubeJsHandlingKt.safeHandleKubeJsScripts;
 
 @Mod(MODID)
 public class CreataniaMain {
   public CreataniaMain() {
+    safeHandleKubeJsScripts();
     StaticInit.run();
     IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
     registrySetup(bus);
