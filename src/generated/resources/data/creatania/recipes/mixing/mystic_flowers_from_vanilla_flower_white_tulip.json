@@ -1,0 +1,31 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:white_tulip"
+    },
+    {
+      "fluid": "creatania:pure_mana",
+      "nbt": {},
+      "amount": 125
+    }
+  ],
+  "results": [
+    {
+      "item": "botania:lime_mystical_flower",
+      "chance": 0.25
+    },
+    {
+      "item": "botania:magenta_mystical_flower",
+      "chance": 0.25
+    },
+    {
+      "item": "botania:orange_mystical_flower",
+      "chance": 0.25
+    },
+    {
+      "item": "botania:pink_mystical_flower",
+      "chance": 0.25
+    }
+  ]
+}

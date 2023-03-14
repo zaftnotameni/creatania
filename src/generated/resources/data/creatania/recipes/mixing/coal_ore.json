@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:stone"
+    },
+    {
+      "fluid": "creatania:molten_terrasteel",
+      "nbt": {},
+      "amount": 125
+    },
+    {
+      "fluid": "creatania:molten_copper",
+      "nbt": {},
+      "amount": 125
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:coal_ore"
+    }
+  ]
+}

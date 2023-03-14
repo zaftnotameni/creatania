@@ -1,0 +1,13 @@
+{
+  "type": "create:haunting",
+  "ingredients": [
+    {
+      "item": "creatania:mana/blocks/pure"
+    }
+  ],
+  "results": [
+    {
+      "item": "creatania:mana/blocks/corrupt"
+    }
+  ]
+}

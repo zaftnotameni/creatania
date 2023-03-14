@@ -1,0 +1,38 @@
+{
+  "parent": "creatania:root",
+  "display": {
+    "icon": {
+      "item": "creatania:mana/machines/casing"
+    },
+    "title": {
+      "translate": "advancement.creatania.mana_machine_component"
+    },
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.creatania.mana_machine_component.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "creatania:mana/machines/casing"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ]
+}

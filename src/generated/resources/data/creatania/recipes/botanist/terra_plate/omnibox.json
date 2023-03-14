@@ -1,0 +1,30 @@
+{
+  "type": "botania:terra_plate",
+  "ingredients": [
+    {
+      "item": "creatania:mana/machines/casing"
+    },
+    {
+      "item": "create:cogwheel"
+    },
+    {
+      "item": "create:shaft"
+    },
+    {
+      "item": "create:cogwheel"
+    },
+    {
+      "item": "create:shaft"
+    },
+    {
+      "item": "create:cogwheel"
+    },
+    {
+      "item": "create:shaft"
+    }
+  ],
+  "mana": 10000,
+  "result": {
+    "item": "creatania:omnibox"
+  }
+}

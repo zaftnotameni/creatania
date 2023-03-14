@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:deepslate"
+    },
+    {
+      "fluid": "creatania:molten_manasteel",
+      "nbt": {},
+      "amount": 125
+    },
+    {
+      "fluid": "creatania:molten_gold",
+      "nbt": {},
+      "amount": 125
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:deepslate_gold_ore"
+    }
+  ]
+}

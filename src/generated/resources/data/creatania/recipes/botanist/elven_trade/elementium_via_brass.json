@@ -1,0 +1,16 @@
+{
+  "type": "botania:elven_trade",
+  "ingredients": [
+    {
+      "item": "create:brass_ingot"
+    },
+    {
+      "item": "creatania:mana/blocks/real"
+    }
+  ],
+  "output": [
+    {
+      "item": "botania:elementium_ingot"
+    }
+  ]
+}

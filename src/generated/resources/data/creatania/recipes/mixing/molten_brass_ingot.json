@@ -1,0 +1,15 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "create:brass_ingot"
+    }
+  ],
+  "results": [
+    {
+      "fluid": "creatania:molten_brass",
+      "amount": 125
+    }
+  ],
+  "heatRequirement": "heated"
+}

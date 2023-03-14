@@ -1,0 +1,31 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:rose_bush"
+    },
+    {
+      "fluid": "creatania:pure_mana",
+      "nbt": {},
+      "amount": 125
+    }
+  ],
+  "results": [
+    {
+      "item": "botania:gray_double_flower",
+      "chance": 0.25
+    },
+    {
+      "item": "botania:green_double_flower",
+      "chance": 0.25
+    },
+    {
+      "item": "botania:light_blue_double_flower",
+      "chance": 0.25
+    },
+    {
+      "item": "botania:light_gray_double_flower",
+      "chance": 0.25
+    }
+  ]
+}

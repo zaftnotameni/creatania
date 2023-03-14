@@ -1,0 +1,10 @@
+{
+  "type": "botania:mana_infusion",
+  "input": {
+    "item": "create:andesite_casing"
+  },
+  "mana": 333333,
+  "output": {
+    "item": "creatania:mana/machines/casing"
+  }
+}

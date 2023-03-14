@@ -1,0 +1,12 @@
+{
+  "type": "botania:terra_plate",
+  "ingredients": [
+    {
+      "item": "creatania:mana/blocks/pure"
+    }
+  ],
+  "mana": 99999,
+  "result": {
+    "item": "creatania:mana/blocks/real"
+  }
+}

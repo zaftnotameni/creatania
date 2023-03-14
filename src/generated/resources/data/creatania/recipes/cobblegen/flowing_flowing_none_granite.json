@@ -1,0 +1,20 @@
+{
+  "type": "creatania:cobblegen",
+  "ingredients": [
+    {
+      "fluid": "creatania:pure_mana",
+      "nbt": {},
+      "amount": 1
+    },
+    {
+      "fluid": "creatania:molten_copper",
+      "nbt": {},
+      "amount": 1
+    }
+  ],
+  "results": [
+    {
+      "item": "minecraft:granite"
+    }
+  ]
+}

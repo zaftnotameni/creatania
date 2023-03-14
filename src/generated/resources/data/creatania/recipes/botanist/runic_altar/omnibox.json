@@ -1,0 +1,18 @@
+{
+  "type": "botania:runic_altar",
+  "ingredients": [
+    {
+      "item": "creatania:mana/machines/casing"
+    },
+    {
+      "item": "create:gearbox"
+    },
+    {
+      "item": "create:vertical_gearbox"
+    }
+  ],
+  "mana": 5000,
+  "output": {
+    "item": "creatania:omnibox"
+  }
+}

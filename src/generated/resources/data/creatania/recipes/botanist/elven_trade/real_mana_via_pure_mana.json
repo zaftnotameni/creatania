@@ -1,0 +1,13 @@
+{
+  "type": "botania:elven_trade",
+  "ingredients": [
+    {
+      "item": "creatania:pure_mana_bucket"
+    }
+  ],
+  "output": [
+    {
+      "item": "creatania:real_mana_bucket"
+    }
+  ]
+}

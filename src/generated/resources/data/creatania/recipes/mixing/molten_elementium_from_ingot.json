@@ -1,0 +1,15 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "botania:elementium_ingot"
+    }
+  ],
+  "results": [
+    {
+      "fluid": "creatania:molten_elementium",
+      "amount": 125
+    }
+  ],
+  "heatRequirement": "superheated"
+}

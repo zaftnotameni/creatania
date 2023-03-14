@@ -1,0 +1,15 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "botania:manasteel_ingot"
+    }
+  ],
+  "results": [
+    {
+      "fluid": "creatania:molten_manasteel",
+      "amount": 125
+    }
+  ],
+  "heatRequirement": "heated"
+}

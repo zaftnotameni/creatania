@@ -1,0 +1,38 @@
+{
+  "parent": "creatania:manaduct_tier_3",
+  "display": {
+    "icon": {
+      "item": "creatania:manaducts/gaia"
+    },
+    "title": {
+      "translate": "advancement.creatania.manaduct_tier_4"
+    },
+    "description": {
+      "color": "#DBA213",
+      "translate": "advancement.creatania.manaduct_tier_4.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "0": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "creatania:manaducts/gaia"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "0"
+    ]
+  ]
+}

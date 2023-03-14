@@ -1,0 +1,22 @@
+{
+  "type": "botania:elven_trade",
+  "ingredients": [
+    {
+      "item": "creatania:manaducts/terrasteel"
+    },
+    {
+      "item": "botania:dragonstone_block"
+    },
+    {
+      "item": "botania:elementium_block"
+    },
+    {
+      "item": "botania:elementium_block"
+    }
+  ],
+  "output": [
+    {
+      "item": "creatania:manaducts/elementium"
+    }
+  ]
+}

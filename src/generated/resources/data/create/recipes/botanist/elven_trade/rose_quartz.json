@@ -1,0 +1,16 @@
+{
+  "type": "botania:elven_trade",
+  "ingredients": [
+    {
+      "item": "minecraft:redstone"
+    },
+    {
+      "item": "minecraft:quartz"
+    }
+  ],
+  "output": [
+    {
+      "item": "create:rose_quartz"
+    }
+  ]
+}

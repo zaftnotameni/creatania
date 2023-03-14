@@ -1,0 +1,13 @@
+{
+  "type": "botania:elven_trade",
+  "ingredients": [
+    {
+      "item": "create:analog_lever"
+    }
+  ],
+  "output": [
+    {
+      "item": "creatania:xor_lever"
+    }
+  ]
+}

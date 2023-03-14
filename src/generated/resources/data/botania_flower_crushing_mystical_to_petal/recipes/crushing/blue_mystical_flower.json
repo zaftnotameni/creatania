@@ -1,0 +1,25 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "botania:blue_mystical_flower"
+    }
+  ],
+  "results": [
+    {
+      "item": "botania:blue_petal",
+      "count": 6
+    },
+    {
+      "item": "botania:blue_petal",
+      "count": 2,
+      "chance": 0.1
+    },
+    {
+      "item": "botania:blue_petal",
+      "count": 2,
+      "chance": 0.1
+    }
+  ],
+  "processingTime": 150
+}

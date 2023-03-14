@@ -1,0 +1,27 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "create:golden_sheet"
+    },
+    {
+      "item": "create:golden_sheet"
+    },
+    {
+      "item": "create:golden_sheet"
+    },
+    {
+      "item": "create:golden_sheet"
+    },
+    {
+      "fluid": "creatania:molten_manasteel",
+      "nbt": {},
+      "amount": 500
+    }
+  ],
+  "results": [
+    {
+      "item": "botania:mana_pylon"
+    }
+  ]
+}
