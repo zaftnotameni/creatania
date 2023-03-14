@@ -14,8 +14,8 @@ import zaftnotameni.creatania.registry.Fluids;
 import zaftnotameni.creatania.registry.Index;
 
 import static zaftnotameni.creatania.registry.Blocks.REAL_MANA_BLOCK;
-import static zaftnotameni.creatania.registry.Items.MANA_GEL;
 import static zaftnotameni.creatania.util.NamedItems.elementiumingot;
+import static zaftnotameni.creatania.util.NamedItems.itemLike;
 import static zaftnotameni.creatania.util.NamedItems.manasteelingot;
 import static zaftnotameni.creatania.util.NamedItems.terrasteelingot;
 public class ElvenTradeRecipeGen extends BotaniaBaseRecipeGen implements DataProvider {
@@ -69,21 +69,42 @@ public class ElvenTradeRecipeGen extends BotaniaBaseRecipeGen implements DataPro
 
     start()
       .ingredient(Ingredient.of(Blocks.MANASTEEL_MANADUCT_BLOCK.get()))
+      .ingredient(Ingredient.of(itemLike("botania", "dragonstone_block")))
+      .ingredient(Ingredient.of(itemLike("botania", "terrasteel_block")))
+      .ingredient(Ingredient.of(itemLike("botania", "terrasteel_block")))
       .ingredientOutput(Ingredient.of(Blocks.TERRASTEEL_MANADUCT_BLOCK.get()))
       .build()
       .saveAs(Blocks.TERRASTEEL_MANADUCT_BLOCK.getId(), pCache);
 
     start()
-      .ingredient(Ingredient.of(Items.SLIME_BALL))
-      .ingredientOutput(Ingredient.of(MANA_GEL.get()))
+      .ingredient(Ingredient.of(Blocks.TERRASTEEL_MANADUCT_BLOCK.get()))
+      .ingredient(Ingredient.of(itemLike("botania", "dragonstone_block")))
+      .ingredient(Ingredient.of(itemLike("botania", "elementium_block")))
+      .ingredient(Ingredient.of(itemLike("botania", "elementium_block")))
+      .ingredientOutput(Ingredient.of(Blocks.ELEMENTIUM_MANADUCT_BLOCK.get()))
       .build()
-      .saveAs(Index.resource("managel_via_elves_from_slime"), pCache);
+      .saveAs(Blocks.ELEMENTIUM_MANADUCT_BLOCK.getId(), pCache);
+
+    start()
+      .ingredient(Ingredient.of(Blocks.ELEMENTIUM_MANADUCT_BLOCK.get()))
+      .ingredient(Ingredient.of(itemLike("botania", "life_essence")))
+      .ingredient(Ingredient.of(itemLike("botania", "life_essence")))
+      .ingredient(Ingredient.of(itemLike("botania", "gaia_head")))
+      .ingredientOutput(Ingredient.of(Blocks.GAIA_MANADUCT_BLOCK.get()))
+      .build()
+      .saveAs(Blocks.GAIA_MANADUCT_BLOCK.getId(), pCache);
+
+    start()
+      .ingredient(Ingredient.of(Items.SLIME_BALL))
+      .ingredientOutput(Ingredient.of(Items.MAGMA_CREAM))
+      .build()
+      .saveAs(Index.resource("slimeball_magma_cream_exchange"), pCache);
 
     start()
       .ingredient(Ingredient.of(Items.MAGMA_CREAM))
-      .ingredientOutput(Ingredient.of(MANA_GEL.get()))
+      .ingredientOutput(Ingredient.of(Items.SLIME_BALL))
       .build()
-      .saveAs(Index.resource("managel_via_elves_from_magmacream"), pCache);
+      .saveAs(Index.resource("magma_cream_slimeball_exchange"), pCache);
 
     start()
       .ingredient(Ingredient.of(AllItems.ANDESITE_ALLOY.get()))

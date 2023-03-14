@@ -2,6 +2,32 @@
 
 ## changelog
 
+### 1.18.2-0.3.15-alpha  (_beta_ candidate release)
+
+#### Fixes
+
+- XOR Lever now correctly powers the block the lever is pointing towards
+- Wrong Casing on some item/block names, everything should be "Title Case" now
+
+#### New
+
+- Setup ponderjs based scenes automatically
+
+#### Changes
+
+- Model adjustment for generator, brighter colors
+
+### 1.18.2-0.3.14-alpha
+
+#### Changes
+
+- Cobblegen recipes shuffled around
+  - asurine uses zinc
+  - veridium uses copper
+- Elven trades
+  - Managel can no longer be created via trade with magmacream/slimeball
+  - Manaduct upgrades are much more expensive via elven trade (in terms of materials), to compensate for them not costing mana
+
 ### 1.18.2-0.3.13-alpha
 
 #### New

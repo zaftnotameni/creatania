@@ -1,0 +1,22 @@
+{
+  "type": "botania:elven_trade",
+  "ingredients": [
+    {
+      "item": "creatania:manaducts/elementium"
+    },
+    {
+      "item": "botania:life_essence"
+    },
+    {
+      "item": "botania:life_essence"
+    },
+    {
+      "item": "botania:gaia_head"
+    }
+  ],
+  "output": [
+    {
+      "item": "creatania:manaducts/gaia"
+    }
+  ]
+}

@@ -3,24 +3,25 @@ package zaftnotameni.creatania.registry;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.simibubi.create.content.contraptions.itemAssembly.SequencedAssemblyItem;
+import com.simibubi.create.foundation.data.AssetLookup;
 import com.tterrag.registrate.util.entry.ItemEntry;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.food.ManaGelItem;
-import zaftnotameni.creatania.util.Humanity;
 
-import static zaftnotameni.creatania.util.Humanity.keyResource;
-import static zaftnotameni.creatania.util.Humanity.lang;
 import static zaftnotameni.creatania.util.LogKt.log;
 
 public class Items {
   public static final DeferredRegister<Item> INDEX = DeferredRegister.create(ForgeRegistries.ITEMS, Constants.MODID);
 
-  public static final RegistryObject<ManaGelItem> MANA_GEL = INDEX.register(Constants.MANA_GEL_ITEM_NAME, ManaGelItem::new);
+  public static final ItemEntry<ManaGelItem>  MANA_GEL = Index.all().item(Constants.MANA_GEL_ITEM_NAME, ManaGelItem::new)
+    .properties(ManaGelItem::propertiesOfManaGel)
+    .lang("Mana Gel")
+    .model(AssetLookup.existingItemModel())
+    .register();
 
   public static final ItemEntry<SequencedAssemblyItem> INCOMPLETE_MANA_MACHINE_COMPONENT = sequencedIngredient(Constants.INCOMPLETE_MANA_MACHINE_COMPONENT);
 
@@ -35,10 +36,6 @@ public class Items {
   }
   public static JsonElement provideLangEntries() {
     var json = new JsonObject();
-    INDEX.getEntries().forEach(entry -> json.addProperty(Humanity.keyItem(entry), Humanity.digestItem(entry)));
-    Index.all().getAll(Item.class).forEach(
-      entry -> json.addProperty("item." + keyResource(entry.getId()),
-        Humanity.slashes(lang.get().getAutomaticName (entry))));
     return json;
   }
 }
