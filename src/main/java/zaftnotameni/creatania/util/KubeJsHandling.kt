@@ -1,20 +1,22 @@
 package zaftnotameni.creatania.util
 
+import com.google.gson.JsonArray
+import com.google.gson.JsonParser
+import com.google.gson.stream.JsonReader
 import dev.architectury.platform.Platform
 import dev.latvian.mods.kubejs.KubeJSPaths
 import org.apache.commons.io.IOUtils
 import zaftnotameni.creatania.CreataniaMain
 import java.nio.file.Files
 import java.nio.file.Path
-import javax.json.JsonArray
-import javax.json.JsonString
 
 fun gameDirectory() : Path = Platform.getGameFolder().normalize().toAbsolutePath()
 
-fun readMetadata() : JsonArray? {
+fun readMetadata() : JsonArray {
   val metadataStream = CreataniaMain::class.java.getResourceAsStream("/data/creatania/kubejs_metadata.json")
-  val metadataJson = javax.json.Json.createReader(metadataStream).readObject()
-  return metadataJson.getJsonArray("targetResources")
+  val reader = JsonReader(metadataStream?.bufferedReader())
+  val metadataJson = JsonParser.parseReader(reader).asJsonObject
+  return metadataJson.getAsJsonArray("targetResources")
 }
 
 fun createRequiredFolders() {
@@ -42,15 +44,12 @@ fun writeResourceFile(resource: String) {
 fun onlyPonderResources(resource : String) = resource.contains("creatania/ponder")
 fun writeToFile(resource : String) = writeResourceFile(resource)
 
-fun asString(jsonString : JsonString) = jsonString.string
-
 fun handleKubejsScripts() {
   createRequiredFolders()
   val targetResources = readMetadata()
-  targetResources?.getValuesAs(JsonString::class.java)
-    ?.map(::asString)
-    ?.filter(::onlyPonderResources)
-    ?.forEach(::writeToFile)
+  targetResources.map { it.asString }
+    .filter(::onlyPonderResources)
+    .forEach(::writeToFile)
 }
 
 fun safeHandleKubeJsScripts() {
@@ -58,6 +57,6 @@ fun safeHandleKubeJsScripts() {
     handleKubejsScripts()
     info("ponderjs scripts for creatania copied to their appropriated folders, happy pondering!")
   } catch (tw : Throwable) {
-    warn("Could not setup ponderjs scripts, some ponder details might be missing! Reason: $tw, ${tw.stackTrace}")
+    warn("Could not setup ponderjs scripts, some ponder details might be missing! Reason: $tw, ${tw.stackTraceToString()}")
   }
 }
