@@ -11,7 +11,6 @@
   "kubejs.ponder.corrupt_mana_scene.text_1": "Throw some mana blocks into the mix",
   "kubejs.ponder.corrupt_mana_scene.text_2": "Superheat your Blaze Burner",
   "kubejs.ponder.corrupt_mana_scene.text_3": "Generates fluid mana",
-  "kubejs.ponder.mana_casing_scene.header": "Pure Daisy doing its magic!",
   "kubejs.ponder.mana_condenser_belt_scene.header": "Automating Mana Condensing",
   "kubejs.ponder.mana_condenser_belt_scene.text_1": "Mana Condensers can also be placed over Mechanical Belts",
   "kubejs.ponder.mana_condenser_belt_scene.text_2": "If the inventory or belt is full, then the Mana Condensers will stop sending out blocks.",
