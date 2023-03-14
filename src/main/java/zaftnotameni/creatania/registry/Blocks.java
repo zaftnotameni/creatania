@@ -12,7 +12,6 @@ import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -33,19 +32,17 @@ import zaftnotameni.creatania.mana.manaduct.ManasteelManaductBlock;
 import zaftnotameni.creatania.mana.manaduct.TerrasteelManaductBlock;
 import zaftnotameni.creatania.stress.omnibox.OmniboxBlock;
 import zaftnotameni.creatania.stress.xorlever.XorLeverBlock;
-import zaftnotameni.creatania.util.Humanity;
 
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
 import static zaftnotameni.creatania.mana.manablock.BaseManaBlock.registerManablock;
 import static zaftnotameni.creatania.mana.manaduct.BaseManaductBlock.registerManaduct;
-import static zaftnotameni.creatania.util.Humanity.keyResource;
-import static zaftnotameni.creatania.util.Humanity.lang;
 import static zaftnotameni.creatania.util.LogKt.log;
 
 public class Blocks {
   public static final BlockEntry<ManaMotorBlock> MANA_MOTOR = Index.all()
     .block(Constants.MANA_MOTOR, ManaMotorBlock::new)
+    .lang("Mana Motor")
     .initialProperties(SharedProperties::stone)
     .blockstate(BlockStateGen.directionalAxisBlockProvider())
     .addLayer(() -> RenderType::cutoutMipped)
@@ -57,6 +54,7 @@ public class Blocks {
 
   public static final BlockEntry<ManaGeneratorBlock> MANA_GENERATOR = Index.all()
     .block(Constants.MANA_GENERATOR, ManaGeneratorBlock::new)
+    .lang("Mana Generator")
     .initialProperties(SharedProperties::softMetal)
     .blockstate(BlockStateGen.directionalAxisBlockProvider())
     .addLayer(() -> RenderType::cutoutMipped)
@@ -69,6 +67,7 @@ public class Blocks {
 
   public static final BlockEntry<ManaCondenserBlock> MANA_CONDENSER = Index.all()
     .block(Constants.MANA_CONDENSER, ManaCondenserBlock::new)
+    .lang("Mana Condenser")
     .initialProperties(SharedProperties::softMetal)
     .blockstate(BlockStateGen.directionalAxisBlockProvider())
     .addLayer(() -> RenderType::cutoutMipped)
@@ -81,6 +80,7 @@ public class Blocks {
 
   public static final BlockEntry<OmniboxBlock> OMNIBOX = Index.all()
     .block(Constants.OMNIBOX, OmniboxBlock::new)
+    .lang("Omnibox")
     .initialProperties(SharedProperties::stone)
     .blockstate(BlockStateGen.directionalBlockProvider(false))
     .addLayer(() -> RenderType::cutoutMipped)
@@ -95,6 +95,7 @@ public class Blocks {
 
   public static final BlockEntry<XorLeverBlock> XOR_LEVER = Index.all()
     .block(Constants.XOR_LEVER, XorLeverBlock::new)
+    .lang("XOR Lever")
     .initialProperties(() -> net.minecraft.world.level.block.Blocks.LEVER)
     .transform(axeOrPickaxe())
     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
@@ -142,9 +143,6 @@ public class Blocks {
 
   public static JsonElement provideLangEntries() {
     var json = new JsonObject();
-    Index.all().getAll(Block.class).forEach(
-      entry -> json.addProperty("block." + keyResource(entry.getId()),
-        Humanity.slashes(lang.get().getAutomaticName (entry))));
     return json;
   }
 

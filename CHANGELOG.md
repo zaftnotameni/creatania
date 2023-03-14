@@ -2,11 +2,12 @@
 
 ## changelog
 
-### 1.18.2-0.3.15-alpha
+### 1.18.2-0.3.15-alpha  (_beta_ candidate release)
 
 #### Fixes
 
 - XOR Lever now correctly powers the block the lever is pointing towards
+- Wrong Casing on some item/block names, everything should be "Title Case" now
 
 #### New
 
