@@ -2,6 +2,18 @@
 
 ## changelog
 
+### 1.18.2-0.3.17-beta
+
+#### Changes
+
+- Added some missing model changes
+
+### 1.18.2-0.3.16-beta
+
+#### Changes
+
+- Mod is finally in beta!
+
 ### 1.18.2-0.3.15-alpha  (_beta_ candidate release)
 
 #### Fixes
