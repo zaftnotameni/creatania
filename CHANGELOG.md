@@ -4,10 +4,17 @@
 
 ### 1.18.2-0.3.15-alpha
 
+#### Fixes
+
+- XOR Lever now correctly powers the block the lever is pointing towards
+
 #### New
 
 - Setup ponderjs based scenes automatically
 
+#### Changes
+
+- Model adjustment for generator, brighter colors
 
 ### 1.18.2-0.3.14-alpha
 

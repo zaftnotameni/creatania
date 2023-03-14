@@ -142,14 +142,15 @@ public class XorLeverBlock extends FaceAttachedHorizontalDirectionalBlock implem
   public static Direction getSignalDirection(XorLeverBlockEntity te, BlockState bs) {
     var teIsOn = te.state > 0;
     var facing = getTrueFacing(bs);
-    if (teIsOn) return facing.getOpposite();
-    return facing;
+    if (teIsOn) return facing;
+    return facing.getOpposite();
   }
   public static Direction getTrueFacing(BlockState bs) {
     var facing = bs.getValue(FACING);
     var face = bs.getValue(FACE);
-    if (face == AttachFace.CEILING) facing = facing.getOpposite();
-    if (face == AttachFace.WALL) facing = facing == Direction.NORTH ? Direction.UP : Direction.DOWN;
+    if (face == AttachFace.FLOOR) facing = facing.getOpposite();
+    if (face == AttachFace.CEILING) facing = facing;
+    if (face == AttachFace.WALL) facing = Direction.UP;
     return facing;
   }
 }
