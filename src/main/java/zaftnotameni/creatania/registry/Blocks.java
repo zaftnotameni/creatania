@@ -2,7 +2,6 @@ package zaftnotameni.creatania.registry;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.jozufozu.flywheel.core.PartialModel;
 import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.block.BlockStressDefaults;
 import com.simibubi.create.foundation.block.ItemUseOverrides;
@@ -11,7 +10,6 @@ import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.SharedProperties;
 import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -146,13 +144,4 @@ public class Blocks {
     return json;
   }
 
-  public static class Partials {
-    public static final PartialModel MANA_MOTOR_FAN = block("mana_motor/mana_motor_fan");
-    public static final PartialModel MANA_GENERATOR_TURBINE = block("mana_generator/copper_turbine");
-    private static PartialModel block(String path) {
-      return new PartialModel(new ResourceLocation(Constants.MODID + ":block/" + path));
-    }
-
-    public static void init() {}
-  }
 }

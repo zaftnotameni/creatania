@@ -2,6 +2,15 @@
 
 ## changelog
 
+### 1.18.2-0.3.18-beta
+
+#### Fixes
+
+- Server crash on startup due to initializing client only code in a server environment. Places changed
+  - Item colors
+  - Flywheel based partial models
+  - Particle factories
+
 ### 1.18.2-0.3.17-beta
 
 #### Changes

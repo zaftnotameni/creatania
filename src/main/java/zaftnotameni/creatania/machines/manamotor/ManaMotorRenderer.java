@@ -1,4 +1,5 @@
 package zaftnotameni.creatania.machines.manamotor;
+
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.simibubi.create.AllBlockPartials;
@@ -16,7 +17,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
 import zaftnotameni.creatania.config.ClientConfig;
-import zaftnotameni.creatania.registry.Blocks;
+import zaftnotameni.creatania.registry.BlockPartials;
 import zaftnotameni.creatania.registry.Fluids;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
@@ -40,7 +41,7 @@ public class ManaMotorRenderer extends KineticTileEntityRenderer {
 
     int lightInFront = LevelRenderer.getLightColor(te.getLevel(), te.getBlockPos().relative(direction));
 
-    SuperByteBuffer fanInner1 = CachedBufferer.partialFacing(Blocks.Partials.MANA_MOTOR_FAN, te.getBlockState(), direction.getOpposite());
+    SuperByteBuffer fanInner1 = CachedBufferer.partialFacing(BlockPartials.MANA_MOTOR_FAN, te.getBlockState(), direction.getOpposite());
 
     Direction.Axis axis = ((IRotate) te.getBlockState().getBlock()).getRotationAxis(te.getBlockState());
     var angle = getAngleForTe(te, te.getBlockPos(), axis);
