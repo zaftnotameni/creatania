@@ -30,6 +30,7 @@ import static zaftnotameni.creatania.machines.managenerator.ManaGeneratorWorldQu
 import static zaftnotameni.creatania.machines.managenerator.ManaGeneratorWorldQueriesKt.getTargetManaReceiver;
 import static zaftnotameni.creatania.machines.managenerator.ManaGeneratorWorldQueriesKt.specialHandlingViaManaduct;
 import static zaftnotameni.creatania.machines.manamachine.KineticManaMachine.renderSimpleBotaniaHud;
+import static zaftnotameni.creatania.util.LogKt.tlog;
 
 public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmManaMachine, IAmParticleEmittingMachine, IWandHUD {
 
@@ -127,9 +128,8 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
     return (int) Math.abs(this.getSpeed());
   }
 
-  public int addManaToPool(int manaAmount) {
+  public int addManaToPool(int manaAmount, ManaReceiverMatch targetReceiver) {
     if (this.level == null) return 0;
-    var targetReceiver = getTargetManaReceiver(this.worldPosition, this.level);
     if (targetReceiver == null) { return 0; }
     if (targetReceiver.isManaDuct()) {
       return specialHandlingViaManaduct(manaAmount, targetReceiver.getBlockstate(), this);
@@ -160,13 +160,15 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
     this.getManaGeneratorFluidHandler().serverTick();
     if (this.shouldAbortServerTick()) return;
 
-    var manaFluidRequired = ManaGeneratorMathKt.pureManaAtRpm(getSpeed());
+    var maxFluidConsumedPossibleAtRpm = ManaGeneratorMathKt.pureManaAtRpm(getSpeed());
     var manaFluidAvailable = this.getManaGeneratorFluidHandler().getManaFluidAvailable();
-    var hasEnoughManaFluidToProduceMana = manaFluidRequired <= manaFluidAvailable;
-    if (hasEnoughManaFluidToProduceMana) {
-      var manaFluidConsumed = this.getManaGeneratorFluidHandler().drainManaFluidFromTank(manaFluidRequired);
+    var hasEnoughManaFluidToProduceMana = manaFluidAvailable > 0;
+    var targetReceiver = getTargetManaReceiver(this.worldPosition, this.level);
+    if (hasEnoughManaFluidToProduceMana && targetReceiver != null) {
+      var manaFluidConsumed = this.getManaGeneratorFluidHandler().drainManaFluidFromTank(maxFluidConsumedPossibleAtRpm);
+      tlog(t -> t.debug("consumed " + manaFluidConsumed + " of a max possible " + maxFluidConsumedPossibleAtRpm));
       var realManaToBeGenerated = realManaAtRpmWhileConsuming(this.getSpeed(), manaFluidConsumed);
-      addManaToPool(realManaToBeGenerated);
+      addManaToPool(realManaToBeGenerated, targetReceiver);
       this.active = true;
     }
   }

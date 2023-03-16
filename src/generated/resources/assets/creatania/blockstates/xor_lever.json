@@ -1,54 +1,107 @@
 {
   "variants": {
-    "face=floor,facing=north": {
+    "conditional=false,face=floor,facing=north": {
       "model": "creatania:block/xor_lever/block"
     },
-    "face=wall,facing=north": {
+    "conditional=true,face=floor,facing=north": {
+      "model": "creatania:block/xor_lever/block",
+      "y": 180
+    },
+    "conditional=false,face=wall,facing=north": {
       "model": "creatania:block/xor_lever/block",
       "x": 90
     },
-    "face=ceiling,facing=north": {
+    "conditional=true,face=wall,facing=north": {
       "model": "creatania:block/xor_lever/block",
-      "x": 180,
+      "x": 270,
       "y": 180
     },
-    "face=floor,facing=south": {
-      "model": "creatania:block/xor_lever/block",
-      "y": 180
-    },
-    "face=wall,facing=south": {
-      "model": "creatania:block/xor_lever/block",
-      "x": 90,
-      "y": 180
-    },
-    "face=ceiling,facing=south": {
+    "conditional=false,face=ceiling,facing=north": {
       "model": "creatania:block/xor_lever/block",
       "x": 180
     },
-    "face=floor,facing=west": {
+    "conditional=true,face=ceiling,facing=north": {
+      "model": "creatania:block/xor_lever/block",
+      "x": 180,
+      "y": 180
+    },
+    "conditional=false,face=floor,facing=south": {
+      "model": "creatania:block/xor_lever/block",
+      "y": 180
+    },
+    "conditional=true,face=floor,facing=south": {
+      "model": "creatania:block/xor_lever/block"
+    },
+    "conditional=false,face=wall,facing=south": {
+      "model": "creatania:block/xor_lever/block",
+      "x": 90,
+      "y": 180
+    },
+    "conditional=true,face=wall,facing=south": {
+      "model": "creatania:block/xor_lever/block",
+      "x": 270
+    },
+    "conditional=false,face=ceiling,facing=south": {
+      "model": "creatania:block/xor_lever/block",
+      "x": 180,
+      "y": 180
+    },
+    "conditional=true,face=ceiling,facing=south": {
+      "model": "creatania:block/xor_lever/block",
+      "x": 180
+    },
+    "conditional=false,face=floor,facing=west": {
       "model": "creatania:block/xor_lever/block",
       "y": 270
     },
-    "face=wall,facing=west": {
+    "conditional=true,face=floor,facing=west": {
+      "model": "creatania:block/xor_lever/block",
+      "y": 90
+    },
+    "conditional=false,face=wall,facing=west": {
       "model": "creatania:block/xor_lever/block",
       "x": 90,
       "y": 270
     },
-    "face=ceiling,facing=west": {
+    "conditional=true,face=wall,facing=west": {
+      "model": "creatania:block/xor_lever/block",
+      "x": 270,
+      "y": 90
+    },
+    "conditional=false,face=ceiling,facing=west": {
+      "model": "creatania:block/xor_lever/block",
+      "x": 180,
+      "y": 270
+    },
+    "conditional=true,face=ceiling,facing=west": {
       "model": "creatania:block/xor_lever/block",
       "x": 180,
       "y": 90
     },
-    "face=floor,facing=east": {
+    "conditional=false,face=floor,facing=east": {
       "model": "creatania:block/xor_lever/block",
       "y": 90
     },
-    "face=wall,facing=east": {
+    "conditional=true,face=floor,facing=east": {
+      "model": "creatania:block/xor_lever/block",
+      "y": 270
+    },
+    "conditional=false,face=wall,facing=east": {
       "model": "creatania:block/xor_lever/block",
       "x": 90,
       "y": 90
     },
-    "face=ceiling,facing=east": {
+    "conditional=true,face=wall,facing=east": {
+      "model": "creatania:block/xor_lever/block",
+      "x": 270,
+      "y": 270
+    },
+    "conditional=false,face=ceiling,facing=east": {
+      "model": "creatania:block/xor_lever/block",
+      "x": 180,
+      "y": 90
+    },
+    "conditional=true,face=ceiling,facing=east": {
       "model": "creatania:block/xor_lever/block",
       "x": 180,
       "y": 270

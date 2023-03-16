@@ -19,7 +19,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fluids.FluidStack;
 import zaftnotameni.creatania.config.ClientConfig;
 import zaftnotameni.creatania.machines.manamachine.IAmParticleEmittingMachine;
-import zaftnotameni.creatania.registry.Blocks;
+import zaftnotameni.creatania.registry.BlockPartials;
 import zaftnotameni.creatania.registry.Fluids;
 import zaftnotameni.creatania.registry.Particles;
 
@@ -49,7 +49,7 @@ public class ManaGeneratorRenderer extends KineticTileEntityRenderer {
 
     int lightInFront = LevelRenderer.getLightColor(te.getLevel(), te.getBlockPos().relative(direction));
 
-    SuperByteBuffer fanInner1 = CachedBufferer.partialFacing(Blocks.Partials.MANA_GENERATOR_TURBINE, te.getBlockState(), direction.getOpposite());
+    SuperByteBuffer fanInner1 = CachedBufferer.partialFacing(BlockPartials.MANA_GENERATOR_TURBINE, te.getBlockState(), direction.getOpposite());
 
     Direction.Axis axis = ((IRotate) te.getBlockState().getBlock()).getRotationAxis(te.getBlockState());
     var angle = getAngleForTe(te, te.getBlockPos(), axis);

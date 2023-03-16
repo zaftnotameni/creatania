@@ -13,6 +13,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.MaterialColor;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ColorHandlerEvent;
 import net.minecraftforge.client.event.ParticleFactoryRegisterEvent;
 import net.minecraftforge.event.RegistryEvent;
@@ -33,10 +34,8 @@ import static java.util.Objects.requireNonNull;
 import static net.minecraft.client.Minecraft.getInstance;
 import static net.minecraft.core.Registry.register;
 
-@Mod.EventBusSubscriber(modid = Constants.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ModEventBus {
-
-
+@Mod.EventBusSubscriber(modid = Constants.MODID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
+public class ModEventBusClient {
   @SubscribeEvent
   public static void registerRecipeTypes(final RegistryEvent.Register<RecipeSerializer<?>> evt) {
     register(
