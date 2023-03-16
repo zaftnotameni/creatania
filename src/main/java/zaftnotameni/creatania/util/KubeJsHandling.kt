@@ -35,10 +35,15 @@ fun writeResourceFile(resource: String) {
   val targetPath = if (resource.contains("client_scripts")) KubeJSPaths.CLIENT_SCRIPTS else KubeJSPaths.ASSETS
   val file = targetPath.resolve(resource.replace("client_scripts/", "").replace("assets/", ""))
   Files.createDirectories(file.parent)
-  val outputStream = Files.newOutputStream(file)
-  outputStream.write(IOUtils.toByteArray(inputStream))
-  outputStream.close()
-  debug("Copied $resource to ${file.toAbsolutePath()}")
+
+  if (Files.notExists(file, *arrayOfNulls(0))) {
+    val outputStream = Files.newOutputStream(file)
+    outputStream.write(IOUtils.toByteArray(inputStream))
+    outputStream.close()
+    debug("Copied $resource to ${file.toAbsolutePath()}")
+  } else {
+    info("Did NOT copy $resource to ${file.toAbsolutePath()} because a file already exists, delete the file to get a new version")
+  }
 }
 
 fun onlyPonderResources(resource : String) = resource.contains("creatania/ponder")

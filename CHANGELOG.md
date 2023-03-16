@@ -2,6 +2,13 @@
 
 ## changelog
 
+### 1.18.2-0.3.20-beta
+
+#### Changes
+
+- Ponder JS files will no longer be overwritten by default on load, files must be deleted manually in case there are new ponder changes.
+  Deleting the whole `creatania` folder inside kubejs assets and client_scripts should always be safe in any new update of creatania. 
+
 ### 1.18.2-0.3.19-beta
 
 #### Balance Changes
