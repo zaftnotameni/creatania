@@ -128,9 +128,8 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
     return (int) Math.abs(this.getSpeed());
   }
 
-  public int addManaToPool(int manaAmount) {
+  public int addManaToPool(int manaAmount, ManaReceiverMatch targetReceiver) {
     if (this.level == null) return 0;
-    var targetReceiver = getTargetManaReceiver(this.worldPosition, this.level);
     if (targetReceiver == null) { return 0; }
     if (targetReceiver.isManaDuct()) {
       return specialHandlingViaManaduct(manaAmount, targetReceiver.getBlockstate(), this);
@@ -164,11 +163,12 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
     var maxFluidConsumedPossibleAtRpm = ManaGeneratorMathKt.pureManaAtRpm(getSpeed());
     var manaFluidAvailable = this.getManaGeneratorFluidHandler().getManaFluidAvailable();
     var hasEnoughManaFluidToProduceMana = manaFluidAvailable > 0;
-    if (hasEnoughManaFluidToProduceMana) {
+    var targetReceiver = getTargetManaReceiver(this.worldPosition, this.level);
+    if (hasEnoughManaFluidToProduceMana && targetReceiver != null) {
       var manaFluidConsumed = this.getManaGeneratorFluidHandler().drainManaFluidFromTank(maxFluidConsumedPossibleAtRpm);
       tlog(t -> t.debug("consumed " + manaFluidConsumed + " of a max possible " + maxFluidConsumedPossibleAtRpm));
       var realManaToBeGenerated = realManaAtRpmWhileConsuming(this.getSpeed(), manaFluidConsumed);
-      addManaToPool(realManaToBeGenerated);
+      addManaToPool(realManaToBeGenerated, targetReceiver);
       this.active = true;
     }
   }

@@ -4,14 +4,18 @@
 
 ### 1.18.2-0.3.19-beta
 
-#### Changes
+#### Balance Changes
+
+- Mana Motor: massive buff on SU generated per RPM, a mana motor at max speed now should outperform a single unit steam engine (not superheated).
+**Important**: DELETE your config files for creatania to make sure this applies
+
+#### Behavior Changes
 
 - Mana Generator behavior: Pure Mana Required (per rpm) => Max Pure Mana Consumption (per rpm)
-  - Before: The mana generator used to not work at all if it is not provided the amount of pure mana it could process at a given RPM.
+  - **Before**: The mana generator used to not work at all if it is not provided the amount of pure mana it could process at a given RPM.
   At 256 RPM, a max speed create pump cannot provide it enough mana to run.
-  - Now: The mana generator will always run and consume _up to_ the amount it can.
+  - **Now**: The mana generator will always run and consume _up to_ the amount it can.
   So you might waste SU running at higher speeds than you can provide it fluid for, but it will _always_ run.
-  
 
 ### 1.18.2-0.3.18-beta
 

@@ -9,6 +9,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.CONDITIONAL;
+
 public class XorLeverBlockEntity extends SmartTileEntity {
   public int state = 0;
   public int lastChange;
@@ -50,6 +53,9 @@ public class XorLeverBlockEntity extends SmartTileEntity {
   private void updateOutput() {
     if (level != null) {
       XorLeverBlock.updateNeighbors(getBlockState(), level, worldPosition);
+      if (!level.isClientSide) {
+        level.setBlockAndUpdate(getBlockPos(), getBlockState().setValue(CONDITIONAL, this.state == 15));
+      }
     }
   }
 

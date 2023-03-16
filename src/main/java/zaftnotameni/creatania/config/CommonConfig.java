@@ -1,4 +1,5 @@
 package zaftnotameni.creatania.config;
+import net.minecraft.util.Mth;
 import net.minecraftforge.common.ForgeConfigSpec;
 public class CommonConfig {
   public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
@@ -62,7 +63,8 @@ public class CommonConfig {
   public static final ForgeConfigSpec.ConfigValue<String> COBBLEGEN_MANA_PYLON_TRANSFORMATIONS;
   public static final ForgeConfigSpec.ConfigValue<String> COBBLEGEN_NATURA_PYLON_TRANSFORMATIONS;
   public static final ForgeConfigSpec.ConfigValue<String> COBBLEGEN_GAIA_PYLON_TRANSFORMATIONS;
-
+  public static final int FULL_SINGLE_STEAM_ENGINE = 16384;
+  public static final int FULL_WINDMILL = 8192;
   static {
     BUILDER.push("mana_generator");
     MANA_GENERATOR_MANA_PER_RPM_PER_TICK = BUILDER.define("mana_per_rpm_per_tick", 4);
@@ -76,7 +78,7 @@ public class CommonConfig {
 
     BUILDER.push("mana_motor");
     MANA_MOTOR_BASE_RPM = BUILDER.define("base_rpm", 16);
-    MANA_MOTOR_SU_PER_RPM = BUILDER.define("su_per_rpm", 8);
+    MANA_MOTOR_SU_PER_RPM = BUILDER.define("su_per_rpm", Mth.ceil(FULL_SINGLE_STEAM_ENGINE * (1.5 / 256.0)));
     MANA_MOTOR_MANA_PER_TICK_PER_RPM = BUILDER.define("mana_per_tick_per_rpm", -1);
     MANA_MOTOR_RPM_PER_MANA_PER_TICK = BUILDER.define("rpm_per_mana_per_tick", 8);
     MANA_MOTOR_MAX_MANA_STORAGE = BUILDER.define("max_mana_storage", 2000);

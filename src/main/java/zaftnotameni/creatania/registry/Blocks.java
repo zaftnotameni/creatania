@@ -8,10 +8,19 @@ import com.simibubi.create.foundation.block.ItemUseOverrides;
 import com.simibubi.create.foundation.data.AssetLookup;
 import com.simibubi.create.foundation.data.BlockStateGen;
 import com.simibubi.create.foundation.data.SharedProperties;
+import com.tterrag.registrate.providers.DataGenContext;
+import com.tterrag.registrate.providers.RegistrateBlockstateProvider;
 import com.tterrag.registrate.util.entry.BlockEntry;
+import java.util.function.Function;
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.AttachFace;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.material.MaterialColor;
+import net.minecraftforge.client.model.generators.ConfiguredModel;
+import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.eventbus.api.IEventBus;
 import zaftnotameni.creatania.Constants;
 import zaftnotameni.creatania.config.CommonConfig;
@@ -33,6 +42,7 @@ import zaftnotameni.creatania.stress.xorlever.XorLeverBlock;
 
 import static com.simibubi.create.foundation.data.ModelGen.customItemModel;
 import static com.simibubi.create.foundation.data.TagGen.axeOrPickaxe;
+import static net.minecraft.world.level.block.state.properties.BlockStateProperties.CONDITIONAL;
 import static zaftnotameni.creatania.mana.manablock.BaseManaBlock.registerManablock;
 import static zaftnotameni.creatania.mana.manaduct.BaseManaductBlock.registerManaduct;
 import static zaftnotameni.creatania.util.LogKt.log;
@@ -97,11 +107,52 @@ public class Blocks {
     .initialProperties(() -> net.minecraft.world.level.block.Blocks.LEVER)
     .transform(axeOrPickaxe())
     .tag(AllTags.AllBlockTags.SAFE_NBT.tag)
-    .blockstate((c, p) -> p.horizontalFaceBlock(c.get(), AssetLookup.partialBaseModel(c, p)))
+    .blockstate(Blocks::xorLeverModel)
     .onRegister(ItemUseOverrides::addBlock)
     .item()
     .transform(customItemModel())
     .register();
+
+  public static ModelFile xorLeverModel(DataGenContext<Block, XorLeverBlock> ctx, RegistrateBlockstateProvider prov) {
+    var block = ctx.get();
+    Function<BlockState, ModelFile> modelFunc = x -> AssetLookup.partialBaseModel(ctx, prov);
+    Function<BlockState, Integer> rotationOnYAxis = (state) -> {
+      var xInitialValue = state.getValue(BlockStateProperties.ATTACH_FACE).ordinal() * 90;
+      var yInitialValue = (((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) + (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.CEILING ? 180 : 0)) % 360;
+      var isWall = (xInitialValue == 90 || xInitialValue == 270);
+      var isCeiling = (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.CEILING);
+      var isFloor = !isWall && !isCeiling;
+      var onOffYRotationCeilingDelta = state.getValue(CONDITIONAL) ? 0 : 180;
+      var onOffYRotationFloorDelta = state.getValue(CONDITIONAL) ? 180 : 0;
+      var onOffYRotationWallDelta = state.getValue(CONDITIONAL) ? 180 : 0;
+      if (isCeiling) return (yInitialValue + onOffYRotationCeilingDelta) % 360;
+      if (isFloor) return (yInitialValue + onOffYRotationFloorDelta) % 360;
+      // isWall
+      return (yInitialValue + onOffYRotationWallDelta) % 360;
+    };
+    Function<BlockState, Integer> rotationOnXAxis = (state) -> {
+      var xInitialValue = state.getValue(BlockStateProperties.ATTACH_FACE).ordinal() * 90;
+      var yInitialValue = (((int) state.getValue(BlockStateProperties.HORIZONTAL_FACING).toYRot() + 180) + (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.CEILING ? 180 : 0)) % 360;
+      var isWall = (xInitialValue == 90 || xInitialValue == 270);
+      var isCeiling = (state.getValue(BlockStateProperties.ATTACH_FACE) == AttachFace.CEILING);
+      var isFloor = !isWall && !isCeiling;
+      var onOffXRotationCeilingDelta = 0;
+      var onOffXRotationFloorDelta = 0;
+      var onOffXRotationWallDelta = state.getValue(CONDITIONAL) ? 180 : 0;
+      if (isCeiling) return (xInitialValue + onOffXRotationCeilingDelta) % 360;
+      if (isFloor) return (xInitialValue + onOffXRotationFloorDelta) % 360;
+      // isWall
+      return (xInitialValue + onOffXRotationWallDelta) % 360;
+    };
+    prov.getVariantBuilder(block)
+      .forAllStates(state -> ConfiguredModel.builder()
+        .modelFile(modelFunc.apply(state))
+        .rotationX(rotationOnXAxis.apply(state))
+        .rotationY(rotationOnYAxis.apply(state))
+        .build()
+      );
+    return null;
+  }
 
   public static final BlockEntry<ManasteelManaductBlock> MANASTEEL_MANADUCT_BLOCK = registerManaduct(
     ManasteelManaductBlock.NAME, "Manasteel Manaduct", Tags.Blocks.TIER_1, ManasteelManaductBlock::new);
