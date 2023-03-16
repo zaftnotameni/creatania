@@ -30,6 +30,7 @@ import static zaftnotameni.creatania.machines.managenerator.ManaGeneratorWorldQu
 import static zaftnotameni.creatania.machines.managenerator.ManaGeneratorWorldQueriesKt.getTargetManaReceiver;
 import static zaftnotameni.creatania.machines.managenerator.ManaGeneratorWorldQueriesKt.specialHandlingViaManaduct;
 import static zaftnotameni.creatania.machines.manamachine.KineticManaMachine.renderSimpleBotaniaHud;
+import static zaftnotameni.creatania.util.LogKt.tlog;
 
 public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmManaMachine, IAmParticleEmittingMachine, IWandHUD {
 
@@ -160,11 +161,12 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
     this.getManaGeneratorFluidHandler().serverTick();
     if (this.shouldAbortServerTick()) return;
 
-    var manaFluidRequired = ManaGeneratorMathKt.pureManaAtRpm(getSpeed());
+    var maxFluidConsumedPossibleAtRpm = ManaGeneratorMathKt.pureManaAtRpm(getSpeed());
     var manaFluidAvailable = this.getManaGeneratorFluidHandler().getManaFluidAvailable();
-    var hasEnoughManaFluidToProduceMana = manaFluidRequired <= manaFluidAvailable;
+    var hasEnoughManaFluidToProduceMana = manaFluidAvailable > 0;
     if (hasEnoughManaFluidToProduceMana) {
-      var manaFluidConsumed = this.getManaGeneratorFluidHandler().drainManaFluidFromTank(manaFluidRequired);
+      var manaFluidConsumed = this.getManaGeneratorFluidHandler().drainManaFluidFromTank(maxFluidConsumedPossibleAtRpm);
+      tlog(t -> t.debug("consumed " + manaFluidConsumed + " of a max possible " + maxFluidConsumedPossibleAtRpm));
       var realManaToBeGenerated = realManaAtRpmWhileConsuming(this.getSpeed(), manaFluidConsumed);
       addManaToPool(realManaToBeGenerated);
       this.active = true;
