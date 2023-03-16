@@ -17,6 +17,10 @@
   - **Now**: The mana generator will always run and consume _up to_ the amount it can.
   So you might waste SU running at higher speeds than you can provide it fluid for, but it will _always_ run.
 
+#### Visual Changes
+
+- XOR Lever has a light indicating which side is on in the base
+
 ### 1.18.2-0.3.18-beta
 
 #### Fixes
