@@ -1,5 +1,5 @@
 {
-    "name": "Mana Machines",
-    "description": "Introduction to functional mana machines for generating Botania Mana or Create SU (Stress Units).",
+    "name": "Creatania",
+    "description": "Introduction to Creatania: Integrating Botania Mana and Create SU (Stress Units).$(br2)$(l)Support:$()$(li)$(l:https://discord.com/invite/jXrx4Tu)CM's World discord$(/l) general questions and discussion.$(li)$(l:https://github.com/zaftnotameni/creatania/issues)Issues$(/l)$(li)$(l:https://github.com/zaftnotameni/creatania/wiki)Wiki$(/l)",
     "icon": "creatania:mana_motor"
 }
