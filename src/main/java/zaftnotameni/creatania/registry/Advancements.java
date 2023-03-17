@@ -1,15 +1,17 @@
 package zaftnotameni.creatania.registry;
+
 import com.simibubi.create.AllItems;
 import com.tterrag.registrate.util.entry.FluidEntry;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.UnaryOperator;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import zaftnotameni.creatania.advancements.CreataniaAdvancement;
 import zaftnotameni.creatania.util.Humanity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.UnaryOperator;
-
-import static zaftnotameni.creatania.advancements.CreataniaAdvancement.TaskType.*;
+import static zaftnotameni.creatania.advancements.CreataniaAdvancement.TaskType.NOISY;
+import static zaftnotameni.creatania.advancements.CreataniaAdvancement.TaskType.SECRET;
+import static zaftnotameni.creatania.advancements.CreataniaAdvancement.TaskType.SILENT;
 public class Advancements {
   public static final List<CreataniaAdvancement> ENTRIES = new ArrayList<>();
   public static final CreataniaAdvancement START = null,
@@ -81,19 +83,19 @@ public class Advancements {
       .whenIconCollected()),
 
   // melting
-    MOLTEN_BRASS_FLUID = melt(Fluids.MOLTEN_BRASS),
-    MOLTEN_GAIA = melt(Fluids.MOLTEN_GAIA),
-    MOLTEN_ELEMENTIUM = melt(Fluids.MOLTEN_ELEMENTIUM),
-    MOLTEN_MANASTEEL = melt(Fluids.MOLTEN_MANASTEEL),
-    MOLTEN_TERRASTEEL = melt(Fluids.MOLTEN_TERRASTEEL),
-    MOLTEN_ANDESITE = melt(Fluids.MOLTEN_ANDESITE),
-    MOLTEN_COPPER_FLUID = melt(Fluids.MOLTEN_COPPER),
-    MOLTEN_GOLD_FLUID = melt(Fluids.MOLTEN_GOLD),
-    MOLTEN_IRON_FLUID = melt(Fluids.MOLTEN_IRON),
-    MOLTEN_ZINC_FLUID = melt(Fluids.MOLTEN_ZINC),
-    BOTANIA_MANA_FLUID = melt(Fluids.REAL_MANA),
-    CORRUPT_MANA_FLUID = melt(Fluids.CORRUPT_MANA),
-    PURIFIED_MANA_FLUID = melt(Fluids.PURE_MANA),
+    MOLTEN_BRASS_FLUID = melt(Fluids.MOLTEN_BRASS, "Bucket of Molten Brass"),
+    MOLTEN_GAIA = melt(Fluids.MOLTEN_GAIA,"Bucket of Molten Gaia"),
+    MOLTEN_ELEMENTIUM = melt(Fluids.MOLTEN_ELEMENTIUM,"Bucket of Molten Elementium"),
+    MOLTEN_MANASTEEL = melt(Fluids.MOLTEN_MANASTEEL,"Bucket of Molten Manasteel"),
+    MOLTEN_TERRASTEEL = melt(Fluids.MOLTEN_TERRASTEEL,"Bucket of Molten Terrasteel"),
+    MOLTEN_ANDESITE = melt(Fluids.MOLTEN_ANDESITE,"Bucket of Molten Andesite"),
+    MOLTEN_COPPER_FLUID = melt(Fluids.MOLTEN_COPPER,"Bucket of Molten Copper"),
+    MOLTEN_GOLD_FLUID = melt(Fluids.MOLTEN_GOLD,"Bucket of Molten Gold"),
+    MOLTEN_IRON_FLUID = melt(Fluids.MOLTEN_IRON,"Bucket of Molten Iron"),
+    MOLTEN_ZINC_FLUID = melt(Fluids.MOLTEN_ZINC,"Bucket of Molten Zinc"),
+    BOTANIA_MANA_FLUID = melt(Fluids.REAL_MANA,"Bucket of Real Mana"),
+    CORRUPT_MANA_FLUID = melt(Fluids.CORRUPT_MANA,"Bucket of Corrupt Mana"),
+    PURIFIED_MANA_FLUID = melt(Fluids.PURE_MANA,"Bucket of Pure Mana"),
 
   // botanical contraptions
 
@@ -110,7 +112,7 @@ public class Advancements {
       .special(SECRET)),
     BUFF_FROM_REAL_MANA_BLOCKS = create("buff_from_real_mana_blocks", b -> b.icon(Blocks.REAL_MANA_BLOCK.get())
       .title("Flying High")
-      .description("Botania mana blocks are the real deal, pure condensed magical power")
+      .description("Botania mana blocks are the real deal, real condensed magical power")
       .after(ROOT)
       .special(SECRET)),
     DEBUFF_FROM_INERT_MANA_BLOCKS = create("debuff_from_corrupt_blocks", b -> b.icon(Blocks.CORRUPT_MANA_BLOCK.get())
@@ -130,7 +132,7 @@ public class Advancements {
       .special(SECRET)),
     PRODUCE_MANA_GEL_FROM_SLIME = create("produce_mana_gel_from_slime", b -> b.icon(Items.MANA_GEL.get())
       .title("YUMMY!")
-      .description("Produce mana gel by having a slime be hurt while touch purified inert mana fluid")
+      .description("Produce mana gel by having a slime be hurt while touching pure mana")
       .after(ROOT)
       .special(SECRET)),
     END = null;
@@ -139,10 +141,10 @@ public class Advancements {
     return new CreataniaAdvancement(id, b);
   }
 
-  public static CreataniaAdvancement melt(FluidEntry<ForgeFlowingFluid.Flowing> fe) {
+  public static CreataniaAdvancement melt(FluidEntry<ForgeFlowingFluid.Flowing> fe, String description) {
     return create("your_first_" + fe.getId().getPath(), b -> b.icon(fe.get().getBucket())
       .title(Humanity.digestItem(fe.get().getBucket()))
-      .description("Grabbing a " + Humanity.digestItem(fe.get().getBucket()) + " from a hot mixer")
+      .description("Grabbing a " + description + " from a hot mixer")
       .after(ROOT));
   }
   public static void register() {}

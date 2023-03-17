@@ -7,6 +7,7 @@
 #### Changes
 
 - XOR Lever has a new model showing it is made with mana
+- Minor fixes on inconsistent wording on advancements
 
 ### 1.18.2-0.3.20-beta
 
