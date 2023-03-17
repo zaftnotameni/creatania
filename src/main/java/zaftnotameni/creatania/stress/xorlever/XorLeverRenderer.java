@@ -1,14 +1,13 @@
 package zaftnotameni.creatania.stress.xorlever;
+
 import com.jozufozu.flywheel.backend.Backend;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.simibubi.create.AllBlockPartials;
 import com.simibubi.create.content.logistics.block.redstone.AnalogLeverBlock;
 import com.simibubi.create.foundation.render.CachedBufferer;
 import com.simibubi.create.foundation.render.SuperByteBuffer;
 import com.simibubi.create.foundation.tileEntity.renderer.SafeTileEntityRenderer;
 import com.simibubi.create.foundation.utility.AngleHelper;
-import com.simibubi.create.foundation.utility.Color;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
@@ -40,13 +39,6 @@ public class XorLeverRenderer extends SafeTileEntityRenderer<XorLeverBlockEntity
       .rotate(Direction.EAST, angle)
       .translate(-1 / 2f, -1 / 16f, -1 / 2f);
     handle.light(light)
-      .renderInto(ms, vb);
-
-    // Indicator
-    int color = Color.mixColors(0x2C0300, 0xCD0000, state / 15f);
-    SuperByteBuffer indicator = transform(CachedBufferer.partial(AllBlockPartials.ANALOG_LEVER_INDICATOR, leverState), leverState);
-    indicator.light(light)
-      .color(color)
       .renderInto(ms, vb);
   }
 

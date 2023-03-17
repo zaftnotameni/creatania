@@ -13,6 +13,8 @@ import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import com.simibubi.create.foundation.utility.Color;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.properties.AttachFace;
+import zaftnotameni.creatania.registry.BlockPartials;
+
 public class XorLeverInstance extends BlockEntityInstance<XorLeverBlockEntity> implements DynamicInstance {
 
   protected final ModelData handle;
@@ -26,7 +28,7 @@ public class XorLeverInstance extends BlockEntityInstance<XorLeverBlockEntity> i
 
     Material<ModelData> mat = getTransformMaterial();
 
-    handle = mat.getModel(AllBlockPartials.ANALOG_LEVER_HANDLE, blockState)
+    handle = mat.getModel(BlockPartials.XOR_LEVER_HANDLE, blockState)
       .createInstance();
     indicator = mat.getModel(AllBlockPartials.ANALOG_LEVER_INDICATOR, blockState)
       .createInstance();
@@ -77,4 +79,3 @@ public class XorLeverInstance extends BlockEntityInstance<XorLeverBlockEntity> i
       .unCentre();
   }
 }
-
