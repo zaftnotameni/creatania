@@ -388,8 +388,10 @@ task prepare_for_publishing {
   dependsOn 'patchouli'
   dependsOn 'copy_kubejs_assets'
   dependsOn 'copy_kubejs_client_scripts'
+  dependsOn 'create_kubejs_metadata'
   dependsOn 'jar'
-  tasks.findByName('jar').mustRunAfter 'copy_kubejs_client_scripts'
+  tasks.findByName('jar').mustRunAfter 'create_kubejs_metadata'
+  tasks.findByName('create_kubejs_metadata').mustRunAfter 'copy_kubejs_client_scripts'
   tasks.findByName('copy_kubejs_client_scripts').mustRunAfter 'copy_kubejs_assets'
   tasks.findByName('copy_kubejs_assets').mustRunAfter 'patchouli'
 }

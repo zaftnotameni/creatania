@@ -11,6 +11,8 @@
         "assets/creatania/ponder/mana_purify/manablocks_puredaisy.nbt",
         "assets/creatania/ponder/mana_purify/purify_liquid_mana.nbt",
         "assets/creatania/ponder/omnibox.nbt",
+        "assets/creatania/ponder/xor_lever_horizontal.nbt",
+        "assets/creatania/ponder/xor_lever_vertical.nbt",
         "client_scripts/creatania/ponder/blazunia.js",
         "client_scripts/creatania/ponder/elven_portal.js",
         "client_scripts/creatania/ponder/helper_functions.js",
@@ -23,6 +25,7 @@
         "client_scripts/creatania/ponder/omnibox.js",
         "client_scripts/creatania/ponder/ponder_tags.js",
         "client_scripts/creatania/ponder/purify_liquid_mana.js",
-        "client_scripts/creatania/ponder/terra_plate.js"
+        "client_scripts/creatania/ponder/terra_plate.js",
+        "client_scripts/creatania/ponder/xor_lever.js"
     ]
 }
