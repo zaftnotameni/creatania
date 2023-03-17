@@ -15,6 +15,8 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
+import zaftnotameni.creatania.registry.BlockPartials;
+
 public class XorLeverRenderer extends SafeTileEntityRenderer<XorLeverBlockEntity> {
 
   public XorLeverRenderer(BlockEntityRendererProvider.Context context) {
@@ -32,7 +34,7 @@ public class XorLeverRenderer extends SafeTileEntityRenderer<XorLeverBlockEntity
     VertexConsumer vb = buffer.getBuffer(RenderType.solid());
 
     // Handle
-    SuperByteBuffer handle = CachedBufferer.partial(AllBlockPartials.ANALOG_LEVER_HANDLE, leverState);
+    SuperByteBuffer handle = CachedBufferer.partial(BlockPartials.XOR_LEVER_HANDLE, leverState);
     float angle = (float) ((state / 15) * 90 / 180 * Math.PI);
     transform(handle, leverState).translate(1 / 2f, 1 / 16f, 1 / 2f)
       .rotate(Direction.EAST, angle)
@@ -58,4 +60,3 @@ public class XorLeverRenderer extends SafeTileEntityRenderer<XorLeverBlockEntity
   }
 
 }
-

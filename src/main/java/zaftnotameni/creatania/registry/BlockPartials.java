@@ -10,6 +10,7 @@ import zaftnotameni.creatania.Constants;
 public class BlockPartials {
   public static final PartialModel MANA_MOTOR_FAN = block("mana_motor/mana_motor_fan");
   public static final PartialModel MANA_GENERATOR_TURBINE = block("mana_generator/copper_turbine");
+  public static final PartialModel XOR_LEVER_HANDLE = block("xor_lever/handle");
   private static PartialModel block(String path) {
     return new PartialModel(new ResourceLocation(Constants.MODID + ":block/" + path));
   }
