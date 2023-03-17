@@ -2,6 +2,12 @@
 
 ## changelog
 
+### 1.18.2-0.3.21-beta
+
+#### Changes
+
+- XOR Lever has a new model showing it is made with mana
+
 ### 1.18.2-0.3.20-beta
 
 #### Changes
