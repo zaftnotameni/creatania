@@ -5,25 +5,27 @@
     "pages": [
         {
             "type": "text",
-            "text": "$(li)$(l:creatania:blocks#blazunia)Blazunia$(/l)$(li)$(l:creatania:blocks#corruptmana)Corrupt Mana Block$(/l)$(li)$(l:creatania:blocks#manacasing)Mana Casing$(/l)$(li)$(l:creatania:blocks#puremana)Pure Mana Block$(/l)$(li)$(l:creatania:blocks#realmana)Real Mana Block$(/l)"
+            "text": "$(li)$(l:creatania:blocks#blazunia)Blazunia$(/l)$(li)$(l:creatania:blocks#corruptmana)Corrupt Mana Block$(/l)$(li)$(l:creatania:blocks#manacasing)Mana Casing$(/l)$(li)$(l:creatania:blocks#puremana)Pure Mana Block$(/l)$(li)$(l:creatania:blocks#realmana)Real Mana Block$(/l)$(li)$(l:creatania:blocks#xorlever)XOR Lever$(/l)"
         },
         {
             "type": "botania:petal_apothecary",
             "title": "Blazunia",
             "recipe": "creatania:botanist/petal_apothecary/blazunia",
-            "anchor":"blazunia",
+            "anchor": "blazunia",
             "text": "The $(c:/create ponder creatania:blazunia @a)Blazunia$(/c) is a powerful magical firey flower."
         },
         {
             "type": "spotlight",
             "title": "Corrupt Mana Block",
             "item": "creatania:mana/blocks/corrupt",
-            "anchor":"corruptmana",
+            "anchor": "corruptmana",
             "text": "This purplish block consists of $(l:creatania:machines#manacondenser)condensed$(/l) Mana, though it seems corrupted and inert. Should be handled with extreme caution."
         },
         {
             "type": "botania:elven_trade",
-            "recipes": ["creatania:botanist/elven_trade/mana/machines/casing"],
+            "recipes": [
+                "creatania:botanist/elven_trade/mana/machines/casing"
+            ],
             "anchor": "manacasing",
             "text": "The Mana Casing is a foundational building block for Creatania's $(l:creatania:machines#manacondenser)machines$(/l)."
         },
@@ -31,21 +33,27 @@
             "type": "spotlight",
             "title": "Pure Mana Block",
             "item": "creatania:mana/blocks/pure",
-            "anchor":"puremana",
+            "anchor": "puremana",
             "text": "The Pure Mana block is the $(l:creatania:mana_su#purifying)purified$(/l) version of the Corrupt Mana block. It too is inert but seems quite safe to handle."
         },
-        {            
+        {
             "type": "spotlight",
             "title": "Real Mana Block",
             "item": "creatania:mana/blocks/real",
-            "anchor":"realmana",
+            "anchor": "realmana",
             "text": "The Real Mana block contains all of the magical properties of Botania Mana but in block form. We are finding more and more uses for this block."
         },
-        {            
+        {
             "type": "botania:terrasteel",
             "title": "Real Mana Block",
             "recipe": "creatania:botanist/terra_plate/mana/blocks/real",
-            "anchor":"realmana"
+            "anchor": "realmana"
+        },
+        {
+            "type": "spotlight",
+            "item": "creatania:xor_lever",
+            "anchor": "xorlever",
+            "text": "The $(c:/create ponder creatania:xor_lever @a)XOR Lever$(/c) behaves like an XOR logic gate and does not pass a redstone signal through the block mounted to. The lever only powers the block it is pointing to. The XOR Lever can be mounted horizontally or vertically."
         }
     ]
 }

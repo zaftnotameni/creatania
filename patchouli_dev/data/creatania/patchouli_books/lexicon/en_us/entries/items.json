@@ -1,0 +1,12 @@
+{
+    "name": "Creatania Items",
+    "icon": "creatania:mana_gel",
+    "category": "patchouli:creatania",
+    "pages": [
+        {
+            "type": "spotlight",
+            "item": "creatania:mana_gel",
+            "text": "Try eating one, if you can fine one."
+        }
+    ]
+}

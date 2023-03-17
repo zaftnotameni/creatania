@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "minecraft:block/lever"
-  }
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "creatania:item/lever"
+	}
 }

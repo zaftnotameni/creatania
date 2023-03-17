@@ -5,6 +5,8 @@
 
 const gentleFall = (util) => util.vector.of(0.0, -0.1, 0.0);
 const offsetCenterOf = (util) => (target) => util.vector.topOf(target).add(0.0, -0.5, 0.0);
+const offsetMiddleSideOf = (util) => (target) => util.vector.topOf(target).add(-0.5, -0.5, 0.0);
+const offsetMiddleFrontOf = (util) => (target) => util.vector.topOf(target).add(-0.5, -0.25, 0.0);
 const offsetTopOf = (util) => (target) => util.vector.topOf(target).add(0.0, 0.5, 0.0);
 const dropBlocksOnto = (scene, util) => (target, blockId, howMany, afterEach) => { while(howMany-- > 0) { dropBlockOnto(scene, util)(target, blockId); afterEach(); } }
 const dropBlockOnto = (scene, util) => (target, blockId) => scene.world.createItemEntity(offsetTopOf(util)(target), gentleFall(util), blockId);

@@ -5,7 +5,7 @@
 	"texture_size": [32, 32],
 	"textures": {
 		"2": "creatania:block/xor_lever",
-		"particle": "block/lever"
+		"particle": "creatania:item/lever"
 	},
 	"elements": [
 		{
