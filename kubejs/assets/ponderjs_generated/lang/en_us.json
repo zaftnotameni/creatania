@@ -71,7 +71,6 @@
   "kubejs.ponder.xor_lever_horizontal.text_1": "The XOR Lever behaves like a XOR logic gate.",
   "kubejs.ponder.xor_lever_horizontal.text_2": "Notice how it does not pass a redstone signal through the block mounted to.",
   "kubejs.ponder.xor_lever_horizontal.text_3": "The lever only powers the block it is pointing to.",
-  "kubejs.ponder.xor_lever_horizontal.text_4": "The lever only powers the block it is pointing to.",
   "kubejs.ponder.xor_lever_vertical.header": "XOR Lever Vertical",
   "kubejs.ponder.xor_lever_vertical.text_1": "The XOR Lever can also be mounted vertically.",
   "kubejs.ponder.xor_lever_vertical.text_2": "Like before, it does not pass a redstone signal through the block mounted to.",
