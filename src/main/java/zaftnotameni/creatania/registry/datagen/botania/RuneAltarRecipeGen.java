@@ -11,7 +11,10 @@ import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.NotNull;
 import zaftnotameni.creatania.registry.Blocks;
 
-import static zaftnotameni.creatania.util.NamedItems.*;
+import static zaftnotameni.creatania.util.NamedItems.elementiumingot;
+import static zaftnotameni.creatania.util.NamedItems.gaiaingot;
+import static zaftnotameni.creatania.util.NamedItems.itemLike;
+import static zaftnotameni.creatania.util.NamedItems.terrasteelingot;
 public class RuneAltarRecipeGen extends BotaniaBaseRecipeGen implements DataProvider {
   public RuneAltarRecipeGen(DataGenerator gen) {
     super(gen, "botania:runic_altar", "output");
@@ -33,7 +36,6 @@ public class RuneAltarRecipeGen extends BotaniaBaseRecipeGen implements DataProv
       .ingredient(Ingredient.of(itemLike("botania", "mana_powder")))
       .ingredient(Ingredient.of(AllBlocks.SHAFT.get().asItem()))
       .ingredient(Ingredient.of(AllBlocks.FLUID_PIPE.get().asItem()))
-      .ingredient(livingrock())
       .mana(5000)
       .itemResult(new ItemStack(Blocks.MANA_GENERATOR.get().asItem(), 1))
       .build()

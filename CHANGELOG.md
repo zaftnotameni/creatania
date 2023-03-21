@@ -2,6 +2,12 @@
 
 ## changelog
 
+### 1.18.2-0.3.22-beta
+
+#### Changes
+
+- Runic Altar recipes no longer require living stone (as part of the recipe itself, still need it for the altar)
+
 ### 1.18.2-0.3.21-beta
 
 #### Changes
