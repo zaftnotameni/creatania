@@ -2,6 +2,18 @@
 
 ## changelog
 
+### 1.18.2-0.3.23-beta
+
+#### Fixes
+
+- Potential crash (only on servers) while processing custom cobblegen
+  - Caused by potentially loading the `ClientLevel` class in some cases, even while running on server.
+  - Code has been changed to never even use that class to begin with.
+
+#### Changes
+
+- Metal alloy recipes produce the sum of parts
+
 ### 1.18.2-0.3.22-beta
 
 #### Changes
