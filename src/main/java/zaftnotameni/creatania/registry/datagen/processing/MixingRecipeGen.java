@@ -64,25 +64,13 @@ public class MixingRecipeGen extends ForgeCreateProcessingRecipeProvider {
   }
 
   private void manaBasedOreReconstruction() {
-    create("iron_ore", b -> b.require(FluidIngredient.fromFluid(MOLTEN_MANASTEEL.get(), 125))
-      .require(FluidIngredient.fromFluid(MOLTEN_IRON.get(), 125))
-      .require(STONE)
-      .output(IRON_ORE));
+    create("iron_ore", b -> b.require(FluidIngredient.fromFluid(MOLTEN_MANASTEEL.get(), 125)).require(FluidIngredient.fromFluid(MOLTEN_IRON.get(), 125)).require(STONE).output(IRON_ORE));
 
-    create("copper_ore", b -> b.require(FluidIngredient.fromFluid(MOLTEN_MANASTEEL.get(), 125))
-      .require(FluidIngredient.fromFluid(MOLTEN_COPPER.get(), 125))
-      .require(STONE)
-      .output(COPPER_ORE));
+    create("copper_ore", b -> b.require(FluidIngredient.fromFluid(MOLTEN_MANASTEEL.get(), 125)).require(FluidIngredient.fromFluid(MOLTEN_COPPER.get(), 125)).require(STONE).output(COPPER_ORE));
 
-    create("zinc_ore", b -> b.require(FluidIngredient.fromFluid(MOLTEN_MANASTEEL.get(), 125))
-      .require(FluidIngredient.fromFluid(MOLTEN_ZINC.get(), 125))
-      .require(STONE)
-      .output(ZINC_ORE.get()));
+    create("zinc_ore", b -> b.require(FluidIngredient.fromFluid(MOLTEN_MANASTEEL.get(), 125)).require(FluidIngredient.fromFluid(MOLTEN_ZINC.get(), 125)).require(STONE).output(ZINC_ORE.get()));
 
-    create("gold_ore", b -> b.require(FluidIngredient.fromFluid(MOLTEN_MANASTEEL.get(), 125))
-      .require(FluidIngredient.fromFluid(MOLTEN_GOLD.get(), 125))
-      .require(STONE)
-      .output(GOLD_ORE));
+    create("gold_ore", b -> b.require(FluidIngredient.fromFluid(MOLTEN_MANASTEEL.get(), 125)).require(FluidIngredient.fromFluid(MOLTEN_GOLD.get(), 125)).require(STONE).output(GOLD_ORE));
 
     create("nether_gold_ore", b -> b.require(FluidIngredient.fromFluid(MOLTEN_MANASTEEL.get(), 125))
       .require(FluidIngredient.fromFluid(MOLTEN_GOLD.get(), 125))
@@ -109,15 +97,9 @@ public class MixingRecipeGen extends ForgeCreateProcessingRecipeProvider {
       .require(DEEPSLATE)
       .output(DEEPSLATE_GOLD_ORE));
 
-    create("diamond_ore", b -> b.require(FluidIngredient.fromFluid(MOLTEN_GAIA.get(), 125))
-      .require(FluidIngredient.fromFluid(MOLTEN_MANASTEEL.get(), 125))
-      .require(STONE)
-      .output(DIAMOND_ORE));
+    create("diamond_ore", b -> b.require(FluidIngredient.fromFluid(MOLTEN_GAIA.get(), 125)).require(FluidIngredient.fromFluid(MOLTEN_MANASTEEL.get(), 125)).require(STONE).output(DIAMOND_ORE));
 
-    create("emerald_ore", b -> b.require(FluidIngredient.fromFluid(MOLTEN_GAIA.get(), 125))
-      .require(FluidIngredient.fromFluid(MOLTEN_TERRASTEEL.get(), 125))
-      .require(STONE)
-      .output(EMERALD_ORE));
+    create("emerald_ore", b -> b.require(FluidIngredient.fromFluid(MOLTEN_GAIA.get(), 125)).require(FluidIngredient.fromFluid(MOLTEN_TERRASTEEL.get(), 125)).require(STONE).output(EMERALD_ORE));
 
     create("deep_diamond_ore", b -> b.require(FluidIngredient.fromFluid(MOLTEN_GAIA.get(), 125))
       .require(FluidIngredient.fromFluid(MOLTEN_MANASTEEL.get(), 125))
@@ -129,40 +111,28 @@ public class MixingRecipeGen extends ForgeCreateProcessingRecipeProvider {
       .require(DEEPSLATE)
       .output(DEEPSLATE_EMERALD_ORE));
 
-    create("redstone_ore", b -> b.require(FluidIngredient.fromFluid(MOLTEN_TERRASTEEL.get(), 125))
-      .require(FluidIngredient.fromFluid(MOLTEN_IRON.get(), 125))
-      .require(STONE)
-      .output(REDSTONE_ORE));
+    create("redstone_ore", b -> b.require(FluidIngredient.fromFluid(MOLTEN_TERRASTEEL.get(), 125)).require(FluidIngredient.fromFluid(MOLTEN_IRON.get(), 125)).require(STONE).output(REDSTONE_ORE));
 
     create("deep_redstone_ore", b -> b.require(FluidIngredient.fromFluid(MOLTEN_TERRASTEEL.get(), 125))
       .require(FluidIngredient.fromFluid(MOLTEN_IRON.get(), 125))
       .require(DEEPSLATE)
       .output(DEEPSLATE_REDSTONE_ORE));
 
-    create("lapis_ore", b -> b.require(FluidIngredient.fromFluid(MOLTEN_TERRASTEEL.get(), 125))
-      .require(FluidIngredient.fromFluid(MOLTEN_MANASTEEL.get(), 125))
-      .require(STONE)
-      .output(LAPIS_ORE));
+    create("lapis_ore", b -> b.require(FluidIngredient.fromFluid(MOLTEN_TERRASTEEL.get(), 125)).require(FluidIngredient.fromFluid(MOLTEN_MANASTEEL.get(), 125)).require(STONE).output(LAPIS_ORE));
 
     create("deep_lapis_ore", b -> b.require(FluidIngredient.fromFluid(MOLTEN_TERRASTEEL.get(), 125))
       .require(FluidIngredient.fromFluid(MOLTEN_MANASTEEL.get(), 125))
       .require(DEEPSLATE)
       .output(DEEPSLATE_LAPIS_ORE));
 
-    create("glowstone", b -> b.require(FluidIngredient.fromFluid(MOLTEN_TERRASTEEL.get(), 125))
-      .require(FluidIngredient.fromFluid(MOLTEN_GOLD.get(), 125))
-      .require(STONE)
-      .output(GLOWSTONE));
+    create("glowstone", b -> b.require(FluidIngredient.fromFluid(MOLTEN_TERRASTEEL.get(), 125)).require(FluidIngredient.fromFluid(MOLTEN_GOLD.get(), 125)).require(STONE).output(GLOWSTONE));
 
     create("nether_quartz", b -> b.require(FluidIngredient.fromFluid(MOLTEN_ELEMENTIUM.get(), 125))
       .require(FluidIngredient.fromFluid(MOLTEN_ZINC.get(), 125))
       .require(NETHERRACK)
       .output(NETHER_QUARTZ_ORE));
 
-    create("coal_ore", b -> b.require(FluidIngredient.fromFluid(MOLTEN_TERRASTEEL.get(), 125))
-      .require(FluidIngredient.fromFluid(MOLTEN_COPPER.get(), 125))
-      .require(STONE)
-      .output(COAL_ORE));
+    create("coal_ore", b -> b.require(FluidIngredient.fromFluid(MOLTEN_TERRASTEEL.get(), 125)).require(FluidIngredient.fromFluid(MOLTEN_COPPER.get(), 125)).require(STONE).output(COAL_ORE));
 
     create("deep_coal_ore", b -> b.require(FluidIngredient.fromFluid(MOLTEN_TERRASTEEL.get(), 125))
       .require(FluidIngredient.fromFluid(MOLTEN_COPPER.get(), 125))
@@ -173,12 +143,16 @@ public class MixingRecipeGen extends ForgeCreateProcessingRecipeProvider {
   private void vanillaIngotsMelting() {
     create("molten_iron_from_ingot", b -> b.require(Ingredient.of(itemLikeOf("minecraft:iron_ingot"))).output(MOLTEN_IRON.get(), 125).requiresHeat(HeatCondition.SUPERHEATED));
     create("molten_gold_from_ingot", b -> b.require(Ingredient.of(itemLikeOf("minecraft:gold_ingot"))).output(MOLTEN_GOLD.get(), 125).requiresHeat(HeatCondition.HEATED));
-    create("molten_copper_from_ingot", b -> b.require(Ingredient.of(itemLikeOf("minecraft:copper_ingot"))).output(MOLTEN_COPPER.get(), 125).requiresHeat(HeatCondition.HEATED));
+    create("molten_copper_from_ingot", b -> b.require(Ingredient.of(itemLikeOf("minecraft:copper_ingot"))).output(MOLTEN_COPPER.get(), 125).requiresHeat(HeatCondition.SUPERHEATED));
   }
 
   private void createIngotsMelting() {
-    create("molten_brass_ingot", b -> b.require(Ingredient.of(AllItems.BRASS_INGOT.get())).output(Fluids.MOLTEN_BRASS.get(), 125).requiresHeat(HeatCondition.HEATED));
-    create("molten_zinc_ingot", b -> b.require(Ingredient.of(AllItems.ZINC_INGOT.get())).output(MOLTEN_ZINC.get(), 125).requiresHeat(HeatCondition.HEATED));
+    create("molten_brass_flued", b -> b.require(FluidIngredient.fromFluid(MOLTEN_COPPER.get(), 125))
+      .require(FluidIngredient.fromFluid(MOLTEN_ZINC.get(), 125))
+      .output(Fluids.MOLTEN_BRASS.get(), 250)
+      .requiresHeat(HeatCondition.SUPERHEATED));
+    create("molten_brass_ingot", b -> b.require(Ingredient.of(AllItems.BRASS_INGOT.get())).output(Fluids.MOLTEN_BRASS.get(), 125).requiresHeat(HeatCondition.SUPERHEATED));
+    create("molten_zinc_ingot", b -> b.require(Ingredient.of(AllItems.ZINC_INGOT.get())).output(MOLTEN_ZINC.get(), 125).requiresHeat(HeatCondition.SUPERHEATED));
     create("molten_andesite_alloy_from_ingot", b -> b.require(Ingredient.of(AllItems.ANDESITE_ALLOY.get())).output(Fluids.MOLTEN_ANDESITE.get(), 125).requiresHeat(HeatCondition.SUPERHEATED));
   }
 

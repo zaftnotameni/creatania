@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "fluid": "creatania:molten_copper",
+      "nbt": {},
+      "amount": 125
+    },
+    {
+      "fluid": "creatania:molten_zinc",
+      "nbt": {},
+      "amount": 125
+    }
+  ],
+  "results": [
+    {
+      "fluid": "creatania:molten_brass",
+      "amount": 250
+    }
+  ],
+  "heatRequirement": "superheated"
+}

@@ -9,10 +9,19 @@
 - Potential crash (only on servers) while processing custom cobblegen
   - Caused by potentially loading the `ClientLevel` class in some cases, even while running on server.
   - Code has been changed to never even use that class to begin with.
+  - To be safe, also searched the code for any other references to this, the only one happens for particles, which _only_ runs in the client, so (hopefully) this should never happen again.
 
 #### Changes
 
-- Metal alloy recipes produce the sum of parts
+- To avoid conflicts with native create recipes:
+  - Molten zinc requires _superheated_ now
+  - Molten brass requires _superheated_ now
+  - Molten copper requires _superheated_ now
+
+#### New
+
+- Molten brass (250mb) can be made with 125mb of molten copper + molten zinc.
+  - Requires superheating, also to avoid conflicting with default create recipes
 
 ### 1.18.2-0.3.22-beta
 
