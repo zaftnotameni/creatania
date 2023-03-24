@@ -46,22 +46,22 @@ public class Fluids {
   public static final ResourceLocation MANA_FLOWING_RL = Index.resource("fluid/mana_flow");
 
   // molten vanilla
-  public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_GOLD = registerMoltenFluid("gold", 0x00ffff00);
-  public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_IRON = registerMoltenFluid("iron", 0x00dd0000);
-  public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_COPPER = registerMoltenFluid("copper", 0x00666600);
+  public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_GOLD = registerMoltenFluid("gold", 0xffffff00);
+  public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_IRON = registerMoltenFluid("iron", 0xffdd0000);
+  public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_COPPER = registerMoltenFluid("copper", 0xff666600);
   // molten create
-  public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ZINC = registerMoltenFluid("zinc", 0x00999999);
-  public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_BRASS = registerMoltenFluid("brass", 0x00dddd33);
-  public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ANDESITE = registerMoltenFluid("andesite", 0x00666666);
+  public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ZINC = registerMoltenFluid("zinc", 0xff999999);
+  public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_BRASS = registerMoltenFluid("brass", 0xffdddd33);
+  public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ANDESITE = registerMoltenFluid("andesite", 0xff666666);
   // molten botania
-  public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_MANASTEEL = registerMoltenFluid("manasteel", 0x00000088);
-  public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_TERRASTEEL = registerMoltenFluid("terrasteel", 0x00008822);
-  public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ELEMENTIUM = registerMoltenFluid("elementium", 0x00ffaaaa);
-  public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_GAIA = registerMoltenFluid("gaia", 0x00ffffff);
+  public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_MANASTEEL = registerMoltenFluid("manasteel", 0xff000088);
+  public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_TERRASTEEL = registerMoltenFluid("terrasteel", 0xff008822);
+  public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_ELEMENTIUM = registerMoltenFluid("elementium", 0xffffaaaa);
+  public static final FluidEntry<ForgeFlowingFluid.Flowing> MOLTEN_GAIA = registerMoltenFluid("gaia", 0xffffffff);
   // mana
-  public static final FluidEntry<ForgeFlowingFluid.Flowing> PURE_MANA = registerManaFluid("pure_mana", 0x0011aaff, Tags.Fluids.PURE_MANA);
-  public static final FluidEntry<ForgeFlowingFluid.Flowing> CORRUPT_MANA = registerManaFluid("corrupt_mana", 0x00440044, Tags.Fluids.CORRUPT_MANA);
-  public static final FluidEntry<ForgeFlowingFluid.Flowing> REAL_MANA = registerManaFluid("real_mana", 0x0044ffff, Tags.Fluids.REAL_MANA);
+  public static final FluidEntry<ForgeFlowingFluid.Flowing> PURE_MANA = registerManaFluid("pure_mana", 0xff11aaff, Tags.Fluids.PURE_MANA);
+  public static final FluidEntry<ForgeFlowingFluid.Flowing> CORRUPT_MANA = registerManaFluid("corrupt_mana", 0xff440044, Tags.Fluids.CORRUPT_MANA);
+  public static final FluidEntry<ForgeFlowingFluid.Flowing> REAL_MANA = registerManaFluid("real_mana", 0xff44ffff, Tags.Fluids.REAL_MANA);
 
   public static JsonElement provideLangEntries() {
     var json = new JsonObject();
