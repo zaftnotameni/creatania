@@ -2,6 +2,12 @@
 
 ## changelog
 
+### 1.18.2-0.3.24-beta
+
+#### Changes
+
+- Rose quartz elven trade recipe now requires botania elven quartz as input (to avoid conflicts with default botania trades)
+
 ### 1.18.2-0.3.23-beta
 
 #### Fixes

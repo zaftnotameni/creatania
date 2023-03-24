@@ -26,7 +26,7 @@ public class ElvenTradeRecipeGen extends BotaniaBaseRecipeGen implements DataPro
   public void run(@NotNull HashCache pCache) throws IOException {
     start()
       .ingredient(Ingredient.of(Items.REDSTONE))
-      .ingredient(Ingredient.of(Items.QUARTZ))
+      .ingredient(Ingredient.of(itemLike("botania", "quartz_elven")))
       .ingredientOutput(Ingredient.of(AllItems.ROSE_QUARTZ.get()))
       .build()
       .saveAs(AllItems.ROSE_QUARTZ.getId(), pCache);
