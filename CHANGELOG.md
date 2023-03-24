@@ -7,6 +7,7 @@
 #### Changes
 
 - Rose quartz elven trade recipe now requires botania elven quartz as input (to avoid conflicts with default botania trades)
+- Mana fluids flow 5x faster (from every 20 ticks, to every 4 ticks)
 
 ### 1.18.2-0.3.23-beta
 
