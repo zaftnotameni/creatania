@@ -100,19 +100,32 @@ public class ModEventBusClient {
   }
   public static void initBlockColors() {
     if (!BLOCK_COLORS.isEmpty()) return;
-    var purple = colorOfBlock(MaterialColor.COLOR_PURPLE);
-    var cyan = colorOfBlock(MaterialColor.COLOR_CYAN);
-    var wart = colorOfBlock(MaterialColor.WARPED_WART_BLOCK);
-    var iron = colorOfBlock(MaterialColor.TERRACOTTA_RED);
-    var copper = colorOfBlock(MaterialColor.COLOR_ORANGE);
-    var gold = colorOfBlock(MaterialColor.GOLD);
-    var zinc = colorOfBlock(MaterialColor.COLOR_GRAY);
-    var andesite = colorOfBlock(MaterialColor.COLOR_GRAY);
-    var brass = colorOfBlock(MaterialColor.COLOR_YELLOW);
-    var mana = colorOfBlock(MaterialColor.COLOR_BLUE);
-    var terra = colorOfBlock(MaterialColor.COLOR_GREEN);
-    var elem = colorOfBlock(MaterialColor.COLOR_PINK);
-    var gaia = colorOfBlock(MaterialColor.COLOR_LIGHT_GRAY);
+//    var purple = colorOfBlock(0x440044);
+//    var cyan = colorOfBlock(0x11aaff);
+//    var wart = colorOfBlock(0x44ffff);
+//    var iron = colorOfBlock(0xdd0000);
+//    var copper = colorOfBlock(0x666600);
+//    var gold = colorOfBlock(0xffff00);
+//    var zinc = colorOfBlock(0x999999);
+//    var andesite = colorOfBlock(0x666666);
+//    var brass = colorOfBlock(0xdddd33);
+//    var mana = colorOfBlock(0x000088);
+//    var terra = colorOfBlock(0x008822);
+//    var elem = colorOfBlock(0xffaaaa);
+//    var gaia = colorOfBlock(0xffffff);
+    var purple = colorOfBlock(0x00440044);
+    var cyan = colorOfBlock(0x0011aaff);
+    var wart = colorOfBlock(0x0044ffff);
+    var iron = colorOfBlock(0x00dd0000);
+    var copper = colorOfBlock(0x00666600);
+    var gold = colorOfBlock(0x00ffff00);
+    var zinc = colorOfBlock(0x00999999);
+    var andesite = colorOfBlock(0x00666666);
+    var brass = colorOfBlock(0x00dddd33);
+    var mana = colorOfBlock(0x00000088);
+    var terra = colorOfBlock(0x00008822);
+    var elem = colorOfBlock(0x00ffaaaa);
+    var gaia = colorOfBlock(0x00ffffff);
     registerBlockColors(purple, Blocks.CORRUPT_MANA_BLOCK::get);
     registerBlockColors(cyan, Blocks.PURE_MANA_BLOCK::get);
     registerBlockColors(wart, Blocks.REAL_MANA_BLOCK::get);
@@ -135,6 +148,7 @@ public class ModEventBusClient {
   public static ItemColor colorOf(int rgbNotA) {
     return (pStack, pTintIndex) -> rgbNotA;
   }
+  public static BlockColor colorOfBlock(int rgbWithA) { return (pState, pLevel, pPos, pTintIndex) -> rgbWithA; }
   public static BlockColor colorOfBlock(MaterialColor c) { return (pState, pLevel, pPos, pTintIndex) -> c.calculateRGBColor(MaterialColor.Brightness.HIGH); }
   public static void initItemColors() {
     if (!ITEM_COLORS.isEmpty()) return;
