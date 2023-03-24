@@ -82,7 +82,7 @@ public class Fluids {
       .waterLikeFluid(name, Colored.from(color))
       .lang("Liquid " + StringUtils.capitalize(name))
       .attributes(b -> defaultMolten(b, color).sound(HONEY_DRINK, HONEY_BLOCK_PLACE))
-      .properties(p -> p.tickRate(1 * 20).levelDecreasePerBlock(2).slopeFindDistance(2).explosionResistance(100f))
+      .properties(p -> p.tickRate(4).levelDecreasePerBlock(2).slopeFindDistance(2).explosionResistance(100f))
       .tag(Tags.Fluids.ALL_MANA, tag, Tags.Fluids.minecraftTag("water"))
       .source(CreataniaFlowingFluidSource::new)
       .tag(Tags.Fluids.minecraftTag("water"))
