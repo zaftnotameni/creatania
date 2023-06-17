@@ -3,12 +3,12 @@ package zaftnotameni.creatania.mana.flowers.blazunia;
 import com.jozufozu.flywheel.core.PartialModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.simibubi.create.AllBlockPartials;
+import com.simibubi.create.AllPartialModels;
 import com.simibubi.create.AllSpriteShifts;
 import com.simibubi.create.foundation.block.render.SpriteShiftEntry;
 import com.simibubi.create.foundation.render.CachedBufferer;
 import com.simibubi.create.foundation.render.SuperByteBuffer;
-import com.simibubi.create.foundation.tileEntity.renderer.SmartTileEntityRenderer;
+import com.simibubi.create.foundation.blockEntity.renderer.SmartBlockEntityRenderer;
 import com.simibubi.create.foundation.utility.AngleHelper;
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import javax.annotation.Nullable;
@@ -22,7 +22,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import vazkii.botania.api.mana.IManaPool;
 
-public class BlazuniaRenderer extends SmartTileEntityRenderer<BlazuniaFunctionalFlowerBlockEntity> {
+public class BlazuniaRenderer extends SmartBlockEntityRenderer<BlazuniaFunctionalFlowerBlockEntity> {
   public BlazuniaRenderer(BlockEntityRendererProvider.Context context) {
     super(context);
   }
@@ -98,7 +98,7 @@ public class BlazuniaRenderer extends SmartTileEntityRenderer<BlazuniaFunctional
       uScroll = uScroll - Math.floor(uScroll);
       uScroll = uScroll * spriteWidth / 2;
 
-      SuperByteBuffer flameBuffer = CachedBufferer.partial(AllBlockPartials.BLAZE_BURNER_FLAME, blockState);
+      SuperByteBuffer flameBuffer = CachedBufferer.partial(AllPartialModels.BLAZE_BURNER_FLAME, blockState);
       if (modelTransform != null)
         flameBuffer.transform(modelTransform);
       flameBuffer.shiftUVScrolling(spriteShift, (float) uScroll, (float) vScroll);
@@ -107,12 +107,12 @@ public class BlazuniaRenderer extends SmartTileEntityRenderer<BlazuniaFunctional
 
 //    PartialModel blazeModel;
 //    if (heatLevel.isAtLeast(BlazeBurnerBlock.HeatLevel.SEETHING)) {
-//      blazeModel = blockAbove ? AllBlockPartials.BLAZE_SUPER_ACTIVE : AllBlockPartials.BLAZE_SUPER;
+//      blazeModel = blockAbove ? AllPartialModels.BLAZE_SUPER_ACTIVE : AllPartialModels.BLAZE_SUPER;
 //    } else if (heatLevel.isAtLeast(BlazeBurnerBlock.HeatLevel.FADING)) {
-//      blazeModel = blockAbove && heatLevel.isAtLeast(BlazeBurnerBlock.HeatLevel.KINDLED) ? AllBlockPartials.BLAZE_ACTIVE
-//                                                                                         : AllBlockPartials.BLAZE_IDLE;
+//      blazeModel = blockAbove && heatLevel.isAtLeast(BlazeBurnerBlock.HeatLevel.KINDLED) ? AllPartialModels.BLAZE_ACTIVE
+//                                                                                         : AllPartialModels.BLAZE_IDLE;
 //    } else {
-//      blazeModel = AllBlockPartials.BLAZE_INERT;
+//      blazeModel = AllPartialModels.BLAZE_INERT;
 //    }
 //
 //    SuperByteBuffer blazeBuffer = CachedBufferer.partial(blazeModel, blockState);
@@ -122,8 +122,8 @@ public class BlazuniaRenderer extends SmartTileEntityRenderer<BlazuniaFunctional
 //    draw(blazeBuffer, horizontalAngle, ms, solid);
 
 //    if (drawGoggles) {
-//      PartialModel gogglesModel = blazeModel == AllBlockPartials.BLAZE_INERT
-//                                  ? AllBlockPartials.BLAZE_GOGGLES_SMALL : AllBlockPartials.BLAZE_GOGGLES;
+//      PartialModel gogglesModel = blazeModel == AllPartialModels.BLAZE_INERT
+//                                  ? AllPartialModels.BLAZE_GOGGLES_SMALL : AllPartialModels.BLAZE_GOGGLES;
 //
 //      SuperByteBuffer gogglesBuffer = CachedBufferer.partial(gogglesModel, blockState);
 //      if (modelTransform != null)
@@ -133,11 +133,11 @@ public class BlazuniaRenderer extends SmartTileEntityRenderer<BlazuniaFunctional
 //    }
 
 //    if (drawHat) {
-//      SuperByteBuffer hatBuffer = CachedBufferer.partial(AllBlockPartials.TRAIN_HAT, blockState);
+//      SuperByteBuffer hatBuffer = CachedBufferer.partial(AllPartialModels.TRAIN_HAT, blockState);
 //      if (modelTransform != null)
 //        hatBuffer.transform(modelTransform);
 //      hatBuffer.translate(0, headY, 0);
-//      if (blazeModel == AllBlockPartials.BLAZE_INERT) {
+//      if (blazeModel == AllPartialModels.BLAZE_INERT) {
 //        hatBuffer.translateY(0.5f)
 //          .centre()
 //          .scale(0.75f)
@@ -153,10 +153,10 @@ public class BlazuniaRenderer extends SmartTileEntityRenderer<BlazuniaFunctional
 //    }
 
     if (false) {
-      PartialModel rodsModel = superhot ? AllBlockPartials.BLAZE_BURNER_SUPER_RODS
-                                                                                : AllBlockPartials.BLAZE_BURNER_RODS;
-      PartialModel rodsModel2 = superhot ? AllBlockPartials.BLAZE_BURNER_SUPER_RODS_2
-                                                                                 : AllBlockPartials.BLAZE_BURNER_RODS_2;
+      PartialModel rodsModel = superhot ? AllPartialModels.BLAZE_BURNER_SUPER_RODS
+                                                                                : AllPartialModels.BLAZE_BURNER_RODS;
+      PartialModel rodsModel2 = superhot ? AllPartialModels.BLAZE_BURNER_SUPER_RODS_2
+                                                                                 : AllPartialModels.BLAZE_BURNER_RODS_2;
 
       SuperByteBuffer rodsBuffer = CachedBufferer.partial(rodsModel, blockState);
       if (modelTransform != null)

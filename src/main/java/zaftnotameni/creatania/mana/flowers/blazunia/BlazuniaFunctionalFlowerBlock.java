@@ -1,6 +1,6 @@
 package zaftnotameni.creatania.mana.flowers.blazunia;
 
-import com.simibubi.create.foundation.block.ITE;
+import com.simibubi.create.foundation.block.IBE;
 import java.util.Random;
 import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
@@ -23,7 +23,7 @@ import zaftnotameni.creatania.registry.BlockEntities;
 import static zaftnotameni.creatania.mana.flowers.blazunia.BlazuniaBlockStates.HAS_MANA_SOURCE;
 import static zaftnotameni.creatania.mana.flowers.blazunia.BlazuniaBlockStates.IS_SUPERHOT;
 
-public class BlazuniaFunctionalFlowerBlock extends FlowerBlock implements ITE<BlazuniaFunctionalFlowerBlockEntity> {
+public class BlazuniaFunctionalFlowerBlock extends FlowerBlock implements IBE<BlazuniaFunctionalFlowerBlockEntity> {
 
   public BlazuniaFunctionalFlowerBlock(Properties pProperties) {
     this(() -> MobEffects.GLOWING, 0, pProperties);
@@ -41,11 +41,11 @@ public class BlazuniaFunctionalFlowerBlock extends FlowerBlock implements ITE<Bl
   }
 
   @Override
-  public Class<BlazuniaFunctionalFlowerBlockEntity> getTileEntityClass() {
+  public Class<BlazuniaFunctionalFlowerBlockEntity> getBlockEntityClass() {
     return BlazuniaFunctionalFlowerBlockEntity.class;
   }
   @Override
-  public BlockEntityType<? extends BlazuniaFunctionalFlowerBlockEntity> getTileEntityType() {
+  public BlockEntityType<? extends BlazuniaFunctionalFlowerBlockEntity> getBlockEntityType() {
     return BlockEntities.BLAZUNIA_BLOCK_ENTITY.get();
   }
 

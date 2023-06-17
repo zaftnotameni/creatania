@@ -1,7 +1,7 @@
 package zaftnotameni.creatania.machines.manamotor;
 
-import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
-import com.simibubi.create.foundation.tileEntity.behaviour.BehaviourType;
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.BehaviourType;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
@@ -9,8 +9,8 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import static zaftnotameni.creatania.machines.manamotor.ManaMotorBlockEntity.UPDATE_MANA_ON_EVERY_TICK;
 
-public class ManaMotorBehavior extends TileEntityBehaviour {
-  public static final BehaviourType<TileEntityBehaviour> TYPE = new BehaviourType<>();
+public class ManaMotorBehavior extends BlockEntityBehaviour {
+  public static final BehaviourType<BlockEntityBehaviour> TYPE = new BehaviourType<>();
   public ManaMotorBlockEntity motor;
 
   public ManaMotorBehavior(ManaMotorBlockEntity pMotor) {

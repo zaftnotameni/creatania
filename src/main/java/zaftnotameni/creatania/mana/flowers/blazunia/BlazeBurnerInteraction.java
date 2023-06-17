@@ -2,7 +2,7 @@ package zaftnotameni.creatania.mana.flowers.blazunia;
 
 import com.mojang.authlib.GameProfile;
 import com.simibubi.create.AllItems;
-import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerTileEntity;
+import com.simibubi.create.content.processing.burner.BlazeBurnerBlockEntity;
 import java.util.UUID;
 import java.util.function.Consumer;
 import net.minecraft.core.BlockPos;
@@ -39,9 +39,9 @@ public class BlazeBurnerInteraction {
   /**
    * range = radius
    */
-  public static void scanRangeForBlazeBurners(int xrange, int yrange, int zrange, ServerLevel level, BlockPos pos, Consumer<BlazeBurnerTileEntity> fn) {
+  public static void scanRangeForBlazeBurners(int xrange, int yrange, int zrange, ServerLevel level, BlockPos pos, Consumer<BlazeBurnerBlockEntity> fn) {
     scanRangeXYZ(xrange, yrange, zrange, pos, (x, y, z) -> {
-      if (level.getBlockEntity(pos.offset(x, y, z)) instanceof BlazeBurnerTileEntity te) fn.accept(te);
+      if (level.getBlockEntity(pos.offset(x, y, z)) instanceof BlazeBurnerBlockEntity te) fn.accept(te);
     });
   }
 

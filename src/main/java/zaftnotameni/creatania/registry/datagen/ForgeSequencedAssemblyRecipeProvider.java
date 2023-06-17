@@ -1,7 +1,7 @@
 package zaftnotameni.creatania.registry.datagen;
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.content.contraptions.components.deployer.DeployerApplicationRecipe;
-import com.simibubi.create.content.contraptions.components.saw.CuttingRecipe;
+import com.simibubi.create.content.kinetics.deployer.DeployerApplicationRecipe;
+import com.simibubi.create.content.kinetics.saw.CuttingRecipe;
 import com.simibubi.create.foundation.data.recipe.SequencedAssemblyRecipeGen;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;

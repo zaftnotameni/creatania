@@ -1,10 +1,10 @@
 package zaftnotameni.creatania.machines.manamachine;
-import com.simibubi.create.foundation.tileEntity.SmartTileEntity;
-import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
-import com.simibubi.create.foundation.tileEntity.behaviour.BehaviourType;
+import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.BehaviourType;
 import net.minecraft.nbt.CompoundTag;
-public class ActiveStateSynchronizerBehavior<X extends SmartTileEntity & IAmManaMachine> extends TileEntityBehaviour{
-  public static final BehaviourType<TileEntityBehaviour> TYPE = new BehaviourType<>();
+public class ActiveStateSynchronizerBehavior<X extends SmartBlockEntity & IAmManaMachine> extends BlockEntityBehaviour{
+  public static final BehaviourType<BlockEntityBehaviour> TYPE = new BehaviourType<>();
   public final X x;
   public boolean active;
   public boolean duct;
@@ -39,8 +39,8 @@ public class ActiveStateSynchronizerBehavior<X extends SmartTileEntity & IAmMana
     this.active = x.isManaMachineActive();
     this.duct = x.isManaMachineDuct();
     if (this.wasActive2 != this.active || this.wasDuct2 != this.duct) {
-      this.tileEntity.setChanged();
-      this.tileEntity.sendData();
+      this.blockEntity.setChanged();
+      this.blockEntity.sendData();
     }
     super.tick();
   }

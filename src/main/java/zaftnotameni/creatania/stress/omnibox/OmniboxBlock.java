@@ -1,6 +1,6 @@
 package zaftnotameni.creatania.stress.omnibox;
-import com.simibubi.create.content.contraptions.base.RotatedPillarKineticBlock;
-import com.simibubi.create.foundation.block.ITE;
+import com.simibubi.create.content.kinetics.base.RotatedPillarKineticBlock;
+import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -15,7 +15,7 @@ import net.minecraft.world.level.material.PushReaction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import zaftnotameni.creatania.registry.BlockEntities;
-public class OmniboxBlock extends RotatedPillarKineticBlock implements ITE<OmniboxBlockEntity> {
+public class OmniboxBlock extends RotatedPillarKineticBlock implements IBE<OmniboxBlockEntity> {
   public static final DirectionProperty FACING = BlockStateProperties.FACING;
   public OmniboxBlock(Properties properties) {
     super(properties);
@@ -43,11 +43,11 @@ public class OmniboxBlock extends RotatedPillarKineticBlock implements ITE<Omnib
     return state.getValue(AXIS);
   }
   @Override
-  public Class<OmniboxBlockEntity> getTileEntityClass() {
+  public Class<OmniboxBlockEntity> getBlockEntityClass() {
     return OmniboxBlockEntity.class;
   }
   @Override
-  public BlockEntityType<? extends OmniboxBlockEntity> getTileEntityType() {
+  public BlockEntityType<? extends OmniboxBlockEntity> getBlockEntityType() {
     return BlockEntities.OMNIBOX_BLOCK_ENTITY.get();
   }
 }

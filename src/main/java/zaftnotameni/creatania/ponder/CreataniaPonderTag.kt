@@ -1,6 +1,6 @@
 package zaftnotameni.creatania.ponder
 
-import com.simibubi.create.content.palettes.AllPaletteStoneTypes
+import com.simibubi.create.content.decoration.palettes.AllPaletteStoneTypes
 import com.simibubi.create.foundation.ponder.PonderTag
 import net.minecraft.resources.ResourceLocation
 import zaftnotameni.creatania.registry.Index

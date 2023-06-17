@@ -1,9 +1,9 @@
 package zaftnotameni.creatania.machines.managenerator;
 
-import com.simibubi.create.foundation.config.AllConfigs;
+import com.simibubi.create.infrastructure.config.AllConfigs;
 import com.simibubi.create.foundation.fluid.CombinedTankWrapper;
-import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
-import com.simibubi.create.foundation.tileEntity.behaviour.fluid.SmartFluidTankBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.fluid.SmartFluidTankBehaviour;
 import java.util.List;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -27,7 +27,7 @@ public class ManaGeneratorFluidHandler {
     contentsChanged = true;
   }
 
-  public void addBehaviours(List<TileEntityBehaviour> behaviours) {
+  public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
     this.inputTankBehavior = new SmartFluidTankBehaviour(SmartFluidTankBehaviour.INPUT, this.manaGenerator, 1, (int) this.getManaTankCapacity(), false).whenFluidUpdates(() ->
       this.contentsChanged =
         true);
@@ -62,7 +62,7 @@ public class ManaGeneratorFluidHandler {
   }
 
   public float getManaTankCapacity() {
-    return Math.min(6f, CommonConfig.MANA_GENERATOR_MAX_MANA_FLUID_STORAGE.get()) * AllConfigs.SERVER.kinetics.maxMotorSpeed.get();
+    return Math.min(6f, CommonConfig.MANA_GENERATOR_MAX_MANA_FLUID_STORAGE.get()) * AllConfigs.server().kinetics.maxRotationSpeed.get();
   }
 
   public void read(CompoundTag compound, boolean clientPacket) {

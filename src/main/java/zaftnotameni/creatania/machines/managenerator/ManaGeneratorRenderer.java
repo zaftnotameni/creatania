@@ -2,10 +2,10 @@ package zaftnotameni.creatania.machines.managenerator;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.simibubi.create.AllBlockPartials;
-import com.simibubi.create.content.contraptions.base.IRotate;
-import com.simibubi.create.content.contraptions.base.KineticTileEntity;
-import com.simibubi.create.content.contraptions.base.KineticTileEntityRenderer;
+import com.simibubi.create.AllPartialModels;
+import com.simibubi.create.content.kinetics.base.IRotate;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 import com.simibubi.create.foundation.fluid.FluidRenderer;
 import com.simibubi.create.foundation.render.CachedBufferer;
 import com.simibubi.create.foundation.render.SuperByteBuffer;
@@ -25,17 +25,17 @@ import zaftnotameni.creatania.registry.Particles;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
 
-public class ManaGeneratorRenderer extends KineticTileEntityRenderer {
+public class ManaGeneratorRenderer extends KineticBlockEntityRenderer {
   public ManaGeneratorRenderer(BlockEntityRendererProvider.Context context) {
     super(context);
   }
   @Override
-  protected SuperByteBuffer getRotatedModel(KineticTileEntity te, BlockState state) {
-    return CachedBufferer.partialFacing(AllBlockPartials.SHAFT_HALF, state);
+  protected SuperByteBuffer getRotatedModel(KineticBlockEntity te, BlockState state) {
+    return CachedBufferer.partialFacing(AllPartialModels.SHAFT_HALF, state);
   }
 
   @Override
-  protected void renderSafe(KineticTileEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
+  protected void renderSafe(KineticBlockEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
     super.renderSafe(te, partialTicks, ms, buffer, light, overlay);
     if (!(te instanceof ManaGeneratorBlockEntity generator)) return;
     if (generator.activeStateSynchronizerBehavior.active && !generator.activeStateSynchronizerBehavior.duct) this.spawnManaParticles(te, partialTicks);
@@ -43,7 +43,7 @@ public class ManaGeneratorRenderer extends KineticTileEntityRenderer {
     renderFluids(te, partialTicks, ms, buffer, light, overlay);
   }
 
-  public static void renderTurbine(KineticTileEntity te, PoseStack ms, MultiBufferSource buffer) {
+  public static void renderTurbine(KineticBlockEntity te, PoseStack ms, MultiBufferSource buffer) {
     Direction direction = te.getBlockState().getValue(FACING);
     VertexConsumer vb = buffer.getBuffer(RenderType.cutoutMipped());
 
@@ -57,7 +57,7 @@ public class ManaGeneratorRenderer extends KineticTileEntityRenderer {
     kineticRotationTransform(fanInner1, te, direction.getAxis(), angle, lightInFront).renderInto(ms, vb);
   }
 
-  public static float getYMaxForFluidLevel(KineticTileEntity te){
+  public static float getYMaxForFluidLevel(KineticBlockEntity te){
     if (!(te instanceof  ManaGeneratorBlockEntity generator)) return 0f;
     var topPadding = ClientConfig.MANA_MOTOR_MANA_FILL_TOP_PADDING.get();
     var bottomPadding = ClientConfig.MANA_MOTOR_MANA_FILL_BOTTOM_PADDING.get();
@@ -80,7 +80,7 @@ public class ManaGeneratorRenderer extends KineticTileEntityRenderer {
     var horizontalPadding = ClientConfig.MANA_MOTOR_MANA_FILL_HORIZONTAL_PADDING.get();
     return 1.0f - horizontalPadding;
   }
-  public static void renderFluids(KineticTileEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
+  public static void renderFluids(KineticBlockEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
     var renderedFluid = new FluidStack(Fluids.PURE_MANA.get(), 1000);
     float ymin = getYMinForFluidLevel();
     float ymax = getYMaxForFluidLevel(te);
@@ -96,7 +96,7 @@ public class ManaGeneratorRenderer extends KineticTileEntityRenderer {
   public float speedModifier = 1.1f;
   public float particlesEveryFTicks = ClientConfig.TICKS_PER_PARTICLE.get();
   public boolean enableManaParticles = ClientConfig.ENABLE_MANA_PARTICLES.get();
-  public void spawnManaParticles(KineticTileEntity te, float partialTicks) {
+  public void spawnManaParticles(KineticBlockEntity te, float partialTicks) {
     if (!this.enableManaParticles) return;
     if (Minecraft.getInstance().isPaused()) return;
     if (!(te instanceof IAmParticleEmittingMachine particleEmittingMachine)) return;

@@ -1,8 +1,8 @@
 package zaftnotameni.creatania.config;
 
-import com.simibubi.create.foundation.block.BlockStressDefaults;
-import com.simibubi.create.foundation.config.AllConfigs;
-import com.simibubi.create.foundation.config.CStress;
+import com.simibubi.create.content.kinetics.BlockStressDefaults;
+import com.simibubi.create.infrastructure.config.AllConfigs;
+import com.simibubi.create.infrastructure.config.CStress;
 import com.simibubi.create.foundation.utility.Couple;
 import java.lang.reflect.Field;
 import java.util.Map;
@@ -19,8 +19,8 @@ public class StressProvider {
     }
     public void stealFields() {
       try {
-        c = AllConfigs.SERVER.kinetics.stressValues.getClass().getField("capacities");
-        i = AllConfigs.SERVER.kinetics.stressValues.getClass().getField("impacts");
+        c = AllConfigs.server().kinetics.stressValues.getClass().getField("capacities");
+        i = AllConfigs.server().kinetics.stressValues.getClass().getField("impacts");
         c.setAccessible(true);
         i.setAccessible(true);
       } catch (Exception e) {}
@@ -43,22 +43,22 @@ public class StressProvider {
     }
     @Override
     public Map<ResourceLocation, ForgeConfigSpec.ConfigValue<Double>> getImpacts() {
-      return AllConfigs.SERVER.kinetics.stressValues.getImpacts();
+      return AllConfigs.server().kinetics.stressValues.getImpacts();
     }
     @Override
     public Map<ResourceLocation, ForgeConfigSpec.ConfigValue<Double>> getCapacities() {
-      return AllConfigs.SERVER.kinetics.stressValues.getCapacities();
+      return AllConfigs.server().kinetics.stressValues.getCapacities();
     }
     @Override
     public double getImpact(Block block) {
-      return AllConfigs.SERVER.kinetics.stressValues.getImpact(block);
+      return AllConfigs.server().kinetics.stressValues.getImpact(block);
     }
     @Override
     public double getCapacity(Block block) {
-      return AllConfigs.SERVER.kinetics.stressValues.getCapacity(block);
+      return AllConfigs.server().kinetics.stressValues.getCapacity(block);
     }
     @Override
-    protected void registerAll(ForgeConfigSpec.Builder builder) {
+    public void registerAll(ForgeConfigSpec.Builder builder) {
       builder.comment(".", Comments.su, Comments.impact)
         .push("impact");
       BlockStressDefaults.DEFAULT_IMPACTS.forEach((r, i) -> {

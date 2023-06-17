@@ -1,8 +1,8 @@
 package zaftnotameni.creatania.machines.manacondenser;
 
-import com.simibubi.create.content.contraptions.base.KineticTileEntity;
-import com.simibubi.create.foundation.config.AllConfigs;
-import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
+import com.simibubi.create.infrastructure.config.AllConfigs;
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -36,7 +36,7 @@ import static zaftnotameni.creatania.machines.manacondenser.ManaCondenserTooltip
  *
  * Can be configured to also require mana, but requires none by default
  */
-public class ManaCondenserBlockEntity extends KineticTileEntity implements IManaReceiver, IAmManaMachine, IAmParticleEmittingMachine {
+public class ManaCondenserBlockEntity extends KineticBlockEntity implements IManaReceiver, IAmManaMachine, IAmParticleEmittingMachine {
   public LazyOptional<IManaReceiver> lazyManaReceiver = LazyOptional.empty();
   public ActiveStateSynchronizerBehavior activeStateSynchronizerBehavior;
   public boolean isFirstTick = true;
@@ -63,14 +63,14 @@ public class ManaCondenserBlockEntity extends KineticTileEntity implements IMana
     return true;
   }
   @Override
-  public void addBehaviours(List<TileEntityBehaviour> behaviours) {
+  public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
     this.activeStateSynchronizerBehavior = new ActiveStateSynchronizerBehavior(this);
     behaviours.add(this.activeStateSynchronizerBehavior);
     super.addBehaviours(behaviours);
   }
   public float tickCounter = 0f;
   public float getPercentageOfMaxRPM() {
-    var maxPossibleRpm = AllConfigs.SERVER.kinetics.maxMotorSpeed.get();
+    var maxPossibleRpm = AllConfigs.server().kinetics.maxRotationSpeed.get();
     return Math.max(0.01f, 100000f * this.getManaMachineAbsoluteSpeed() / (float) maxPossibleRpm);
   }
   public float getTickCounterIncrease() {

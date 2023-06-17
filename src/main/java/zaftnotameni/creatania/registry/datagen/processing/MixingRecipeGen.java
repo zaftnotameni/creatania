@@ -2,8 +2,8 @@ package zaftnotameni.creatania.registry.datagen.processing;
 
 import com.simibubi.create.AllItems;
 import com.simibubi.create.AllRecipeTypes;
-import com.simibubi.create.content.contraptions.processing.HeatCondition;
-import com.simibubi.create.content.contraptions.processing.ProcessingRecipeBuilder;
+import com.simibubi.create.content.processing.recipe.HeatCondition;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
 import com.simibubi.create.foundation.fluid.FluidIngredient;
 import java.util.function.BiFunction;
 import net.minecraft.data.DataGenerator;
