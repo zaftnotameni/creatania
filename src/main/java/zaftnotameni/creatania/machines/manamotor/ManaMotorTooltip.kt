@@ -1,6 +1,6 @@
 package zaftnotameni.creatania.machines.manamotor
 
-import com.simibubi.create.foundation.config.AllConfigs
+import com.simibubi.create.infrastructure.config.AllConfigs
 import net.minecraft.network.chat.Component
 import zaftnotameni.creatania.util.Text
 
@@ -12,7 +12,7 @@ fun gogglesTooltip(tooltip : MutableList<Component>, crouching : Boolean, motor 
   Text.muted("Maximum SU Produced:").space()
     .add(Text.gray(motor.getManaMachine().maximumSUPossible.toString())).space()
     .add(Text.muted("at")).space()
-    .add(Text.gray(AllConfigs.SERVER.kinetics.maxMotorSpeed.get().toString())).space()
+    .add(Text.gray(AllConfigs.server().kinetics.maxRotationSpeed.get().toString())).space()
     .add(Text.gray("RPM")).forGoggles(tooltip)
 
   emptyLine(tooltip)

@@ -3,10 +3,10 @@ package zaftnotameni.creatania.stress.xorlever;
 import com.jozufozu.flywheel.backend.Backend;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.simibubi.create.content.logistics.block.redstone.AnalogLeverBlock;
+import com.simibubi.create.content.redstone.analogLever.AnalogLeverBlock;
 import com.simibubi.create.foundation.render.CachedBufferer;
 import com.simibubi.create.foundation.render.SuperByteBuffer;
-import com.simibubi.create.foundation.tileEntity.renderer.SafeTileEntityRenderer;
+import com.simibubi.create.foundation.blockEntity.renderer.SafeBlockEntityRenderer;
 import com.simibubi.create.foundation.utility.AngleHelper;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.AttachFace;
 import zaftnotameni.creatania.registry.BlockPartials;
 
-public class XorLeverRenderer extends SafeTileEntityRenderer<XorLeverBlockEntity> {
+public class XorLeverRenderer extends SafeBlockEntityRenderer<XorLeverBlockEntity> {
 
   public XorLeverRenderer(BlockEntityRendererProvider.Context context) {
   }

@@ -1,6 +1,6 @@
 package zaftnotameni.creatania.machines.managenerator
 
-import com.simibubi.create.foundation.config.AllConfigs
+import com.simibubi.create.infrastructure.config.AllConfigs
 import net.minecraft.network.chat.Component
 import zaftnotameni.creatania.util.Text
 import kotlin.math.roundToInt
@@ -21,7 +21,7 @@ fun gogglesTooltip(tooltip : MutableList<Component>, crouching : Boolean, genera
 
   emptyLine(tooltip)
 
-  val index = (Math.abs(generator.speed) * 3f / AllConfigs.SERVER.kinetics.maxMotorSpeed.get()).roundToInt()
+  val index = (Math.abs(generator.speed) * 3f / AllConfigs.server().kinetics.maxRotationSpeed.get()).roundToInt()
   Text.muted("Real Mana Produced at current speed:").space()
     .add(Text.red(manaLabel[index % 4])).forGoggles(tooltip)
 }

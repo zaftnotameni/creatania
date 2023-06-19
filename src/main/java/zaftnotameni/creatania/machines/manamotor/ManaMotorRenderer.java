@@ -2,10 +2,10 @@ package zaftnotameni.creatania.machines.manamotor;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.simibubi.create.AllBlockPartials;
-import com.simibubi.create.content.contraptions.base.IRotate;
-import com.simibubi.create.content.contraptions.base.KineticTileEntity;
-import com.simibubi.create.content.contraptions.base.KineticTileEntityRenderer;
+import com.simibubi.create.AllPartialModels;
+import com.simibubi.create.content.kinetics.base.IRotate;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 import com.simibubi.create.foundation.fluid.FluidRenderer;
 import com.simibubi.create.foundation.render.CachedBufferer;
 import com.simibubi.create.foundation.render.SuperByteBuffer;
@@ -21,21 +21,21 @@ import zaftnotameni.creatania.registry.BlockPartials;
 import zaftnotameni.creatania.registry.Fluids;
 
 import static net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING;
-public class ManaMotorRenderer extends KineticTileEntityRenderer {
+public class ManaMotorRenderer extends KineticBlockEntityRenderer {
   public ManaMotorRenderer(BlockEntityRendererProvider.Context context) {
     super(context);
   }
   @Override
-  protected SuperByteBuffer getRotatedModel(KineticTileEntity te, BlockState state) {
-    return CachedBufferer.partialFacing(AllBlockPartials.SHAFT_HALF, state);
+  protected SuperByteBuffer getRotatedModel(KineticBlockEntity te, BlockState state) {
+    return CachedBufferer.partialFacing(AllPartialModels.SHAFT_HALF, state);
   }
   @Override
-  protected void renderSafe(KineticTileEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
+  protected void renderSafe(KineticBlockEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
     super.renderSafe(te, partialTicks, ms, buffer, light, overlay);
     renderFans(te, ms, buffer);
     renderFluids(te, partialTicks, ms, buffer, light, overlay);
   }
-  public static void renderFans(KineticTileEntity te, PoseStack ms, MultiBufferSource buffer) {
+  public static void renderFans(KineticBlockEntity te, PoseStack ms, MultiBufferSource buffer) {
     Direction direction = te.getBlockState().getValue(FACING);
     VertexConsumer vb = buffer.getBuffer(RenderType.cutoutMipped());
 
@@ -69,7 +69,7 @@ public class ManaMotorRenderer extends KineticTileEntityRenderer {
     var horizontalPadding = ClientConfig.MANA_MOTOR_MANA_FILL_HORIZONTAL_PADDING.get();
     return 1.0f - horizontalPadding;
   }
-  public static void renderFluids(KineticTileEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
+  public static void renderFluids(KineticBlockEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
     if (!(te instanceof ManaMotorBlockEntity motor)) return;
     if (motor.mana < 1) return;
     var renderedFluid = new FluidStack(Fluids.PURE_MANA.get(), 1000);

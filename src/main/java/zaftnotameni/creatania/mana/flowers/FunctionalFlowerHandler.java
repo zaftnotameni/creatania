@@ -1,7 +1,7 @@
 package zaftnotameni.creatania.mana.flowers;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.foundation.tileEntity.SmartTileEntity;
+import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import javax.annotation.Nonnull;
@@ -31,7 +31,7 @@ import zaftnotameni.creatania.mana.flowers.blazunia.BlazuniaFunctionalFlowerBloc
 import static net.minecraftforge.common.util.LazyOptional.empty;
 import static zaftnotameni.creatania.util.With.with;
 
-public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerInterfaces> implements BotaniaFlowerInterfaces {
+public class FunctionalFlowerHandler<T extends SmartBlockEntity & BotaniaFlowerInterfaces> implements BotaniaFlowerInterfaces {
 
   public static final ResourceLocation MANA_POOL = new ResourceLocation("botania", "mana_pool");
   public static final ResourceLocation MANA_SPREADER = new ResourceLocation("botania", "mana_spreader");
@@ -56,7 +56,7 @@ public class FunctionalFlowerHandler<T extends SmartTileEntity & BotaniaFlowerIn
 
   public FunctionalFlowerHandler(T self) { this.self = self; }
 
-  public static <R extends SmartTileEntity & BotaniaFlowerInterfaces> FunctionalFlowerHandler<R> of(R x) { return new FunctionalFlowerHandler<R>(x);}
+  public static <R extends SmartBlockEntity & BotaniaFlowerInterfaces> FunctionalFlowerHandler<R> of(R x) { return new FunctionalFlowerHandler<R>(x);}
 
   public FunctionalFlowerHandler withColor(int x) { return with(this, it -> it.color = x); }
 

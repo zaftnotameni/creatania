@@ -1,8 +1,8 @@
 package zaftnotameni.creatania.mana.flowers.blazunia;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.foundation.tileEntity.SmartTileEntity;
-import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
+import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.simibubi.create.foundation.utility.VecHelper;
 import java.util.List;
 import java.util.Random;
@@ -31,15 +31,15 @@ import vazkii.botania.api.block.IWandHUD;
 import zaftnotameni.creatania.mana.flowers.BotaniaFlowerInterfaces;
 import zaftnotameni.creatania.mana.flowers.FunctionalFlowerHandler;
 
-import static com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock.HeatLevel.SEETHING;
-import static com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock.tryInsert;
+import static com.simibubi.create.content.processing.burner.BlazeBurnerBlock.HeatLevel.SEETHING;
+import static com.simibubi.create.content.processing.burner.BlazeBurnerBlock.tryInsert;
 import static zaftnotameni.creatania.mana.flowers.blazunia.BlazeBurnerInteraction.scanRangeForBlazeBurners;
 import static zaftnotameni.creatania.mana.flowers.blazunia.BlazeBurnerInteraction.stackOfBlazeCake;
 import static zaftnotameni.creatania.mana.flowers.blazunia.BlazeBurnerInteraction.stackOfOakPlanks;
 import static zaftnotameni.creatania.mana.flowers.blazunia.BlazuniaBlockStates.HAS_MANA_SOURCE;
 import static zaftnotameni.creatania.mana.flowers.blazunia.BlazuniaBlockStates.IS_SUPERHOT;
 
-@OnlyIn(value = Dist.CLIENT, _interface = IWandHUD.class) public class BlazuniaFunctionalFlowerBlockEntity extends SmartTileEntity implements BotaniaFlowerInterfaces {
+@OnlyIn(value = Dist.CLIENT, _interface = IWandHUD.class) public class BlazuniaFunctionalFlowerBlockEntity extends SmartBlockEntity implements BotaniaFlowerInterfaces {
 
   public LazyOptional<FunctionalFlowerHandler> lazyFlowerHandler = LazyOptional.of(() -> FunctionalFlowerHandler.of(this).withColor(0xffffff00)
     .withMaxMana(10000)
@@ -158,7 +158,7 @@ import static zaftnotameni.creatania.mana.flowers.blazunia.BlazuniaBlockStates.I
     }
   }
 
-  @Override public void addBehaviours(List<TileEntityBehaviour> behaviours) { }
+  @Override public void addBehaviours(List<BlockEntityBehaviour> behaviours) { }
 
   @Override public void tick() {
     super.tick();

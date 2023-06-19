@@ -1,5 +1,5 @@
 package zaftnotameni.creatania.recipes.base;
-import com.simibubi.create.content.contraptions.processing.ProcessingRecipe;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableStatic;

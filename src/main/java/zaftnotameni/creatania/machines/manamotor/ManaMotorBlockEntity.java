@@ -1,9 +1,9 @@
 package zaftnotameni.creatania.machines.manamotor;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.content.contraptions.base.GeneratingKineticTileEntity;
-import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
-import com.simibubi.create.foundation.tileEntity.behaviour.scrollvalue.ScrollValueBehaviour;
+import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.simibubi.create.foundation.blockEntity.behaviour.scrollValue.ScrollValueBehaviour;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -43,7 +43,7 @@ import static zaftnotameni.creatania.util.LogKt.log;
  *
  * If there is not enough mana, it still rotates but produces 0 SU.
  */
-public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements IManaReceiver, IManaPool, ISparkAttachable, IAmManaMachine, IWandHUD, IWandable {
+public class ManaMotorBlockEntity extends GeneratingKineticBlockEntity implements IManaReceiver, IManaPool, ISparkAttachable, IAmManaMachine, IWandHUD, IWandable {
   public static final boolean UPDATE_MANA_ON_EVERY_TICK = true;
   public static final boolean UPDATE_MANA_ON_LAZY_TICK = !UPDATE_MANA_ON_EVERY_TICK;
   public ManaMotorBehavior manaMotorBehavior;
@@ -164,7 +164,7 @@ public class ManaMotorBlockEntity extends GeneratingKineticTileEntity implements
   public <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap) { return super.getCapability(cap); }
 
   @Override
-  public void addBehaviours(List<TileEntityBehaviour> behaviours) {
+  public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
     super.addBehaviours(behaviours);
     this.scrollValueBehaviour = this.getManaMachine().createScrollBehavior(BlockStateProperties.FACING);
     this.manaMotorBehavior = new ManaMotorBehavior(this);

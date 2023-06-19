@@ -6,8 +6,8 @@ import com.jozufozu.flywheel.backend.instancing.blockentity.BlockEntityInstance;
 import com.jozufozu.flywheel.core.materials.model.ModelData;
 import com.jozufozu.flywheel.util.transform.Rotate;
 import com.jozufozu.flywheel.util.transform.Translate;
-import com.simibubi.create.AllBlockPartials;
-import com.simibubi.create.content.logistics.block.redstone.AnalogLeverBlock;
+import com.simibubi.create.AllPartialModels;
+import com.simibubi.create.content.redstone.analogLever.AnalogLeverBlock;
 import com.simibubi.create.foundation.utility.AngleHelper;
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
 import com.simibubi.create.foundation.utility.Color;
@@ -30,7 +30,7 @@ public class XorLeverInstance extends BlockEntityInstance<XorLeverBlockEntity> i
 
     handle = mat.getModel(BlockPartials.XOR_LEVER_HANDLE, blockState)
       .createInstance();
-    indicator = mat.getModel(AllBlockPartials.ANALOG_LEVER_INDICATOR, blockState)
+    indicator = mat.getModel(AllPartialModels.ANALOG_LEVER_INDICATOR, blockState)
       .createInstance();
 
     transform(indicator);

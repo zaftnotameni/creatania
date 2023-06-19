@@ -1,8 +1,8 @@
 package zaftnotameni.creatania.machines.managenerator;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.content.contraptions.base.KineticTileEntity;
-import com.simibubi.create.foundation.tileEntity.TileEntityBehaviour;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
+import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import java.util.List;
 import javax.annotation.Nonnull;
 import net.minecraft.client.Minecraft;
@@ -32,7 +32,7 @@ import static zaftnotameni.creatania.machines.managenerator.ManaGeneratorWorldQu
 import static zaftnotameni.creatania.machines.manamachine.KineticManaMachine.renderSimpleBotaniaHud;
 import static zaftnotameni.creatania.util.LogKt.tlog;
 
-public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmManaMachine, IAmParticleEmittingMachine, IWandHUD {
+public class ManaGeneratorBlockEntity extends KineticBlockEntity implements IAmManaMachine, IAmParticleEmittingMachine, IWandHUD {
 
   public boolean isFirstTick = true;
   public boolean active;
@@ -90,7 +90,7 @@ public class ManaGeneratorBlockEntity extends KineticTileEntity implements IAmMa
     this.getManaGeneratorFluidHandler().invalidate();
   }
 
-  @Override public void addBehaviours(List<TileEntityBehaviour> behaviours) {
+  @Override public void addBehaviours(List<BlockEntityBehaviour> behaviours) {
     super.addBehaviours(behaviours);
     this.getManaGeneratorFluidHandler().addBehaviours(behaviours);
     this.activeStateSynchronizerBehavior = new ActiveStateSynchronizerBehavior(this);

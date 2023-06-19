@@ -1,10 +1,10 @@
 package zaftnotameni.creatania.recipes.cobblegen;
 
-import com.simibubi.create.content.contraptions.processing.ProcessingRecipe;
-import com.simibubi.create.content.contraptions.processing.ProcessingRecipeBuilder;
-import com.simibubi.create.content.contraptions.processing.ProcessingRecipeSerializer;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipeBuilder;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipeSerializer;
 import com.simibubi.create.foundation.fluid.FluidIngredient.FluidStackIngredient;
-import com.simibubi.create.foundation.utility.recipe.IRecipeTypeInfo;
+import com.simibubi.create.foundation.recipe.IRecipeTypeInfo;
 import java.util.List;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;

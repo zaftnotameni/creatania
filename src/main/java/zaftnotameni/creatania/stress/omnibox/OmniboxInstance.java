@@ -4,9 +4,9 @@ import com.jozufozu.flywheel.api.InstanceData;
 import com.jozufozu.flywheel.api.Instancer;
 import com.jozufozu.flywheel.api.Material;
 import com.jozufozu.flywheel.api.MaterialManager;
-import com.simibubi.create.AllBlockPartials;
-import com.simibubi.create.content.contraptions.base.KineticTileInstance;
-import com.simibubi.create.content.contraptions.base.flwdata.RotatingData;
+import com.simibubi.create.AllPartialModels;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntityInstance;
+import com.simibubi.create.content.kinetics.base.flwdata.RotatingData;
 import com.simibubi.create.foundation.utility.Iterate;
 import java.util.EnumMap;
 import java.util.Map;
@@ -15,7 +15,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
-public class OmniboxInstance extends KineticTileInstance<OmniboxBlockEntity> {
+public class OmniboxInstance extends KineticBlockEntityInstance<OmniboxBlockEntity> {
 
   protected final EnumMap<Direction, RotatingData> keys;
   protected Direction sourceFacing;
@@ -39,7 +39,7 @@ public class OmniboxInstance extends KineticTileInstance<OmniboxBlockEntity> {
 //      if (boxAxis == axis)
 //        continue;
 
-      Instancer<RotatingData> shaft = rotatingMaterial.getModel(AllBlockPartials.SHAFT_HALF, blockState, direction);
+      Instancer<RotatingData> shaft = rotatingMaterial.getModel(AllPartialModels.SHAFT_HALF, blockState, direction);
 
       RotatingData key = shaft.createInstance();
 

@@ -1,7 +1,7 @@
 package zaftnotameni.creatania.ponder;
 
-import com.simibubi.create.content.contraptions.processing.burner.BlazeBurnerBlock;
-import com.simibubi.create.foundation.block.ITE;
+import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
+import com.simibubi.create.foundation.block.IBE;
 import com.simibubi.create.foundation.ponder.*;
 import com.simibubi.create.foundation.ponder.element.InputWindowElement;
 import com.simibubi.create.foundation.utility.Pointing;
@@ -251,7 +251,7 @@ public class CreataniaPonderUtils {
 
     public Runnable modifyBlock(UnaryOperator<BlockState> blockstateFunc) { return () -> u.scene.world.modifyBlock(asBlockPos(), blockstateFunc, false); }
 
-    public Runnable modifyNbt(Class<? extends BlockEntity> type, Consumer<CompoundTag> nbtFn) { return () -> u.scene.world.modifyTileNBT(asSelection(), type, nbtFn, true); }
+    public Runnable modifyNbt(Class<? extends BlockEntity> type, Consumer<CompoundTag> nbtFn) { return () -> u.scene.world.modifyBlockEntityNBT(asSelection(), type, nbtFn, true); }
 
     public Runnable modifyNbt(Consumer<CompoundTag> nbtFn) {
       return modifyNbt(getSmartTileEntityType().get(), nbtFn);
@@ -302,8 +302,8 @@ public class CreataniaPonderUtils {
 
     public Supplier<Class<? extends BlockEntity>> getSmartTileEntityType() {
       return () -> {
-        if (!(getBlockState().get() instanceof ITE ite)) return BlockEntity.class;
-        return ite.getTileEntityClass();
+        if (!(getBlockState().get() instanceof IBE ite)) return BlockEntity.class;
+        return ite.getBlockEntityClass();
       };
     }
 

@@ -1,8 +1,8 @@
 package zaftnotameni.creatania.stress.omnibox;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.simibubi.create.AllBlockPartials;
-import com.simibubi.create.content.contraptions.base.KineticTileEntity;
-import com.simibubi.create.content.contraptions.base.KineticTileEntityRenderer;
+import com.simibubi.create.AllPartialModels;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntityRenderer;
 import com.simibubi.create.foundation.render.CachedBufferer;
 import com.simibubi.create.foundation.render.SuperByteBuffer;
 import com.simibubi.create.foundation.utility.AnimationTickHolder;
@@ -14,13 +14,13 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
-public class OmniboxRenderer extends KineticTileEntityRenderer {
+public class OmniboxRenderer extends KineticBlockEntityRenderer {
   public OmniboxRenderer(BlockEntityRendererProvider.Context context) {
     super(context);
   }
 
   @Override
-  protected void renderSafe(KineticTileEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer,
+  protected void renderSafe(KineticBlockEntity te, float partialTicks, PoseStack ms, MultiBufferSource buffer,
                             int light, int overlay) {
     final BlockPos pos = te.getBlockPos();
     float time = AnimationTickHolder.getRenderTime(te.getLevel());
@@ -32,7 +32,7 @@ public class OmniboxRenderer extends KineticTileEntityRenderer {
 //        continue;
 
 
-      SuperByteBuffer shaft = CachedBufferer.partialFacing(AllBlockPartials.SHAFT_HALF, te.getBlockState(), direction);
+      SuperByteBuffer shaft = CachedBufferer.partialFacing(AllPartialModels.SHAFT_HALF, te.getBlockState(), direction);
       float offset = getRotationOffsetForPosition(te, pos, axis);
       float angle = (time * te.getSpeed() * 3f / 10) % 360;
 
